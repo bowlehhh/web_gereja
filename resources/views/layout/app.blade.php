@@ -1,154 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>@yield('title', 'GKKA Samarinda')</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@yield('title','GKKA Samarinda')</title>
 
-    {{-- CSS --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+  {{-- SATU CSS SAJA --}}
+  <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+
 </head>
-<body>
+<body class="@yield('body_class')">
 
-    {{-- INTRO FULLSCREEN --}}
-    <div id="intro" class="intro-screen">
-        <div class="intro-bg"></div>
-        <div class="intro-overlay"></div>
+<header class="topbar">
+  <div class="container">
+    <div class="nav-wrap">
 
-        <div class="intro-content">
-            <div class="intro-script">Welcome Home</div>
-            <div class="intro-big">Selamat Datang</div>
-            <div class="intro-sub">di Website GKKA Indonesia Jemaat Samarinda</div>
-            <button type="button" class="intro-skip" id="introSkip">Lewati</button>
+      <a class="brand" href="{{ route('home') }}">
+        <img src="{{ asset('assets/logo.png') }}" class="brand-logo">
+        <div class="brand-text">
+          <div class="brand-title">GKKA Indonesia</div>
+          <div class="brand-sub">Jemaat Samarinda</div>
         </div>
+      </a>
+
+      <nav class="nav">
+        <a href="{{ route('home') }}">BERANDA</a>
+
+        <div class="nav-drop">
+          <a href="{{ route('gereja') }}">GEREJA <span class="nav-chev">▼</span></a>
+          <div class="nav-drop-menu">
+            <a href="{{ route('gereja.sejarah') }}">SEJARAH</a>
+            <a href="{{ route('gereja.hamba') }}">HAMBA TUHAN</a>
+            <a href="{{ route('gereja.majelis') }}">MAJELIS</a>
+            <a href="{{ route('gereja.komisi') }}">KOMISI</a>
+          </div>
+        </div>
+
+        <a href="{{ route('event') }}">EVENT</a>
+
+        <a href="{{ route('media') }}">MEDIA</a>
+        <a href="{{ route('kontak') }}">KONTAK</a>
+        <a href="{{ route('gallery') }}">GALLERY</a>
+        <a href="{{ route('warta') }}">WARTA JEMAAT</a>
+
+        @auth
+          <a href="{{ route('admin.dashboard') }}">DASHBOARD</a>
+          <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button class="nav-logout-btn">LOGOUT</button>
+          </form>
+        @else
+          <a href="{{ route('login') }}">LOGIN</a>
+        @endauth
+      </nav>
+
     </div>
+  </div>
+</header>
 
-    {{-- HEADER / NAVBAR (JANGAN HILANG) --}}
-    <header class="site-header">
-        <div class="nav-wrap">
-            <div class="nav-inner container">
-                <a class="brand" href="{{ route('home') }}">
-                    <div class="brand-mark">GKKA</div>
-                    <div>
-                        <div class="brand-title">GKKA Indonesia</div>
-                        <div class="brand-sub">Jemaat Samarinda</div>
-                    </div>
-                </a>
+<main>
+  @yield('content')
+</main>
 
-                <button class="mobile-btn" id="navBtn" type="button">☰</button>
+@include('partials.footer')
 
-                {{-- NAVBAR FIX: SEMUA LINK PAKAI ROUTE --}}
-                <nav class="nav" id="navMenu">
-                    <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
-                        BERANDA
-                    </a>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const els = Array.from(document.querySelectorAll('.reveal'));
+    if (els.length === 0) return;
 
-                    <a class="nav-link {{ request()->routeIs('gereja') ? 'active' : '' }}" href="{{ route('gereja') }}">
-                        GEREJA
-                    </a>
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
 
-                    <a class="nav-link {{ request()->routeIs('event') ? 'active' : '' }}" href="{{ route('event') }}">
-                        EVENT
-                    </a>
+    const io = new IntersectionObserver((entries, obs) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          obs.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.12 });
 
-                    <a class="nav-link {{ request()->routeIs('news') ? 'active' : '' }}" href="{{ route('news') }}">
-                        NEWS
-                    </a>
-
-                    <a class="nav-link {{ request()->routeIs('media') ? 'active' : '' }}" href="{{ route('media') }}">
-                        MEDIA
-                    </a>
-
-                    <a class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}" href="{{ route('gallery') }}">
-                        GALLERY
-                    </a>
-
-                    <a class="nav-link {{ request()->routeIs('warta') ? 'active' : '' }}" href="{{ route('warta') }}">
-                        WARTA JEMAAT
-                    </a>
-
-                    <a class="nav-link {{ request()->routeIs('kontak') ? 'active' : '' }}" href="{{ route('kontak') }}">
-                        KONTAK
-                    </a>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    {{-- CONTENT --}}
-    <main>
-        @yield('content')
-    </main>
-
-    {{-- FOOTER --}}
-    <footer class="footer">
-        <div class="container footer-inner">
-            <div>
-                <div class="footer-logo">GKKA</div>
-                <div class="footer-name">GKKA Indonesia Jemaat Samarinda</div>
-                <div class="footer-muted">© {{ date('Y') }}</div>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // ===== MOBILE NAV TOGGLE =====
-        (function () {
-            const btn = document.getElementById('navBtn');
-            const nav = document.getElementById('navMenu');
-            if (!btn || !nav) return;
-            btn.addEventListener('click', () => nav.classList.toggle('is-open'));
-        })();
-
-        // ===== INTRO (FULL) =====
-        (function () {
-            const intro = document.getElementById('intro');
-            const skipBtn = document.getElementById('introSkip');
-            if (!intro) return;
-
-            function hideIntro() {
-                intro.classList.add('is-hide');
-                sessionStorage.setItem('intro_seen', '1');
-
-                setTimeout(() => {
-                    intro.style.display = 'none';
-                    document.body.style.overflow = ''; // BALIKIN SCROLL
-                }, 800);
-            }
-
-            // kalau sudah pernah lihat intro, jangan tampilkan lagi
-            if (sessionStorage.getItem('intro_seen') === '1') {
-                intro.style.display = 'none';
-                document.body.style.overflow = '';
-            } else {
-                // blok scroll hanya saat intro tampil
-                document.body.style.overflow = 'hidden';
-
-                // auto hide setelah 2.5 detik
-                setTimeout(hideIntro, 2500);
-            }
-
-            if (skipBtn) skipBtn.addEventListener('click', hideIntro);
-        })();
-
-        // ===== SCROLL REVEAL =====
-        (function () {
-            const revealEls = document.querySelectorAll('.reveal');
-            if (!revealEls.length) return;
-
-            if ('IntersectionObserver' in window) {
-                const io = new IntersectionObserver((entries) => {
-                    entries.forEach((e) => {
-                        if (e.isIntersecting) e.target.classList.add('is-visible');
-                    });
-                }, { threshold: 0.12 });
-
-                revealEls.forEach(el => io.observe(el));
-            } else {
-                revealEls.forEach(el => el.classList.add('is-visible'));
-            }
-        })();
-    </script>
+    els.forEach(el => io.observe(el));
+  });
+</script>
 
 </body>
 </html>

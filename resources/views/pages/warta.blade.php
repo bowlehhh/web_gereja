@@ -13,108 +13,46 @@
 <section class="warta-section">
   <div class="container">
 
-    <div class="warta-grid reveal">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;">
+      @forelse ($wartas as $w)
+        <a href="{{ asset('storage/'.$w->pdf_path) }}" target="_blank" style="text-decoration:none;color:inherit;">
+          <div style="
+            border-radius:16px;
+            overflow:hidden;
+            background:#fff;
+            box-shadow:0 12px 28px rgba(0,0,0,.12);
+          ">
 
-      {{-- CARD 1 --}}
-      <a class="warta-card" href="#">
-        <div class="warta-thumb">
-          <img class="warta-img" src="{{ asset('img/fotogrj.jpg') }}" alt="Warta Jemaat">
-          <div class="warta-overlay"></div>
+            {{-- THUMBNAIL --}}
+            <div style="
+              height:280px;
+              background:#e5e5e5;
+              background-image: url('{{ $w->thumbnail_path ? asset('storage/'.$w->thumbnail_path) : '' }}');
+              background-size:cover;
+              background-position:center;
+            "></div>
 
-          <div class="warta-text">
-            <div class="warta-kicker">Warta Jemaat</div>
-            <div class="warta-title">GKKA Samarinda</div>
-            <div class="warta-meta">
-              <span>01 Februari 2026</span>
-              <span class="dot">•</span>
-              <span>Edisi 05</span>
+            {{-- TEXT --}}
+            <div style="padding:14px;">
+              <div style="font-weight:900;">{{ $w->title }}</div>
+              <div style="font-size:13px;color:#64748b;margin-top:4px;">
+                {{ optional($w->date)->translatedFormat('d F Y') }}
+                &nbsp;•&nbsp;
+                Edisi {{ $w->edition ?? '-' }}
+              </div>
             </div>
+
           </div>
+        </a>
+      @empty
+        <div style="padding:18px;background:#fff;border-radius:12px;">
+          Belum ada warta.
         </div>
+      @endforelse
+    </div>
 
-        <div class="warta-below">Warta Jemaat Minggu, 1 Februari 2026</div>
-      </a>
-
-      {{-- CARD 2 --}}
-      <a class="warta-card" href="#">
-        <div class="warta-thumb">
-          <img class="warta-img" src="{{ asset('img/fotogrj.jpg') }}" alt="Warta Jemaat">
-          <div class="warta-overlay"></div>
-
-          <div class="warta-text">
-            <div class="warta-kicker">Warta Jemaat</div>
-            <div class="warta-title">GKKA Samarinda</div>
-            <div class="warta-meta">
-              <span>25 Januari 2026</span>
-              <span class="dot">•</span>
-              <span>Edisi 04</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="warta-below">Warta Jemaat Minggu, 25 Januari 2026</div>
-      </a>
-
-      {{-- CARD 3 --}}
-      <a class="warta-card" href="#">
-        <div class="warta-thumb">
-          <img class="warta-img" src="{{ asset('img/fotogrj.jpg') }}" alt="Warta Jemaat">
-          <div class="warta-overlay"></div>
-
-          <div class="warta-text">
-            <div class="warta-kicker">Warta Jemaat</div>
-            <div class="warta-title">GKKA Samarinda</div>
-            <div class="warta-meta">
-              <span>18 Januari 2026</span>
-              <span class="dot">•</span>
-              <span>Edisi 03</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="warta-below">Warta Jemaat Minggu, 18 Januari 2026</div>
-      </a>
-
-      {{-- CARD 4 --}}
-      <a class="warta-card" href="#">
-        <div class="warta-thumb">
-          <img class="warta-img" src="{{ asset('img/fotogrj.jpg') }}" alt="Warta Jemaat">
-          <div class="warta-overlay"></div>
-
-          <div class="warta-text">
-            <div class="warta-kicker">Warta Jemaat</div>
-            <div class="warta-title">GKKA Samarinda</div>
-            <div class="warta-meta">
-              <span>11 Januari 2026</span>
-              <span class="dot">•</span>
-              <span>Edisi 02</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="warta-below">Warta Jemaat Minggu, 11 Januari 2026</div>
-      </a>
-
-      {{-- CARD 5 --}}
-      <a class="warta-card" href="#">
-        <div class="warta-thumb">
-          <img class="warta-img" src="{{ asset('img/fotogrj.jpg') }}" alt="Warta Jemaat">
-          <div class="warta-overlay"></div>
-
-          <div class="warta-text">
-            <div class="warta-kicker">Warta Jemaat</div>
-            <div class="warta-title">GKKA Samarinda</div>
-            <div class="warta-meta">
-              <span>04 Januari 2026</span>
-              <span class="dot">•</span>
-              <span>Edisi 01</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="warta-below">Warta Jemaat Minggu, 4 Januari 2026</div>
-      </a>
-
+    <div style="margin-top:20px;">
+      {{ $wartas->links() }}
     </div>
 
   </div>

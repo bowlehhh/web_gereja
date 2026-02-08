@@ -2,7 +2,7 @@
     <div class="nav-wrap">
         <div class="container nav-inner">
             <a href="{{ route('home') }}" class="brand">
-                <div class="brand-mark">GKKA</div>
+                <img src="{{ asset('assets/logo.png') }}" alt="GKKA" style="width:44px;height:44px;object-fit:contain;">
                 <div class="brand-text">
                     <div class="brand-title">GKKA Indonesia</div>
                     <div class="brand-sub">Jemaat Samarinda</div>
@@ -27,17 +27,7 @@
                     </div>
                 </div>
 
-                <div class="nav-dd">
-                    <a class="nav-link {{ request()->routeIs('event','warta') ? 'active' : '' }}" href="#">
-                        EVENT & NEWS <span class="chev">▾</span>
-                    </a>
-                    <div class="dd-menu">
-                        <a href="{{ route('event') }}">EVENT</a>
-                        <a href="{{ route('warta') }}">WARTA JEMAAT</a>
-                        <a href="{{ route('warta') }}">ARTIKEL</a>
-                        <a href="{{ route('warta') }}">RENUNGAN</a>
-                    </div>
-                </div>
+                <a class="nav-link {{ request()->routeIs('event') ? 'active' : '' }}" href="{{ route('event') }}">EVENT</a>
 
                 <a class="nav-link {{ request()->routeIs('media') ? 'active' : '' }}" href="{{ route('media') }}">MEDIA</a>
                 <a class="nav-link {{ request()->routeIs('kontak') ? 'active' : '' }}" href="{{ route('kontak') }}">KONTAK</a>
