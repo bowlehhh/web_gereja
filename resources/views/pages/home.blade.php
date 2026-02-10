@@ -7,270 +7,309 @@
   $heroImage = asset('img/fotogrj.jpeg');
 @endphp
 
-<section class="home-media">
-  <div class="container">
-    <div class="home-head reveal">
+{{-- HERO SECTION --}}
+<section class="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
+  {{-- Background --}}
+  <div class="absolute inset-0">
+    <img src="{{ $heroImage }}" class="w-full h-full object-cover scale-105" alt="GKKA Samarinda">
+    <div class="absolute inset-0 bg-blue-900/60 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-transparent to-transparent"></div>
+  </div>
+
+  {{-- Content --}}
+  <div class="relative h-full max-w-7xl mx-auto px-6 flex flex-col justify-center items-center text-center text-white z-10">
+      <div class="font-black text-blue-300 tracking-widest uppercase mb-4 text-sm md:text-base animate-fade-in-up">Selamat Datang</div>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-tight drop-shadow-lg animate-fade-in-up delay-100">
+        GKKA Indonesia<br><span class="text-blue-200">Jemaat Samarinda</span>
+      </h1>
+      <p class="max-w-2xl text-lg md:text-xl text-blue-100 font-medium mb-10 leading-relaxed drop-shadow-md animate-fade-in-up delay-200">
+        Informasi pelayanan, jadwal, komisi, event, dan dokumentasi kegiatan jemaat.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center animate-fade-in-up delay-300">
+        <a href="{{ route('kontak') }}" class="px-8 py-3.5 rounded-full bg-yellow-500 text-blue-900 font-black shadow-xl hover:bg-yellow-400 hover:scale-105 transition-all duration-300">
+          Hubungi Kami
+        </a>
+        <a href="{{ route('gereja.sejarah') }}" class="px-8 py-3.5 rounded-full bg-white text-blue-900 font-black shadow-xl hover:bg-gray-100 hover:scale-105 transition-all duration-300">
+          Sejarah Gereja
+        </a>
+      </div>
+  </div>
+</section>
+
+{{-- MEDIA & WELCOME SECTION --}}
+<section class="py-16 bg-gradient-to-b from-blue-50/50 to-white">
+  <div class="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      
+      {{-- Image --}}
+      <div class="relative group">
+        <div class="absolute inset-0 bg-blue-600 rounded-3xl rotate-3 opacity-20 group-hover:rotate-6 transition-transform duration-500"></div>
+        <img src="{{ $heroImage }}" alt="GKKA Samarinda" class="relative w-full h-[400px] object-cover rounded-3xl shadow-2xl transform transition-transform duration-500 group-hover:-translate-y-2">
+      </div>
+
+      {{-- Video / Text --}}
       <div>
-        <div class="home-kicker">Selamat Datang</div>
-        <h1 class="home-title">GKKA Indonesia Jemaat Samarinda</h1>
-        <p class="home-sub">Informasi pelayanan, jadwal, komisi, event, dan dokumentasi kegiatan jemaat.</p>
-      </div>
-      <div class="home-actions">
-        <a class="hero-btn" href="{{ route('kontak') }}">Hubungi Kami</a>
-        <a class="hero-btn" href="{{ route('gereja.sejarah') }}" style="background:#ffffff;color:#0b4a8b;">Sejarah Gereja</a>
-      </div>
-    </div>
-
-    <div class="home-media-grid reveal">
-      <div class="panel home-media-card">
-        <img class="panel-img" src="{{ $heroImage }}" alt="GKKA Samarinda">
-      </div>
-
-      <div class="panel home-media-card">
-        <div class="panel-video">
+        <div class="w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
           <iframe
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
             title="YouTube video"
+            class="w-full h-full"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
         </div>
       </div>
-    </div>
+
   </div>
 </section>
 
-<section class="home-schedules">
-  <div class="container">
-    <div class="home-schedule-grid reveal">
-      <div class="home-schedule-card" style="background-image:url('{{ $heroImage }}');">
-        <div class="home-schedule-overlay"></div>
-        <div class="home-schedule-body">
-          <div class="home-schedule-title">JADWAL KOMISI</div>
-          <div class="home-schedule-items">
-            <div class="home-schedule-item">
-              <div class="home-schedule-name">Komisi Wanita “Gloria”</div>
-              <div class="home-schedule-text">
-                Tiap hari Selasa, Pukul 19.00 WITA<br>
-                Minggu ke 2 &amp; 4: Ibadah<br>
-                Minggu ke 3: Komsel
-              </div>
+{{-- SCHEDULES SECTION --}}
+<section class="py-20 bg-blue-900 text-white relative overflow-hidden">
+  {{-- Background Decoration --}}
+  <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+     <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
+     <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-600 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="w-full max-w-7xl mx-auto px-6 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      
+      {{-- JADWAL KOMISI --}}
+      <div class="group relative rounded-3xl overflow-hidden bg-blue-800/50 border border-white/10 shadow-2xl hover:border-blue-400/50 transition-colors duration-300">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/90 to-blue-800/50 z-0"></div>
+        <div class="relative z-10 p-8">
+          <h2 class="text-2xl font-black uppercase tracking-wider mb-8 flex items-center gap-3">
+            <span class="w-2 h-8 bg-yellow-500 rounded-full"></span>
+            Jadwal Komisi
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <h3 class="font-bold text-yellow-400 text-lg">Komisi Wanita “Gloria”</h3>
+              <p class="text-blue-100 text-sm leading-relaxed">
+                Tiap Selasa, 19.00 WITA<br>
+                Minggu 2 & 4: Ibadah<br>
+                Minggu 3: Komsel
+              </p>
             </div>
-            <div class="home-schedule-item">
-              <div class="home-schedule-name">Komisi Remaja “Philia”</div>
-              <div class="home-schedule-text">
-                Tiap hari Jumat, Pukul 19.00 WITA<br>
-                Minggu ke 1 - 3: Ibadah<br>
-                Minggu ke 4 &amp; 5: Gabungan
-              </div>
+            <div class="space-y-2">
+              <h3 class="font-bold text-yellow-400 text-lg">Komisi Remaja “Philia”</h3>
+              <p class="text-blue-100 text-sm leading-relaxed">
+                Tiap Jumat, 19.00 WITA<br>
+                Minggu 1 - 3: Ibadah<br>
+                Minggu 4 & 5: Gabungan
+              </p>
             </div>
-            <div class="home-schedule-item">
-              <div class="home-schedule-name">Komisi Pria “Yosua”</div>
-              <div class="home-schedule-text">
-                Hari Jumat (Minggu ke 1)<br>
-                Pukul 19.00 WITA
-              </div>
+            <div class="space-y-2">
+              <h3 class="font-bold text-yellow-400 text-lg">Komisi Pria “Yosua”</h3>
+              <p class="text-blue-100 text-sm leading-relaxed">
+                Jumat (Minggu 1)<br>
+                19.00 WITA
+              </p>
             </div>
-            <div class="home-schedule-item">
-              <div class="home-schedule-name">Komisi Pemuda “Sola Gratia”</div>
-              <div class="home-schedule-text">
-                Tiap hari Jumat, Pukul 19.00 WITA<br>
-                Minggu ke 1 - 3: Ibadah<br>
-                Minggu ke 4 &amp; 5: Gabungan
-              </div>
+            <div class="space-y-2">
+              <h3 class="font-bold text-yellow-400 text-lg">Komisi Pemuda “Sola Gratia”</h3>
+              <p class="text-blue-100 text-sm leading-relaxed">
+                Tiap Jumat, 19.00 WITA<br>
+                Minggu 1 - 3: Ibadah<br>
+                Minggu 4 & 5: Gabungan
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="home-schedule-card" style="background-image:url('{{ $heroImage }}');">
-        <div class="home-schedule-overlay"></div>
-        <div class="home-schedule-body">
-          <div class="home-schedule-title">JADWAL IBADAH</div>
-          <div class="home-schedule-items">
-            <div class="home-schedule-item">
-              <div class="home-schedule-name">Ibadah Umum</div>
-              <div class="home-schedule-text">
+      {{-- JADWAL IBADAH --}}
+      <div class="group relative rounded-3xl overflow-hidden bg-blue-800/50 border border-white/10 shadow-2xl hover:border-blue-400/50 transition-colors duration-300">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/90 to-blue-800/50 z-0"></div>
+        <div class="relative z-10 p-8">
+          <h2 class="text-2xl font-black uppercase tracking-wider mb-8 flex items-center gap-3">
+             <span class="w-2 h-8 bg-yellow-500 rounded-full"></span>
+             Jadwal Ibadah
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <h3 class="font-bold text-white text-lg">Ibadah Umum</h3>
+              <p class="text-blue-100 text-sm leading-relaxed">
                 Tiap Hari Minggu<br>
-                Pukul 08.00 WITA : KU 1<br>
-                Pukul 10.00 WITA : KU 2
-              </div>
+                <span class="font-semibold text-yellow-400">08.00 WITA</span> : KU 1<br>
+                <span class="font-semibold text-yellow-400">10.00 WITA</span> : KU 2
+              </p>
             </div>
-            <div class="home-schedule-item">
-              <div class="home-schedule-name">Ibadah Sekolah Minggu “Agape”</div>
-              <div class="home-schedule-text">
+            <div class="space-y-2">
+              <h3 class="font-bold text-white text-lg">Sekolah Minggu “Agape”</h3>
+              <p class="text-blue-100 text-sm leading-relaxed">
                 Tiap Hari Minggu<br>
-                Pukul 10.00 WITA
-              </div>
+                10.00 WITA
+              </p>
             </div>
-            <div class="home-schedule-item">
-              <div class="home-schedule-name">Komisi Usia Indah “Simeon”</div>
-              <div class="home-schedule-text">
-                Hari Rabu (Minggu ke 1)<br>
-                Pukul 17.00 WITA
-              </div>
+            <div class="space-y-2">
+              <h3 class="font-bold text-white text-lg">Usia Indah “Simeon”</h3>
+              <p class="text-blue-100 text-sm leading-relaxed">
+                Rabu (Minggu 1)<br>
+                17.00 WITA
+              </p>
             </div>
-            <div class="home-schedule-item">
-              <div class="home-schedule-name">Persekutuan Doa</div>
-              <div class="home-schedule-text">
+            <div class="space-y-2">
+              <h3 class="font-bold text-white text-lg">Persekutuan Doa</h3>
+              <p class="text-blue-100 text-sm leading-relaxed">
                 Tiap Hari Kamis<br>
-                Pukul 19.00 WITA
-              </div>
+                19.00 WITA
+              </p>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<section class="home-sejarah">
-  <div class="container">
-    <div class="home-sejarah-grid reveal">
-      <div class="panel home-sejarah-media">
-        <img class="panel-img" src="{{ $heroImage }}" alt="Sejarah GKKA Samarinda">
+{{-- SEJARAH SIMPLE --}}
+<section class="py-20 bg-white">
+  <div class="w-full max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="relative">
+         <div class="absolute -inset-4 bg-blue-100 rounded-3xl -rotate-2"></div>
+         <img src="{{ $heroImage }}" alt="Sejarah GKKA" class="relative w-full h-[400px] object-cover rounded-3xl shadow-xl">
       </div>
-      <div class="home-sejarah-card">
-        <h2 class="home-sejarah-title">Sejarah Gereja</h2>
-        <p class="home-sejarah-text">
-          Ringkasan sejarah berdirinya GKKA Indonesia Jemaat Samarinda. Silakan lengkapi isi sesuai data gereja.
+      <div>
+        <h2 class="text-3xl md:text-4xl font-black text-blue-900 mb-6">Sejarah Gereja</h2>
+        <p class="text-slate-600 text-lg leading-relaxed mb-8">
+           Ringkasan sejarah berdirinya GKKA Indonesia Jemaat Samarinda. Silakan lengkapi isi sesuai data gereja.
         </p>
+        
+        <div class="space-y-4">
+           <details class="group p-4 bg-blue-50 rounded-2xl cursor-pointer open:bg-blue-100 transition-colors">
+              <summary class="font-black text-blue-900 text-lg list-none flex justify-between items-center">
+                Visi
+                <span class="transform group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <div class="mt-3 text-slate-700 font-medium">Menjadi jemaat yang bertumbuh dalam iman, kasih, dan pelayanan.</div>
+           </details>
+           <details class="group p-4 bg-blue-50 rounded-2xl cursor-pointer open:bg-blue-100 transition-colors">
+              <summary class="font-black text-blue-900 text-lg list-none flex justify-between items-center">
+                Misi
+                <span class="transform group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <div class="mt-3 text-slate-700 font-medium">Membangun persekutuan, pemuridan, dan penginjilan yang berdampak.</div>
+           </details>
+        </div>
 
-        <details class="home-acc">
-          <summary>Visi</summary>
-          <div class="home-acc-body">Menjadi jemaat yang bertumbuh dalam iman, kasih, dan pelayanan.</div>
-        </details>
-        <details class="home-acc">
-          <summary>Misi</summary>
-          <div class="home-acc-body">Membangun persekutuan, pemuridan, dan penginjilan yang berdampak.</div>
-        </details>
-
-        <div class="home-sejarah-actions">
-          <a class="hero-btn" href="{{ route('gereja.sejarah') }}">Lihat Selengkapnya</a>
+        <div class="mt-8">
+           <a href="{{ route('gereja.sejarah') }}" class="inline-flex items-center gap-2 font-bold text-blue-600 hover:text-blue-800 transition-colors">
+             Lihat Selengkapnya <span class="text-xl">→</span>
+           </a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="home-komisi">
-  <div class="container">
-    <h2 class="home-section-title reveal">Komisi GKKA Samarinda</h2>
+{{-- KOMISI SECTION --}}
+<section class="py-20 bg-slate-50">
+  <div class="w-full max-w-7xl mx-auto px-6">
+    <h2 class="text-center text-3xl md:text-4xl font-black text-blue-900 mb-12">Komisi GKKA Samarinda</h2>
 
-    <div class="home-komisi-grid reveal">
-      <a class="home-komisi-card" href="{{ route('gereja.majelis') }}">
-        <img src="{{ $heroImage }}" alt="Majelis">
-        <div class="home-komisi-name">Majelis</div>
-        <div class="home-komisi-btn">Lihat Selengkapnya</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      @foreach(['Majelis', 'Komisi Sekolah Minggu', 'Komisi Remaja Pemuda', 'Komisi Wanita', 'Komisi Pria', 'Komisi Usia Indah'] as $komisi)
+      <a href="{{ route('gereja.komisi') }}" class="group block bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100 hover:-translate-y-2 transition-all duration-300">
+        <div class="h-48 overflow-hidden relative">
+           <img src="{{ $heroImage }}" alt="{{ $komisi }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+           <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+        </div>
+        <div class="p-6 text-center">
+           <h3 class="font-black text-xl text-slate-800 mb-4 group-hover:text-blue-700 transition-colors">{{ $komisi }}</h3>
+           <span class="px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wider group-hover:bg-blue-600 group-hover:text-white transition-colors">
+             Lihat Detail
+           </span>
+        </div>
       </a>
-      <a class="home-komisi-card" href="{{ route('gereja.komisi') }}">
-        <img src="{{ $heroImage }}" alt="Komisi Sekolah Minggu">
-        <div class="home-komisi-name">Komisi Sekolah Minggu</div>
-        <div class="home-komisi-btn">Lihat Selengkapnya</div>
-      </a>
-      <a class="home-komisi-card" href="{{ route('gereja.komisi') }}">
-        <img src="{{ $heroImage }}" alt="Komisi Remaja Pemuda">
-        <div class="home-komisi-name">Komisi Remaja Pemuda</div>
-        <div class="home-komisi-btn">Lihat Selengkapnya</div>
-      </a>
-      <a class="home-komisi-card" href="{{ route('gereja.komisi') }}">
-        <img src="{{ $heroImage }}" alt="Komisi Wanita">
-        <div class="home-komisi-name">Komisi Wanita</div>
-        <div class="home-komisi-btn">Lihat Selengkapnya</div>
-      </a>
-      <a class="home-komisi-card" href="{{ route('gereja.komisi') }}">
-        <img src="{{ $heroImage }}" alt="Komisi Pria">
-        <div class="home-komisi-name">Komisi Pria</div>
-        <div class="home-komisi-btn">Lihat Selengkapnya</div>
-      </a>
-      <a class="home-komisi-card" href="{{ route('gereja.komisi') }}">
-        <img src="{{ $heroImage }}" alt="Komisi Usia Indah">
-        <div class="home-komisi-name">Komisi Usia Indah</div>
-        <div class="home-komisi-btn">Lihat Selengkapnya</div>
-      </a>
+      @endforeach
     </div>
   </div>
 </section>
 
-<section class="home-events">
-  <div class="container">
-    <div class="home-events-head reveal">
-      <h2 class="home-section-title" style="margin:0;">Event Terbaru</h2>
-      <a class="hero-btn" href="{{ route('event') }}">Lihat Lebih Banyak</a>
+{{-- EVENTS SECTION --}}
+<section class="py-20 bg-white">
+  <div class="w-full max-w-7xl mx-auto px-6">
+    <div class="flex justify-between items-end mb-12">
+       <h2 class="text-3xl md:text-4xl font-black text-blue-900">Event Terbaru</h2>
+       <a href="{{ route('event') }}" class="hidden md:inline-block font-bold text-blue-600 hover:text-blue-800 transition-colors">Lihat Semua Event →</a>
     </div>
 
-    <div class="home-events-grid reveal">
-      <div class="panel home-events-feature">
-        @if(!empty($featuredEvent))
-          @php
-            $thumb = $featuredEvent->thumbnail_path
-              ? asset('storage/'.$featuredEvent->thumbnail_path)
-              : ($featuredEvent->photo_path ? asset('storage/'.$featuredEvent->photo_path) : asset('assets/logo.png'));
-          @endphp
-          <a href="{{ route('event.show', $featuredEvent) }}" class="home-events-feature-link">
-            <div class="home-events-feature-media" style="background-image:url('{{ $thumb }}');"></div>
-            <div class="home-events-feature-body">
-              <div class="home-events-feature-title">{{ $featuredEvent->title }}</div>
-              <div class="home-events-feature-meta">
-                @if($featuredEvent->start_date)
-                  {{ optional($featuredEvent->start_date)->translatedFormat('d F Y') }}
-                @endif
-                @if($featuredEvent->location)
-                  <span class="dot">•</span> {{ $featuredEvent->location }}
-                @endif
-              </div>
-              @if($featuredEvent->description)
-                <div class="home-events-feature-desc">{{ \Illuminate\Support\Str::limit($featuredEvent->description, 160) }}</div>
-              @endif
-            </div>
-          </a>
-        @else
-          <div style="padding:16px;font-weight:800;color:#64748b;">
-            Belum ada event yang dipublish.
-          </div>
-        @endif
-      </div>
-
-      <aside class="panel home-events-aside">
-        <div class="home-events-aside-title">Last Post</div>
-        <div class="home-events-aside-list">
-          @forelse(($eventList ?? collect()) as $it)
-            @php
-              $thumb = $it->thumbnail_path
-                ? asset('storage/'.$it->thumbnail_path)
-                : ($it->photo_path ? asset('storage/'.$it->photo_path) : asset('assets/logo.png'));
-            @endphp
-            <a class="event-mini" href="{{ route('event.show', $it) }}">
-              <img class="event-mini-thumb" src="{{ $thumb }}" alt="{{ $it->title }}">
-              <div class="event-mini-text">
-                <div class="event-mini-title">{{ $it->title }}</div>
-                <div class="event-mini-meta">
-                  @if($it->start_date)
-                    {{ optional($it->start_date)->translatedFormat('d M Y') }}
-                  @else
-                    -
-                  @endif
+    <div class="grid grid-cols-1 lg:grid-cols-[1.65fr_1fr] gap-10">
+       {{-- Featured Event --}}
+       <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden group">
+         @if(!empty($featuredEvent))
+           @php
+             $thumb = $featuredEvent->thumbnail_path
+               ? asset('storage/'.$featuredEvent->thumbnail_path)
+               : ($featuredEvent->photo_path ? asset('storage/'.$featuredEvent->photo_path) : asset('assets/logo.png'));
+           @endphp
+           <a href="{{ route('event.show', $featuredEvent) }}" class="block">
+             <div class="h-[300px] md:h-[400px] w-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image:url('{{ $thumb }}');"></div>
+             <div class="relative p-8 bg-white z-10 -mt-10 mx-6 rounded-2xl shadow-lg border border-gray-100">
+                <div class="flex items-center gap-3 text-sm font-bold text-gray-500 mb-3">
+                   @if($featuredEvent->start_date)
+                     <span class="text-blue-600">{{ optional($featuredEvent->start_date)->translatedFormat('d F Y') }}</span>
+                   @endif
+                   @if($featuredEvent->location)
+                     <span>•</span> <span>{{ $featuredEvent->location }}</span>
+                   @endif
                 </div>
-              </div>
-            </a>
-          @empty
-            <div class="event-empty-aside">Belum ada event lainnya.</div>
-          @endforelse
-        </div>
-      </aside>
+                <h3 class="text-2xl font-black text-slate-800 mb-4 group-hover:text-blue-700 transition-colors">{{ $featuredEvent->title }}</h3>
+                @if($featuredEvent->description)
+                  <p class="text-slate-600 line-clamp-3">{{ \Illuminate\Support\Str::limit($featuredEvent->description, 160) }}</p>
+                @endif
+             </div>
+           </a>
+         @else
+           <div class="p-12 text-center text-gray-400 font-bold bg-gray-50">
+             Belum ada event yang dipublish.
+           </div>
+         @endif
+       </div>
+
+       {{-- Side List --}}
+       <aside class="space-y-6">
+          <h3 class="font-black text-xl text-blue-900 mb-6 border-l-4 border-yellow-500 pl-4">Last Post</h3>
+          <div class="space-y-4">
+            @forelse(($eventList ?? collect()) as $it)
+              @php
+                $thumb = $it->thumbnail_path
+                  ? asset('storage/'.$it->thumbnail_path)
+                  : ($it->photo_path ? asset('storage/'.$it->photo_path) : asset('assets/logo.png'));
+              @endphp
+              <a href="{{ route('event.show', $it) }}" class="flex gap-4 p-3 rounded-2xl bg-white hover:bg-blue-50 border border-gray-100 hover:border-blue-200 transition-all duration-300 group">
+                <div class="w-24 h-24 rounded-xl bg-cover bg-center flex-shrink-0 group-hover:shadow-md transition-shadow" style="background-image:url('{{ $thumb }}');"></div>
+                <div class="flex flex-col justify-center">
+                  <h4 class="font-bold text-slate-800 group-hover:text-blue-700 mb-1">{{ $it->title }}</h4>
+                  <div class="text-xs font-bold text-gray-400">
+                     @if($it->start_date)
+                       {{ optional($it->start_date)->translatedFormat('d M Y') }}
+                     @else
+                       -
+                     @endif
+                  </div>
+                </div>
+              </a>
+            @empty
+              <div class="text-gray-400 text-sm font-bold p-4 text-center">Belum ada event lainnya.</div>
+            @endforelse
+          </div>
+       </aside>
     </div>
   </div>
 </section>
 
-<section class="hamba-cta">
-  <div class="container">
-    <div class="hamba-cta-inner reveal">
-      <div class="hamba-cta-title">Temukan kekuatan iman &amp; Pertumbuhan Rohani</div>
-      <div class="hamba-cta-actions">
-        <a class="hamba-cta-btn" href="{{ route('kontak') }}">Hubungi Kami</a>
-      </div>
-    </div>
-  </div>
+{{-- CTA SECTION --}}
+<section class="py-24 bg-blue-900 relative overflow-hidden text-center text-white">
+   <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+   <div class="relative z-10 max-w-3xl mx-auto px-6">
+      <h2 class="text-3xl md:text-5xl font-black mb-8 tracking-tight">Temukan kekuatan iman &<br>Pertumbuhan Rohan</h2>
+      <a href="{{ route('kontak') }}" class="inline-block px-10 py-4 rounded-full bg-yellow-500 text-blue-900 font-black text-lg shadow-xl hover:bg-yellow-400 hover:scale-105 transition-all duration-300">
+        Hubungi Kami
+      </a>
+   </div>
 </section>
 
 @endsection

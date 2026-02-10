@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
-@source "../views/admin/**/*.blade.php";
-@source "../views/layout/admin.blade.php";
+@plugin "tailwindcss-animate";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: "Inter", "sans-serif";
+}
+
+@layer utilities {
+    .glass-effect {
+        @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-lg;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}

@@ -1,10 +1,12 @@
 @extends('layout.app')
 @section('title','Sejarah - GKKA Samarinda')
 @section('content')
-<section class="page-head"><div class="container">
-  <h1 class="page-title">Sejarah</h1>
-  <p class="page-sub">Profil singkat, tujuan & sasaran, serta perjalanan gereja.</p>
-</div></section>
+<section class="bg-blue-900 text-white py-20">
+  <div class="w-full max-w-7xl mx-auto px-6 text-center">
+    <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Sejarah</h1>
+    <p class="text-lg text-blue-200 font-medium">Profil singkat, tujuan & sasaran, serta perjalanan gereja.</p>
+  </div>
+</section>
 
 @php
   $judulStrategis = 'TUJUAN & SASARAN STRATEGIS GEREJA KEBANGUNAN KALAM ALLAH INDONESIA JEMAAT SAMARINDA';
@@ -44,25 +46,31 @@
   };
 @endphp
 
-<section class="sejarah-section">
-  <div class="container">
-    <h2 class="sejarah-heading">{{ $judulStrategis }}</h2>
+<section class="py-16 md:py-24 bg-blue-50">
+  <div class="w-full max-w-7xl mx-auto px-6">
+    <h2 class="text-2xl md:text-3xl font-black text-center text-blue-900 mb-12 uppercase tracking-wide leading-relaxed max-w-4xl mx-auto">{{ $judulStrategis }}</h2>
 
-    <div class="sejarah-grid-2">
-      <div class="sejarah-box reveal">
-        <h3 class="sejarah-box-title">Tujuan</h3>
-        <ol class="sejarah-ol">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+      <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-blue-100 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-bl-full opacity-50 -mr-16 -mt-16"></div>
+        <h3 class="text-2xl font-black text-slate-800 mb-6 relative z-10 flex items-center gap-3">
+           <span class="w-8 h-1 bg-yellow-500 rounded-full"></span> Tujuan
+        </h3>
+        <ol class="space-y-4 list-decimal list-outside ml-5 text-slate-700 leading-relaxed font-medium relative z-10">
           @foreach ($tujuan as $item)
-            <li>{{ $item }}</li>
+            <li class="pl-2">{{ $item }}</li>
           @endforeach
         </ol>
       </div>
 
-      <div class="sejarah-box reveal">
-        <h3 class="sejarah-box-title">Sasaran</h3>
-        <ol class="sejarah-ol">
+      <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-blue-100 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-100 rounded-bl-full opacity-50 -mr-16 -mt-16"></div>
+        <h3 class="text-2xl font-black text-slate-800 mb-6 relative z-10 flex items-center gap-3">
+           <span class="w-8 h-1 bg-yellow-500 rounded-full"></span> Sasaran
+        </h3>
+        <ol class="space-y-4 list-decimal list-outside ml-5 text-slate-700 leading-relaxed font-medium relative z-10">
           @foreach ($sasaran as $item)
-            <li>{{ $item }}</li>
+            <li class="pl-2">{{ $item }}</li>
           @endforeach
         </ol>
       </div>
@@ -70,39 +78,39 @@
   </div>
 </section>
 
-<section class="sejarah-section sejarah-section--white">
-  <div class="container">
-    <div class="sejarah-lead reveal">
-      <p>
+<section class="py-16 md:py-24 bg-white">
+  <div class="w-full max-w-5xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-xl md:text-2xl text-slate-600 font-medium leading-relaxed max-w-3xl mx-auto">
         Isi bagian ini dengan ringkasan perjalanan gereja (mis. tahun berdiri, perpindahan tempat ibadah,
         penetapan/penugasan hamba Tuhan, dan momen penting lainnya).
       </p>
     </div>
 
-    <div class="sejarah-card-grid">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-20">
       @foreach ($galeriTokoh as $tokoh)
-        <div class="sejarah-card reveal">
-          <div class="sejarah-card-media">
+        <div class="group text-center">
+          <div class="w-full aspect-square bg-gray-100 rounded-2xl overflow-hidden mb-4 shadow-md border border-gray-100 relative">
             @if (!empty($tokoh['foto']))
-              <img src="{{ $tokoh['foto'] }}" alt="{{ $tokoh['nama'] }}">
+              <img src="{{ $tokoh['foto'] }}" alt="{{ $tokoh['nama'] }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             @else
-              <div class="sejarah-card-placeholder">{{ $initials($tokoh['nama']) }}</div>
+              <div class="w-full h-full flex items-center justify-center bg-blue-50 text-blue-300 font-black text-2xl group-hover:bg-blue-100 transition-colors uppercase select-none">{{ $initials($tokoh['nama']) }}</div>
             @endif
           </div>
-          <div class="sejarah-card-name">{{ $tokoh['nama'] }}</div>
+          <div class="text-sm font-bold text-slate-700 group-hover:text-blue-700 transition-colors px-2">{{ $tokoh['nama'] }}</div>
         </div>
       @endforeach
     </div>
 
-    <div class="sejarah-article reveal">
+    <div class="prose prose-lg prose-blue mx-auto text-slate-600 leading-relaxed">
       <p>
         Tulis sejarah lengkap gereja di sini dalam beberapa paragraf agar mudah dibaca. Contoh: bagaimana
         persekutuan dimulai, perkembangan jemaat, pelayanan yang berjalan, hingga kondisi terkini.
       </p>
-      <p>
+      <div class="p-6 bg-yellow-50 rounded-2xl border-l-4 border-yellow-400 text-yellow-800 not-prose font-medium">
         Jika kamu punya teks sejarah versi final, kirimkan saja — nanti aku rapikan formatnya (pemenggalan paragraf,
         penebalan nama/tanggal penting, dan penataan agar nyaman dibaca).
-      </p>
+      </div>
     </div>
   </div>
 </section>
