@@ -8,11 +8,15 @@ use App\Http\Controllers\WartaPublicController;
 use App\Http\Controllers\EventPublicController;
 use App\Http\Controllers\GalleryPublicController;
 use App\Http\Controllers\HambaTuhanPublicController;
+use App\Http\Controllers\MajelisPublicController;
+use App\Http\Controllers\MediaPublicController;
 
 use App\Http\Controllers\Admin\WartaController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\HambaTuhanController;
+use App\Http\Controllers\Admin\MajelisController;
+use App\Http\Controllers\Admin\MediaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +32,8 @@ Route::get('/gereja', fn () => view('pages.gereja'))->name('gereja');
 Route::get('/gereja/sejarah', fn () => view('pages.gereja-sejarah'))->name('gereja.sejarah');
 Route::get('/gereja/hamba-tuhan', [HambaTuhanPublicController::class, 'index'])->name('gereja.hamba');
 Route::get('/gereja/hamba-tuhan/{hambaTuhan}', [HambaTuhanPublicController::class, 'show'])->name('gereja.hamba.show');
-Route::get('/gereja/majelis', fn () => view('pages.gereja-majelis'))->name('gereja.majelis');
+Route::get('/gereja/majelis', [MajelisPublicController::class, 'index'])->name('gereja.majelis');
+Route::get('/gereja/majelis/{period}', [MajelisPublicController::class, 'show'])->name('gereja.majelis.show');
 Route::get('/gereja/komisi', fn () => view('pages.gereja-komisi'))->name('gereja.komisi');
 
 /* Event (PUBLIC) */
@@ -39,7 +44,7 @@ Route::get('/event/{item}', [EventPublicController::class, 'show'])->name('event
 Route::get('/artikel', fn () => view('pages.artikel'))->name('artikel');
 Route::get('/renungan', fn () => view('pages.renungan'))->name('renungan');
 
-Route::get('/media', fn () => view('pages.media'))->name('media');
+Route::get('/media', [MediaPublicController::class, 'index'])->name('media');
 Route::get('/gallery', [GalleryPublicController::class, 'index'])->name('gallery');
 
 Route::get('/warta-jemaat', [WartaPublicController::class, 'index'])->name('warta');
@@ -71,6 +76,15 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/hamba-tuhan/{hambaTuhan}', [HambaTuhanController::class, 'update'])->name('admin.hamba.update');
     Route::delete('/hamba-tuhan/{hambaTuhan}', [HambaTuhanController::class, 'destroy'])->name('admin.hamba.destroy');
 
+    // MAJELIS ADMIN (CRUD)
+    Route::get('/majelis', [MajelisController::class, 'index'])->name('admin.majelis.index');
+    // (Anggota majelis dihapus dari admin; gunakan Pengaturan Periode)
+
+    // MAJELIS PERIODE (Thumbnail & Gallery) — tetap 1 halaman "Majelis"
+    Route::post('/majelis/periode', [MajelisController::class, 'storePeriod'])->name('admin.majelis.periods.store');
+    Route::put('/majelis/periode/{majelisPeriod}', [MajelisController::class, 'updatePeriod'])->name('admin.majelis.periods.update');
+    Route::delete('/majelis/periode/{majelisPeriod}', [MajelisController::class, 'destroyPeriod'])->name('admin.majelis.periods.destroy');
+
     // WARTA ADMIN (CRUD)
     Route::get('/warta', [WartaController::class, 'index'])->name('admin.warta.index');
     Route::get('/warta/create', [WartaController::class, 'create'])->name('admin.warta.create');
@@ -94,5 +108,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/gallery/{gallery}/edit', [GalleryController::class, 'edit'])->name('admin.gallery.edit');
     Route::put('/gallery/{gallery}', [GalleryController::class, 'update'])->name('admin.gallery.update');
     Route::delete('/gallery/{gallery}', [GalleryController::class, 'destroy'])->name('admin.gallery.destroy');
+
+    // MEDIA ADMIN (CRUD)
+    Route::get('/media', [MediaController::class, 'index'])->name('admin.media.index');
+    Route::get('/media/create', [MediaController::class, 'create'])->name('admin.media.create');
+    Route::post('/media', [MediaController::class, 'store'])->name('admin.media.store');
+    Route::get('/media/{media}/edit', [MediaController::class, 'edit'])->name('admin.media.edit');
+    Route::put('/media/{media}', [MediaController::class, 'update'])->name('admin.media.update');
+    Route::delete('/media/{media}', [MediaController::class, 'destroy'])->name('admin.media.destroy');
 
 });

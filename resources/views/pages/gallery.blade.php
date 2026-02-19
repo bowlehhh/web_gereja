@@ -37,7 +37,9 @@
       </div>
 
       <div class="mt-12">
-        {{ $items->links() }}
+        @if(method_exists($items, 'links'))
+          {{ $items->links() }}
+        @endif
       </div>
     @else
       <div class="p-12 bg-white rounded-3xl border border-gray-200 text-center text-gray-400 font-bold">
@@ -46,7 +48,7 @@
     @endif
 
   </div>
-</section>
+	</section>
 
 {{-- Lightbox / modal --}}
 <div id="galleryModal" class="fixed inset-0 z-[100] hidden items-center justify-center" aria-hidden="true">

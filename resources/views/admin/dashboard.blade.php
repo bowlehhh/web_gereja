@@ -10,6 +10,7 @@
   use App\Models\GalleryItem;
   use App\Models\Warta;
   use App\Models\HambaTuhan;
+  use App\Models\MajelisMember;
 
   $safeCount = function (string $table, callable $query) {
     try {
@@ -30,6 +31,7 @@
   };
 
   $countHamba = $safeCount('hamba_tuhans', fn () => HambaTuhan::query()->count());
+  $countMajelis = $safeCount('majelis_members', fn () => MajelisMember::query()->count());
   $countWarta = $safeCount('wartas', fn () => Warta::query()->count());
   $countEvent = $safeCount('event_items', fn () => EventItem::query()->count());
   $countGallery = $safeCount('gallery_items', fn () => GalleryItem::query()->count());
@@ -47,7 +49,7 @@
 
 <div class="space-y-8">
   <!-- Stats Grid -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
     <!-- Hamba Tuhan Card -->
     <div class="relative overflow-hidden bg-white p-6 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-lg transition-all duration-300">
       <div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity rotate-12">
@@ -120,6 +122,29 @@
         <div>
           <h3 class="text-4xl font-black text-slate-800 tracking-tight">{{ $countGallery }}</h3>
           <p class="text-slate-400 text-xs font-bold mt-1">Dokumentasi</p>
+        </div>
+      </div>
+    </div>
+    <!-- Majelis Card -->
+    <div class="relative overflow-hidden bg-white p-6 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-lg transition-all duration-300">
+      <div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity rotate-12">
+        <svg class="w-32 h-32 text-blue-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM17 9a3 3 0 11-6 0 3 3 0 016 0zM2 18a6 6 0 0112 0v1H2v-1zm13 1v-1a5 5 0 00-1.5-3.57A5 5 0 0119 19v0h-4z"></path></svg>
+      </div>
+      <div class="relative z-10 flex flex-col h-full justify-between">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-2.5 bg-blue-50 text-blue-700 rounded-xl">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM17 9a3 3 0 11-6 0 3 3 0 016 0zM2 18a6 6 0 0112 0v1H2v-1zm13 1v-1a5 5 0 00-1.5-3.57A5 5 0 0119 19v0h-4z"></path></svg>
+          </div>
+          <span class="font-bold text-slate-500 text-sm uppercase tracking-wider">Majelis</span>
+        </div>
+        <div>
+          <h3 class="text-4xl font-black text-slate-800 tracking-tight">{{ $countMajelis }}</h3>
+          <p class="text-slate-400 text-xs font-bold mt-1">Data Terdaftar</p>
+        </div>
+        <div class="mt-4">
+          <a href="{{ route('admin.majelis.index') }}" class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline">
+            Kelola Majelis →
+          </a>
         </div>
       </div>
     </div>

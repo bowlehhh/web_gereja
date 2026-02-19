@@ -39,7 +39,7 @@ class HambaTuhanController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:160'],
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
             'roles_summary' => ['nullable', 'string', 'max:255'],
             'contact' => ['nullable', 'string', 'max:120'],
             'profile' => ['nullable', 'string'],
@@ -49,7 +49,7 @@ class HambaTuhanController extends Controller
         ], [
             'name.required' => 'Nama wajib diisi.',
             'photo.mimes' => 'Foto harus JPG/JPEG/PNG/WEBP.',
-            'photo.max' => 'Ukuran foto maksimal 5MB.',
+            'photo.max' => 'Ukuran foto maksimal 20MB.',
         ]);
 
         $photoPath = null;
@@ -85,7 +85,7 @@ class HambaTuhanController extends Controller
         abort_unless(Schema::hasTable('hamba_tuhans'), 404);
         $data = $request->validate([
             'name' => ['required', 'string', 'max:160'],
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
             'roles_summary' => ['nullable', 'string', 'max:255'],
             'contact' => ['nullable', 'string', 'max:120'],
             'profile' => ['nullable', 'string'],
@@ -95,7 +95,7 @@ class HambaTuhanController extends Controller
         ], [
             'name.required' => 'Nama wajib diisi.',
             'photo.mimes' => 'Foto harus JPG/JPEG/PNG/WEBP.',
-            'photo.max' => 'Ukuran foto maksimal 5MB.',
+            'photo.max' => 'Ukuran foto maksimal 20MB.',
         ]);
 
         if ($request->hasFile('photo')) {

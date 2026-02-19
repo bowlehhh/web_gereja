@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Exceptions\PostTooLargeException;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,5 +16,17 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->render(function (PostTooLargeException $e, Request $request) {
+            $maxMb = 20;
+
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => "Ukuran request terlalu besar. Upload foto maksimal {$maxMb}MB.",
+                ], 413);
+            }
+
+            return response()->view('errors.413', [
+                'maxMb' => $maxMb,
+            ], 413);
+        });
     })->create();

@@ -29,12 +29,12 @@ class GalleryController extends Controller
         $data = $request->validate([
             'title' => ['required', 'string', 'max:150'],
             'caption' => ['nullable', 'string'],
-            'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
             'is_published' => ['nullable'],
         ], [
             'photo.required' => 'Foto wajib diupload.',
             'photo.mimes' => 'Foto harus jpg/jpeg/png/webp.',
-            'photo.max' => 'Ukuran foto maksimal 5MB.',
+            'photo.max' => 'Ukuran foto maksimal 20MB.',
         ]);
 
         $path = $request->file('photo')->store('gallery', 'public');
@@ -59,8 +59,11 @@ class GalleryController extends Controller
         $data = $request->validate([
             'title' => ['required', 'string', 'max:150'],
             'caption' => ['nullable', 'string'],
-            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
             'is_published' => ['nullable'],
+        ], [
+            'photo.mimes' => 'Foto harus jpg/jpeg/png/webp.',
+            'photo.max' => 'Ukuran foto maksimal 20MB.',
         ]);
 
         if ($request->hasFile('photo')) {

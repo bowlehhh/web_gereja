@@ -68,6 +68,8 @@
   @endforelse
 </div>
 <div class="mt-5">
-  {{ $items->links() }}
+  @if(method_exists($items, 'links'))
+    {{ $items->links() }}
+  @endif
 </div>
 @endsection

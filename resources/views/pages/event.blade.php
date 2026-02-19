@@ -52,13 +52,13 @@
       @endforelse
     </div>
 
-    @if($items->hasMorePages())
+    @if(method_exists($items, 'hasMorePages') && $items->hasMorePages())
       <div class="flex justify-center mt-12">
         <a class="px-8 py-3 rounded-full bg-blue-600 text-white font-bold shadow-lg hover:bg-blue-700 hover:scale-105 transition-all" href="{{ $items->nextPageUrl() }}">Lebih Banyak</a>
       </div>
-    @else
+    @elseif(method_exists($items, 'links'))
       <div class="mt-12">
-         {{ $items->links() }}
+        {{ $items->links() }}
       </div>
     @endif
   </div>

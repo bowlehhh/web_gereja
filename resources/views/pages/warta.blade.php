@@ -45,7 +45,9 @@
     </div>
 
     <div class="mt-12">
-      {{ $wartas->links() }}
+      @if(method_exists($wartas, 'links'))
+        {{ $wartas->links() }}
+      @endif
     </div>
 
   </div>

@@ -1,1 +1,122 @@
 @import "tailwindcss";
+
+/* Lenis smooth-scroll baseline (non-Tailwind utilities) */
+html.lenis {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+@layer components {
+  .gkka-hero-title {
+    text-shadow:
+      0 10px 30px rgba(2, 6, 23, 0.55),
+      0 2px 10px rgba(2, 6, 23, 0.35);
+  }
+
+  /* Komisi cards: consistent height + responsive */
+  .gkka-komisi-card {
+    @apply rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm transition-all hover:shadow-xl hover:-translate-y-1 flex flex-col h-full;
+  }
+
+  .gkka-komisi-card__media {
+    @apply bg-slate-100 relative overflow-hidden;
+    aspect-ratio: 16 / 10;
+  }
+
+  .gkka-komisi-card__img {
+    @apply w-full h-full object-cover transition duration-700 group-hover:scale-110;
+  }
+
+  .gkka-komisi-card__badge {
+    @apply inline-flex items-center px-3 py-1.5 rounded-full bg-white/90 backdrop-blur text-blue-900 text-xs font-black tracking-widest uppercase shadow;
+  }
+
+  .gkka-komisi-card__body {
+    @apply p-6 flex flex-col flex-1;
+  }
+
+  .gkka-komisi-card__title {
+    @apply font-black text-slate-800 text-lg leading-snug transition-colors group-hover:text-blue-800;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .gkka-komisi-card__meta {
+    @apply mt-2 text-xs font-black text-slate-500 uppercase tracking-wider;
+  }
+
+  .gkka-komisi-card__excerpt {
+    @apply mt-3 text-sm font-semibold text-slate-600 leading-relaxed;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+}
+
+@layer utilities {
+  .bg-gkka-pattern {
+    background-color: #eaf3fb;
+    /* Pattern: alkitab (buku) + salib */
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='240'%20height='240'%20viewBox='0%200%20240%20240'%3E%3Cdefs%3E%3Cpattern%20id='p'%20width='160'%20height='160'%20patternUnits='userSpaceOnUse'%3E%3Cg%20fill='none'%20stroke='%231e3a8a'%20stroke-opacity='0.10'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cg%20transform='translate(18%2C18)%20rotate(-18%2048%2048)'%3E%3Cpath%20d='M16%2028c18-10%2038-10%2056%200v44c-18-10-38-10-56%200z'/%3E%3Cpath%20d='M72%2028c18-10%2038-10%2056%200v44c-18-10-38-10-56%200z'/%3E%3Cpath%20d='M72%2028v44'/%3E%3Cpath%20d='M26%2040h32m-32%2010h32m-32%2010h32'/%3E%3Cpath%20d='M82%2040h32m-32%2010h32m-32%2010h32'/%3E%3C/g%3E%3Cg%20transform='translate(84%2C88)%20rotate(14%2040%2040)'%3E%3Cpath%20d='M10%2020c14-8%2029-8%2043%200v34c-14-8-29-8-43%200z'/%3E%3Cpath%20d='M53%2020c14-8%2029-8%2043%200v34c-14-8-29-8-43%200z'/%3E%3Cpath%20d='M53%2020v34'/%3E%3C/g%3E%3Cpath%20d='M126%2022h18m-9-9v18'/%3E%3Cpath%20d='M34%20112h18m-9-9v18'/%3E%3Cpath%20d='M120%20120h18m-9-9v18'/%3E%3Cpath%20d='M46%2038h12m-6-6v12'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect%20width='240'%20height='240'%20fill='url(%23p)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 240px 240px;
+  }
+
+  /* Background majelis (biru/putih + icon) — reused on Home + Majelis page */
+  .majelis-pattern-bg {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 45%, #dbeafe 120%);
+  }
+
+  .majelis-pattern-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360' viewBox='0 0 360 360'%3E%3Cg fill='none' stroke='%231d4ed8' stroke-opacity='0.35' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg transform='translate(30 36) rotate(-10 72 72) scale(6)'%3E%3Cpath d='M4 19.5V6.5c0-1.1.9-2 2-2h6v15H6c-1.1 0-2 .9-2 2Z'/%3E%3Cpath d='M20 19.5V6.5c0-1.1-.9-2-2-2h-6v15h6c1.1 0 2 .9 2 2Z'/%3E%3Cpath d='M12 7v3'/%3E%3Cpath d='M10.5 8.5h3'/%3E%3C/g%3E%3Cg transform='translate(214 44) rotate(12 60 60) scale(7)'%3E%3Cpath d='M12 2v20'/%3E%3Cpath d='M7 7h10'/%3E%3C/g%3E%3Cg transform='translate(92 212) rotate(8 70 70) scale(6)'%3E%3Cpath d='M4 19.5V6.5c0-1.1.9-2 2-2h6v15H6c-1.1 0-2 .9-2 2Z'/%3E%3Cpath d='M20 19.5V6.5c0-1.1-.9-2-2-2h-6v15h6c1.1 0 2 .9 2 2Z'/%3E%3Cpath d='M12 7v3'/%3E%3Cpath d='M10.5 8.5h3'/%3E%3C/g%3E%3Cg transform='translate(252 252) rotate(-10 60 60) scale(7)'%3E%3Cpath d='M12 2v20'/%3E%3Cpath d='M7 7h10'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 520px 520px;
+    opacity: 0.10;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .majelis-pattern-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 28% 30%, rgba(37,99,235,0.10) 0%, rgba(37,99,235,0) 55%),
+      radial-gradient(circle at 70% 20%, rgba(59,130,246,0.08) 0%, rgba(59,130,246,0) 52%),
+      linear-gradient(120deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 45%, rgba(255,255,255,0.35) 72%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .majelis-pattern-bg > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .reveal {
+    @apply opacity-0 translate-y-6 transition duration-700 ease-out;
+  }
+
+  .reveal.is-visible {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

@@ -7,6 +7,19 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Upload foto Majelis (≤ 20MB)
+
+- Validasi aplikasi membatasi foto Majelis maksimal **20MB**.
+- Supaya tidak muncul error `PostTooLargeException (413)`, server PHP juga harus mengizinkan request lebih besar (mis. **64MB**) agar Laravel bisa memvalidasi dan memberi pesan error yang rapi.
+
+Catatan environment:
+- Untuk local `php artisan serve`, limit upload sudah dioverride via `php/conf.d/uploads.ini` (default `64M`) supaya bisa upload foto besar tanpa error `413`.
+- Jika butuh lebih besar, edit `php/conf.d/uploads.ini` lalu jalankan ulang `php artisan serve`.
+- Jika local masih `413`, kemungkinan kamu menjalankan server dengan `php -S ...` langsung (tanpa override ini). Pakai `composer dev` atau jalankan dengan `-d post_max_size=64M -d upload_max_filesize=64M`.
+- Hosting Apache (mod_php): sudah dibantu lewat `public/.htaccess`.
+- Hosting PHP-FPM/CGI: sudah dibantu lewat `public/.user.ini` (tergantung host).
+- Nginx: perlu set `client_max_body_size` (contoh: `client_max_body_size 64m;`) di konfigurasi server.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

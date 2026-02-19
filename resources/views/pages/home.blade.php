@@ -81,9 +81,9 @@
             <span class="w-2 h-8 bg-yellow-500 rounded-full"></span>
             Jadwal Komisi
           </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="space-y-2">
-              <h3 class="font-bold text-yellow-400 text-lg">Komisi Wanita “Gloria”</h3>
+              <h3 class="font-bold text-yellow-400 text-lg">Komisi Wanita Rut</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
                 Tiap Selasa, 19.00 WITA<br>
                 Minggu 2 & 4: Ibadah<br>
@@ -91,7 +91,7 @@
               </p>
             </div>
             <div class="space-y-2">
-              <h3 class="font-bold text-yellow-400 text-lg">Komisi Remaja “Philia”</h3>
+              <h3 class="font-bold text-yellow-400 text-lg">Komisi Remaja Betania</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
                 Tiap Jumat, 19.00 WITA<br>
                 Minggu 1 - 3: Ibadah<br>
@@ -99,14 +99,14 @@
               </p>
             </div>
             <div class="space-y-2">
-              <h3 class="font-bold text-yellow-400 text-lg">Komisi Pria “Yosua”</h3>
+              <h3 class="font-bold text-yellow-400 text-lg">Komisi Pria Hizkia</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
                 Jumat (Minggu 1)<br>
                 19.00 WITA
               </p>
             </div>
             <div class="space-y-2">
-              <h3 class="font-bold text-yellow-400 text-lg">Komisi Pemuda “Sola Gratia”</h3>
+              <h3 class="font-bold text-yellow-400 text-lg">Komisi Pemuda Eirene</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
                 Tiap Jumat, 19.00 WITA<br>
                 Minggu 1 - 3: Ibadah<br>
@@ -204,25 +204,110 @@
   </div>
 </section>
 
+{{-- MAJELIS SECTION --}}
+<section class="py-20 majelis-pattern-bg">
+  <div class="w-full max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-black text-blue-900">Majelis GKKA Samarinda</h2>
+        <p class="mt-2 text-slate-600 font-medium">Klik kartu untuk melihat “About Majelis”.</p>
+      </div>
+      <a href="{{ route('gereja.majelis') }}" class="inline-flex items-center gap-2 font-black text-blue-600 hover:text-blue-800 transition-colors">
+        Lihat Semua <span class="text-xl">→</span>
+      </a>
+    </div>
+
+    @if(isset($majelisPeriods) && $majelisPeriods->isNotEmpty())
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @foreach($majelisPeriods as $p)
+          @php
+            $thumb = $p->thumbnail_path ? asset('storage/'.$p->thumbnail_path) : asset('assets/logo.png');
+          @endphp
+          <a href="{{ route('gereja.majelis.show', ['period' => $p->period]) }}"
+             class="group block bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
+            <div class="h-44 overflow-hidden relative bg-white">
+              <img src="{{ $thumb }}" alt="Periode {{ $p->period }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+              <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/15 transition-colors duration-300"></div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between gap-3 mb-2">
+                <div class="text-xs font-black uppercase tracking-wider text-blue-700 bg-blue-50 px-3 py-1 rounded-full">
+                  Periode
+                </div>
+                <div class="text-xs font-bold text-slate-500">{{ $p->period }}</div>
+              </div>
+              <h3 class="text-lg font-black text-slate-900 group-hover:text-blue-700 transition-colors">Majelis Periode {{ $p->period }}</h3>
+              @if(!empty($p->about))
+                <p class="mt-2 text-slate-600 font-medium leading-relaxed line-clamp-2">{{ $p->about }}</p>
+              @endif
+            </div>
+          </a>
+        @endforeach
+      </div>
+    @else
+      <div class="bg-slate-50 rounded-3xl border border-gray-100 p-10 text-center text-slate-500 font-bold">
+        Data periode majelis belum tersedia.
+      </div>
+    @endif
+  </div>
+</section>
+
 {{-- KOMISI SECTION --}}
 <section class="py-20 bg-slate-50">
   <div class="w-full max-w-7xl mx-auto px-6">
     <h2 class="text-center text-3xl md:text-4xl font-black text-blue-900 mb-12">Komisi GKKA Samarinda</h2>
 
+    @php
+      $komisiCards = [
+        [
+          'label' => 'Komisi',
+          'title' => 'Komisi Sekolah Minggu Narwastu',
+          'date' => 'Pelayanan anak & keluarga',
+          'excerpt' => 'Mendampingi pertumbuhan iman anak melalui pengajaran firman, ibadah, dan kegiatan pembinaan.',
+          'image' => asset('img/sekolah minggu.jpeg'),
+        ],
+        [
+          'label' => 'Komisi',
+          'title' => 'Komisi Remaja Betania',
+          'date' => 'Pembinaan remaja',
+          'excerpt' => 'Ruang bertumbuh bersama, pemuridan, dan pelayanan bagi remaja di GKKA Samarinda.',
+          'image' => asset('img/remajaa.jpeg'),
+        ],
+        [
+          'label' => 'Komisi',
+          'title' => 'Komisi Pemuda Eirene',
+          'date' => 'Pembinaan pemuda',
+          'excerpt' => 'Persekutuan, pemuridan, dan pelayanan bersama untuk pemuda di GKKA Samarinda.',
+          'image' => asset('img/pemuda.jpeg'),
+        ],
+        [
+          'label' => 'Komisi',
+          'title' => 'Komisi Wanita Rut',
+          'date' => 'Persekutuan wanita',
+          'excerpt' => 'Persekutuan, doa, dan pelayanan yang menguatkan keluarga serta jemaat melalui karya kasih.',
+          'image' => asset('img/komisiwanita.jpeg'),
+        ],
+        [
+          'label' => 'Komisi',
+          'title' => 'Komisi Pria Hizkia',
+          'date' => 'Pembinaan pria',
+          'excerpt' => 'Membangun karakter, keteladanan, dan kepekaan pelayanan melalui firman dan persekutuan.',
+          'image' => asset('img/komisi bapapk.jpeg'),
+        ],
+      ];
+    @endphp
+
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      @foreach(['Majelis', 'Komisi Sekolah Minggu', 'Komisi Remaja Pemuda', 'Komisi Wanita', 'Komisi Pria', 'Komisi Usia Indah'] as $komisi)
-      <a href="{{ route('gereja.komisi') }}" class="group block bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100 hover:-translate-y-2 transition-all duration-300">
-        <div class="h-48 overflow-hidden relative">
-           <img src="{{ $heroImage }}" alt="{{ $komisi }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-           <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-        </div>
-        <div class="p-6 text-center">
-           <h3 class="font-black text-xl text-slate-800 mb-4 group-hover:text-blue-700 transition-colors">{{ $komisi }}</h3>
-           <span class="px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wider group-hover:bg-blue-600 group-hover:text-white transition-colors">
-             Lihat Detail
-           </span>
-        </div>
-      </a>
+      @foreach($komisiCards as $card)
+        <x-komisi-card
+          variant="detailed"
+          :href="route('gereja.komisi')"
+          :title="$card['title']"
+          :image="$card['image']"
+          :label="$card['label']"
+          :meta="$card['date']"
+          :excerpt="$card['excerpt']"
+        />
       @endforeach
     </div>
   </div>

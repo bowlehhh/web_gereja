@@ -3,6 +3,12 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    # If running on Apache + mod_php, allow larger uploads (so Laravel can validate size itself).
+    <IfModule mod_php.c>
+        php_value upload_max_filesize 128M
+        php_value post_max_size 128M
+    </IfModule>
+
     RewriteEngine On
 
     # Handle Authorization Header

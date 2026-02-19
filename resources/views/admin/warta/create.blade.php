@@ -52,7 +52,7 @@
         </div>
 
         <div>
-          <label class="font-extrabold text-sm text-blue-900">Thumbnail (jpg/png/webp, max 5MB)</label>
+          <label class="font-extrabold text-sm text-blue-900">Thumbnail (jpg/png/webp, max 20MB)</label>
           <input type="file" name="thumbnail" accept="image/*"
                  class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
         </div>

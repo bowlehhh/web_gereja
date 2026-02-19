@@ -30,7 +30,7 @@
           <label class="font-extrabold text-sm text-blue-900">Foto</label>
           <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp"
                  class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
-          <div class="mt-2 text-blue-900/60 text-sm font-semibold">Disarankan foto potret seperti contoh. Maks 5MB.</div>
+          <div class="mt-2 text-blue-900/60 text-sm font-semibold">Disarankan foto potret seperti contoh. Maks 20MB.</div>
           @error('photo') <div class="mt-2 text-blue-900 font-bold text-sm bg-blue-50 p-2 rounded-lg border border-blue-100 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>{{ $message }}</div> @enderror
         </div>
 
@@ -38,7 +38,7 @@
           <label class="font-extrabold text-sm text-blue-900">Ringkasan (untuk kartu)</label>
           <input name="roles_summary" value="{{ old('roles_summary') }}" maxlength="255"
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition"
-                 placeholder="Contoh: Pembina Komisi Remaja Pemuda, Pembina Komisi Usia Indah">
+                 placeholder="Contoh: Pembina Komisi Remaja Betania, Pembina Komisi Pemuda Eirene">
           @error('roles_summary') <div class="mt-2 text-blue-900 font-bold text-sm bg-blue-50 p-2 rounded-lg border border-blue-100 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>{{ $message }}</div> @enderror
         </div>
 
@@ -78,7 +78,7 @@
           <label class="font-extrabold text-sm text-blue-900">Bidang Pelayanan (halaman detail)</label>
           <textarea name="service_fields" rows="4"
                     class="mt-2 w-full p-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition"
-                    placeholder="Contoh: Pembina Komisi Remaja Pemuda, Pembina Komisi Usia Indah...">{{ old('service_fields') }}</textarea>
+                    placeholder="Contoh: Pembina Komisi Wanita Rut, Pembina Komisi Pria Hizkia...">{{ old('service_fields') }}</textarea>
           @error('service_fields') <div class="mt-2 text-blue-900 font-bold text-sm bg-blue-50 p-2 rounded-lg border border-blue-100 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>{{ $message }}</div> @enderror
         </div>
 

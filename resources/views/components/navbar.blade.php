@@ -97,7 +97,7 @@
                  <a href="{{ route('gereja.hamba') }}" class="mobile-link block px-4 py-3 rounded-lg font-bold text-base transition-all duration-200 {{ request()->routeIs('gereja.hamba*') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">
                     Hamba Tuhan
                  </a>
-                 <a href="{{ route('gereja.majelis') }}" class="mobile-link block px-4 py-3 rounded-lg font-bold text-base transition-all duration-200 {{ request()->routeIs('gereja.majelis') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">
+                 <a href="{{ route('gereja.majelis') }}" class="mobile-link block px-4 py-3 rounded-lg font-bold text-base transition-all duration-200 {{ request()->routeIs('gereja.majelis*') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">
                     Majelis
                  </a>
                  <a href="{{ route('gereja.komisi') }}" class="mobile-link block px-4 py-3 rounded-lg font-bold text-base transition-all duration-200 {{ request()->routeIs('gereja.komisi') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">

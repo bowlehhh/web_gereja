@@ -36,22 +36,21 @@ class EventController extends Controller
                 'start_date' => ['nullable','date'],
                 'end_date' => ['nullable','date','after_or_equal:start_date'],
                 'location' => ['nullable','string','max:150'],
-                'thumbnail' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:5120'],
-                'photo' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:5120'],
-                'video' => ['nullable','file','mimes:mp4,webm,ogg','max:51200'],
-                'youtube_url' => ['nullable','string','max:255'],
+                'thumbnail' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:20480'],
+                'photo' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:20480'],
+                'video' => ['nullable','file','mimes:mp4,webm,ogg','max:30720'],
                 'is_published' => ['nullable'],
             ],
             [
                 'end_date.after_or_equal' => 'Tanggal Selesai harus sama atau setelah Tanggal Mulai.',
                 'thumbnail.image' => 'Thumbnail harus berupa file gambar.',
                 'thumbnail.mimes' => 'Thumbnail harus berformat jpg, jpeg, png, atau webp.',
-                'thumbnail.max' => 'Ukuran thumbnail maksimal 5MB.',
+                'thumbnail.max' => 'Ukuran thumbnail maksimal 20MB.',
                 'photo.image' => 'Foto harus berupa file gambar.',
                 'photo.mimes' => 'Foto harus berformat jpg, jpeg, png, atau webp.',
-                'photo.max' => 'Ukuran foto maksimal 5MB.',
+                'photo.max' => 'Ukuran foto maksimal 20MB.',
                 'video.mimes' => 'Video harus berformat mp4, webm, atau ogg.',
-                'video.max' => 'Ukuran video maksimal 50MB.',
+                'video.max' => 'Ukuran video maksimal 30MB.',
             ],
             [
                 'title' => 'Judul',
@@ -63,7 +62,6 @@ class EventController extends Controller
                 'thumbnail' => 'Thumbnail',
                 'photo' => 'Foto',
                 'video' => 'Video',
-                'youtube_url' => 'YouTube URL',
             ]
         );
 
@@ -92,7 +90,6 @@ class EventController extends Controller
             'thumbnail_path' => $thumbnailPath,
             'photo_path' => $photoPath,
             'video_path' => $videoPath,
-            'youtube_url' => $data['youtube_url'] ?? null,
             'is_published' => $request->boolean('is_published'),
         ]);
 
@@ -114,22 +111,21 @@ class EventController extends Controller
                 'start_date' => ['nullable','date'],
                 'end_date' => ['nullable','date','after_or_equal:start_date'],
                 'location' => ['nullable','string','max:150'],
-                'thumbnail' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:5120'],
-                'photo' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:5120'],
-                'video' => ['nullable','file','mimes:mp4,webm,ogg','max:51200'],
-                'youtube_url' => ['nullable','string','max:255'],
+                'thumbnail' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:20480'],
+                'photo' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:20480'],
+                'video' => ['nullable','file','mimes:mp4,webm,ogg','max:30720'],
                 'is_published' => ['nullable'],
             ],
             [
                 'end_date.after_or_equal' => 'Tanggal Selesai harus sama atau setelah Tanggal Mulai.',
                 'thumbnail.image' => 'Thumbnail harus berupa file gambar.',
                 'thumbnail.mimes' => 'Thumbnail harus berformat jpg, jpeg, png, atau webp.',
-                'thumbnail.max' => 'Ukuran thumbnail maksimal 5MB.',
+                'thumbnail.max' => 'Ukuran thumbnail maksimal 20MB.',
                 'photo.image' => 'Foto harus berupa file gambar.',
                 'photo.mimes' => 'Foto harus berformat jpg, jpeg, png, atau webp.',
-                'photo.max' => 'Ukuran foto maksimal 5MB.',
+                'photo.max' => 'Ukuran foto maksimal 20MB.',
                 'video.mimes' => 'Video harus berformat mp4, webm, atau ogg.',
-                'video.max' => 'Ukuran video maksimal 50MB.',
+                'video.max' => 'Ukuran video maksimal 30MB.',
             ],
             [
                 'title' => 'Judul',
@@ -141,7 +137,6 @@ class EventController extends Controller
                 'thumbnail' => 'Thumbnail',
                 'photo' => 'Foto',
                 'video' => 'Video',
-                'youtube_url' => 'YouTube URL',
             ]
         );
 
@@ -151,7 +146,6 @@ class EventController extends Controller
         $item->start_date = $data['start_date'] ?? null;
         $item->end_date = $data['end_date'] ?? null;
         $item->location = $data['location'] ?? null;
-        $item->youtube_url = $data['youtube_url'] ?? null;
         $item->is_published = $request->boolean('is_published');
 
         if ($request->hasFile('thumbnail')) {

@@ -8,13 +8,14 @@
   {{-- SATU CSS SAJA --}}
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-
+  @stack('styles')
+  
 </head>
-<body class="@yield('body_class')">
+<body class="min-h-screen min-h-[100svh] flex flex-col @yield('body_class')">
 
 @include('components.navbar')
 
-<main>
+<main class="flex-1">
   @yield('content')
 </main>
 
@@ -43,5 +44,8 @@
   });
 </script>
 
+<script src="https://unpkg.com/lucide@latest"></script>
+
+@stack('scripts')
 </body>
 </html>

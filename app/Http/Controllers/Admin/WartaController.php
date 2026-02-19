@@ -32,7 +32,7 @@ class WartaController extends Controller
             'edition' => ['nullable', 'string', 'max:50'],
 
             // thumbnail optional
-            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
 
             // pdf wajib
             'pdf' => ['required', 'file', 'mimes:pdf', 'max:20480'],
@@ -42,7 +42,7 @@ class WartaController extends Controller
             'title.required' => 'Judul wajib diisi.',
             'date.date' => 'Format tanggal tidak valid.',
             'thumbnail.mimes' => 'Thumbnail harus JPG/JPEG/PNG/WEBP.',
-            'thumbnail.max' => 'Ukuran thumbnail maksimal 5MB.',
+            'thumbnail.max' => 'Ukuran thumbnail maksimal 20MB.',
             'pdf.required' => 'PDF Warta wajib diupload.',
             'pdf.mimes' => 'File warta harus PDF.',
             'pdf.max' => 'Ukuran PDF maksimal 20MB.',
@@ -78,14 +78,14 @@ class WartaController extends Controller
             'title' => ['required', 'string', 'max:200'],
             'date' => ['nullable', 'date'],
             'edition' => ['nullable', 'string', 'max:50'],
-            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
             'pdf' => ['nullable', 'file', 'mimes:pdf', 'max:20480'],
             'is_published' => ['nullable'],
         ], [
             'title.required' => 'Judul wajib diisi.',
             'date.date' => 'Format tanggal tidak valid.',
             'thumbnail.mimes' => 'Thumbnail harus JPG/JPEG/PNG/WEBP.',
-            'thumbnail.max' => 'Ukuran thumbnail maksimal 5MB.',
+            'thumbnail.max' => 'Ukuran thumbnail maksimal 20MB.',
             'pdf.mimes' => 'File warta harus PDF.',
             'pdf.max' => 'Ukuran PDF maksimal 20MB.',
         ]);
