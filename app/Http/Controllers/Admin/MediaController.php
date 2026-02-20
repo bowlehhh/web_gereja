@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\MediaItem;
+use App\Support\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,7 +59,7 @@ class MediaController extends Controller
 
         $thumbnailPath = null;
         if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = $request->file('thumbnail')->store('media/thumbnails', 'public');
+            $thumbnailPath = ImageUpload::storeAsWebp($request->file('thumbnail'), 'media/thumbnails');
         }
 
         $youtubeId = MediaItem::extractYoutubeId($data['youtube_url']);
@@ -117,7 +118,7 @@ class MediaController extends Controller
             if (!empty($media->thumbnail_path)) {
                 Storage::disk('public')->delete($media->thumbnail_path);
             }
-            $media->thumbnail_path = $request->file('thumbnail')->store('media/thumbnails', 'public');
+            $media->thumbnail_path = ImageUpload::storeAsWebp($request->file('thumbnail'), 'media/thumbnails');
         }
 
         $media->save();
@@ -135,4 +136,3 @@ class MediaController extends Controller
         return redirect()->route('admin.media.index')->with('ok', 'Media berhasil dihapus.');
     }
 }
-

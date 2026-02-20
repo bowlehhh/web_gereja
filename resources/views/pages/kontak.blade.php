@@ -60,51 +60,46 @@
          </div>
       </div>
 
-      {{-- RIGHT COLUMN: Contact Form --}}
+      {{-- RIGHT COLUMN: Informasi Statis --}}
       <div class="relative w-full lg:w-7/12 bg-white p-8 md:p-12 lg:p-16">
          {{-- Slanted Divider (Desktop Only) --}}
          <div class="hidden lg:block absolute inset-y-0 -left-20 w-40 bg-white -skew-x-[6deg] transform origin-bottom z-10"></div>
          
          <div class="relative z-20">
-            <h2 class="text-3xl font-black text-slate-800 mb-2">Kirim Pesan</h2>
-            <p class="text-slate-500 mb-8">Punya pertanyaan atau ingin menyampaikan sesuatu?</p>
+            <h2 class="text-3xl font-black text-slate-800 mb-2">Informasi Kontak</h2>
+            <p class="text-slate-500 mb-8">Detail kontak resmi dan informasi pelayanan.</p>
 
-            <form action="#" method="POST" class="space-y-6">
-               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div class="space-y-2">
-                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Nama Lengkap</label>
-                     <input type="text" class="w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-medium text-slate-800 placeholder-gray-400" placeholder="Nama Anda">
-                  </div>
-                  <div class="space-y-2">
-                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Email</label>
-                     <input type="email" class="w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-medium text-slate-800 placeholder-gray-400" placeholder="email@anda.com">
-                  </div>
-               </div>
-
-               <div class="space-y-2">
-                  <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Subjek</label>
-                  <div class="relative">
-                    <select class="w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-medium text-slate-800 appearance-none cursor-pointer">
-                       <option>Pertanyaan Umum</option>
-                       <option>Permohonan Doa</option>
-                       <option>Konseling / Pastoral</option>
-                       <option>Lainnya</option>
-                    </select>
-                    <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
+            <div class="space-y-6">
+               <div class="rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-widest">Kontak Admin</div>
+                  <div class="mt-3 space-y-2 text-slate-700 font-semibold">
+                     <div class="flex items-center gap-2">
+                        <span class="text-slate-400">Telepon/WA:</span>
+                        <a href="tel:08xx-xxxx-xxxx" class="text-blue-700 hover:text-blue-900 transition-colors">08xx-xxxx-xxxx</a>
+                     </div>
+                     <div class="flex items-center gap-2">
+                        <span class="text-slate-400">Email:</span>
+                        <a href="mailto:info@gkkasamarinda.com" class="text-blue-700 hover:text-blue-900 transition-colors">info@gkkasamarinda.com</a>
+                     </div>
                   </div>
                </div>
 
-               <div class="space-y-2">
-                  <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Pesan</label>
-                  <textarea rows="5" class="w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-medium text-slate-800 placeholder-gray-400 resize-none" placeholder="Tulis pesan Anda di sini..."></textarea>
+               <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-widest">Jam Pelayanan</div>
+                  <div class="mt-3 space-y-2 text-slate-700 font-semibold">
+                     <div>Senin - Jumat: 09.00 - 17.00 WITA</div>
+                     <div>Sabtu: 09.00 - 13.00 WITA</div>
+                     <div>Minggu: Pelayanan ibadah</div>
+                  </div>
                </div>
 
-               <button type="submit" class="w-full py-4 rounded-xl bg-blue-600 text-white font-black text-lg shadow-xl shadow-blue-600/30 hover:bg-blue-700 hover:shadow-2xl hover:shadow-blue-600/40 hover:-translate-y-1 transition-all duration-300">
-                  Kirim Pesan
-               </button>
-            </form>
+               <div class="rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-widest">Catatan</div>
+                  <p class="mt-3 text-slate-600 font-medium leading-relaxed">
+                     Untuk jadwal pelayanan terbaru atau kebutuhan khusus, silakan hubungi admin melalui telepon/WA.
+                  </p>
+               </div>
+            </div>
          </div>
       </div>
 

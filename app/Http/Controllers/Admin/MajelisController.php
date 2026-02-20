@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\MajelisPeriod;
+use App\Support\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
@@ -61,13 +62,13 @@ class MajelisController extends Controller
 
         $thumbPath = null;
         if ($request->hasFile('thumbnail')) {
-            $thumbPath = $request->file('thumbnail')->store("majelis/periods/{$slug}", 'public');
+            $thumbPath = ImageUpload::storeAsWebp($request->file('thumbnail'), "majelis/periods/{$slug}");
         }
 
         $galleryPaths = [];
         if ($request->hasFile('gallery')) {
             foreach ($request->file('gallery') as $file) {
-                $galleryPaths[] = $file->store("majelis/periods/{$slug}/gallery", 'public');
+                $galleryPaths[] = ImageUpload::storeAsWebp($file, "majelis/periods/{$slug}/gallery");
             }
         }
 
@@ -112,7 +113,7 @@ class MajelisController extends Controller
             if ($majelisPeriod->thumbnail_path && Storage::disk('public')->exists($majelisPeriod->thumbnail_path)) {
                 Storage::disk('public')->delete($majelisPeriod->thumbnail_path);
             }
-            $majelisPeriod->thumbnail_path = $request->file('thumbnail')->store("majelis/periods/{$slug}", 'public');
+            $majelisPeriod->thumbnail_path = ImageUpload::storeAsWebp($request->file('thumbnail'), "majelis/periods/{$slug}");
         }
 
         if ($request->boolean('clear_gallery')) {
@@ -133,7 +134,7 @@ class MajelisController extends Controller
 
             $galleryPaths = [];
             foreach ($request->file('gallery') as $file) {
-                $galleryPaths[] = $file->store("majelis/periods/{$slug}/gallery", 'public');
+                $galleryPaths[] = ImageUpload::storeAsWebp($file, "majelis/periods/{$slug}/gallery");
             }
             $majelisPeriod->gallery_paths = $galleryPaths ?: null;
         }

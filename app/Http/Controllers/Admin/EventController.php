@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\EventItem;
+use App\Support\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -67,12 +68,12 @@ class EventController extends Controller
 
         $thumbnailPath = null;
         if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = $request->file('thumbnail')->store('events', 'public');
+            $thumbnailPath = ImageUpload::storeAsWebp($request->file('thumbnail'), 'events');
         }
 
         $photoPath = null;
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('events/photos', 'public');
+            $photoPath = ImageUpload::storeAsWebp($request->file('photo'), 'events/photos');
         }
 
         $videoPath = null;
@@ -152,14 +153,14 @@ class EventController extends Controller
             if (!empty($item->thumbnail_path)) {
                 Storage::disk('public')->delete($item->thumbnail_path);
             }
-            $item->thumbnail_path = $request->file('thumbnail')->store('events', 'public');
+            $item->thumbnail_path = ImageUpload::storeAsWebp($request->file('thumbnail'), 'events');
         }
 
         if ($request->hasFile('photo')) {
             if (!empty($item->photo_path)) {
                 Storage::disk('public')->delete($item->photo_path);
             }
-            $item->photo_path = $request->file('photo')->store('events/photos', 'public');
+            $item->photo_path = ImageUpload::storeAsWebp($request->file('photo'), 'events/photos');
         }
 
         if ($request->hasFile('video')) {

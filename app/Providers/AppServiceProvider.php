@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
             }
         }
 
-        if ($command !== 'serve') {
+        if (! is_string($command) || ! str_starts_with($command, 'serve')) {
             return;
         }
 

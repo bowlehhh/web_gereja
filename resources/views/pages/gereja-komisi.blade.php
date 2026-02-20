@@ -48,7 +48,7 @@
   ];
 @endphp
 
-<div class="relative">
+<div class="relative overflow-x-hidden">
   <div class="absolute inset-0 -z-10">
 	    <div
 	      class="absolute inset-0 bg-center bg-cover blur-[2px] scale-105 opacity-80 brightness-[0.40] saturate-[0.55] contrast-[0.95]"

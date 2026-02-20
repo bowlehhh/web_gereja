@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\HambaTuhan;
+use App\Support\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
@@ -54,7 +55,7 @@ class HambaTuhanController extends Controller
 
         $photoPath = null;
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('hamba_tuhan/photos', 'public');
+            $photoPath = ImageUpload::storeAsWebp($request->file('photo'), 'hamba_tuhan/photos');
         }
 
         $item = HambaTuhan::create([
@@ -102,7 +103,7 @@ class HambaTuhanController extends Controller
             if ($hambaTuhan->photo_path && Storage::disk('public')->exists($hambaTuhan->photo_path)) {
                 Storage::disk('public')->delete($hambaTuhan->photo_path);
             }
-            $hambaTuhan->photo_path = $request->file('photo')->store('hamba_tuhan/photos', 'public');
+            $hambaTuhan->photo_path = ImageUpload::storeAsWebp($request->file('photo'), 'hamba_tuhan/photos');
         }
 
         $hambaTuhan->name = $data['name'];

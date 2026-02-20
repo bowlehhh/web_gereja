@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Warta;
+use App\Support\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -50,7 +51,7 @@ class WartaController extends Controller
 
         $thumbPath = null;
         if ($request->hasFile('thumbnail')) {
-            $thumbPath = $request->file('thumbnail')->store('warta/thumbs', 'public');
+            $thumbPath = ImageUpload::storeAsWebp($request->file('thumbnail'), 'warta/thumbs');
         }
 
         $pdfPath = $request->file('pdf')->store('warta/pdfs', 'public');
@@ -94,7 +95,7 @@ class WartaController extends Controller
             if ($warta->thumbnail_path && Storage::disk('public')->exists($warta->thumbnail_path)) {
                 Storage::disk('public')->delete($warta->thumbnail_path);
             }
-            $warta->thumbnail_path = $request->file('thumbnail')->store('warta/thumbs', 'public');
+            $warta->thumbnail_path = ImageUpload::storeAsWebp($request->file('thumbnail'), 'warta/thumbs');
         }
 
         if ($request->hasFile('pdf')) {

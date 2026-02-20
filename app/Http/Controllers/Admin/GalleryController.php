@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\GalleryItem;
+use App\Support\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -37,7 +38,7 @@ class GalleryController extends Controller
             'photo.max' => 'Ukuran foto maksimal 20MB.',
         ]);
 
-        $path = $request->file('photo')->store('gallery', 'public');
+        $path = ImageUpload::storeAsWebp($request->file('photo'), 'gallery');
 
         GalleryItem::create([
             'title' => $data['title'],
@@ -70,7 +71,7 @@ class GalleryController extends Controller
             if ($gallery->image_path && Storage::disk('public')->exists($gallery->image_path)) {
                 Storage::disk('public')->delete($gallery->image_path);
             }
-            $gallery->image_path = $request->file('photo')->store('gallery', 'public');
+            $gallery->image_path = ImageUpload::storeAsWebp($request->file('photo'), 'gallery');
         }
 
         $gallery->title = $data['title'];
