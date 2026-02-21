@@ -4,14 +4,14 @@
 
 @section('content')
 <section class="bg-blue-900 text-white py-20">
-  <div class="w-full max-w-7xl mx-auto px-6 text-center">
+  <div class="gkka-container text-center">
     <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Warta Jemaat</h1>
     <p class="text-lg text-blue-200 font-medium">Arsip warta jemaat GKKA Indonesia Jemaat Samarinda</p>
   </div>
 </section>
 
 <section class="py-16 bg-gray-50">
-  <div class="w-full max-w-7xl mx-auto px-6">
+  <div class="gkka-container">
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
       @forelse ($wartas as $w)

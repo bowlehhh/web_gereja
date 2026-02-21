@@ -1,7 +1,6 @@
 import './bootstrap';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
 
 window.gsap = gsap;
 
@@ -118,21 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Sidebar listeners attached.');
     }
 
-    // Majelis timeline (Lenis + GSAP ScrollTrigger)
+    // Majelis timeline (GSAP ScrollTrigger)
     const timelineContainer = document.querySelector('.timeline-container');
     if (!timelineContainer) return;
 
     gsap.registerPlugin(ScrollTrigger);
-
-    const lenis = new Lenis();
-    window.lenis = lenis;
-
-    lenis.on('scroll', ScrollTrigger.update);
-
-    gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
 
     const lineActive = document.getElementById('line-active');
     if (lineActive) {

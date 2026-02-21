@@ -1,9 +1,9 @@
-<header class="fixed w-full top-0 z-50 bg-white shadow-md">
-  <div class="w-full max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+<header class="fixed w-full top-0 z-50 bg-white shadow-md max-sm:bg-white/95 max-sm:backdrop-blur">
+  <div class="gkka-container py-3 flex justify-between items-center">
     
     {{-- BRAND --}}
-    <a class="flex items-center gap-3 group" href="{{ route('home') }}">
-      <img src="{{ asset('assets/logo.png') }}" class="w-10 h-10 object-contain group-hover:scale-105 transition-transform duration-300">
+    <a class="flex items-center gap-3 group shrink-0" href="{{ route('home') }}">
+      <img src="{{ asset('assets/logo.png') }}" class="w-10 h-10 object-contain group-hover:scale-105 transition-transform duration-300" alt="Logo GKKA">
       <div>
         <div class="font-black text-lg leading-tight text-blue-900 group-hover:text-blue-700 transition-colors">GKKA Indonesia</div>
         <div class="text-xs text-gray-500 font-bold tracking-wide">Jemaat Samarinda</div>

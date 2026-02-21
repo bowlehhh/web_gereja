@@ -65,8 +65,8 @@
   <section class="relative text-white overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-blue-950/55 via-blue-950/35 to-transparent"></div>
 
-    <div class="w-full max-w-7xl mx-auto px-6 relative">
-      <div class="py-16 lg:py-20 text-center">
+    <div class="gkka-container relative">
+      <div class="py-14 sm:py-16 lg:py-20 text-center">
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 text-blue-100 font-black tracking-widest uppercase text-xs">
           GKKA Samarinda
         </div>
@@ -81,8 +81,8 @@
     </div>
   </section>
 
-  <section class="py-16">
-    <div class="w-full max-w-7xl mx-auto px-6">
+  <section class="gkka-section-tight">
+    <div class="gkka-container">
       <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
         <div>
           <h2 class="text-2xl md:text-3xl font-black tracking-tight text-white drop-shadow-sm">Komisi GKKA Samarinda</h2>

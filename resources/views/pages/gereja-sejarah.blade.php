@@ -2,7 +2,7 @@
 @section('title','Sejarah - GKKA Samarinda')
 @section('content')
 <section class="bg-blue-900 text-white py-20">
-  <div class="w-full max-w-7xl mx-auto px-6 text-center">
+  <div class="gkka-container text-center">
     <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Sejarah</h1>
     <p class="text-lg text-blue-200 font-medium">Profil singkat, tujuan & sasaran, serta perjalanan gereja.</p>
   </div>
@@ -47,7 +47,7 @@
 @endphp
 
 <section class="py-16 md:py-24 bg-blue-50">
-  <div class="w-full max-w-7xl mx-auto px-6">
+  <div class="gkka-container">
     <h2 class="text-2xl md:text-3xl font-black text-center text-blue-900 mb-12 uppercase tracking-wide leading-relaxed max-w-4xl mx-auto">{{ $judulStrategis }}</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">

@@ -4,14 +4,14 @@
 
 @section('content')
 <section class="bg-blue-900 text-white py-20">
-  <div class="w-full max-w-7xl mx-auto px-6 text-center">
+  <div class="gkka-container text-center">
     <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Event</h1>
     <p class="text-lg text-blue-200 font-medium">Daftar event yang ditampilkan ke jemaat.</p>
   </div>
 </section>
 
 <section class="py-16 bg-gray-50">
-  <div class="w-full max-w-7xl mx-auto px-6">
+  <div class="gkka-container">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
       @forelse($items as $it)
         <a class="group block bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100" href="{{ route('event.show', $it) }}">

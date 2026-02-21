@@ -8,7 +8,7 @@
 @endphp
 
 {{-- HERO SECTION --}}
-<section class="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
+<section class="relative h-[72svh] min-h-[360px] sm:min-h-[500px] w-full overflow-hidden">
   {{-- Background --}}
   <div class="absolute inset-0">
     <img src="{{ $heroImage }}" class="w-full h-full object-cover scale-105" alt="GKKA Samarinda">
@@ -17,12 +17,12 @@
   </div>
 
   {{-- Content --}}
-  <div class="relative h-full max-w-7xl mx-auto px-6 flex flex-col justify-center items-center text-center text-white z-10">
+  <div class="relative h-full gkka-container flex flex-col justify-center items-center text-center text-white z-10 pt-24 sm:pt-0 pb-10 sm:pb-0">
       <div class="font-black text-blue-300 tracking-widest uppercase mb-4 text-sm md:text-base animate-fade-in-up">Selamat Datang</div>
-      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-tight drop-shadow-lg animate-fade-in-up delay-100">
+      <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-tight drop-shadow-lg animate-fade-in-up delay-100">
         GKKA Indonesia<br><span class="text-blue-200">Jemaat Samarinda</span>
       </h1>
-      <p class="max-w-2xl text-lg md:text-xl text-blue-100 font-medium mb-10 leading-relaxed drop-shadow-md animate-fade-in-up delay-200">
+      <p class="max-w-2xl text-base sm:text-lg md:text-xl text-blue-100 font-medium mb-10 leading-relaxed drop-shadow-md animate-fade-in-up delay-200">
         Informasi pelayanan, jadwal, komisi, event, dan dokumentasi kegiatan jemaat.
       </p>
       <div class="flex flex-wrap gap-4 justify-center animate-fade-in-up delay-300">
@@ -37,18 +37,18 @@
 </section>
 
 {{-- MEDIA & WELCOME SECTION --}}
-<section class="py-16 bg-gradient-to-b from-blue-50/50 to-white">
-  <div class="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<section class="gkka-section-tight bg-gradient-to-b from-blue-50/50 to-white">
+  <div class="gkka-container grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
       
       {{-- Image --}}
       <div class="relative group">
         <div class="absolute inset-0 bg-blue-600 rounded-3xl rotate-3 opacity-20 group-hover:rotate-6 transition-transform duration-500"></div>
-        <img src="{{ $heroImage }}" alt="GKKA Samarinda" class="relative w-full h-[400px] object-cover rounded-3xl shadow-2xl transform transition-transform duration-500 group-hover:-translate-y-2">
+        <img src="{{ $heroImage }}" alt="GKKA Samarinda" class="relative w-full h-64 sm:h-80 lg:h-[420px] object-cover rounded-3xl shadow-2xl transform transition-transform duration-500 group-hover:-translate-y-2">
       </div>
 
       {{-- Video / Text --}}
       <div>
-        <div class="w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+        <div class="w-full h-56 sm:h-72 md:h-[400px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-black/5">
           <iframe
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
             title="YouTube video"
@@ -63,20 +63,20 @@
 </section>
 
 {{-- SCHEDULES SECTION --}}
-<section class="py-20 bg-blue-900 text-white relative overflow-hidden">
+<section class="gkka-section bg-blue-900 text-white relative overflow-hidden">
   {{-- Background Decoration --}}
   <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
      <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
      <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-600 rounded-full blur-3xl"></div>
   </div>
 
-  <div class="w-full max-w-7xl mx-auto px-6 relative z-10">
+  <div class="gkka-container relative z-10">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       
       {{-- JADWAL KOMISI --}}
       <div class="group relative rounded-3xl overflow-hidden bg-blue-800/50 border border-white/10 shadow-2xl hover:border-blue-400/50 transition-colors duration-300">
         <div class="absolute inset-0 bg-gradient-to-br from-blue-900/90 to-blue-800/50 z-0"></div>
-        <div class="relative z-10 p-8">
+        <div class="relative z-10 p-6 sm:p-8">
           <h2 class="text-2xl font-black uppercase tracking-wider mb-8 flex items-center gap-3">
             <span class="w-2 h-8 bg-yellow-500 rounded-full"></span>
             Jadwal Komisi
@@ -120,10 +120,10 @@
       {{-- JADWAL IBADAH --}}
       <div class="group relative rounded-3xl overflow-hidden bg-blue-800/50 border border-white/10 shadow-2xl hover:border-blue-400/50 transition-colors duration-300">
         <div class="absolute inset-0 bg-gradient-to-br from-blue-900/90 to-blue-800/50 z-0"></div>
-        <div class="relative z-10 p-8">
+        <div class="relative z-10 p-6 sm:p-8">
           <h2 class="text-2xl font-black uppercase tracking-wider mb-8 flex items-center gap-3">
-             <span class="w-2 h-8 bg-yellow-500 rounded-full"></span>
-             Jadwal Ibadah
+            <span class="w-2 h-8 bg-yellow-500 rounded-full"></span>
+            Jadwal Ibadah
           </h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="space-y-2">
@@ -164,12 +164,12 @@
 </section>
 
 {{-- SEJARAH SIMPLE --}}
-<section class="py-20 bg-white">
-  <div class="w-full max-w-7xl mx-auto px-6">
+<section class="gkka-section bg-white">
+  <div class="gkka-container">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div class="relative">
          <div class="absolute -inset-4 bg-blue-100 rounded-3xl -rotate-2"></div>
-         <img src="{{ $heroImage }}" alt="Sejarah GKKA" class="relative w-full h-[400px] object-cover rounded-3xl shadow-xl">
+         <img src="{{ $heroImage }}" alt="Sejarah GKKA" class="relative w-full h-64 sm:h-80 lg:h-[420px] object-cover rounded-3xl shadow-xl">
       </div>
       <div>
         <h2 class="text-3xl md:text-4xl font-black text-blue-900 mb-6">Sejarah Gereja</h2>
@@ -205,8 +205,8 @@
 </section>
 
 {{-- MAJELIS SECTION --}}
-<section class="py-20 majelis-pattern-bg">
-  <div class="w-full max-w-7xl mx-auto px-6">
+<section class="gkka-section majelis-pattern-bg">
+  <div class="gkka-container">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
       <div>
         <h2 class="text-3xl md:text-4xl font-black text-blue-900">Majelis GKKA Samarinda</h2>
@@ -253,8 +253,8 @@
 </section>
 
 {{-- KOMISI SECTION --}}
-<section class="py-20 bg-slate-50">
-  <div class="w-full max-w-7xl mx-auto px-6">
+<section class="gkka-section bg-slate-50">
+  <div class="gkka-container">
     <h2 class="text-center text-3xl md:text-4xl font-black text-blue-900 mb-12">Komisi GKKA Samarinda</h2>
 
     @php
@@ -314,11 +314,11 @@
 </section>
 
 {{-- EVENTS SECTION --}}
-<section class="py-20 bg-white">
-  <div class="w-full max-w-7xl mx-auto px-6">
-    <div class="flex justify-between items-end mb-12">
+<section class="gkka-section bg-white">
+  <div class="gkka-container">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-12">
        <h2 class="text-3xl md:text-4xl font-black text-blue-900">Event Terbaru</h2>
-       <a href="{{ route('event') }}" class="hidden md:inline-block font-bold text-blue-600 hover:text-blue-800 transition-colors">Lihat Semua Event →</a>
+       <a href="{{ route('event') }}" class="font-bold text-blue-600 hover:text-blue-800 transition-colors">Lihat Semua Event →</a>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-[1.65fr_1fr] gap-10">
@@ -387,9 +387,9 @@
 </section>
 
 {{-- CTA SECTION --}}
-<section class="py-24 bg-blue-900 relative overflow-hidden text-center text-white">
+<section class="py-20 sm:py-24 bg-blue-900 relative overflow-hidden text-center text-white">
    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-   <div class="relative z-10 max-w-3xl mx-auto px-6">
+   <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6">
       <h2 class="text-3xl md:text-5xl font-black mb-8 tracking-tight">Temukan kekuatan iman &<br>Pertumbuhan Rohan</h2>
       <a href="{{ route('kontak') }}" class="inline-block px-10 py-4 rounded-full bg-yellow-500 text-blue-900 font-black text-lg shadow-xl hover:bg-yellow-400 hover:scale-105 transition-all duration-300">
         Hubungi Kami

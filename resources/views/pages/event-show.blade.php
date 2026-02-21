@@ -4,14 +4,14 @@
 
 @section('content')
 <section class="bg-blue-900 text-white py-20">
-  <div class="w-full max-w-7xl mx-auto px-6 text-center">
+  <div class="gkka-container text-center">
     <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Event</h1>
     <p class="text-lg text-blue-200 font-medium">{{ $item->title }}</p>
   </div>
 </section>
 
 <section class="py-16 bg-gray-50">
-  <div class="w-full max-w-7xl mx-auto px-6">
+  <div class="gkka-container">
     <div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12">
       
       {{-- Main Content --}}

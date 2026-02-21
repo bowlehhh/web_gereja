@@ -4,14 +4,14 @@
 
 @section('content')
 <section class="bg-blue-900 text-white py-20">
-  <div class="w-full max-w-7xl mx-auto px-6 text-center">
+  <div class="gkka-container text-center">
     <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Tentang Gereja</h1>
     <p class="text-lg text-blue-200 font-medium">Mengenal lebih dekat GKKA Indonesia Jemaat Samarinda.</p>
   </div>
 </section>
 
 <section class="py-20 bg-gray-50">
-  <div class="w-full max-w-7xl mx-auto px-6">
+  <div class="gkka-container">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       
       <a href="{{ route('gereja.sejarah') }}" class="group bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">

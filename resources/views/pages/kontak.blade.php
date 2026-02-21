@@ -3,7 +3,7 @@
 
 @section('content')
 <section class="py-24 pt-32 bg-gray-50 min-h-screen">
-  <div class="w-full max-w-7xl mx-auto px-6">
+  <div class="gkka-container">
     <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
       
       {{-- LEFT COLUMN: Address & Map --}}

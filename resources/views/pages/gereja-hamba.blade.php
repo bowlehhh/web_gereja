@@ -2,14 +2,14 @@
 @section('title','Hamba Tuhan - GKKA Samarinda')
 @section('content')
 <section class="bg-blue-900 text-white py-20">
-  <div class="w-full max-w-7xl mx-auto px-6 text-center">
+  <div class="gkka-container text-center">
     <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Hamba Tuhan</h1>
     <p class="text-lg text-blue-200 font-medium">Daftar hamba Tuhan GKKA Indonesia Jemaat Samarinda.</p>
   </div>
 </section>
 
 <section class="py-16 bg-gray-50">
-  <div class="w-full max-w-7xl mx-auto px-6">
+  <div class="gkka-container">
     <h2 class="text-3xl font-black text-center text-blue-900 mb-12 uppercase tracking-wide">Hamba Tuhan GKKA Samarinda</h2>
 
     @if(isset($table_ready) && $table_ready === false)

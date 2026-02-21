@@ -21,7 +21,7 @@
   </div>
 
 	  <div
-	    class="relative min-h-screen min-h-[100svh] w-full mx-auto px-6 lg:pl-14 lg:pr-24 flex items-center justify-end pt-24 pb-16 lg:pt-28 lg:pb-24"
+	    class="relative min-h-screen min-h-[100svh] w-full mx-auto px-4 sm:px-6 lg:pl-14 lg:pr-24 flex items-center justify-end pt-20 sm:pt-24 pb-14 sm:pb-16 lg:pt-28 lg:pb-24"
 	  >
 	    <div class="w-full text-center lg:text-left max-w-[520px] mx-auto lg:mx-0 lg:ml-auto lg:mr-20">
       <div
@@ -60,7 +60,7 @@
   </a>
 </section>
 
-<section id="tayangan" class="relative py-16 bg-gradient-to-b from-sky-700 via-cyan-700 to-blue-900 text-white overflow-hidden scroll-mt-24">
+<section id="tayangan" class="relative gkka-section-tight bg-gradient-to-b from-sky-700 via-cyan-700 to-blue-900 text-white overflow-hidden scroll-mt-24">
   <div class="absolute inset-0 pointer-events-none opacity-20">
     <svg class="absolute -top-8 left-8 w-36 h-36 text-white/60" viewBox="0 0 120 120" fill="none" stroke="currentColor" aria-hidden="true">
       <path d="M60 18v84M30 60h60" stroke-width="6" stroke-linecap="round"/>
@@ -78,7 +78,7 @@
       <path d="M60 18v84M30 60h60" stroke-width="6" stroke-linecap="round"/>
     </svg>
   </div>
-  <div class="w-full max-w-7xl mx-auto px-6">
+  <div class="gkka-container">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-2xl md:text-3xl font-black tracking-tight">Tayangan Ibadah Rutin Mingguan</h2>
 

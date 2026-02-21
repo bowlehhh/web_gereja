@@ -9,7 +9,30 @@ html.lenis {
   scroll-behavior: auto !important;
 }
 
+@layer base {
+  :root {
+    --gkka-header-offset: 5rem;
+  }
+
+  html {
+    scroll-padding-top: var(--gkka-header-offset);
+  }
+}
+
 @layer components {
+  .gkka-container {
+    /* Keep desktop spacing the same as before (px-6), only tighten on mobile */
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6;
+  }
+
+  .gkka-section {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  .gkka-section-tight {
+    @apply py-10 sm:py-12 lg:py-16;
+  }
+
   .gkka-hero-title {
     text-shadow:
       0 10px 30px rgba(2, 6, 23, 0.55),

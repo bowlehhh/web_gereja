@@ -1,5 +1,5 @@
 <footer class="bg-blue-900 text-white pt-10 md:pt-12 pb-6">
-  <div class="w-full max-w-7xl mx-auto px-6">
+  <div class="gkka-container">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
       
       {{-- Brand & Contact --}}
