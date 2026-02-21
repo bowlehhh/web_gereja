@@ -7,7 +7,7 @@
 
   @vite(['resources/css/admin.css'])
 </head>
-<body class="bg-slate-50 min-h-screen font-sans text-slate-900 selection:bg-blue-100 selection:text-blue-900 @yield('body_class')">
+<body class="bg-slate-50 min-h-screen font-sans text-slate-900 selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden @yield('body_class')">
   <div class="flex min-h-screen">
 
     <!-- Sidebar -->

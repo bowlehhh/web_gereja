@@ -21,13 +21,11 @@
   </div>
 
 	  <div
-	    class="relative min-h-screen min-h-[100svh] w-full mx-auto px-6 lg:pl-14 lg:pr-24 flex items-center pt-24 pb-16 lg:pt-28 lg:pb-24"
-	    style="justify-content:flex-end;"
+	    class="relative min-h-screen min-h-[100svh] w-full mx-auto px-6 lg:pl-14 lg:pr-24 flex items-center justify-end pt-24 pb-16 lg:pt-28 lg:pb-24"
 	  >
-	    <div class="w-full text-center lg:text-left" style="margin-left:auto;max-width:520px;margin-right:5rem;">
+	    <div class="w-full text-center lg:text-left max-w-[520px] mx-auto lg:mx-0 lg:ml-auto lg:mr-20">
       <div
-        class="rounded-3xl border border-white/10 shadow-2xl p-8 lg:p-12"
-        style="background:rgba(15,23,42,.55);backdrop-filter:blur(10px);"
+        class="rounded-3xl border border-white/10 shadow-2xl p-8 lg:p-12 bg-slate-900/55 backdrop-blur-md"
       >
         <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 border border-white/10 text-blue-100 font-black tracking-[0.22em] uppercase text-xs">
           GKKA Samarinda

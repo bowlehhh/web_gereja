@@ -11,7 +11,7 @@
   @stack('styles')
   
 </head>
-<body class="min-h-screen min-h-[100svh] flex flex-col @yield('body_class')">
+<body class="min-h-screen min-h-[100svh] flex flex-col overflow-x-hidden @yield('body_class')">
 
 @include('components.navbar')
 
