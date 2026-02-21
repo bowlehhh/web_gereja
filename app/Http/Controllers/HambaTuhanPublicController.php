@@ -9,10 +9,19 @@ class HambaTuhanPublicController extends Controller
 {
     public function index()
     {
-        if (!Schema::hasTable('hamba_tuhans')) {
+        try {
+            if (!Schema::hasTable('hamba_tuhans')) {
+                return view('pages.gereja-hamba', [
+                    'items' => collect(),
+                    'table_ready' => false,
+                    'db_ready' => true,
+                ]);
+            }
+        } catch (\Throwable $e) {
             return view('pages.gereja-hamba', [
                 'items' => collect(),
                 'table_ready' => false,
+                'db_ready' => false,
             ]);
         }
 
@@ -25,12 +34,17 @@ class HambaTuhanPublicController extends Controller
         return view('pages.gereja-hamba', [
             'items' => $items,
             'table_ready' => true,
+            'db_ready' => true,
         ]);
     }
 
     public function show(HambaTuhan $hambaTuhan)
     {
-        abort_unless(Schema::hasTable('hamba_tuhans'), 404);
+        try {
+            abort_unless(Schema::hasTable('hamba_tuhans'), 404);
+        } catch (\Throwable $e) {
+            abort(404);
+        }
         abort_unless($hambaTuhan->is_active, 404);
 
         return view('pages.gereja-hamba-show', [

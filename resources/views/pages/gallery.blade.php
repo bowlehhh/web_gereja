@@ -3,52 +3,124 @@
 @section('title','Gallery - GKKA Samarinda')
 
 @section('content')
-<section class="bg-blue-900 text-white py-20">
-  <div class="gkka-container text-center">
-    <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Gallery</h1>
-    <p class="text-lg text-blue-200 font-medium">Dokumentasi kegiatan GKKA Indonesia Jemaat Samarinda</p>
+@php
+  $arr = $items instanceof \Illuminate\Pagination\AbstractPaginator ? $items->getCollection()->values() : collect($items)->values();
+  $featured = $arr->first();
+  $circles = $arr->slice(1, 6)->values();
+  $rest = $arr->slice(7)->values();
+@endphp
+
+<section class="gkka-gallery-hero">
+  <div class="relative z-10 gkka-container pt-28 pb-10 sm:pt-32 sm:pb-12">
+    <h1 class="gkka-hero-title text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">
+      Galeri Foto Jemaat
+    </h1>
+    <p class="mt-3 text-sm sm:text-base text-white/80 font-semibold">
+      Jelajahi momen indah GKKA Samarinda
+    </p>
   </div>
 </section>
 
-<section class="py-16 bg-gray-50">
-  <div class="gkka-container">
+<section class="gkka-gallery-body">
+  <div class="gkka-container py-12 sm:py-14">
+    <div class="relative z-10 px-2 sm:px-0">
+      {{-- blue transparent blobs (like reference depth) --}}
+      <div class="absolute -top-24 -left-24 size-[520px] rounded-full bg-blue-400/10 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-28 -right-24 size-[560px] rounded-full bg-blue-700/10 blur-3xl pointer-events-none"></div>
 
-    @if($items->count())
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-        @foreach($items as $it)
+      <div class="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-10 lg:gap-12 items-start">
+        {{-- Featured (left) --}}
+        <div class="max-w-[420px] mx-auto lg:mx-0">
+          @if($featured)
+            <button
+              type="button"
+              class="js-gallery-item w-full text-left focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-yellow-300/60"
+              data-src="{{ asset('storage/'.$featured->image_path) }}"
+              data-title="{{ $featured->title }}"
+              data-caption="{{ $featured->caption ?? '' }}"
+              aria-label="Buka foto: {{ $featured->title }}"
+            >
+              <div class="rounded-[1.75rem] overflow-hidden border-4 gkka-gold-ring bg-white">
+                <div class="aspect-[16/9]">
+                  <img
+                    src="{{ asset('storage/'.$featured->image_path) }}"
+                    alt="{{ $featured->title }}"
+                    class="w-full h-full object-cover"
+                    loading="eager"
+                  >
+                </div>
+              </div>
+            </button>
+          @else
+            <div class="rounded-[1.75rem] overflow-hidden border-4 gkka-gold-ring bg-white">
+              <div class="aspect-[16/9] grid place-items-center text-slate-400 font-black">
+                Belum ada foto
+              </div>
+            </div>
+          @endif
+
+          <div class="mt-5 rounded-2xl bg-white px-5 py-4 shadow-lg border border-slate-200">
+            <div class="text-sm font-semibold text-slate-600">
+              Klik gambar di atas untuk melihat detail
+            </div>
+          </div>
+        </div>
+
+        {{-- Circles (right) --}}
+        <div class="w-full">
+          @if($circles->count())
+            <div class="grid grid-cols-3 gap-6 sm:gap-7 place-items-center">
+              @foreach($circles as $it)
+                <button
+                  type="button"
+                  class="js-gallery-item group relative size-28 sm:size-32 md:size-36 lg:size-40 rounded-full overflow-hidden border-4 gkka-gold-ring bg-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-yellow-300/60"
+                  data-src="{{ asset('storage/'.$it->image_path) }}"
+                  data-title="{{ $it->title }}"
+                  data-caption="{{ $it->caption ?? '' }}"
+                  aria-label="Buka foto: {{ $it->title }}"
+                >
+                  <img
+                    src="{{ asset('storage/'.$it->image_path) }}"
+                    alt="{{ $it->title }}"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  >
+                  <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/15 transition-colors"></div>
+                </button>
+              @endforeach
+            </div>
+          @else
+            <div class="text-slate-600 font-semibold">
+              Belum ada foto gallery yang dipublish.
+            </div>
+          @endif
+        </div>
+      </div>
+    </div>
+
+    {{-- Hidden items so modal navigation can include all photos --}}
+    @if($rest->count())
+      <div class="sr-only">
+        @foreach($rest as $it)
           <button
             type="button"
-            class="group relative block w-full text-left bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 js-gallery-item focus:outline-none focus:ring-4 focus:ring-blue-300"
+            class="js-gallery-item"
             data-src="{{ asset('storage/'.$it->image_path) }}"
             data-title="{{ $it->title }}"
             data-caption="{{ $it->caption ?? '' }}"
             aria-label="Buka foto: {{ $it->title }}"
-          >
-            <div class="h-64 bg-gray-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image:url('{{ asset('storage/'.$it->image_path) }}')"></div>
-            
-            <div class="p-6">
-              <div class="font-bold text-lg text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">{{ $it->title }}</div>
-              @if($it->caption)
-                <div class="text-sm text-slate-500 line-clamp-2">{{ $it->caption }}</div>
-              @endif
-            </div>
-          </button>
+          ></button>
         @endforeach
-      </div>
-
-      <div class="mt-12">
-        @if(method_exists($items, 'links'))
-          {{ $items->links() }}
-        @endif
-      </div>
-    @else
-      <div class="p-12 bg-white rounded-3xl border border-gray-200 text-center text-gray-400 font-bold">
-        Belum ada foto gallery yang dipublish.
       </div>
     @endif
 
+    <div class="mt-10">
+      @if(method_exists($items, 'links'))
+        {{ $items->links() }}
+      @endif
+    </div>
   </div>
-	</section>
+</section>
 
 {{-- Lightbox / modal --}}
 <div id="galleryModal" class="fixed inset-0 z-[100] hidden items-center justify-center" aria-hidden="true">

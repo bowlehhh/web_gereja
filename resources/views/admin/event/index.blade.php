@@ -47,7 +47,13 @@
         <div class="flex gap-2 flex-wrap">
           <a class="h-10 px-4 rounded-xl border border-blue-900 bg-white hover:bg-blue-50 text-blue-900 font-extrabold text-sm inline-flex items-center transition"
              href="{{ route('admin.event.edit', $it->id) }}">Edit</a>
-          <form action="{{ route('admin.event.destroy', $it->id) }}" method="POST" onsubmit="return confirm('Hapus event ini?')">
+          <form
+            action="{{ route('admin.event.destroy', $it->id) }}"
+            method="POST"
+            data-confirm="Hapus event ini?"
+            data-confirm-title="Hapus Event"
+            data-confirm-ok="Ya, Hapus"
+          >
             @csrf
             @method('DELETE')
             <button type="submit"

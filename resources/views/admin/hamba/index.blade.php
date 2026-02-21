@@ -53,7 +53,13 @@
            href="{{ route('gereja.hamba.show', $item) }}" target="_blank">Lihat</a>
         <a class="h-10 px-4 rounded-xl border border-blue-900 bg-white hover:bg-blue-50 text-blue-900 font-extrabold text-sm inline-flex items-center transition"
            href="{{ route('admin.hamba.edit', $item) }}">Edit</a>
-        <form action="{{ route('admin.hamba.destroy', $item) }}" method="POST" onsubmit="return confirm('Hapus data ini?')">
+        <form
+          action="{{ route('admin.hamba.destroy', $item) }}"
+          method="POST"
+          data-confirm="Hapus data ini?"
+          data-confirm-title="Hapus Data"
+          data-confirm-ok="Ya, Hapus"
+        >
           @csrf
           @method('DELETE')
           <button class="h-10 px-4 rounded-xl bg-blue-900 hover:opacity-90 text-white font-extrabold text-sm shadow-sm transition"

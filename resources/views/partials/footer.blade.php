@@ -14,8 +14,22 @@
           </div>
         </div>
         <div class="text-blue-100 text-sm leading-relaxed font-medium">
-          <p class="mb-2">Alamat gereja (isi nanti)</p>
-          <p>Kontak: 08xx-xxxx-xxxx</p>
+          @php
+            $adminEmail = 'gkkaisamarinda@yahoo.com';
+            $adminPhoneDisplay = '+62 823-5052-6337';
+            $adminPhoneTel = '+6282350526337';
+            $adminWa = 'https://wa.me/6282350526337';
+            $alamat = 'Jl. Sentosa No.25, Sungai Pinang Dalam, Kec. Sungai Pinang, Kota Samarinda, Kalimantan Timur 75117';
+          @endphp
+
+          <p class="mb-2">{{ $alamat }}</p>
+          <p class="flex flex-wrap gap-x-3 gap-y-1 items-center">
+            <a class="underline decoration-white/30 hover:decoration-white hover:text-white transition" href="mailto:{{ $adminEmail }}">{{ $adminEmail }}</a>
+            <span class="text-white/30">•</span>
+            <a class="underline decoration-white/30 hover:decoration-white hover:text-white transition" href="tel:{{ $adminPhoneTel }}">{{ $adminPhoneDisplay }}</a>
+            <span class="text-white/30">•</span>
+            <a class="underline decoration-white/30 hover:decoration-white hover:text-white transition" href="{{ $adminWa }}" target="_blank" rel="noopener">WhatsApp</a>
+          </p>
         </div>
       </div>
 

@@ -138,6 +138,80 @@ document.addEventListener('DOMContentLoaded', () => {
         logoutModalOverlay.addEventListener('click', closeModal);
     }
 
+    // --- Global Confirm Modal (replaces browser confirm()) ---
+    const confirmModal = document.getElementById('confirmModal');
+    const confirmModalOverlay = document.getElementById('confirmModalOverlay');
+    const confirmModalContent = document.getElementById('confirmModalContent');
+    const confirmModalTitle = document.getElementById('confirmModalTitle');
+    const confirmModalMessage = document.getElementById('confirmModalMessage');
+    const confirmModalCancel = document.getElementById('confirmModalCancel');
+    const confirmModalOk = document.getElementById('confirmModalOk');
+
+    let pendingForm = null;
+
+    const openConfirm = ({ title, message, okText }) => {
+        if (!confirmModal) return;
+        if (confirmModalTitle) confirmModalTitle.textContent = title || 'Konfirmasi';
+        if (confirmModalMessage) confirmModalMessage.textContent = message || 'Apakah Anda yakin?';
+        if (confirmModalOk) confirmModalOk.textContent = okText || 'Ya, Hapus';
+
+        confirmModal.classList.remove('hidden');
+        gsap.to(confirmModalOverlay, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+        gsap.fromTo(confirmModalContent,
+            { scale: 0.92, opacity: 0, y: 18 },
+            { scale: 1, opacity: 1, y: 0, duration: 0.35, ease: 'back.out(1.45)' }
+        );
+    };
+
+    const closeConfirm = () => {
+        if (!confirmModal) return;
+        gsap.to(confirmModalContent, { scale: 0.96, opacity: 0, y: 10, duration: 0.18, ease: 'power2.in' });
+        gsap.to(confirmModalOverlay, {
+            opacity: 0,
+            duration: 0.25,
+            onComplete: () => {
+                confirmModal.classList.add('hidden');
+                pendingForm = null;
+            }
+        });
+    };
+
+    if (confirmModal && confirmModalOverlay && confirmModalCancel && confirmModalOk) {
+        confirmModalOverlay.addEventListener('click', closeConfirm);
+        confirmModalCancel.addEventListener('click', closeConfirm);
+
+        document.addEventListener('keydown', (e) => {
+            if (confirmModal.classList.contains('hidden')) return;
+            if (e.key === 'Escape') closeConfirm();
+        });
+
+        confirmModalOk.addEventListener('click', () => {
+            if (!pendingForm) return closeConfirm();
+            // prevent re-triggering confirmation
+            pendingForm.dataset.confirmed = '1';
+            pendingForm.submit();
+            closeConfirm();
+        });
+
+        // Intercept forms that request confirmation
+        document.querySelectorAll('form[data-confirm]').forEach((form) => {
+            form.addEventListener('submit', (e) => {
+                if (form.dataset.confirmed === '1') {
+                    delete form.dataset.confirmed;
+                    return;
+                }
+
+                e.preventDefault();
+                pendingForm = form;
+                openConfirm({
+                    title: form.dataset.confirmTitle || 'Konfirmasi Hapus',
+                    message: form.dataset.confirm || 'Apakah Anda yakin ingin menghapus data ini?',
+                    okText: form.dataset.confirmOk || 'Ya, Hapus',
+                });
+            });
+        });
+    }
+
     // Handle Window Resize
     window.addEventListener('resize', () => {
         if (window.innerWidth >= 768) {

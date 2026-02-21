@@ -219,7 +219,9 @@
               <form
                 action="{{ route('admin.majelis.periods.destroy', $p) }}"
                 method="POST"
-                onsubmit="return confirm('Hapus periode ini?')"
+                data-confirm="Hapus periode ini?"
+                data-confirm-title="Hapus Periode"
+                data-confirm-ok="Ya, Hapus"
               >
                 @csrf
                 @method('DELETE')

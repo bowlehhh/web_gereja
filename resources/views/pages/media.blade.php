@@ -5,15 +5,18 @@
 @section('content')
 <section class="relative bg-blue-900 text-white overflow-hidden">
   <div class="absolute inset-0">
-	    <img
-	      src="{{ asset('img/media.jpeg') }}"
-	      alt="Media GKKA Samarinda"
-	      class="w-full h-full object-cover object-[15%_10%]"
-	      onerror="this.onerror=null;this.src='{{ asset('img/fotogrj.jpeg') }}';"
-	    >
-    <div class="absolute inset-0 bg-blue-900/60 mix-blend-multiply"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/85 via-blue-900/25 to-transparent"></div>
+    <img
+      src="{{ asset('img/media.jpeg') }}"
+      alt="Media GKKA Samarinda"
+      class="w-full h-full object-cover object-[35%_14%] sm:object-[20%_12%] lg:object-[15%_10%]"
+      onerror="this.onerror=null;this.src='{{ asset('img/fotogrj.jpeg') }}';"
+    >
+    <div class="absolute inset-0 bg-blue-900/40 sm:bg-blue-900/60 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/75 sm:from-blue-900/85 via-blue-900/18 sm:via-blue-900/25 to-transparent"></div>
   </div>
+
+  {{-- Faith icons overlay (cross + bible + dove) --}}
+  <div class="absolute inset-0 pointer-events-none opacity-[0.18] gkka-faith-icons"></div>
 
   <div class="absolute inset-0 pointer-events-none opacity-20">
     <div class="absolute -top-32 -left-28 size-[520px] bg-blue-500 rounded-full blur-3xl"></div>
@@ -21,12 +24,12 @@
   </div>
 
 	  <div
-	    class="relative min-h-screen min-h-[100svh] w-full mx-auto px-4 sm:px-6 lg:pl-14 lg:pr-24 flex items-center justify-end pt-20 sm:pt-24 pb-14 sm:pb-16 lg:pt-28 lg:pb-24"
+	    class="relative min-h-screen min-h-[100svh] w-full mx-auto px-4 sm:px-6 lg:pl-14 lg:pr-24 flex items-end lg:items-center justify-end pt-20 sm:pt-24 pb-16 sm:pb-16 lg:pt-28 lg:pb-24"
 	  >
 	    <div class="w-full text-center lg:text-left max-w-[520px] mx-auto lg:mx-0 lg:ml-auto lg:mr-20">
-      <div
-        class="rounded-3xl border border-white/10 shadow-2xl p-8 lg:p-12 bg-slate-900/55 backdrop-blur-md"
-      >
+      <div class="relative overflow-hidden rounded-3xl border border-white/15 shadow-2xl p-8 lg:p-12 bg-slate-900/40 sm:bg-slate-900/55 backdrop-blur-lg">
+        <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-white/0 to-slate-900/30 pointer-events-none"></div>
+        <div class="relative">
         <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 border border-white/10 text-blue-100 font-black tracking-[0.22em] uppercase text-xs">
           GKKA Samarinda
         </div>
@@ -49,6 +52,7 @@
              class="h-14 px-9 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-black shadow-lg transition inline-flex items-center justify-center">
             Hubungi Admin
           </a>
+        </div>
         </div>
       </div>
     </div>

@@ -1,108 +1,130 @@
 @extends('layout.app')
 
 @section('title', $item->name.' - Hamba Tuhan')
-@section('body_class','bg-gray-50')
+@section('body_class','bg-[#001B44]')
 
 @section('content')
-<section class="bg-blue-900 text-white py-20">
-  <div class="gkka-container text-center">
-    <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Hamba Tuhan</h1>
-    <p class="text-lg text-blue-200 font-medium">Profile {{ $item->name }}</p>
-  </div>
-</section>
+@php
+  use Illuminate\Support\Facades\Storage;
 
-<section class="py-16 md:py-24 relative">
-  <div class="w-full max-w-6xl mx-auto px-6">
-    <div class="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-gray-100 flex flex-col md:flex-row">
-      
-      {{-- Photo Side --}}
-      <div class="w-full md:w-5/12 lg:w-4/12 relative min-h-[400px] md:min-h-full bg-gray-200">
-        @if($item->photo_path)
-          <img class="absolute inset-0 w-full h-full object-cover" src="{{ asset('storage/'.$item->photo_path) }}" alt="{{ $item->name }}">
-        @else
-          <div class="absolute inset-0 flex items-center justify-center bg-blue-100 text-blue-300 font-black text-8xl">GK</div>
-        @endif
-        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-transparent to-transparent md:hidden"></div>
-        <div class="absolute bottom-6 left-6 right-6 text-white md:hidden">
-           <div class="text-xs font-bold text-yellow-400 uppercase tracking-widest mb-1">HAMBA TUHAN</div>
-           <h2 class="text-3xl font-black leading-tight">{{ $item->name }}</h2>
-        </div>
-      </div>
+  $kontak = trim(($item->contact ?? ''));
+  $bidang = trim(($item->service_fields ?? ''));
+  $ringkas = trim(($item->roles_summary ?? ''));
 
-      {{-- Content Side --}}
-      <div class="w-full md:w-7/12 lg:w-8/12 p-8 md:p-12 lg:p-16 flex flex-col">
-        <div class="hidden md:block mb-8 border-b-2 border-gray-100 pb-6">
-           <div class="text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">HAMBA TUHAN</div>
-           <h2 class="text-4xl lg:text-5xl font-black text-slate-800 leading-tight">{{ $item->name }}</h2>
-        </div>
+  $hasPhoto = filled($item->photo_path) && Storage::disk('public')->exists($item->photo_path);
+  $photoUrl = $hasPhoto ? Storage::url($item->photo_path) : null;
+@endphp
 
-        <div class="space-y-10">
-          <div>
-            <h3 class="text-xl font-black text-slate-800 mb-4 flex items-center gap-3">
-              <span class="w-8 h-1 bg-yellow-500 rounded-full"></span>
-              Profile
-            </h3>
-            <div class="text-slate-600 text-lg leading-relaxed">
-              {!! nl2br(e($item->profile ?: 'Info profile belum tersedia.')) !!}
+<section class="gkka-blue-page px-4 sm:px-6">
+  <div class="w-full max-w-[1400px] mx-auto">
+    <div class="gkka-blue-stage px-5 sm:px-8 md:px-14 py-10 sm:py-12 md:py-16">
+      <div class="gkka-blue-corner tl"></div>
+      <div class="gkka-blue-corner br"></div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-12 items-start">
+        {{-- Text / About (mobile first) --}}
+        <div class="order-1 lg:order-2">
+          <div class="flex items-start justify-between gap-4">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 text-blue-100 font-black tracking-widest uppercase text-xs">
+              Hamba Tuhan
             </div>
+            <a class="h-11 px-6 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-black shadow-sm transition inline-flex items-center justify-center"
+               href="{{ route('gereja.hamba') }}">
+              ← Kembali
+            </a>
           </div>
 
-          <div>
-            <h3 class="text-xl font-black text-slate-800 mb-4 flex items-center gap-3">
-              <span class="w-8 h-1 bg-yellow-500 rounded-full"></span>
-              Bidang Pelayanan
-            </h3>
-            <div class="text-slate-600 text-lg leading-relaxed">
-              @php
-                $bidang = trim(($item->service_fields ?? ''));
-                $ringkas = trim(($item->roles_summary ?? ''));
-                $kontak = trim(($item->contact ?? ''));
-              @endphp
+          <h1 class="gkka-hero-title mt-6 text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-[1.05]">
+            {{ $item->name }}
+          </h1>
+          <div class="mt-2 text-sm sm:text-base font-semibold text-blue-100/85">
+            {{ $ringkas !== '' ? $ringkas : 'Hamba Tuhan' }}
+          </div>
 
-              @if($bidang !== '')
-                {!! nl2br(e($bidang)) !!}
-              @elseif($ringkas !== '' || $kontak !== '')
-                <p class="mb-2 font-bold text-blue-700">{{ $ringkas }}</p>
-                @if($kontak) 
-                  <p class="text-sm bg-blue-50 text-blue-800 py-2 px-4 rounded-lg inline-block font-bold">
-                    Dukungan Doa &amp; Kontak : {{ $kontak }}
-                  </p>
+          <div class="mt-10 max-w-xl space-y-10">
+            <div>
+              <div class="text-xs font-black tracking-widest uppercase text-blue-100/80">About</div>
+              <h2 class="mt-2 text-2xl sm:text-3xl font-black text-white leading-tight">{{ $item->name }}</h2>
+              <div class="mt-5 h-px bg-white/15"></div>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-3 text-white font-black">
+                <span class="w-10 h-1 bg-yellow-400 rounded-full"></span>
+                Profile
+              </div>
+              <div class="mt-4 text-white/80 text-base sm:text-lg leading-relaxed">
+                {!! nl2br(e($item->profile ?: 'Info profile belum tersedia.')) !!}
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-3 text-white font-black">
+                <span class="w-10 h-1 bg-yellow-400 rounded-full"></span>
+                Bidang Pelayanan
+              </div>
+              <div class="mt-4 text-white/80 text-base sm:text-lg leading-relaxed">
+                @if($bidang !== '')
+                  {!! nl2br(e($bidang)) !!}
+                @elseif($ringkas !== '' || $kontak !== '')
+                  <p class="font-bold text-white">{{ $ringkas }}</p>
+                  @if($kontak !== '')
+                    <p class="mt-3 inline-flex items-center gap-2 text-sm bg-white/10 border border-white/15 text-white px-4 py-2 rounded-2xl font-black">
+                      Dukungan Doa &amp; Kontak: <span class="font-extrabold">{{ $kontak }}</span>
+                    </p>
+                  @endif
+                @else
+                  <span class="italic text-white/60">Info bidang pelayanan belum tersedia.</span>
                 @endif
-              @else
-                <span class="italic text-gray-400">Info bidang pelayanan belum tersedia.</span>
+              </div>
+            </div>
+
+            <div class="pt-2 flex flex-wrap items-center gap-3">
+              <a class="h-12 px-6 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-black shadow-sm transition inline-flex items-center justify-center"
+                 href="{{ route('gereja.hamba') }}">
+                ← Kembali
+              </a>
+              <a class="h-12 px-7 rounded-2xl bg-yellow-400/15 hover:bg-yellow-400/25 border border-yellow-300/50 text-white font-black shadow-sm transition inline-flex items-center justify-center"
+                 href="{{ route('kontak') }}">
+                Hubungi Kami
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {{-- Single Photo (match Majelis vibe) --}}
+        <div class="order-2 lg:order-1">
+          <div class="relative">
+            <div class="absolute -inset-8 bg-yellow-400/10 blur-3xl rounded-full"></div>
+            <div class="mx-auto lg:mx-0 max-w-[520px]">
+              <div class="rounded-[2.5rem] overflow-hidden border border-white/20 shadow-[0_26px_56px_rgba(0,0,0,0.35)] bg-white/5 backdrop-blur">
+                <div class="aspect-[4/5] sm:aspect-[16/12] lg:aspect-[4/5] overflow-hidden">
+                  @if($photoUrl)
+                    <img
+                      src="{{ $photoUrl }}"
+                      alt="{{ $item->name }}"
+                      class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
+                      loading="eager"
+                    >
+                  @else
+                    <div class="w-full h-full grid place-items-center bg-white/10 text-white/70 font-black text-6xl">
+                      GK
+                    </div>
+                  @endif
+                </div>
+              </div>
+
+              @if($kontak !== '')
+                <div class="mt-5 rounded-3xl border border-white/15 bg-white/10 backdrop-blur p-5">
+                  <div class="text-[11px] font-black tracking-widest uppercase text-blue-100/80">Kontak</div>
+                  <div class="mt-1 text-sm sm:text-base font-semibold text-white break-words">{{ $kontak }}</div>
+                </div>
               @endif
             </div>
           </div>
         </div>
-
-        <div class="mt-auto pt-12">
-          <a class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-100 text-slate-700 font-bold hover:bg-gray-200 transition-colors" href="{{ route('gereja.hamba') }}">
-            <span>←</span> Kembali
-          </a>
-        </div>
-
       </div>
     </div>
-  </div>
-</section>
-
-@php
-  $kontak = trim(($item->contact ?? ''));
-@endphp
-<section class="py-20 bg-blue-600 text-white relative overflow-hidden text-center">
-  <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-  <div class="relative z-10 container mx-auto px-6 max-w-3xl">
-    <h2 class="text-3xl font-black mb-4">Butuh Dukungan Doa?</h2>
-    <p class="text-blue-100 text-lg mb-8">
-      @if($kontak !== '')
-        Hubungi secara pribadi: <span class="font-bold text-white">{{ $kontak }}</span>
-      @else
-        Hubungi kami untuk informasi lebih lanjut.
-      @endif
-    </p>
-    <a class="inline-block px-8 py-4 rounded-full bg-white text-blue-700 font-black shadow-xl hover:bg-yellow-400 hover:text-blue-900 hover:scale-105 transition-all duration-300" href="{{ route('kontak') }}">
-      Hubungi Gereja
-    </a>
   </div>
 </section>
 @endsection

@@ -43,7 +43,13 @@
         @endif
         <a class="h-10 px-4 rounded-xl border border-blue-900 bg-white hover:bg-blue-50 text-blue-900 font-extrabold text-sm inline-flex items-center transition"
            href="{{ route('admin.warta.edit', $w) }}">Edit</a>
-        <form action="{{ route('admin.warta.destroy', $w) }}" method="POST" onsubmit="return confirm('Hapus warta ini?')">
+        <form
+          action="{{ route('admin.warta.destroy', $w) }}"
+          method="POST"
+          data-confirm="Hapus warta ini?"
+          data-confirm-title="Hapus Warta"
+          data-confirm-ok="Ya, Hapus"
+        >
           @csrf
           @method('DELETE')
           <button class="h-10 px-4 rounded-xl bg-blue-900 hover:opacity-90 text-white font-extrabold text-sm shadow-sm transition"

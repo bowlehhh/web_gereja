@@ -6,11 +6,11 @@
 @section('content')
 @php
   use Illuminate\Support\Facades\Schema;
-  use App\Models\EventItem;
-  use App\Models\GalleryItem;
-  use App\Models\Warta;
-  use App\Models\HambaTuhan;
-  use App\Models\MajelisMember;
+	  use App\Models\EventItem;
+	  use App\Models\GalleryItem;
+	  use App\Models\Warta;
+	  use App\Models\HambaTuhan;
+	  use App\Models\MajelisPeriod;
 
   $safeCount = function (string $table, callable $query) {
     try {
@@ -30,11 +30,12 @@
     }
   };
 
-  $countHamba = $safeCount('hamba_tuhans', fn () => HambaTuhan::query()->count());
-  $countMajelis = $safeCount('majelis_members', fn () => MajelisMember::query()->count());
-  $countWarta = $safeCount('wartas', fn () => Warta::query()->count());
-  $countEvent = $safeCount('event_items', fn () => EventItem::query()->count());
-  $countGallery = $safeCount('gallery_items', fn () => GalleryItem::query()->count());
+	  $countHamba = $safeCount('hamba_tuhans', fn () => HambaTuhan::query()->count());
+	  // Majelis pada admin ini = daftar periode majelis (bukan anggota)
+	  $countMajelis = $safeCount('majelis_periods', fn () => MajelisPeriod::query()->count());
+	  $countWarta = $safeCount('wartas', fn () => Warta::query()->count());
+	  $countEvent = $safeCount('event_items', fn () => EventItem::query()->count());
+	  $countGallery = $safeCount('gallery_items', fn () => GalleryItem::query()->count());
 
   $latestWarta = $safeGet('wartas', fn () => Warta::latest()->limit(5)->get());
   $upcomingEvents = $safeGet('event_items', fn () => EventItem::where('start_date', '>=', now())->orderBy('start_date', 'asc')->limit(4)->get());

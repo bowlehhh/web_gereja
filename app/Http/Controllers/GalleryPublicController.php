@@ -8,10 +8,15 @@ class GalleryPublicController extends Controller
 {
     public function index()
     {
-        $items = GalleryItem::query()
-            ->where('is_published', 1)
-            ->orderByDesc('id')
-            ->paginate(12);
+        try {
+            $items = GalleryItem::query()
+                ->where('is_published', 1)
+                ->orderByDesc('id')
+                ->paginate(12);
+        } catch (\Throwable $e) {
+            // DB belum siap / koneksi gagal: halaman public jangan 500.
+            $items = collect();
+        }
 
         return view('pages.gallery', compact('items'));
     }

@@ -13,35 +13,45 @@ class HomeController extends Controller
         $featuredEvent = null;
         $eventList = collect();
         $majelisPeriods = collect();
+        $dbReady = true;
 
-        if (Schema::hasTable('event_items')) {
-            $featuredEvent = EventItem::query()
-                ->where('is_published', 1)
-                ->orderByDesc('start_date')
-                ->orderByDesc('id')
-                ->first();
+        try {
+            if (Schema::hasTable('event_items')) {
+                $featuredEvent = EventItem::query()
+                    ->where('is_published', 1)
+                    ->orderByDesc('start_date')
+                    ->orderByDesc('id')
+                    ->first();
 
-            $eventList = EventItem::query()
-                ->where('is_published', 1)
-                ->when($featuredEvent, fn ($q) => $q->where('id', '!=', $featuredEvent->id))
-                ->orderByDesc('start_date')
-                ->orderByDesc('id')
-                ->limit(4)
-                ->get();
-        }
+                $eventList = EventItem::query()
+                    ->where('is_published', 1)
+                    ->when($featuredEvent, fn ($q) => $q->where('id', '!=', $featuredEvent->id))
+                    ->orderByDesc('start_date')
+                    ->orderByDesc('id')
+                    ->limit(4)
+                    ->get();
+            }
 
-        if (Schema::hasTable('majelis_periods')) {
-            $majelisPeriods = MajelisPeriod::query()
-                ->orderByDesc('period')
-                ->latest('updated_at')
-                ->limit(6)
-                ->get();
+            if (Schema::hasTable('majelis_periods')) {
+                $majelisPeriods = MajelisPeriod::query()
+                    ->orderByDesc('period')
+                    ->latest('updated_at')
+                    ->limit(6)
+                    ->get();
+            }
+        } catch (\Throwable $e) {
+            // DB belum siap / koneksi gagal: jangan bikin halaman public jadi 500.
+            $dbReady = false;
+            $featuredEvent = null;
+            $eventList = collect();
+            $majelisPeriods = collect();
         }
 
         return view('pages.home', [
             'featuredEvent' => $featuredEvent,
             'eventList' => $eventList,
             'majelisPeriods' => $majelisPeriods,
+            'db_ready' => $dbReady,
         ]);
     }
 }

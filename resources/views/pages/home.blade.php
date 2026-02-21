@@ -5,20 +5,55 @@
 @section('content')
 @php
   $heroImage = asset('img/fotogrj.jpeg');
+  $sejarahLandscape = asset('img/sejarah/batu-pertama.jpg');
+  $homeSlides = [
+    asset('img/fotogrj.jpeg'),
+    asset('img/media.jpeg'),
+    asset('img/komisiwanita.jpeg'),
+    asset('img/pemuda.jpeg'),
+    asset('img/remajaa.jpeg'),
+    asset('img/sekolah minggu.jpeg'),
+  ];
 @endphp
 
+{{-- INTRO OVERLAY (like GKKA Balikpapan style) --}}
+<div id="gkkaIntro" class="gkka-intro">
+  <div class="absolute inset-0 opacity-25 pointer-events-none"
+       style="background-image: radial-gradient(1200px 520px at 50% 0%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 60%);"></div>
+
+  <div class="relative text-center px-6">
+    <div class="gkka-intro__logo-wrap mx-auto">
+      <img class="gkka-intro__logo" src="{{ asset('assets/logo.png') }}" alt="Logo GKKA">
+    </div>
+    <div class="mt-6 text-sm font-black tracking-[0.35em] text-white/80 uppercase">GKKA Indonesia</div>
+    <div class="mt-2 text-3xl sm:text-4xl md:text-5xl font-black tracking-tight gkka-hero-title">
+      Jemaat Samarinda
+    </div>
+    <button id="gkkaIntroSkip"
+            class="mt-10 h-11 px-7 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-black shadow-sm transition inline-flex items-center justify-center">
+      Masuk
+    </button>
+  </div>
+</div>
+
 {{-- HERO SECTION --}}
-<section class="relative h-[72svh] min-h-[360px] sm:min-h-[500px] w-full overflow-hidden">
-  {{-- Background --}}
+<section class="relative h-[100svh] min-h-[520px] w-full overflow-hidden">
+  {{-- Background (slideshow) --}}
   <div class="absolute inset-0">
-    <img src="{{ $heroImage }}" class="w-full h-full object-cover scale-105" alt="GKKA Samarinda">
-    <div class="absolute inset-0 bg-blue-900/60 mix-blend-multiply"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-transparent to-transparent"></div>
+    <div id="gkkaHeroBgA" class="absolute inset-0 bg-cover bg-center scale-105 transition-opacity duration-1000 opacity-100"
+         style="background-image:url('{{ $homeSlides[0] }}')"></div>
+    <div id="gkkaHeroBgB" class="absolute inset-0 bg-cover bg-center scale-105 transition-opacity duration-1000 opacity-0"
+         style="background-image:url('{{ $homeSlides[1] ?? $homeSlides[0] }}')"></div>
+
+    <div class="absolute inset-0 bg-blue-900/55 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/95 via-blue-900/30 to-transparent"></div>
   </div>
 
   {{-- Content --}}
   <div class="relative h-full gkka-container flex flex-col justify-center items-center text-center text-white z-10 pt-24 sm:pt-0 pb-10 sm:pb-0">
-      <div class="font-black text-blue-300 tracking-widest uppercase mb-4 text-sm md:text-base animate-fade-in-up">Selamat Datang</div>
+      <div class="font-black text-blue-200 tracking-widest uppercase mb-4 text-sm md:text-base animate-fade-in-up">
+        Selamat Datang
+      </div>
       <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-tight drop-shadow-lg animate-fade-in-up delay-100">
         GKKA Indonesia<br><span class="text-blue-200">Jemaat Samarinda</span>
       </h1>
@@ -36,6 +71,58 @@
   </div>
 </section>
 
+<script>
+  (function () {
+    const intro = document.getElementById('gkkaIntro');
+    const skip = document.getElementById('gkkaIntroSkip');
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const storageKey = 'gkka_intro_seen_session_v1';
+
+    function hideIntro() {
+      if (!intro) return;
+      try { sessionStorage.setItem(storageKey, '1'); } catch (e) {}
+      intro.classList.add('is-leaving');
+      setTimeout(() => intro.remove(), prefersReduced ? 0 : 560);
+    }
+
+    // Show intro only once per session/tab (so navigating to Media then back won't show again)
+    if (intro) {
+      let seen = false;
+      try { seen = sessionStorage.getItem(storageKey) === '1'; } catch (e) {}
+      if (seen) {
+        intro.remove();
+        return;
+      }
+    }
+
+    // Auto leave after a short intro (tap/click also works).
+    // If user prefers reduced motion, don't auto-close; wait for click.
+    const t = prefersReduced ? null : setTimeout(hideIntro, 1600);
+    if (skip) skip.addEventListener('click', () => { if (t) clearTimeout(t); hideIntro(); });
+    if (intro) intro.addEventListener('click', (e) => {
+      if (e.target === intro) { if (t) clearTimeout(t); hideIntro(); }
+    });
+
+    // Background slideshow
+    const slides = @json($homeSlides);
+    const a = document.getElementById('gkkaHeroBgA');
+    const b = document.getElementById('gkkaHeroBgB');
+    if (slides && slides.length > 1 && a && b && !prefersReduced) {
+      let si = 1;
+      let frontIsA = true;
+      setInterval(() => {
+        const front = frontIsA ? a : b;
+        const back = frontIsA ? b : a;
+        back.style.backgroundImage = `url('${slides[si]}')`;
+        back.style.opacity = '1';
+        front.style.opacity = '0';
+        frontIsA = !frontIsA;
+        si = (si + 1) % slides.length;
+      }, 5200);
+    }
+  })();
+</script>
+
 {{-- MEDIA & WELCOME SECTION --}}
 <section class="gkka-section-tight bg-gradient-to-b from-blue-50/50 to-white">
   <div class="gkka-container grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
@@ -43,14 +130,14 @@
       {{-- Image --}}
       <div class="relative group">
         <div class="absolute inset-0 bg-blue-600 rounded-3xl rotate-3 opacity-20 group-hover:rotate-6 transition-transform duration-500"></div>
-        <img src="{{ $heroImage }}" alt="GKKA Samarinda" class="relative w-full h-64 sm:h-80 lg:h-[420px] object-cover rounded-3xl shadow-2xl transform transition-transform duration-500 group-hover:-translate-y-2">
+        <img src="{{ asset('img/doa.jpeg') }}" alt="GKKA Samarinda" class="relative w-full h-64 sm:h-80 lg:h-[420px] object-cover rounded-3xl shadow-2xl transform transition-transform duration-500 group-hover:-translate-y-2" onerror="this.onerror=null;this.src='{{ $heroImage }}';">
       </div>
 
       {{-- Video / Text --}}
       <div>
         <div class="w-full h-56 sm:h-72 md:h-[400px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-black/5">
           <iframe
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            src="https://www.youtube.com/embed/mYXhv8ZUJa4?start=29&rel=0"
             title="YouTube video"
             class="w-full h-full"
             frameborder="0"
@@ -64,8 +151,20 @@
 
 {{-- SCHEDULES SECTION --}}
 <section class="gkka-section bg-blue-900 text-white relative overflow-hidden">
+  {{-- Background Photo --}}
+  <div class="absolute inset-0">
+    <img
+      src="{{ asset('img/majelis potong kue.jpeg') }}"
+      alt="GKKA Samarinda"
+      class="w-full h-full object-cover object-center opacity-70"
+      onerror="this.onerror=null;this.src='{{ asset('img/fotogrj.jpeg') }}';"
+    >
+    <div class="absolute inset-0 bg-blue-950/65 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-blue-950/80 via-blue-900/55 to-blue-900/80"></div>
+  </div>
+
   {{-- Background Decoration --}}
-  <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+  <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none">
      <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
      <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-600 rounded-full blur-3xl"></div>
   </div>
@@ -85,32 +184,41 @@
             <div class="space-y-2">
               <h3 class="font-bold text-yellow-400 text-lg">Komisi Wanita Rut</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
-                Tiap Selasa, 19.00 WITA<br>
-                Minggu 2 & 4: Ibadah<br>
-                Minggu 3: Komsel
+                Ibadah sebulan sekali<br>
+                Minggu ke-2<br>
+                Setelah Kebaktian Umum di gereja
+              </p>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-bold text-yellow-400 text-lg">Komisi Sekolah Minggu Narwastu</h3>
+              <p class="text-blue-100 text-sm leading-relaxed">
+                Tiap Hari Minggu<br>
+                09.00 WITA<br>
+                di gereja
               </p>
             </div>
             <div class="space-y-2">
               <h3 class="font-bold text-yellow-400 text-lg">Komisi Remaja Betania</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
-                Tiap Jumat, 19.00 WITA<br>
-                Minggu 1 - 3: Ibadah<br>
-                Minggu 4 & 5: Gabungan
-              </p>
-            </div>
-            <div class="space-y-2">
-              <h3 class="font-bold text-yellow-400 text-lg">Komisi Pria Hizkia</h3>
-              <p class="text-blue-100 text-sm leading-relaxed">
-                Jumat (Minggu 1)<br>
-                19.00 WITA
+                Tiap Hari Minggu<br>
+                09.00 WITA • di gereja<br>
+                Minggu ke-1: gabung Kebaktian Umum<br>
+                Minggu ke-2 s/d terakhir: ibadah remaja
               </p>
             </div>
             <div class="space-y-2">
               <h3 class="font-bold text-yellow-400 text-lg">Komisi Pemuda Eirene</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
-                Tiap Jumat, 19.00 WITA<br>
-                Minggu 1 - 3: Ibadah<br>
-                Minggu 4 & 5: Gabungan
+                Tiap Hari Sabtu<br>
+                18.00 WITA<br>
+                di gereja
+              </p>
+            </div>
+            <div class="space-y-2 sm:col-span-2">
+              <h3 class="font-bold text-yellow-400 text-lg">Komisi Pria Hizkia</h3>
+              <p class="text-blue-100 text-sm leading-relaxed">
+                Ibadah sebulan sekali<br>
+                (hari &amp; jam menyusul)
               </p>
             </div>
           </div>
@@ -130,29 +238,28 @@
               <h3 class="font-bold text-white text-lg">Ibadah Umum</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
                 Tiap Hari Minggu<br>
-                <span class="font-semibold text-yellow-400">08.00 WITA</span> : KU 1<br>
-                <span class="font-semibold text-yellow-400">10.00 WITA</span> : KU 2
+                <span class="font-semibold text-yellow-400">09.00 WITA</span>
               </p>
             </div>
             <div class="space-y-2">
-              <h3 class="font-bold text-white text-lg">Sekolah Minggu “Agape”</h3>
+              <h3 class="font-bold text-white text-lg">Sekolah Minggu “Narwastu”</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
                 Tiap Hari Minggu<br>
-                10.00 WITA
+                <span class="font-semibold text-yellow-400">09.00 WITA</span>
               </p>
             </div>
             <div class="space-y-2">
-              <h3 class="font-bold text-white text-lg">Usia Indah “Simeon”</h3>
+              <h3 class="font-bold text-white text-lg">Ibadah Rumah Tangga</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
-                Rabu (Minggu 1)<br>
-                17.00 WITA
+                Tiap Hari Kamis<br>
+                <span class="font-semibold text-yellow-400">19.00 WITA</span>
               </p>
             </div>
             <div class="space-y-2">
               <h3 class="font-bold text-white text-lg">Persekutuan Doa</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
-                Tiap Hari Kamis<br>
-                19.00 WITA
+                Tiap Hari Sabtu<br>
+                <span class="font-semibold text-yellow-400">17.00 WITA</span>
               </p>
             </div>
           </div>
@@ -169,7 +276,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div class="relative">
          <div class="absolute -inset-4 bg-blue-100 rounded-3xl -rotate-2"></div>
-         <img src="{{ $heroImage }}" alt="Sejarah GKKA" class="relative w-full h-64 sm:h-80 lg:h-[420px] object-cover rounded-3xl shadow-xl">
+         <img src="{{ $sejarahLandscape }}" alt="Sejarah GKKA" class="relative w-full h-64 sm:h-80 lg:h-[420px] object-cover object-center rounded-3xl shadow-xl">
       </div>
       <div>
         <h2 class="text-3xl md:text-4xl font-black text-blue-900 mb-6">Sejarah Gereja</h2>

@@ -35,4 +35,16 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Cloudflare Turnstile (Captcha)
+    |--------------------------------------------------------------------------
+    */
+    'turnstile' => [
+        'site_key' => env('TURNSTILE_SITE_KEY'),
+        'secret_key' => env('TURNSTILE_SECRET_KEY'),
+        // Local dev convenience: set true if you want captcha enforced in APP_ENV=local.
+        'enforce_local' => (bool) env('TURNSTILE_ENFORCE_LOCAL', false),
+    ],
+
 ];

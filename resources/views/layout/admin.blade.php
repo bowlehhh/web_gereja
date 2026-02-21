@@ -185,6 +185,35 @@
       </div>
     </div>
   </div>
+
+  <!-- Global Confirm Modal (for delete actions, etc.) -->
+  <div id="confirmModal" class="hidden fixed inset-0 z-[70] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-md opacity-0" id="confirmModalOverlay" data-close="1"></div>
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden relative z-10 scale-90 opacity-0" id="confirmModalContent" role="dialog" aria-modal="true" aria-labelledby="confirmModalTitle">
+      <div class="p-8 text-center">
+        <div id="confirmModalIconWrap" class="size-20 rounded-2xl bg-red-50 text-red-600 grid place-items-center mx-auto mb-6">
+          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3m4 0H5" />
+          </svg>
+        </div>
+
+        <h3 id="confirmModalTitle" class="text-2xl font-black text-slate-800 mb-2">Konfirmasi</h3>
+        <p id="confirmModalMessage" class="text-slate-500 font-bold mb-8">Apakah Anda yakin?</p>
+
+        <div class="grid grid-cols-2 gap-3">
+          <button type="button" id="confirmModalCancel"
+                  class="h-12 rounded-2xl border border-slate-200 text-slate-600 font-black hover:bg-slate-50 transition">
+            Batal
+          </button>
+          <button type="button" id="confirmModalOk"
+                  class="h-12 rounded-2xl bg-red-600 text-white font-black hover:bg-red-700 shadow-lg shadow-red-200 transition active:scale-95">
+            Ya, Hapus
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
   
   @vite(['resources/js/admin.js'])
 </body>

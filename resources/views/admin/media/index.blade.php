@@ -61,7 +61,14 @@
           <div class="mt-4 flex gap-2 flex-wrap pt-4 border-t border-blue-50">
             <a class="h-10 px-4 rounded-xl border border-blue-900 bg-white hover:bg-blue-50 text-blue-900 font-extrabold text-sm inline-flex items-center transition flex-1 justify-center"
                href="{{ route('admin.media.edit', $it->id) }}">Edit</a>
-            <form action="{{ route('admin.media.destroy', $it->id) }}" method="POST" onsubmit="return confirm('Hapus media ini?')" class="flex-1">
+            <form
+              action="{{ route('admin.media.destroy', $it->id) }}"
+              method="POST"
+              data-confirm="Hapus media ini?"
+              data-confirm-title="Hapus Media"
+              data-confirm-ok="Ya, Hapus"
+              class="flex-1"
+            >
               @csrf
               @method('DELETE')
               <button type="submit"

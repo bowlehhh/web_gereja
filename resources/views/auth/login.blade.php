@@ -45,6 +45,11 @@
 
                 <form method="POST" action="{{ route('login.post') }}" class="space-y-6">
                     @csrf
+                    {{-- Honeypot (anti-bot). Do not remove. --}}
+                    <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+                        <label>Website</label>
+                        <input type="text" name="website" tabindex="-1" autocomplete="off">
+                    </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="space-y-2 col-span-1 md:col-span-2">
@@ -61,6 +66,19 @@
                                 placeholder="••••••••">
                         </div>
                     </div>
+
+                    @php
+                        $turnstileKey = config('services.turnstile.site_key');
+                        $showTurnstile = !empty($turnstileKey) && (!app()->environment('local') || (bool) config('services.turnstile.enforce_local', false));
+                    @endphp
+                    @if($showTurnstile)
+                        <div class="pt-2">
+                            <div class="cf-turnstile" data-sitekey="{{ $turnstileKey }}"></div>
+                            <p class="mt-2 text-xs text-slate-400 font-semibold">
+                                Verifikasi untuk mencegah spam.
+                            </p>
+                        </div>
+                    @endif
 
                     <div class="flex items-center justify-between py-2">
                         <label class="flex items-center gap-2 cursor-pointer group">
@@ -83,6 +101,10 @@
         </div>
 
     </div>
+
+    @if($showTurnstile)
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    @endif
 
 </body>
 </html>

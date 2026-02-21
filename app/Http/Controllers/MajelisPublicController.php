@@ -11,10 +11,19 @@ class MajelisPublicController extends Controller
 {
     public function index()
     {
-        if (!Schema::hasTable('majelis_periods')) {
+        try {
+            if (!Schema::hasTable('majelis_periods')) {
+                return view('pages.gereja-majelis', [
+                    'items' => collect(),
+                    'table_ready' => false,
+                    'db_ready' => true,
+                ]);
+            }
+        } catch (\Throwable $e) {
             return view('pages.gereja-majelis', [
                 'items' => collect(),
                 'table_ready' => false,
+                'db_ready' => false,
             ]);
         }
 
@@ -41,12 +50,17 @@ class MajelisPublicController extends Controller
         return view('pages.gereja-majelis', [
             'items' => $periodItems,
             'table_ready' => true,
+            'db_ready' => true,
         ]);
     }
 
     public function show(string $period)
     {
-        abort_unless(Schema::hasTable('majelis_periods'), 404);
+        try {
+            abort_unless(Schema::hasTable('majelis_periods'), 404);
+        } catch (\Throwable $e) {
+            abort(404);
+        }
 
         $period = trim(urldecode($period));
 

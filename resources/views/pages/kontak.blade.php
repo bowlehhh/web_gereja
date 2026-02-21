@@ -2,6 +2,16 @@
 @section('title', 'Kontak - GKKA Samarinda')
 
 @section('content')
+@php
+  $adminEmail = 'gkkaisamarinda@yahoo.com';
+  $adminPhoneDisplay = '+62 823-5052-6337';
+  $adminPhoneTel = '+6282350526337';
+  $adminWa = 'https://wa.me/6282350526337';
+  $alamat = 'Jl. Sentosa No.25, Sungai Pinang Dalam, Kec. Sungai Pinang, Kota Samarinda, Kalimantan Timur 75117';
+  $mapsEmbed = 'https://www.google.com/maps?q='.urlencode($alamat).'&output=embed';
+  $mapsOpen = 'https://www.google.com/maps/search/?api=1&query='.urlencode($alamat);
+@endphp
+
 <section class="py-24 pt-32 bg-gray-50 min-h-screen">
   <div class="gkka-container">
     <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
@@ -23,7 +33,7 @@
                   <div>
                      <div class="font-bold text-lg mb-1 text-blue-100">Alamat Gereja</div>
                      <div class="text-white font-medium leading-relaxed opacity-90">
-                        Jalan (Alamat Lengkap)<br>Samarinda, Kalimantan Timur
+                        {{ $alamat }}
                      </div>
                   </div>
                </div>
@@ -34,7 +44,11 @@
                   </div>
                   <div>
                      <div class="font-bold text-lg mb-1 text-blue-100">Telepon</div>
-                     <div class="text-white font-medium opacity-90">08xx-xxxx-xxxx</div>
+                     <div class="text-white font-medium opacity-90">
+                       <a class="underline decoration-white/30 hover:decoration-white" href="tel:{{ $adminPhoneTel }}">{{ $adminPhoneDisplay }}</a>
+                       <span class="text-white/40 mx-2">•</span>
+                       <a class="underline decoration-white/30 hover:decoration-white" href="{{ $adminWa }}" target="_blank" rel="noopener">WhatsApp</a>
+                     </div>
                   </div>
                </div>
 
@@ -44,7 +58,9 @@
                   </div>
                   <div>
                      <div class="font-bold text-lg mb-1 text-blue-100">Email</div>
-                     <div class="text-white font-medium opacity-90">info@gkkasamarinda.com</div>
+                     <div class="text-white font-medium opacity-90">
+                       <a class="underline decoration-white/30 hover:decoration-white" href="mailto:{{ $adminEmail }}">{{ $adminEmail }}</a>
+                     </div>
                   </div>
                </div>
             </div>
@@ -53,10 +69,10 @@
          {{-- Map Embed --}}
          <div class="relative z-10 mt-10 lg:mt-16 rounded-2xl overflow-hidden h-64 border-4 border-white/10 shadow-lg group">
             <iframe 
-               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127637.28424164627!2d117.0601955!3d-0.502187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df5d57d33074935%3A0xef64e9b06c7ad3e!2sSamarinda%2C%20Samarinda%20City%2C%20East%20Kalimantan!5e0!3m2!1sen!2sid!4v1645000000000!5m2!1sen!2sid" 
+               src="{{ $mapsEmbed }}" 
                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                class="grayscale group-hover:grayscale-0 transition-all duration-500"></iframe>
-            <a href="https://maps.google.com" target="_blank" class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none"></a>
+            <a href="{{ $mapsOpen }}" target="_blank" rel="noopener" class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none"></a>
          </div>
       </div>
 
@@ -75,11 +91,13 @@
                   <div class="mt-3 space-y-2 text-slate-700 font-semibold">
                      <div class="flex items-center gap-2">
                         <span class="text-slate-400">Telepon/WA:</span>
-                        <a href="tel:08xx-xxxx-xxxx" class="text-blue-700 hover:text-blue-900 transition-colors">08xx-xxxx-xxxx</a>
+                        <a href="tel:{{ $adminPhoneTel }}" class="text-blue-700 hover:text-blue-900 transition-colors">{{ $adminPhoneDisplay }}</a>
+                        <span class="text-slate-300">•</span>
+                        <a href="{{ $adminWa }}" target="_blank" rel="noopener" class="text-blue-700 hover:text-blue-900 transition-colors">WhatsApp</a>
                      </div>
                      <div class="flex items-center gap-2">
                         <span class="text-slate-400">Email:</span>
-                        <a href="mailto:info@gkkasamarinda.com" class="text-blue-700 hover:text-blue-900 transition-colors">info@gkkasamarinda.com</a>
+                        <a href="mailto:{{ $adminEmail }}" class="text-blue-700 hover:text-blue-900 transition-colors">{{ $adminEmail }}</a>
                      </div>
                   </div>
                </div>
