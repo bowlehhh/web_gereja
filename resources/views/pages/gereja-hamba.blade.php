@@ -50,8 +50,6 @@
 
 <section class="relative overflow-hidden bg-gradient-to-b from-sky-50 via-white to-sky-50">
   <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute -top-24 -right-24 size-[520px] rounded-full bg-sky-200/60 blur-3xl"></div>
-    <div class="absolute -bottom-28 -left-28 size-[520px] rounded-full bg-blue-200/50 blur-3xl"></div>
     <svg class="absolute inset-x-0 top-16 w-full text-blue-200/40" viewBox="0 0 1440 220" fill="none" aria-hidden="true">
       <path d="M0,128 C220,32 420,56 640,120 C860,184 1100,216 1440,88" stroke="currentColor" stroke-width="36" stroke-linecap="round"/>
       <path d="M0,188 C260,96 460,112 700,168 C940,224 1140,236 1440,140" stroke="currentColor" stroke-width="22" stroke-linecap="round" opacity="0.7"/>
@@ -94,23 +92,6 @@
             <p class="mt-2 text-sm sm:text-base text-slate-600 font-semibold leading-relaxed">
               Data hamba Tuhan akan tampil di sini setelah ditambahkan di dashboard admin.
             </p>
-            <div class="mt-6 flex flex-col sm:flex-row gap-3">
-              @auth
-                <a href="{{ route('admin.hamba.index') }}"
-                   class="h-11 px-6 rounded-2xl bg-blue-700 hover:bg-blue-800 text-white font-black shadow-sm transition inline-flex items-center justify-center">
-                  Buka Dashboard
-                </a>
-              @else
-                <a href="{{ route('login') }}"
-                   class="h-11 px-6 rounded-2xl bg-blue-700 hover:bg-blue-800 text-white font-black shadow-sm transition inline-flex items-center justify-center">
-                  Login Admin
-                </a>
-              @endauth
-              <a href="{{ route('kontak') }}"
-                 class="h-11 px-6 rounded-2xl bg-sky-100 hover:bg-sky-200 text-blue-900 font-black shadow-sm transition inline-flex items-center justify-center">
-                Hubungi Admin
-              </a>
-            </div>
           </div>
         </div>
       </div>

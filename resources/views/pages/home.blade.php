@@ -173,8 +173,9 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       
       {{-- JADWAL KOMISI --}}
-      <div class="group relative rounded-3xl overflow-hidden bg-blue-800/50 border border-white/10 shadow-2xl hover:border-blue-400/50 transition-colors duration-300">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/90 to-blue-800/50 z-0"></div>
+      <div class="group relative rounded-3xl overflow-hidden bg-white/10 border border-white/20 shadow-2xl backdrop-blur-xl hover:border-white/40 transition-colors duration-300">
+        <div class="absolute inset-0 bg-gradient-to-br from-white/10 via-blue-900/60 to-blue-800/70 z-0"></div>
+        <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
         <div class="relative z-10 p-6 sm:p-8">
           <h2 class="text-2xl font-black uppercase tracking-wider mb-8 flex items-center gap-3">
             <span class="w-2 h-8 bg-yellow-500 rounded-full"></span>
@@ -226,8 +227,9 @@
       </div>
 
       {{-- JADWAL IBADAH --}}
-      <div class="group relative rounded-3xl overflow-hidden bg-blue-800/50 border border-white/10 shadow-2xl hover:border-blue-400/50 transition-colors duration-300">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/90 to-blue-800/50 z-0"></div>
+      <div class="group relative rounded-3xl overflow-hidden bg-white/10 border border-white/20 shadow-2xl backdrop-blur-xl hover:border-white/40 transition-colors duration-300">
+        <div class="absolute inset-0 bg-gradient-to-br from-white/10 via-blue-900/60 to-blue-800/70 z-0"></div>
+        <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
         <div class="relative z-10 p-6 sm:p-8">
           <h2 class="text-2xl font-black uppercase tracking-wider mb-8 flex items-center gap-3">
             <span class="w-2 h-8 bg-yellow-500 rounded-full"></span>

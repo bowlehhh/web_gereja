@@ -146,50 +146,72 @@
 </section>
 
 <section class="py-20 timeline-container overflow-hidden majelis-pattern-bg">
-    <div id="line-progress">
-        <div id="line-active"></div>
-    </div>
+    @if($items->count())
+        <div id="line-progress">
+            <div id="line-active"></div>
+        </div>
+    @endif
 
     <div class="max-w-6xl mx-auto px-6 relative">
+        @if($items->count())
             @foreach($items as $i => $item)
-            @php 
-                $isLeft = $i % 2 === 0; 
-                $periodParam = ($item->slug ?? null) === 'tidak-diketahui' ? 'tidak-diketahui' : ($item->period ?? null);
-                if ($item->photo_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($item->photo_path)) {
-                    $img = \Illuminate\Support\Facades\Storage::url($item->photo_path); // /storage/...
-                } else {
-                    $img = '/assets/logo.png';
-                }
-            @endphp
+                @php 
+                    $isLeft = $i % 2 === 0; 
+                    $periodParam = ($item->slug ?? null) === 'tidak-diketahui' ? 'tidak-diketahui' : ($item->period ?? null);
+                    if ($item->photo_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($item->photo_path)) {
+                        $img = \Illuminate\Support\Facades\Storage::url($item->photo_path); // /storage/...
+                    } else {
+                        $img = '/assets/logo.png';
+                    }
+                @endphp
 
-            <div class="timeline-row {{ $isLeft ? 'is-left' : 'is-right' }} relative grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-24 items-center mb-32">
-                
-                <div class="timeline-dot order-2 md:order-none mx-auto md:mx-0 w-4 h-4 md:w-6 md:h-6 bg-white border-2 md:border-4 border-blue-600 rounded-full z-10 md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"></div>
+                <div class="timeline-row {{ $isLeft ? 'is-left' : 'is-right' }} relative grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-24 items-center mb-32">
+                    
+                    <div class="timeline-dot order-2 md:order-none mx-auto md:mx-0 w-4 h-4 md:w-6 md:h-6 bg-white border-2 md:border-4 border-blue-600 rounded-full z-10 md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"></div>
 
-                <div class="{{ $isLeft ? 'md:text-right order-3 md:order-1' : 'md:col-start-2 order-3' }} reveal-content">
-                    <div class="card-3d-timbul p-8 rounded-3xl">
-                        <div class="mb-6 inline-flex p-3 rounded-xl icon-block-3d">
-                            <i data-lucide="users-2" class="w-6 h-6"></i>
+                    <div class="{{ $isLeft ? 'md:text-right order-3 md:order-1' : 'md:col-start-2 order-3' }} reveal-content">
+                        <div class="card-3d-timbul p-8 rounded-3xl">
+                            <div class="mb-6 inline-flex p-3 rounded-xl icon-block-3d">
+                                <i data-lucide="users-2" class="w-6 h-6"></i>
+                            </div>
+                            <h2 class="text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">PERIODE</h2>
+                            <h3 class="text-2xl font-black text-slate-800 mb-4">{{ $item->period ?: 'Tidak diketahui' }}</h3>
+                            <p class="text-slate-500 leading-relaxed mb-6">{{ $item->excerpt }}</p>
+                            
+                            <a href="{{ $periodParam ? route('gereja.majelis.show', ['period' => $periodParam]) : route('gereja.majelis') }}" class="inline-flex items-center gap-2 font-bold text-blue-600 group">
+                                ABOUT MAJELIS
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </a>
                         </div>
-                        <h2 class="text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">PERIODE</h2>
-                        <h3 class="text-2xl font-black text-slate-800 mb-4">{{ $item->period ?: 'Tidak diketahui' }}</h3>
-                        <p class="text-slate-500 leading-relaxed mb-6">{{ $item->excerpt }}</p>
-                        
-                        <a href="{{ $periodParam ? route('gereja.majelis.show', ['period' => $periodParam]) : route('gereja.majelis') }}" class="inline-flex items-center gap-2 font-bold text-blue-600 group">
-                            ABOUT MAJELIS
-                            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                    </div>
+
+                    <div class="{{ $isLeft ? 'md:col-start-2 order-1' : 'md:col-start-1 md:row-start-1 order-1' }} reveal-img">
+                        <div class="relative overflow-hidden rounded-[2.5rem] shadow-2xl bg-white">
+                            <img src="{{ $img }}" class="w-full aspect-square object-cover transition-transform duration-700 hover:scale-110">
+                        </div>
+                    </div>
+
+                </div>
+            @endforeach
+        @else
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="card-3d-timbul rounded-3xl p-8 sm:p-10">
+                    <div class="mx-auto mb-5 inline-flex size-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 shadow-sm">
+                        <i data-lucide="info" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">Majelis belum tersedia</h2>
+                    <p class="mt-2 text-slate-500 font-medium">
+                        Data majelis akan ditampilkan di sini setelah ditambahkan oleh admin.
+                    </p>
+                    <div class="mt-6">
+                        <a href="{{ route('kontak') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-900 text-white font-bold shadow-lg hover:bg-blue-800 transition">
+                            Hubungi Admin
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
                         </a>
                     </div>
                 </div>
-
-                <div class="{{ $isLeft ? 'md:col-start-2 order-1' : 'md:col-start-1 md:row-start-1 order-1' }} reveal-img">
-                    <div class="relative overflow-hidden rounded-[2.5rem] shadow-2xl bg-white">
-                        <img src="{{ $img }}" class="w-full aspect-square object-cover transition-transform duration-700 hover:scale-110">
-                    </div>
-                </div>
-
             </div>
-        @endforeach
+        @endif
     </div>
 </section>
 @endsection

@@ -23,18 +23,18 @@
     <div class="absolute -bottom-40 -right-24 size-[560px] bg-blue-700 rounded-full blur-3xl"></div>
   </div>
 
-	  <div
-	    class="relative min-h-screen min-h-[100svh] w-full mx-auto px-4 sm:px-6 lg:pl-14 lg:pr-24 flex items-end lg:items-center justify-end pt-20 sm:pt-24 pb-16 sm:pb-16 lg:pt-28 lg:pb-24"
-	  >
-	    <div class="w-full text-center lg:text-left max-w-[520px] mx-auto lg:mx-0 lg:ml-auto lg:mr-20">
-      <div class="relative overflow-hidden rounded-3xl border border-white/15 shadow-2xl p-8 lg:p-12 bg-slate-900/40 sm:bg-slate-900/55 backdrop-blur-lg">
+  <div
+    class="relative min-h-[100svh] sm:min-h-screen w-full mx-auto px-5 sm:px-8 lg:pl-14 lg:pr-24 flex items-center justify-center lg:justify-end pt-20 sm:pt-24 pb-20 sm:pb-16 lg:pt-28 lg:pb-24"
+  >
+    <div class="w-full text-center lg:text-left max-w-[520px] mx-auto lg:mx-0 lg:ml-auto lg:mr-16">
+      <div class="relative overflow-hidden rounded-3xl border border-white/15 shadow-xl sm:shadow-2xl p-6 sm:p-8 lg:p-12 bg-slate-900/40 sm:bg-slate-900/55 backdrop-blur-lg">
         <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-white/0 to-slate-900/30 pointer-events-none"></div>
         <div class="relative">
         <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 border border-white/10 text-blue-100 font-black tracking-[0.22em] uppercase text-xs">
           GKKA Samarinda
         </div>
 
-        <h1 class="gkka-hero-title mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05]">
+        <h1 class="gkka-hero-title mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05]">
           Tayangan Ibadah<br class="hidden md:block">
           <span class="text-blue-200">& Dokumentasi</span>
         </h1>
@@ -45,11 +45,11 @@
 
         <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
           <a href="#tayangan"
-             class="h-14 px-9 rounded-2xl bg-yellow-500 hover:bg-yellow-400 text-blue-900 font-black shadow-xl transition inline-flex items-center justify-center">
+             class="h-12 sm:h-14 px-7 sm:px-9 rounded-2xl bg-yellow-500 hover:bg-yellow-400 text-blue-900 font-black shadow-xl transition inline-flex items-center justify-center w-full sm:w-auto">
             Lihat Tayangan
           </a>
           <a href="{{ route('kontak') }}"
-             class="h-14 px-9 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-black shadow-lg transition inline-flex items-center justify-center">
+             class="h-12 sm:h-14 px-7 sm:px-9 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-black shadow-lg transition inline-flex items-center justify-center w-full sm:w-auto">
             Hubungi Admin
           </a>
         </div>
@@ -86,15 +86,15 @@
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-2xl md:text-3xl font-black tracking-tight">Tayangan Ibadah Rutin Mingguan</h2>
 
-      <form method="GET" action="{{ route('media') }}" class="mt-6 flex flex-col md:flex-row gap-3 items-center justify-center">
+      <form method="GET" action="{{ route('media') }}" class="mt-6 flex flex-col md:flex-row gap-3 items-center justify-center rounded-3xl border border-white/15 bg-white/10 backdrop-blur-lg p-4 sm:p-5">
         <div class="w-full md:flex-1">
           <input type="text" name="q" value="{{ $q ?? '' }}" placeholder="Search..."
-                 class="w-full h-12 px-5 rounded-2xl border border-white/20 bg-white text-slate-800 font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition">
+                 class="w-full h-12 px-5 rounded-2xl border border-white/20 bg-white/10 text-white placeholder:text-white/60 font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-300/70 focus:border-transparent transition">
         </div>
 
         <div class="w-full md:w-56">
           <input type="date" name="date" value="{{ $date ?? '' }}"
-                 class="w-full h-12 px-5 rounded-2xl border border-white/20 bg-white text-slate-800 font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition">
+                 class="w-full h-12 px-5 rounded-2xl border border-white/20 bg-white/10 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-300/70 focus:border-transparent transition">
         </div>
 
         <div class="w-full md:w-auto flex gap-2">
@@ -113,7 +113,7 @@
     </div>
 
     @if($items->count() === 0)
-      <div class="mt-10 rounded-3xl border border-slate-200 bg-white p-10 text-center text-slate-600 font-bold">
+      <div class="mt-10 rounded-3xl border border-white/15 bg-white/10 backdrop-blur-lg p-10 text-center text-blue-100 font-bold">
         Belum ada tayangan untuk ditampilkan.
       </div>
     @else

@@ -61,7 +61,7 @@
     <div id="adminOverlay" class="hidden fixed inset-0 bg-slate-900/20 z-40 md:hidden backdrop-blur-sm"></div>
 
     <aside id="adminSidebar"
-           class="w-72 bg-white text-slate-600 hidden md:flex md:static fixed inset-y-0 left-0 z-50 flex-col shadow-xl sidebar-transition rounded-r-3xl my-4 ml-4 h-[calc(100vh-2rem)] border border-slate-100">
+           class="w-72 bg-white text-slate-600 hidden md:flex md:static fixed inset-y-0 left-0 z-50 flex-col sidebar-transition border-r border-slate-100 shadow-2xl md:shadow-none md:h-screen">
       
       <!-- Brand -->
       <div class="h-24 flex items-center px-8 border-b border-slate-100">
@@ -103,7 +103,7 @@
                   </div>
               </div>
               <button type="button" id="logoutBtn" 
-                      class="w-full h-10 flex items-center justify-center gap-2 bg-white hover:bg-red-50 text-slate-600 hover:text-red-600 rounded-xl text-xs font-bold transition-all group border border-slate-200 hover:border-red-100 shadow-sm">
+                      class="w-full h-10 flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all group border border-red-200 shadow-sm">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                   <span>Log Out</span>
               </button>

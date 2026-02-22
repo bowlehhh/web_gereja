@@ -58,17 +58,15 @@
               </div>
             </div>
           @endif
-
-          <div class="mt-5 rounded-2xl bg-white px-5 py-4 shadow-lg border border-slate-200">
-            <div class="text-sm font-semibold text-slate-600">
-              Klik gambar di atas untuk melihat detail
-            </div>
-          </div>
         </div>
 
         {{-- Circles (right) --}}
         <div class="w-full">
-          @if($circles->count())
+          @if($arr->count() === 0)
+            <div class="rounded-2xl border border-slate-200 bg-white/70 backdrop-blur px-6 py-5 text-slate-600 font-semibold shadow-sm">
+              Belum ada foto gallery yang dipublish.
+            </div>
+          @elseif($circles->count())
             <div class="grid grid-cols-3 gap-6 sm:gap-7 place-items-center">
               @foreach($circles as $it)
                 <button
@@ -90,8 +88,8 @@
               @endforeach
             </div>
           @else
-            <div class="text-slate-600 font-semibold">
-              Belum ada foto gallery yang dipublish.
+            <div class="rounded-2xl border border-slate-200 bg-white/70 backdrop-blur px-6 py-5 text-slate-600 font-semibold shadow-sm">
+              Belum ada foto lainnya untuk ditampilkan.
             </div>
           @endif
         </div>

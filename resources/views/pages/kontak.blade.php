@@ -12,12 +12,12 @@
   $mapsOpen = 'https://www.google.com/maps/search/?api=1&query='.urlencode($alamat);
 @endphp
 
-<section class="py-24 pt-32 bg-gray-50 min-h-screen">
+<section class="py-16 pt-24 sm:py-24 sm:pt-32 bg-gray-50 min-h-screen">
   <div class="gkka-container">
     <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
       
       {{-- LEFT COLUMN: Address & Map --}}
-      <div class="relative w-full lg:w-5/12 bg-blue-900 text-white p-8 md:p-12 lg:pr-24 overflow-hidden flex flex-col justify-between">
+      <div class="relative w-full lg:w-5/12 bg-blue-900 text-white p-6 sm:p-8 md:p-12 lg:pr-24 overflow-hidden flex flex-col justify-between">
          {{-- Deco Blobs --}}
          <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-blue-800/40 blur-3xl"></div>
          <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-blue-600/40 blur-3xl"></div>
@@ -32,7 +32,7 @@
                   </div>
                   <div>
                      <div class="font-bold text-lg mb-1 text-blue-100">Alamat Gereja</div>
-                     <div class="text-white font-medium leading-relaxed opacity-90">
+                     <div class="text-white font-medium leading-relaxed opacity-90 break-words">
                         {{ $alamat }}
                      </div>
                   </div>
@@ -44,9 +44,9 @@
                   </div>
                   <div>
                      <div class="font-bold text-lg mb-1 text-blue-100">Telepon</div>
-                     <div class="text-white font-medium opacity-90">
+                     <div class="text-white font-medium opacity-90 flex flex-wrap items-center gap-2">
                        <a class="underline decoration-white/30 hover:decoration-white" href="tel:{{ $adminPhoneTel }}">{{ $adminPhoneDisplay }}</a>
-                       <span class="text-white/40 mx-2">•</span>
+                       <span class="hidden sm:inline text-white/40">•</span>
                        <a class="underline decoration-white/30 hover:decoration-white" href="{{ $adminWa }}" target="_blank" rel="noopener">WhatsApp</a>
                      </div>
                   </div>
@@ -67,7 +67,7 @@
          </div>
 
          {{-- Map Embed --}}
-         <div class="relative z-10 mt-10 lg:mt-16 rounded-2xl overflow-hidden h-64 border-4 border-white/10 shadow-lg group">
+         <div class="relative z-10 mt-10 lg:mt-16 rounded-2xl overflow-hidden h-56 sm:h-64 border-4 border-white/10 shadow-lg group">
             <iframe 
                src="{{ $mapsEmbed }}" 
                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
@@ -77,7 +77,7 @@
       </div>
 
       {{-- RIGHT COLUMN: Informasi Statis --}}
-      <div class="relative w-full lg:w-7/12 bg-white p-8 md:p-12 lg:p-16">
+      <div class="relative w-full lg:w-7/12 bg-white p-6 sm:p-8 md:p-12 lg:p-16">
          {{-- Slanted Divider (Desktop Only) --}}
          <div class="hidden lg:block absolute inset-y-0 -left-20 w-40 bg-white -skew-x-[6deg] transform origin-bottom z-10"></div>
          
@@ -89,15 +89,17 @@
                <div class="rounded-2xl border border-slate-100 bg-slate-50 p-6">
                   <div class="text-xs font-bold text-slate-500 uppercase tracking-widest">Kontak Admin</div>
                   <div class="mt-3 space-y-2 text-slate-700 font-semibold">
-                     <div class="flex items-center gap-2">
+                     <div class="flex flex-col sm:flex-row sm:items-center gap-2">
                         <span class="text-slate-400">Telepon/WA:</span>
-                        <a href="tel:{{ $adminPhoneTel }}" class="text-blue-700 hover:text-blue-900 transition-colors">{{ $adminPhoneDisplay }}</a>
-                        <span class="text-slate-300">•</span>
-                        <a href="{{ $adminWa }}" target="_blank" rel="noopener" class="text-blue-700 hover:text-blue-900 transition-colors">WhatsApp</a>
+                        <div class="flex flex-wrap items-center gap-2">
+                          <a href="tel:{{ $adminPhoneTel }}" class="text-blue-700 hover:text-blue-900 transition-colors">{{ $adminPhoneDisplay }}</a>
+                          <span class="hidden sm:inline text-slate-300">•</span>
+                          <a href="{{ $adminWa }}" target="_blank" rel="noopener" class="text-blue-700 hover:text-blue-900 transition-colors">WhatsApp</a>
+                        </div>
                      </div>
-                     <div class="flex items-center gap-2">
+                     <div class="flex flex-col sm:flex-row sm:items-center gap-2">
                         <span class="text-slate-400">Email:</span>
-                        <a href="mailto:{{ $adminEmail }}" class="text-blue-700 hover:text-blue-900 transition-colors">{{ $adminEmail }}</a>
+                        <a href="mailto:{{ $adminEmail }}" class="text-blue-700 hover:text-blue-900 transition-colors break-words">{{ $adminEmail }}</a>
                      </div>
                   </div>
                </div>
