@@ -1,5 +1,7 @@
 @extends('layout.app')
 @section('title','Majelis - GKKA Samarinda')
+@section('meta_description', 'Daftar periode dan informasi majelis GKKA Indonesia Jemaat Samarinda.')
+@section('meta_image', asset('img/fotogrj.jpeg'))
 
 @push('styles')
 <style>

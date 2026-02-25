@@ -10,6 +10,7 @@ use App\Http\Controllers\GalleryPublicController;
 use App\Http\Controllers\HambaTuhanPublicController;
 use App\Http\Controllers\MajelisPublicController;
 use App\Http\Controllers\MediaPublicController;
+use App\Http\Controllers\SitemapController;
 
 use App\Http\Controllers\Admin\WartaController;
 use App\Http\Controllers\Admin\EventController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\Admin\MediaController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 /* Halaman utama gereja (landing gereja) */
 Route::get('/gereja', fn () => view('pages.gereja'))->name('gereja');

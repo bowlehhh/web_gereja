@@ -1,6 +1,8 @@
 @extends('layout.app')
 
 @section('title','Gallery - GKKA Samarinda')
+@section('meta_description', 'Galeri foto kegiatan dan momen jemaat GKKA Indonesia Samarinda.')
+@section('meta_image', asset('img/fotogrj.jpeg'))
 
 @section('content')
 @php

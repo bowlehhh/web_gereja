@@ -1,5 +1,7 @@
 @extends('layout.app')
 @section('title', 'Kontak - GKKA Samarinda')
+@section('meta_description', 'Kontak GKKA Indonesia Jemaat Samarinda: alamat gereja, email, dan WhatsApp.')
+@section('meta_image', asset('img/fotogrj.jpeg'))
 
 @section('content')
 @php

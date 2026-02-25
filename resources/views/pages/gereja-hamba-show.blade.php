@@ -2,6 +2,16 @@
 
 @section('title', $item->name.' - Hamba Tuhan')
 @section('body_class','bg-[#001B44]')
+@php
+  $metaDescription = trim((string) ($item->roles_summary ?: $item->profile));
+  if ($metaDescription === '') {
+    $metaDescription = 'Profil hamba Tuhan GKKA Indonesia Jemaat Samarinda.';
+  }
+  $metaDescription = \Illuminate\Support\Str::limit(strip_tags($metaDescription), 160);
+  $metaImage = $item->photo_path ? asset('storage/'.$item->photo_path) : asset('img/fotogrj.jpeg');
+@endphp
+@section('meta_description', $metaDescription)
+@section('meta_image', $metaImage)
 
 @section('content')
 @php

@@ -1,6 +1,8 @@
 @extends('layout.app')
 
 @section('title', 'Beranda - GKKA Samarinda')
+@section('meta_description', 'Situs resmi GKKA Indonesia Jemaat Samarinda. Info ibadah, event, warta jemaat, media, galeri, dan pelayanan.')
+@section('meta_image', asset('img/fotogrj.jpeg'))
 
 @section('content')
 @php

@@ -1,6 +1,8 @@
 @extends('layout.app')
 
 @section('title', 'Media - GKKA Samarinda')
+@section('meta_description', 'Koleksi media ibadah, khotbah, dan dokumentasi GKKA Indonesia Jemaat Samarinda.')
+@section('meta_image', asset('img/media.jpeg'))
 
 @section('content')
 <section class="relative bg-blue-900 text-white overflow-hidden">

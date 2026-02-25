@@ -1,5 +1,7 @@
 @extends('layout.app')
 @section('title','Hamba Tuhan - GKKA Samarinda')
+@section('meta_description', 'Profil hamba Tuhan yang melayani di GKKA Indonesia Jemaat Samarinda.')
+@section('meta_image', asset('img/fotogrj.jpeg'))
 @section('content')
 @php
   $bgHero = asset('img/fotogrj.jpeg');

@@ -1,6 +1,8 @@
 @extends('layout.app')
 
 @section('title', 'Tentang Gereja - GKKA Samarinda')
+@section('meta_description', 'Profil GKKA Indonesia Jemaat Samarinda: sejarah, hamba Tuhan, majelis, komisi, dan pelayanan.')
+@section('meta_image', asset('img/fotogrj.jpeg'))
 
 @section('content')
 <section class="bg-blue-900 text-white py-20">

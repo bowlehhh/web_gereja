@@ -1,5 +1,7 @@
 @extends('layout.app')
 @section('title','Sejarah - GKKA Samarinda')
+@section('meta_description', 'Ringkasan sejarah GKKA Indonesia dan perjalanan GKKA Jemaat Samarinda.')
+@section('meta_image', asset('img/fotogrj.jpeg'))
 @section('content')
 @php
   $hero = asset('img/fotogrj.jpeg');

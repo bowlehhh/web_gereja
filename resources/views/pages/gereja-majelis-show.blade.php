@@ -1,5 +1,15 @@
 @extends('layout.app')
 @section('title', ($item->name ?: 'Majelis').' - GKKA Samarinda')
+@php
+  $metaDescription = trim((string) ($item->about ?: $item->excerpt));
+  if ($metaDescription === '') {
+    $metaDescription = 'Informasi majelis GKKA Indonesia Jemaat Samarinda.';
+  }
+  $metaDescription = \Illuminate\Support\Str::limit(strip_tags($metaDescription), 160);
+  $metaImage = $item->photo_path ? asset('storage/'.$item->photo_path) : asset('img/fotogrj.jpeg');
+@endphp
+@section('meta_description', $metaDescription)
+@section('meta_image', $metaImage)
 @section('content')
 @php
   use Illuminate\Support\Facades\Storage;

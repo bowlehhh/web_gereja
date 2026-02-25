@@ -1,6 +1,8 @@
 @extends('layout.app')
 
 @section('title', 'Warta Jemaat - GKKA Samarinda')
+@section('meta_description', 'Arsip warta jemaat dan informasi pelayanan GKKA Indonesia Jemaat Samarinda.')
+@section('meta_image', asset('img/fotogrj.jpeg'))
 
 @section('content')
 <section class="gkka-warta-hero">
