@@ -33,7 +33,7 @@
 
       <div class="relative z-10 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-12 items-start">
         {{-- Text / About (mobile first) --}}
-        <div class="order-1 lg:order-2">
+        <div class="order-2 lg:order-2">
           <div class="flex items-start justify-between gap-4">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 text-blue-100 font-black tracking-widest uppercase text-xs">
               Hamba Tuhan
@@ -103,7 +103,7 @@
         </div>
 
         {{-- Single Photo (match Majelis vibe) --}}
-        <div class="order-2 lg:order-1">
+        <div class="order-1 lg:order-1">
           <div class="relative">
             <div class="absolute -inset-8 bg-yellow-400/10 blur-3xl rounded-full"></div>
             <div class="mx-auto lg:mx-0 max-w-[520px]">

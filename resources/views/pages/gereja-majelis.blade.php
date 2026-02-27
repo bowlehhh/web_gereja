@@ -51,50 +51,67 @@
     @media (max-width: 768px) {
         .timeline-container { overflow: hidden; }
 
-        /* Zig-zag on mobile: alternate left/right around centered line */
-        .timeline-row .reveal-content,
-        .timeline-row .reveal-img {
-            width: min(20rem, calc(100% - 5rem));
+        #line-progress {
+            left: 20px;
+            transform: none;
+            width: 3px;
+            opacity: 0.9;
         }
 
-        .timeline-row.is-left .reveal-content,
-        .timeline-row.is-left .reveal-img {
-            justify-self: start;
+        .timeline-row {
+            grid-template-columns: 1fr;
+            gap: 0.9rem;
+            margin-bottom: 2.75rem;
+            padding-left: 2rem;
+            align-items: start;
         }
 
-        .timeline-row.is-right .reveal-content,
-        .timeline-row.is-right .reveal-img {
-            justify-self: end;
+        .timeline-row .reveal-img,
+        .timeline-row .reveal-content {
+            width: 100%;
+            justify-self: stretch;
+            text-align: left;
         }
 
         .timeline-row.is-right .reveal-content {
-            text-align: right;
+            text-align: left;
+        }
+
+        .timeline-row .reveal-img > div {
+            border-radius: 1.45rem;
+        }
+
+        .timeline-row .reveal-img img {
+            aspect-ratio: 16 / 11;
+        }
+
+        .timeline-row .card-3d-timbul {
+            padding: 1.25rem;
+            border-radius: 1.25rem;
         }
 
         .timeline-dot {
-            --branch-len: clamp(28px, 10vw, 64px);
-            position: relative;
-            z-index: 2;
+            position: absolute;
+            left: 20px;
+            top: 1.2rem;
+            width: 14px;
+            height: 14px;
+            margin: 0;
+            transform: translateX(-50%);
+            border-width: 3px;
+            z-index: 3;
         }
 
-        .timeline-row.is-left .timeline-dot::before,
-        .timeline-row.is-right .timeline-dot::before {
+        .timeline-dot::before {
             content: "";
             position: absolute;
             top: 50%;
+            left: calc(100% + 4px);
+            width: 18px;
             height: 2px;
-            background: #cbd5e1;
-            width: var(--branch-len);
+            background: #93c5fd;
             transform: translateY(-50%);
             z-index: 0;
-        }
-
-        .timeline-row.is-left .timeline-dot::before {
-            right: calc(100% + 0.5rem);
-        }
-
-        .timeline-row.is-right .timeline-dot::before {
-            left: calc(100% + 0.5rem);
         }
     }
 
@@ -154,7 +171,7 @@
         </div>
     @endif
 
-    <div class="max-w-6xl mx-auto px-6 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
         @if($items->count())
             @foreach($items as $i => $item)
                 @php 

@@ -21,7 +21,9 @@
 
             <div class="relative z-10">
                 <div class="mb-6">
-                    <img src="{{ asset('assets/css/image.png') }}" alt="GKKA Logo" class="w-auto h-24 object-contain drop-shadow-md">
+                    <div class="size-24 rounded-full overflow-hidden bg-white/95 border border-white/70 shadow-lg p-2">
+                        <img src="{{ asset('assets/css/image.png') }}" alt="GKKA Logo" class="w-full h-full object-contain rounded-full">
+                    </div>
                 </div>
                 <h1 class="text-4xl font-extrabold leading-tight mb-4">GKKA<br>Samarinda</h1>
                 <p class="text-blue-200 text-lg font-light leading-relaxed">Pusat Kendali Admin. Kelola konten dan jemaat dengan lebih efisien dalam satu dashboard.</p>

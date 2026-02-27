@@ -9,7 +9,7 @@
     <div>
       <div class="text-xl font-black tracking-tight text-blue-900">Tambah Media YouTube</div>
       <div class="text-blue-900/70 font-semibold text-sm mt-1">Thumbnail optional (maks 10MB). Kalau kosong, pakai thumbnail dari YouTube.</div>
-    </div>
+    </div> 
     <a class="h-10 px-4 rounded-xl border border-blue-900 bg-white hover:bg-blue-50 text-blue-900 font-extrabold text-sm inline-flex items-center transition"
        href="{{ route('admin.media.index') }}">← Kembali</a>
   </div>

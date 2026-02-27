@@ -7,14 +7,18 @@
 @section('content')
 @php
   $heroImage = asset('img/fotogrj.jpeg');
-  $sejarahLandscape = asset('img/sejarah/batu-pertama.jpg');
+  $sejarahSlides = [
+    ['src' => asset('img/sejarah/batu-pertama.jpg'), 'alt' => 'Peletakan batu pertama GKKA Samarinda'],
+    ['src' => asset('img/sejarah/pembangunan-gedung.jpg'), 'alt' => 'Pembangunan gedung GKKA Samarinda'],
+    ['src' => asset('img/sejarah/foto-bersama.jpg'), 'alt' => 'Foto bersama jemaat GKKA Samarinda'],
+  ];
   $homeSlides = [
-    asset('img/fotogrj.jpeg'),
-    asset('img/media.jpeg'),
-    asset('img/komisiwanita.jpeg'),
-    asset('img/pemuda.jpeg'),
-    asset('img/remajaa.jpeg'),
-    asset('img/sekolah minggu.jpeg'),
+    ['src' => asset('img/fotogrj.jpeg')],
+    ['src' => asset('img/media.jpeg'), 'mobile_position' => '22% center'],
+    ['src' => asset('img/komisiwanita.jpeg')],
+    ['src' => asset('img/pemuda.jpeg')],
+    ['src' => asset('img/remajaa.jpeg')],
+    ['src' => asset('img/sekolah minggu.jpeg')],
   ];
 @endphp
 
@@ -42,10 +46,10 @@
 <section class="relative h-[100svh] min-h-[520px] w-full overflow-hidden">
   {{-- Background (slideshow) --}}
   <div class="absolute inset-0">
-    <div id="gkkaHeroBgA" class="absolute inset-0 bg-cover bg-center scale-105 transition-opacity duration-1000 opacity-100"
-         style="background-image:url('{{ $homeSlides[0] }}')"></div>
-    <div id="gkkaHeroBgB" class="absolute inset-0 bg-cover bg-center scale-105 transition-opacity duration-1000 opacity-0"
-         style="background-image:url('{{ $homeSlides[1] ?? $homeSlides[0] }}')"></div>
+    <div id="gkkaHeroBgA" class="absolute inset-0 bg-blue-950 bg-no-repeat bg-cover bg-center scale-100 sm:scale-105 transition-opacity duration-1000 opacity-100"
+         style="background-image:url('{{ $homeSlides[0]['src'] }}')"></div>
+    <div id="gkkaHeroBgB" class="absolute inset-0 bg-blue-950 bg-no-repeat bg-cover bg-center scale-100 sm:scale-105 transition-opacity duration-1000 opacity-0"
+         style="background-image:url('{{ $homeSlides[1]['src'] ?? $homeSlides[0]['src'] }}')"></div>
 
     <div class="absolute inset-0 bg-blue-900/55 mix-blend-multiply"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-blue-900/95 via-blue-900/30 to-transparent"></div>
@@ -80,6 +84,107 @@
     const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const storageKey = 'gkka_intro_seen_session_v1';
 
+    function initSejarahSlider() {
+      const sejarahSlider = document.querySelector('[data-sejarah-slider]');
+      const sejarahFrames = Array.from(document.querySelectorAll('[data-sejarah-slide]'));
+      const sejarahPrev = document.querySelector('[data-sejarah-prev]');
+      const sejarahNext = document.querySelector('[data-sejarah-next]');
+      if (!sejarahSlider || sejarahFrames.length <= 1) return;
+
+      let sejarahIndex = 0;
+      let sejarahTimer = null;
+      let touchStartX = null;
+      let touchStartY = null;
+      const swipeThreshold = 42;
+
+      function renderSejarah(index) {
+        const total = sejarahFrames.length;
+        sejarahIndex = (index + total) % total;
+        sejarahFrames.forEach((frame, i) => {
+          const isActive = i === sejarahIndex;
+          frame.style.opacity = isActive ? '1' : '0';
+          frame.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+        });
+      }
+
+      function stopSejarahAuto() {
+        if (!sejarahTimer) return;
+        clearInterval(sejarahTimer);
+        sejarahTimer = null;
+      }
+
+      function startSejarahAuto() {
+        if (prefersReduced) return;
+        stopSejarahAuto();
+        sejarahTimer = setInterval(() => renderSejarah(sejarahIndex + 1), 4200);
+      }
+
+      if (sejarahPrev) {
+        sejarahPrev.addEventListener('click', () => {
+          renderSejarah(sejarahIndex - 1);
+          startSejarahAuto();
+        });
+      }
+
+      if (sejarahNext) {
+        sejarahNext.addEventListener('click', () => {
+          renderSejarah(sejarahIndex + 1);
+          startSejarahAuto();
+        });
+      }
+
+      sejarahSlider.addEventListener('mouseenter', stopSejarahAuto);
+      sejarahSlider.addEventListener('mouseleave', startSejarahAuto);
+      sejarahSlider.addEventListener('focusin', stopSejarahAuto);
+      sejarahSlider.addEventListener('focusout', (e) => {
+        if (e.relatedTarget && sejarahSlider.contains(e.relatedTarget)) return;
+        startSejarahAuto();
+      });
+      sejarahSlider.addEventListener('touchstart', (e) => {
+        stopSejarahAuto();
+        const touch = e.changedTouches && e.changedTouches[0];
+        if (!touch) return;
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+      }, { passive: true });
+      sejarahSlider.addEventListener('touchend', (e) => {
+        const touch = e.changedTouches && e.changedTouches[0];
+        if (!touch || touchStartX === null || touchStartY === null) {
+          startSejarahAuto();
+          return;
+        }
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+        touchStartX = null;
+        touchStartY = null;
+
+        if (Math.abs(deltaX) > swipeThreshold && Math.abs(deltaX) > Math.abs(deltaY)) {
+          renderSejarah(sejarahIndex + (deltaX < 0 ? 1 : -1));
+        }
+        startSejarahAuto();
+      }, { passive: true });
+      sejarahSlider.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          renderSejarah(sejarahIndex - 1);
+          startSejarahAuto();
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          renderSejarah(sejarahIndex + 1);
+          startSejarahAuto();
+        }
+      });
+
+      renderSejarah(0);
+      startSejarahAuto();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSejarahSlider, { once: true });
+    } else {
+      initSejarahSlider();
+    }
+
     function hideIntro() {
       if (!intro) return;
       try { sessionStorage.setItem(storageKey, '1'); } catch (e) {}
@@ -88,36 +193,69 @@
     }
 
     // Show intro only once per session/tab (so navigating to Media then back won't show again)
+    let shouldShowIntro = Boolean(intro);
     if (intro) {
       let seen = false;
       try { seen = sessionStorage.getItem(storageKey) === '1'; } catch (e) {}
       if (seen) {
         intro.remove();
-        return;
+        shouldShowIntro = false;
       }
     }
 
-    // Auto leave after a short intro (tap/click also works).
-    // If user prefers reduced motion, don't auto-close; wait for click.
-    const t = prefersReduced ? null : setTimeout(hideIntro, 1600);
-    if (skip) skip.addEventListener('click', () => { if (t) clearTimeout(t); hideIntro(); });
-    if (intro) intro.addEventListener('click', (e) => {
-      if (e.target === intro) { if (t) clearTimeout(t); hideIntro(); }
-    });
+    if (shouldShowIntro) {
+      // Auto leave after a short intro (tap/click also works).
+      // If user prefers reduced motion, don't auto-close; wait for click.
+      const t = prefersReduced ? null : setTimeout(hideIntro, 1600);
+      if (skip) skip.addEventListener('click', () => { if (t) clearTimeout(t); hideIntro(); });
+      if (intro) intro.addEventListener('click', (e) => {
+        if (e.target === intro) { if (t) clearTimeout(t); hideIntro(); }
+      });
+    }
 
     // Background slideshow
     const slides = @json($homeSlides);
     const a = document.getElementById('gkkaHeroBgA');
     const b = document.getElementById('gkkaHeroBgB');
+
+    function applyHeroSlide(el, slide) {
+      if (!el || !slide) return;
+      const src = typeof slide === 'string' ? slide : slide.src;
+      const isMobile = window.matchMedia('(max-width: 639px)').matches;
+      const mobileSize = typeof slide === 'object' ? (slide.mobile_size || 'cover') : 'cover';
+      const mobilePosition = typeof slide === 'object' ? (slide.mobile_position || 'center') : 'center';
+
+      el.style.backgroundImage = `url('${src}')`;
+      el.style.backgroundSize = isMobile ? mobileSize : 'cover';
+      el.style.backgroundPosition = isMobile ? mobilePosition : 'center';
+    }
+
+    let aIndex = 0;
+    let bIndex = slides && slides.length > 1 ? 1 : 0;
+    const reapplyHeroSlides = () => {
+      applyHeroSlide(a, slides[aIndex]);
+      applyHeroSlide(b, slides[bIndex]);
+    };
+
+    if (slides && slides.length > 0 && a && b) {
+      reapplyHeroSlides();
+      window.addEventListener('resize', reapplyHeroSlides, { passive: true });
+    }
+
     if (slides && slides.length > 1 && a && b && !prefersReduced) {
       let si = 1;
       let frontIsA = true;
       setInterval(() => {
         const front = frontIsA ? a : b;
         const back = frontIsA ? b : a;
-        back.style.backgroundImage = `url('${slides[si]}')`;
+        applyHeroSlide(back, slides[si]);
         back.style.opacity = '1';
         front.style.opacity = '0';
+        if (frontIsA) {
+          bIndex = si;
+        } else {
+          aIndex = si;
+        }
         frontIsA = !frontIsA;
         si = (si + 1) % slides.length;
       }, 5200);
@@ -278,9 +416,43 @@
 <section class="gkka-section bg-white">
   <div class="gkka-container">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <div class="relative">
+      <div class="relative" data-sejarah-slider tabindex="0">
          <div class="absolute -inset-4 bg-blue-100 rounded-3xl -rotate-2"></div>
-         <img src="{{ $sejarahLandscape }}" alt="Sejarah GKKA" class="relative w-full h-64 sm:h-80 lg:h-[420px] object-cover object-center rounded-3xl shadow-xl">
+         <div class="relative w-full h-64 sm:h-80 lg:h-[420px] overflow-hidden rounded-3xl shadow-xl">
+           @foreach($sejarahSlides as $slide)
+             <img
+               src="{{ $slide['src'] }}"
+               alt="{{ $slide['alt'] }}"
+               data-sejarah-slide="{{ $loop->index }}"
+               class="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 {{ $loop->first ? 'opacity-100' : 'opacity-0' }}"
+               loading="{{ $loop->first ? 'eager' : 'lazy' }}"
+               aria-hidden="{{ $loop->first ? 'false' : 'true' }}"
+             >
+           @endforeach
+           <div class="absolute inset-0 bg-gradient-to-t from-blue-900/20 via-transparent to-transparent pointer-events-none"></div>
+         </div>
+
+         <button
+           type="button"
+           data-sejarah-prev
+           class="absolute z-30 top-1/2 -translate-y-1/2 -left-4 sm:-left-5 lg:-left-6 inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-blue-800/70 bg-blue-50/85 text-blue-800 backdrop-blur-md shadow-[0_10px_20px_rgba(30,64,175,0.20)] hover:bg-white hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
+           aria-label="Foto sejarah sebelumnya"
+         >
+           <svg class="w-4 h-4 sm:w-5 sm:h-5 rotate-180" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+             <path d="M7.5 4.5L13 10l-5.5 5.5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+           </svg>
+         </button>
+
+         <button
+           type="button"
+           data-sejarah-next
+           class="absolute z-30 top-1/2 -translate-y-1/2 -right-4 sm:-right-5 lg:-right-6 inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-blue-800/70 bg-blue-50/85 text-blue-800 backdrop-blur-md shadow-[0_10px_20px_rgba(30,64,175,0.20)] hover:bg-white hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
+           aria-label="Foto sejarah berikutnya"
+         >
+           <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+             <path d="M7.5 4.5L13 10l-5.5 5.5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+           </svg>
+         </button>
       </div>
       <div>
         <h2 class="text-3xl md:text-4xl font-black text-blue-900 mb-6">Sejarah Gereja</h2>
@@ -501,7 +673,7 @@
 <section class="py-20 sm:py-24 bg-blue-900 relative overflow-hidden text-center text-white">
    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
    <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6">
-      <h2 class="text-3xl md:text-5xl font-black mb-8 tracking-tight">Temukan kekuatan iman &<br>Pertumbuhan Rohan</h2>
+      <h2 class="text-3xl md:text-5xl font-black mb-8 tracking-tight">Temukan kekuatan iman &<br>Pertumbuhan Rohani</h2>
       <a href="{{ route('kontak') }}" class="inline-block px-10 py-4 rounded-full bg-yellow-500 text-blue-900 font-black text-lg shadow-xl hover:bg-yellow-400 hover:scale-105 transition-all duration-300">
         Hubungi Kami
       </a>

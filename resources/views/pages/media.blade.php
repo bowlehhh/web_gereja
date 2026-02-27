@@ -17,8 +17,12 @@
     <div class="absolute inset-0 bg-gradient-to-t from-blue-900/75 sm:from-blue-900/85 via-blue-900/18 sm:via-blue-900/25 to-transparent"></div>
   </div>
 
-  {{-- Faith icons overlay (cross + bible + dove) --}}
-  <div class="absolute inset-0 pointer-events-none opacity-[0.18] gkka-faith-icons"></div>
+  {{-- Faith icons overlay: keep away from portrait/face area --}}
+  <div
+    class="absolute inset-y-0 right-0 w-[44%] hidden lg:block pointer-events-none opacity-[0.13] gkka-faith-icons"
+    style="-webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.98) 72%, rgba(0,0,0,0) 100%); mask-image: linear-gradient(to left, rgba(0,0,0,0.98) 72%, rgba(0,0,0,0) 100%);"
+    aria-hidden="true"
+  ></div>
 
   <div class="absolute inset-0 pointer-events-none opacity-20">
     <div class="absolute -top-32 -left-28 size-[520px] bg-blue-500 rounded-full blur-3xl"></div>
@@ -28,7 +32,7 @@
   <div
     class="relative min-h-[100svh] sm:min-h-screen w-full mx-auto px-5 sm:px-8 lg:pl-14 lg:pr-24 flex items-center justify-center lg:justify-end pt-20 sm:pt-24 pb-20 sm:pb-16 lg:pt-28 lg:pb-24"
   >
-    <div class="w-full text-center lg:text-left max-w-[520px] mx-auto lg:mx-0 lg:ml-auto lg:mr-16">
+    <div class="w-full text-center max-w-[520px] mx-auto lg:mx-0 lg:ml-auto lg:mr-16">
       <div class="relative overflow-hidden rounded-3xl border border-white/15 shadow-xl sm:shadow-2xl p-6 sm:p-8 lg:p-12 bg-slate-900/40 sm:bg-slate-900/55 backdrop-blur-lg">
         <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-white/0 to-slate-900/30 pointer-events-none"></div>
         <div class="relative">
@@ -37,15 +41,15 @@
         </div>
 
         <h1 class="gkka-hero-title mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05]">
-          Tayangan Ibadah<br class="hidden md:block">
-          <span class="text-blue-200">& Dokumentasi</span>
+          Tayangan Ibadah
+          <span class="block text-blue-200 mt-1">&amp; Dokumentasi</span>
         </h1>
 
-        <p class="mt-5 text-base sm:text-lg md:text-xl text-blue-100 font-semibold leading-relaxed max-w-2xl mx-auto lg:mx-0">
+        <p class="mt-5 text-base sm:text-lg md:text-xl text-blue-100 font-semibold leading-relaxed max-w-2xl mx-auto">
           Kumpulan media dan dokumentasi lainnya. Scroll ke bawah untuk melihat semua tayangan.
         </p>
 
-        <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+        <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
           <a href="#tayangan"
              class="h-12 sm:h-14 px-7 sm:px-9 rounded-2xl bg-yellow-500 hover:bg-yellow-400 text-blue-900 font-black shadow-xl transition inline-flex items-center justify-center w-full sm:w-auto">
             Lihat Tayangan

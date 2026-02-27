@@ -102,12 +102,7 @@
       </div>
 
       <aside class="gkka-card gkka-card-pad bg-slate-50 border-slate-200">
-        <div class="text-xs font-black tracking-widest uppercase text-slate-500">Catatan</div>
-        <div class="mt-3 text-slate-700 font-semibold leading-relaxed">
-          Teks sejarah di bawah ditata ulang agar nyaman dibaca di HP (judul, paragraf, dan bagian panjang dibuat per-bab).
-          Jika ada koreksi tanggal/nama/tulisan, kirim revisinya—nanti aku rapikan lagi.
-        </div>
-        <div class="mt-6 rounded-2xl bg-white border border-slate-200 p-5">
+        <div class="rounded-2xl bg-white border border-slate-200 p-5">
           <div class="text-xs font-black tracking-widest uppercase text-slate-500">Baca Cepat</div>
           <ul class="mt-3 space-y-2 text-sm font-bold text-slate-700">
             <li><a class="hover:text-blue-800 transition-colors" href="#latar">1) Latar belakang GKKA Indonesia</a></li>

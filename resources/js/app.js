@@ -141,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const content = row.querySelector('.reveal-content');
         const img = row.querySelector('.reveal-img');
         const dot = row.querySelector('.timeline-dot');
+        const isMobileTimeline = window.matchMedia('(max-width: 768px)').matches;
 
         if (!content || !img) return;
 
@@ -159,7 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tl.from(
             content,
             {
-                x: row.classList.contains('is-left') ? -50 : 50,
+                x: isMobileTimeline ? 0 : (row.classList.contains('is-left') ? -50 : 50),
+                y: isMobileTimeline ? 26 : 0,
                 opacity: 0,
                 duration: 0.8,
             },
@@ -167,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ).from(
             img,
             {
-                y: 50,
+                y: isMobileTimeline ? 26 : 50,
                 opacity: 0,
                 duration: 0.8,
             },

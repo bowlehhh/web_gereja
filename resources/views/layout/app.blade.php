@@ -34,8 +34,14 @@
       ],
     ];
   @endphp
+  @php
+    $faviconVersion = @filemtime(public_path('favicon.ico')) ?: time();
+  @endphp
   <meta name="description" content="{{ $metaDescription }}">
   <meta name="robots" content="@yield('meta_robots', 'index,follow')">
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v={{ $faviconVersion }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v={{ $faviconVersion }}">
+  <link rel="icon" type="image/png" href="{{ asset('assets/logo.png') }}?v={{ $faviconVersion }}">
   <link rel="canonical" href="{{ $metaUrl }}">
   <meta property="og:locale" content="id_ID">
   <meta property="og:type" content="{{ $metaType }}">
