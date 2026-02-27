@@ -4,6 +4,12 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Upload Terlalu Besar</title>
+        @php
+            $faviconVersion = @filemtime(public_path('favicon.ico')) ?: time();
+        @endphp
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v={{ $faviconVersion }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v={{ $faviconVersion }}">
+        <link rel="icon" type="image/png" href="{{ asset('assets/logo.png') }}?v={{ $faviconVersion }}">
         <style>
             :root { color-scheme: light dark; }
             body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
@@ -25,4 +31,3 @@
         </div>
     </body>
 </html>
-
