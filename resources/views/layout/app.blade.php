@@ -7,31 +7,134 @@
 
   @php
     $metaSiteName = config('app.name', 'GKKA Samarinda');
+    $seo = config('seo', []);
+    $homeUrl = rtrim(url('/'), '/');
+    $logoPath = trim((string) ($seo['logo_path'] ?? 'assets/logo.png'));
+    $logoUrl = asset($logoPath);
+
     $metaTitle = trim($__env->yieldContent('meta_title'));
     if ($metaTitle === '') {
       $metaTitle = trim($__env->yieldContent('title', $metaSiteName));
     }
     $metaDescription = trim($__env->yieldContent('meta_description', 'Situs resmi GKKA Indonesia Jemaat Samarinda. Informasi ibadah, event, warta jemaat, media, galeri, dan pelayanan.'));
-    $metaImage = trim($__env->yieldContent('meta_image', asset('img/fotogrj.jpeg')));
+    $metaImage = $logoUrl;
     $metaUrl = trim($__env->yieldContent('canonical', url()->current()));
     $metaType = trim($__env->yieldContent('meta_type', 'website'));
+
+    $organizationName = trim((string) ($seo['organization_name'] ?? $metaSiteName));
+    $legalName = trim((string) ($seo['legal_name'] ?? $organizationName));
+    $phone = trim((string) ($seo['phone'] ?? ''));
+    $email = trim((string) ($seo['email'] ?? ''));
+    $priceRange = trim((string) ($seo['price_range'] ?? ''));
+    $mapUrl = trim((string) ($seo['map_url'] ?? ''));
+    $sameAs = $seo['same_as'] ?? [];
+    if (!is_array($sameAs)) {
+      $sameAs = [];
+    }
+    $sameAs = array_values(array_filter(array_map(fn ($item) => is_string($item) ? trim($item) : '', $sameAs)));
+
+    $address = $seo['address'] ?? [];
+    if (!is_array($address)) {
+      $address = [];
+    }
+    $streetAddress = trim((string) ($address['street'] ?? ''));
+    $addressLocality = trim((string) ($address['locality'] ?? ''));
+    $addressRegion = trim((string) ($address['region'] ?? ''));
+    $postalCode = trim((string) ($address['postal_code'] ?? ''));
+    $addressCountry = trim((string) ($address['country'] ?? 'ID'));
+
+    $geo = $seo['geo'] ?? [];
+    if (!is_array($geo)) {
+      $geo = [];
+    }
+    $latitude = trim((string) ($geo['latitude'] ?? ''));
+    $longitude = trim((string) ($geo['longitude'] ?? ''));
+
+    $isHome = rtrim($metaUrl, '/') === $homeUrl;
+    $breadcrumbTitle = trim($__env->yieldContent('breadcrumb_title'));
+    if ($breadcrumbTitle === '') {
+      $breadcrumbTitle = preg_replace('/\s+\|\s+.*/', '', $metaTitle);
+      if (!is_string($breadcrumbTitle) || trim($breadcrumbTitle) === '') {
+        $breadcrumbTitle = $metaSiteName;
+      }
+    }
+    $breadcrumbs = [
+      ['name' => $metaSiteName, 'item' => $homeUrl],
+    ];
+    if (! $isHome) {
+      $breadcrumbs[] = ['name' => $breadcrumbTitle, 'item' => $metaUrl];
+    }
+
     $schemaOrg = [
       '@context' => 'https://schema.org',
       '@type' => 'Organization',
-      'name' => $metaSiteName,
-      'url' => url('/'),
-      'logo' => asset('assets/logo.png'),
+      '@id' => $homeUrl.'#organization',
+      'name' => $organizationName,
+      'legalName' => $legalName,
+      'url' => $homeUrl,
+      'logo' => $logoUrl,
+      'email' => $email !== '' ? $email : null,
+      'telephone' => $phone !== '' ? $phone : null,
+      'sameAs' => !empty($sameAs) ? $sameAs : null,
     ];
+    $schemaOrg = array_filter($schemaOrg, fn ($value) => $value !== null && $value !== []);
+
+    $schemaChurch = [
+      '@context' => 'https://schema.org',
+      '@type' => ['Church', 'LocalBusiness'],
+      '@id' => $homeUrl.'#church',
+      'name' => $organizationName,
+      'url' => $homeUrl,
+      'image' => $logoUrl,
+      'logo' => $logoUrl,
+      'description' => $metaDescription,
+      'email' => $email !== '' ? $email : null,
+      'telephone' => $phone !== '' ? $phone : null,
+      'priceRange' => $priceRange !== '' ? $priceRange : null,
+      'hasMap' => $mapUrl !== '' ? $mapUrl : null,
+      'address' => [
+        '@type' => 'PostalAddress',
+        'streetAddress' => $streetAddress,
+        'addressLocality' => $addressLocality,
+        'addressRegion' => $addressRegion,
+        'postalCode' => $postalCode,
+        'addressCountry' => $addressCountry,
+      ],
+      'geo' => ($latitude !== '' && $longitude !== '') ? [
+        '@type' => 'GeoCoordinates',
+        'latitude' => $latitude,
+        'longitude' => $longitude,
+      ] : null,
+      'sameAs' => !empty($sameAs) ? $sameAs : null,
+    ];
+    $schemaChurch['address'] = array_filter($schemaChurch['address'], fn ($value) => $value !== '');
+    $schemaChurch = array_filter($schemaChurch, fn ($value) => $value !== null && $value !== []);
+
     $schemaWebsite = [
       '@context' => 'https://schema.org',
       '@type' => 'WebSite',
-      'name' => $metaSiteName,
-      'url' => url('/'),
+      '@id' => $homeUrl.'#website',
+      'name' => $organizationName,
+      'url' => $homeUrl,
+      'publisher' => ['@id' => $homeUrl.'#organization'],
       'potentialAction' => [
         '@type' => 'SearchAction',
-        'target' => url('/media').'?q={search_term_string}',
+        'target' => $homeUrl.'/media?q={search_term_string}',
         'query-input' => 'required name=search_term_string',
       ],
+    ];
+
+    $schemaBreadcrumb = [
+      '@context' => 'https://schema.org',
+      '@type' => 'BreadcrumbList',
+      'itemListElement' => array_map(function ($item, $index) {
+        return [
+          '@type' => 'ListItem',
+          'position' => $index + 1,
+          'name' => $item['name'],
+          'item' => $item['item'],
+        ];
+      }, $breadcrumbs, array_keys($breadcrumbs)),
     ];
   @endphp
   @php
@@ -41,7 +144,6 @@
   <meta name="robots" content="@yield('meta_robots', 'index,follow')">
   <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v={{ $faviconVersion }}">
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v={{ $faviconVersion }}">
-  <link rel="icon" type="image/png" href="{{ asset('assets/logo.png') }}?v={{ $faviconVersion }}">
   <link rel="canonical" href="{{ $metaUrl }}">
   <meta property="og:locale" content="id_ID">
   <meta property="og:type" content="{{ $metaType }}">
@@ -56,7 +158,9 @@
   <meta name="twitter:image" content="{{ $metaImage }}">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ url('/sitemap.xml') }}">
   <script type="application/ld+json">{!! json_encode($schemaOrg, JSON_UNESCAPED_SLASHES) !!}</script>
+  <script type="application/ld+json">{!! json_encode($schemaChurch, JSON_UNESCAPED_SLASHES) !!}</script>
   <script type="application/ld+json">{!! json_encode($schemaWebsite, JSON_UNESCAPED_SLASHES) !!}</script>
+  <script type="application/ld+json">{!! json_encode($schemaBreadcrumb, JSON_UNESCAPED_SLASHES) !!}</script>
 
   {{-- SATU CSS SAJA --}}
   @vite(['resources/css/app.css', 'resources/js/app.js'])

@@ -1,6 +1,6 @@
 @extends('layout.app')
-@section('title','Hamba Tuhan - GKKA Samarinda')
-@section('meta_description', 'Profil hamba Tuhan yang melayani di GKKA Indonesia Jemaat Samarinda.')
+@section('title','Hamba Tuhan GKKA Samarinda | GKKAI Samarinda')
+@section('meta_description', 'Profil hamba Tuhan yang melayani di GKKA Samarinda (GKKAI Samarinda), lengkap dengan bidang pelayanan jemaat.')
 @section('meta_image', asset('img/fotogrj.jpeg'))
 @section('content')
 @php

@@ -1,6 +1,6 @@
 @extends('layout.app')
-@section('title','Majelis - GKKA Samarinda')
-@section('meta_description', 'Daftar periode dan informasi majelis GKKA Indonesia Jemaat Samarinda.')
+@section('title','Majelis GKKA Samarinda | GKKAI Samarinda')
+@section('meta_description', 'Daftar periode dan informasi majelis GKKA Samarinda (GKKAI Samarinda) untuk pelayanan jemaat.')
 @section('meta_image', asset('img/fotogrj.jpeg'))
 
 @push('styles')
@@ -159,7 +159,7 @@
 @section('content')
 <section class="bg-blue-900 text-white py-20 border-b border-slate-100">
     <div class="gkka-container text-center">
-        <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Majelis</h1>
+        <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Majelis GKKA Samarinda</h1>
         <p class="text-lg text-blue-200 font-medium">Pelayanan dengan kasih, bertumbuh dalam iman.</p>
     </div>
 </section>

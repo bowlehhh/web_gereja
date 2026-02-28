@@ -1,6 +1,6 @@
 @extends('layout.app')
-@section('title','Komisi - GKKA Samarinda')
-@section('meta_description', 'Komisi pelayanan GKKA Indonesia Jemaat Samarinda: sekolah minggu, remaja, pemuda, wanita, dan pria.')
+@section('title','Komisi GKKA Samarinda | GKKAI Samarinda')
+@section('meta_description', 'Komisi pelayanan GKKA Samarinda (GKKAI Samarinda): sekolah minggu, remaja, pemuda, wanita, dan pria.')
 @section('meta_image', asset('img/komisiwanita.jpeg'))
 @section('content')
 @php

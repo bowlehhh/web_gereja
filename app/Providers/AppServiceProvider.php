@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Console\ServeCommand;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\Str;
 use Illuminate\Support\ServiceProvider;
@@ -22,8 +23,30 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->configureSeoHttpsUrls();
         $this->disableLoopbackViteHotFileForNonLoopbackClients();
         $this->configurePhpIniScanDirForArtisanServe();
+    }
+
+    private function configureSeoHttpsUrls(): void
+    {
+        $forceHttps = filter_var((string) config('app.force_https', false), FILTER_VALIDATE_BOOL);
+
+        if (! $forceHttps) {
+            return;
+        }
+
+        $appUrl = rtrim((string) config('app.url', ''), '/');
+
+        if ($appUrl !== '') {
+            $httpsRoot = preg_replace('/^http:/i', 'https:', $appUrl);
+
+            if (is_string($httpsRoot) && $httpsRoot !== '') {
+                URL::forceRootUrl($httpsRoot);
+            }
+        }
+
+        URL::forceScheme('https');
     }
 
     private function disableLoopbackViteHotFileForNonLoopbackClients(): void

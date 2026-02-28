@@ -1,7 +1,7 @@
 @extends('layout.app')
 
-@section('title', 'Media - GKKA Samarinda')
-@section('meta_description', 'Koleksi media ibadah, khotbah, dan dokumentasi GKKA Indonesia Jemaat Samarinda.')
+@section('title', 'Media GKKA Samarinda | Ibadah & Khotbah GKKAI')
+@section('meta_description', 'Koleksi media ibadah, khotbah, dan dokumentasi kegiatan GKKA Samarinda (GKKAI Samarinda).')
 @section('meta_image', asset('img/media.jpeg'))
 
 @section('content')

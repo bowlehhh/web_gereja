@@ -1,6 +1,6 @@
 @extends('layout.app')
-@section('title', 'Kontak - GKKA Samarinda')
-@section('meta_description', 'Kontak GKKA Indonesia Jemaat Samarinda: alamat gereja, email, dan WhatsApp.')
+@section('title', 'Kontak GKKA Samarinda | Alamat & WhatsApp GKKAI')
+@section('meta_description', 'Kontak GKKA Samarinda (GKKAI Samarinda): alamat gereja, email, nomor telepon, dan WhatsApp resmi.')
 @section('meta_image', asset('img/fotogrj.jpeg'))
 
 @section('content')
@@ -16,6 +16,7 @@
 
 <section class="py-16 pt-24 sm:py-24 sm:pt-32 bg-gray-50 min-h-screen">
   <div class="gkka-container">
+    <h1 class="sr-only">Kontak GKKA Samarinda</h1>
     <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
       
       {{-- LEFT COLUMN: Address & Map --}}

@@ -1,10 +1,10 @@
 @extends('layout.app')
 
-@section('title', $item->title.' - Event')
+@section('title', $item->title.' | Event GKKA Samarinda')
 @php
   $metaDescription = trim((string) ($item->description ?: $item->content));
   if ($metaDescription === '') {
-    $metaDescription = 'Informasi event GKKA Indonesia Jemaat Samarinda.';
+    $metaDescription = 'Informasi event GKKA Samarinda (GKKAI Samarinda).';
   }
   $metaDescription = \Illuminate\Support\Str::limit(strip_tags($metaDescription), 160);
   $metaImage = $item->photo_path
@@ -14,11 +14,79 @@
 @section('meta_description', $metaDescription)
 @section('meta_image', $metaImage)
 @section('meta_type', 'article')
+@section('breadcrumb_title', $item->title)
+
+@php
+  $homeUrl = rtrim(url('/'), '/');
+  $eventUrl = url()->current();
+  try {
+    $eventUrl = route('event.show', $item);
+  } catch (\Throwable $e) {
+  }
+  $eventLocation = trim((string) ($item->location ?? ''));
+  $eventStartAt = $item->start_date ?? $item->created_at;
+  $eventEndAt = $item->end_date ?? $eventStartAt;
+
+  $eventSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'Event',
+    'name' => $item->title,
+    'description' => $metaDescription,
+    'startDate' => optional($eventStartAt)->toAtomString(),
+    'endDate' => optional($eventEndAt)->toAtomString(),
+    'eventStatus' => optional($eventEndAt)->isPast()
+      ? 'https://schema.org/EventCompleted'
+      : 'https://schema.org/EventScheduled',
+    'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+    'image' => [$metaImage],
+    'url' => $eventUrl,
+    'location' => [
+      '@type' => 'Place',
+      'name' => $eventLocation !== '' ? $eventLocation : (string) config('seo.organization_name', config('app.name')),
+      'address' => [
+        '@type' => 'PostalAddress',
+        'streetAddress' => (string) config('seo.address.street', ''),
+        'addressLocality' => (string) config('seo.address.locality', ''),
+        'addressRegion' => (string) config('seo.address.region', ''),
+        'postalCode' => (string) config('seo.address.postal_code', ''),
+        'addressCountry' => (string) config('seo.address.country', 'ID'),
+      ],
+    ],
+    'organizer' => [
+      '@type' => 'Organization',
+      '@id' => $homeUrl.'#organization',
+      'name' => (string) config('seo.organization_name', config('app.name')),
+      'url' => $homeUrl,
+    ],
+    'offers' => [
+      '@type' => 'Offer',
+      'url' => $eventUrl,
+      'price' => '0',
+      'priceCurrency' => 'IDR',
+      'availability' => 'https://schema.org/InStock',
+      'validFrom' => optional($item->created_at)->toAtomString(),
+    ],
+  ];
+
+  $eventSchema['location']['address'] = array_filter(
+    $eventSchema['location']['address'],
+    fn ($value) => $value !== ''
+  );
+
+  $eventSchema = array_filter(
+    $eventSchema,
+    fn ($value) => $value !== null && $value !== []
+  );
+@endphp
+
+@push('meta')
+  <script type="application/ld+json">{!! json_encode($eventSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+@endpush
 
 @section('content')
 <section class="bg-blue-900 text-white py-20">
   <div class="gkka-container text-center">
-    <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Event</h1>
+    <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Event GKKA Samarinda</h1>
     <p class="text-lg text-blue-200 font-medium">{{ $item->title }}</p>
   </div>
 </section>
@@ -64,7 +132,7 @@
         @endif
 
         <div class="p-8 md:p-10">
-          <h1 class="text-3xl md:text-4xl font-black text-slate-900 mb-6 leading-tight">{{ $item->title }}</h1>
+          <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-6 leading-tight">{{ $item->title }}</h2>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-blue-50 rounded-2xl mb-8 border border-blue-100">
             <div>

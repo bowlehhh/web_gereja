@@ -1,6 +1,6 @@
 @extends('layout.app')
-@section('title','Artikel - GKKA Samarinda')
-@section('meta_description', 'Artikel dan informasi GKKA Indonesia Jemaat Samarinda.')
+@section('title','Artikel GKKA Samarinda | GKKAI Samarinda')
+@section('meta_description', 'Artikel dan informasi seputar pelayanan GKKA Samarinda (GKKAI Samarinda).')
 @section('meta_image', asset('img/fotogrj.jpeg'))
 @section('content')
 <section class="py-20 bg-gray-50">

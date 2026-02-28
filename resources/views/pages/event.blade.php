@@ -1,7 +1,7 @@
 @extends('layout.app')
 
-@section('title', 'Event - GKKA Samarinda')
-@section('meta_description', 'Jadwal kegiatan dan informasi event GKKA Indonesia Jemaat Samarinda.')
+@section('title', 'Event GKKA Samarinda | Jadwal Kegiatan GKKAI')
+@section('meta_description', 'Jadwal kegiatan dan informasi event GKKA Samarinda (GKKAI Samarinda) untuk jemaat dan pengunjung.')
 @section('meta_image', asset('img/fotogrj.jpeg'))
 
 @section('content')

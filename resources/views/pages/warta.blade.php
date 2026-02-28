@@ -1,7 +1,7 @@
 @extends('layout.app')
 
-@section('title', 'Warta Jemaat - GKKA Samarinda')
-@section('meta_description', 'Arsip warta jemaat dan informasi pelayanan GKKA Indonesia Jemaat Samarinda.')
+@section('title', 'Warta Jemaat GKKA Samarinda | GKKAI Samarinda')
+@section('meta_description', 'Arsip warta jemaat dan informasi pelayanan GKKA Samarinda (GKKAI Samarinda).')
 @section('meta_image', asset('img/fotogrj.jpeg'))
 
 @section('content')
@@ -18,7 +18,7 @@
         Warta Jemaat
       </h1>
       <div class="mt-3 text-base sm:text-lg font-black tracking-widest text-white/90">
-        GKKA-I SAMARINDA
+        GKKAI SAMARINDA
       </div>
 
       <p class="mt-4 text-sm sm:text-base md:text-lg text-white/80 font-semibold max-w-2xl mx-auto">

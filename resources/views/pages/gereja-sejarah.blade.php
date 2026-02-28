@@ -1,6 +1,6 @@
 @extends('layout.app')
-@section('title','Sejarah - GKKA Samarinda')
-@section('meta_description', 'Ringkasan sejarah GKKA Indonesia dan perjalanan GKKA Jemaat Samarinda.')
+@section('title','Sejarah GKKA Samarinda | GKKAI Samarinda')
+@section('meta_description', 'Ringkasan sejarah GKKA Indonesia dan perjalanan GKKA Samarinda (GKKAI Samarinda) dari awal pelayanan hingga sekarang.')
 @section('meta_image', asset('img/fotogrj.jpeg'))
 @section('content')
 @php
