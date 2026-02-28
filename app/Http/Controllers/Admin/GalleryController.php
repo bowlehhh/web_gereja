@@ -44,7 +44,7 @@ class GalleryController extends Controller
             'title' => $data['title'],
             'caption' => $data['caption'] ?? null,
             'image_path' => $path,
-            'is_published' => $request->boolean('is_published'),
+            'is_published' => $request->has('is_published') ? $request->boolean('is_published') : true,
         ]);
 
         return redirect()->route('admin.gallery.index')->with('ok', 'Foto berhasil ditambahkan.');

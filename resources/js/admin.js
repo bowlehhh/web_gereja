@@ -32,6 +32,99 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isSidebarOpenDesktop = true;
     let isSidebarOpenMobile = false;
+    const submitLoader = document.getElementById('adminSubmitLoader');
+    const submitLoaderText = document.getElementById('adminSubmitLoaderText');
+    const networkModal = document.getElementById('adminNetworkModal');
+    const networkModalText = document.getElementById('adminNetworkModalText');
+    const networkModalClose = document.getElementById('adminNetworkModalClose');
+    const networkModalOverlay = document.getElementById('adminNetworkModalOverlay');
+
+    const refreshBodyScrollLock = () => {
+        const shouldLock = (submitLoader && !submitLoader.classList.contains('hidden'))
+            || (networkModal && !networkModal.classList.contains('hidden'));
+        document.body.classList.toggle('overflow-hidden', shouldLock);
+    };
+
+    const showSubmitLoader = (message = 'Mohon tunggu, data sedang diproses...') => {
+        if (!submitLoader) return;
+        if (submitLoaderText) {
+            submitLoaderText.textContent = message;
+        }
+        submitLoader.classList.remove('hidden');
+        refreshBodyScrollLock();
+    };
+
+    const hideSubmitLoader = () => {
+        if (!submitLoader) return;
+        submitLoader.classList.add('hidden');
+        refreshBodyScrollLock();
+    };
+
+    const openNetworkModal = (message = 'Upload gagal. Koneksi internet sedang tidak stabil, silakan coba lagi.') => {
+        if (!networkModal) return;
+        if (networkModalText) {
+            networkModalText.textContent = message;
+        }
+        networkModal.classList.remove('hidden');
+        refreshBodyScrollLock();
+    };
+
+    const closeNetworkModal = () => {
+        if (!networkModal) return;
+        networkModal.classList.add('hidden');
+        refreshBodyScrollLock();
+    };
+
+    const setFormSubmittingState = (form, isSubmitting) => {
+        const submitButtons = form.querySelectorAll('button[type="submit"], input[type="submit"]');
+        submitButtons.forEach((btn) => {
+            if (isSubmitting) {
+                if (btn.dataset.loadingLocked === '1') return;
+                btn.dataset.loadingLocked = '1';
+                btn.dataset.wasDisabled = btn.disabled ? '1' : '0';
+                btn.disabled = true;
+
+                if (btn.tagName === 'BUTTON') {
+                    btn.dataset.originalHtml = btn.innerHTML;
+                    btn.innerHTML = `
+                        <span class="inline-flex items-center gap-2">
+                            <svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
+                                <path class="opacity-90" d="M12 2a10 10 0 0110 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                            </svg>
+                            <span>Memproses...</span>
+                        </span>
+                    `;
+                } else {
+                    btn.dataset.originalValue = btn.value;
+                    btn.value = 'Memproses...';
+                }
+                return;
+            }
+
+            if (btn.dataset.loadingLocked !== '1') return;
+
+            if (btn.tagName === 'BUTTON' && btn.dataset.originalHtml !== undefined) {
+                btn.innerHTML = btn.dataset.originalHtml;
+                delete btn.dataset.originalHtml;
+            } else if (btn.tagName === 'INPUT' && btn.dataset.originalValue !== undefined) {
+                btn.value = btn.dataset.originalValue;
+                delete btn.dataset.originalValue;
+            }
+
+            btn.disabled = btn.dataset.wasDisabled === '1';
+            delete btn.dataset.wasDisabled;
+            delete btn.dataset.loadingLocked;
+        });
+    };
+
+    if (networkModalClose) {
+        networkModalClose.addEventListener('click', closeNetworkModal);
+    }
+
+    if (networkModalOverlay) {
+        networkModalOverlay.addEventListener('click', closeNetworkModal);
+    }
 
     // --- Desktop Animation ---
     function toggleDesktopSidebar() {
@@ -189,7 +282,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!pendingForm) return closeConfirm();
             // prevent re-triggering confirmation
             pendingForm.dataset.confirmed = '1';
-            pendingForm.submit();
+            if (typeof pendingForm.requestSubmit === 'function') {
+                pendingForm.requestSubmit();
+            } else {
+                pendingForm.submit();
+            }
             closeConfirm();
         });
 
@@ -211,6 +308,45 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // --- Global submit loading + upload network handling ---
+    document.addEventListener('submit', async (e) => {
+        const form = e.target;
+        if (!(form instanceof HTMLFormElement)) return;
+
+        const method = (form.getAttribute('method') || 'GET').toUpperCase();
+        if (method === 'GET') return;
+
+        // Wait until user confirms for confirm-enabled forms
+        if (form.dataset.confirm && form.dataset.confirmed !== '1') return;
+
+        if (form.dataset.submitting === '1') {
+            e.preventDefault();
+            return;
+        }
+
+        const activeFileInput = Array.from(form.querySelectorAll('input[type="file"]'))
+            .find((input) => input.files && input.files.length > 0);
+
+        if (activeFileInput && !navigator.onLine) {
+            e.preventDefault();
+            openNetworkModal('Upload tidak dapat dimulai karena koneksi internet terputus. Periksa jaringan lalu coba lagi.');
+            return;
+        }
+
+        form.dataset.submitting = '1';
+        setFormSubmittingState(form, true);
+        showSubmitLoader(activeFileInput ? 'Sedang mengunggah file, mohon tunggu...' : 'Mohon tunggu, data sedang diproses...');
+        // allow normal browser submit so Laravel redirect/validation flow stays intact
+    }, true);
+
+    window.addEventListener('pageshow', () => {
+        hideSubmitLoader();
+        document.querySelectorAll('form[data-submitting="1"]').forEach((form) => {
+            delete form.dataset.submitting;
+            setFormSubmittingState(form, false);
+        });
+    });
 
     // Handle Window Resize
     window.addEventListener('resize', () => {

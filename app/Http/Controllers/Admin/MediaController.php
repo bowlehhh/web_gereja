@@ -13,7 +13,7 @@ class MediaController extends Controller
     public function index()
     {
         $items = MediaItem::query()
-            ->orderByDesc('service_at')
+            ->orderByRaw('COALESCE(service_at, created_at) DESC')
             ->orderByDesc('id')
             ->paginate(12);
 
@@ -71,7 +71,7 @@ class MediaController extends Controller
             'youtube_url' => $data['youtube_url'],
             'youtube_id' => $youtubeId,
             'thumbnail_path' => $thumbnailPath,
-            'is_published' => $request->boolean('is_published'),
+            'is_published' => $request->has('is_published') ? $request->boolean('is_published') : true,
         ]);
 
         return redirect()->route('admin.media.index')->with('ok', 'Media berhasil ditambahkan.');

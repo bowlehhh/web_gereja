@@ -219,6 +219,45 @@
       </div>
     </div>
   </div>
+
+  <!-- Global Submit Loader -->
+  <div id="adminSubmitLoader" class="hidden fixed inset-0 z-[80]">
+    <div class="absolute inset-0 bg-slate-900/45 backdrop-blur-sm"></div>
+    <div class="relative z-10 flex h-full w-full items-center justify-center p-4">
+      <div class="w-full max-w-sm rounded-3xl bg-white p-7 text-center shadow-2xl border border-slate-100">
+        <div class="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-blue-50 text-blue-700">
+          <svg class="h-8 w-8 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
+            <path class="opacity-90" d="M12 2a10 10 0 0110 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-black text-slate-800">Memproses Data</h3>
+        <p id="adminSubmitLoaderText" class="mt-2 text-sm font-semibold text-slate-500">Mohon tunggu, data sedang diproses...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Network Warning Modal -->
+  <div id="adminNetworkModal" class="hidden fixed inset-0 z-[85]">
+    <button type="button" id="adminNetworkModalOverlay" class="absolute inset-0 h-full w-full bg-slate-900/45 backdrop-blur-sm cursor-default" aria-label="Tutup"></button>
+    <div class="relative z-10 flex h-full w-full items-center justify-center p-4">
+      <div class="w-full max-w-md rounded-3xl bg-white p-7 shadow-2xl border border-slate-100">
+        <div class="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-amber-50 text-amber-600">
+          <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3" d="M12 9v4m0 4h.01M10.29 3.86l-7.5 13A2 2 0 004.5 20h15a2 2 0 001.71-3.14l-7.5-13a2 2 0 00-3.42 0z" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-black text-slate-800 text-center">Peringatan Jaringan</h3>
+        <p id="adminNetworkModalText" class="mt-2 text-sm font-semibold text-slate-500 text-center">
+          Upload gagal. Koneksi internet sedang tidak stabil, silakan coba lagi.
+        </p>
+        <button type="button" id="adminNetworkModalClose"
+                class="mt-6 h-12 w-full rounded-2xl bg-blue-900 text-white font-black hover:bg-blue-800 transition">
+          Mengerti
+        </button>
+      </div>
+    </div>
+  </div>
   
   @vite(['resources/js/admin.js'])
 </body>

@@ -10,8 +10,7 @@ class WartaPublicController extends Controller
     {
         try {
             $wartas = Warta::query()
-                ->where('is_published', true)
-                ->latest('date')
+                ->orderByRaw('COALESCE(date, created_at) DESC')
                 ->latest('id')
                 ->paginate(12);
         } catch (\Throwable $e) {

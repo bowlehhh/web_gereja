@@ -10,7 +10,6 @@ class GalleryPublicController extends Controller
     {
         try {
             $items = GalleryItem::query()
-                ->where('is_published', 1)
                 ->orderByDesc('id')
                 ->paginate(12);
         } catch (\Throwable $e) {

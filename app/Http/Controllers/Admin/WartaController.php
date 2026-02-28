@@ -13,7 +13,7 @@ class WartaController extends Controller
     public function index()
     {
         $wartas = Warta::query()
-            ->latest('date')
+            ->orderByRaw('COALESCE(date, created_at) DESC')
             ->latest('id')
             ->paginate(10);
 
@@ -62,7 +62,7 @@ class WartaController extends Controller
             'edition' => $data['edition'] ?? null,
             'thumbnail_path' => $thumbPath,
             'pdf_path' => $pdfPath,
-            'is_published' => $request->boolean('is_published'),
+            'is_published' => $request->has('is_published') ? $request->boolean('is_published') : true,
         ]);
 
         return redirect()->route('admin.warta.index')->with('ok', 'Warta berhasil ditambahkan.');

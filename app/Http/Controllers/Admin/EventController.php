@@ -91,7 +91,7 @@ class EventController extends Controller
             'thumbnail_path' => $thumbnailPath,
             'photo_path' => $photoPath,
             'video_path' => $videoPath,
-            'is_published' => $request->boolean('is_published'),
+            'is_published' => $request->has('is_published') ? $request->boolean('is_published') : true,
         ]);
 
         return redirect()->route('admin.event.index')->with('ok', 'Event berhasil ditambahkan.');

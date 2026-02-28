@@ -10,8 +10,7 @@ class EventPublicController extends Controller
     public function index()
     {
         $items = EventItem::query()
-            ->where('is_published', 1)
-            ->orderByDesc('start_date')
+            ->orderByRaw('COALESCE(start_date, created_at) DESC')
             ->orderByDesc('id')
             ->paginate(12);
 
@@ -20,15 +19,12 @@ class EventPublicController extends Controller
 
     public function show(EventItem $item)
     {
-        abort_unless($item->is_published, 404);
-
         return view('pages.event-show', [
             'item' => $item,
             'youtubeEmbed' => $this->resolveYoutubeEmbedUrl($item->youtube_url),
             'latest' => EventItem::query()
-                ->where('is_published', 1)
                 ->where('id', '!=', $item->id)
-                ->orderByDesc('start_date')
+                ->orderByRaw('COALESCE(start_date, created_at) DESC')
                 ->orderByDesc('id')
                 ->limit(5)
                 ->get(),

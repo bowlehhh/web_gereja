@@ -95,7 +95,7 @@
 	        </div>
 
 	        <label class="inline-flex items-center gap-3 font-extrabold text-sm text-blue-900 cursor-pointer">
-	          <input type="checkbox" name="is_published" value="1" {{ old('is_published', false) ? 'checked' : '' }}
+	          <input type="checkbox" name="is_published" value="1" {{ old('is_published', true) ? 'checked' : '' }}
 	                 class="size-5 rounded border-blue-300 text-blue-900 focus:ring-blue-900">
           Publish
         </label>

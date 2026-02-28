@@ -18,15 +18,13 @@ class HomeController extends Controller
         try {
             if (Schema::hasTable('event_items')) {
                 $featuredEvent = EventItem::query()
-                    ->where('is_published', 1)
-                    ->orderByDesc('start_date')
+                    ->orderByRaw('COALESCE(start_date, created_at) DESC')
                     ->orderByDesc('id')
                     ->first();
 
                 $eventList = EventItem::query()
-                    ->where('is_published', 1)
                     ->when($featuredEvent, fn ($q) => $q->where('id', '!=', $featuredEvent->id))
-                    ->orderByDesc('start_date')
+                    ->orderByRaw('COALESCE(start_date, created_at) DESC')
                     ->orderByDesc('id')
                     ->limit(4)
                     ->get();

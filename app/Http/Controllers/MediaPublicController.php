@@ -14,7 +14,6 @@ class MediaPublicController extends Controller
 
         try {
             $items = MediaItem::query()
-                ->where('is_published', true)
                 ->when($q !== '', function ($query) use ($q) {
                     $query->where(function ($q2) use ($q) {
                         $q2->where('title', 'like', "%{$q}%")
@@ -24,7 +23,7 @@ class MediaPublicController extends Controller
                 ->when($date !== '', function ($query) use ($date) {
                     $query->whereDate('service_at', $date);
                 })
-                ->orderByDesc('service_at')
+                ->orderByRaw('COALESCE(service_at, created_at) DESC')
                 ->orderByDesc('id')
                 ->paginate(9)
                 ->withQueryString();
