@@ -9,6 +9,8 @@
   $adminPhoneDisplay = '+62 823-5052-6337';
   $adminPhoneTel = '+6282350526337';
   $adminWa = 'https://wa.me/6282350526337';
+  $adminInstagramHandle = '@gkkaismr';
+  $adminInstagramUrl = 'https://www.instagram.com/gkkaismr/';
   $alamat = 'Jl. Sentosa No.25, Sungai Pinang Dalam, Kec. Sungai Pinang, Kota Samarinda, Kalimantan Timur 75117';
   $mapsEmbed = 'https://www.google.com/maps?q='.urlencode($alamat).'&output=embed';
   $mapsOpen = 'https://www.google.com/maps/search/?api=1&query='.urlencode($alamat);
@@ -66,6 +68,18 @@
                      </div>
                   </div>
                </div>
+
+               <div class="flex items-start gap-4 group">
+                  <div class="w-12 h-12 rounded-2xl bg-blue-800/80 flex items-center justify-center shrink-0 text-white group-hover:scale-110 transition-transform shadow-lg border border-blue-700/50">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" ry="5" stroke-width="2"></rect><circle cx="12" cy="12" r="4" stroke-width="2"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg>
+                  </div>
+                  <div>
+                     <div class="font-bold text-lg mb-1 text-blue-100">Instagram</div>
+                     <div class="text-white font-medium opacity-90">
+                       <a class="underline decoration-white/30 hover:decoration-white" href="{{ $adminInstagramUrl }}" target="_blank" rel="noopener">{{ $adminInstagramHandle }}</a>
+                     </div>
+                  </div>
+               </div>
             </div>
          </div>
 
@@ -103,6 +117,10 @@
                      <div class="flex flex-col sm:flex-row sm:items-center gap-2">
                         <span class="text-slate-400">Email:</span>
                         <a href="mailto:{{ $adminEmail }}" class="text-blue-700 hover:text-blue-900 transition-colors break-words">{{ $adminEmail }}</a>
+                     </div>
+                     <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                        <span class="text-slate-400">Instagram:</span>
+                        <a href="{{ $adminInstagramUrl }}" target="_blank" rel="noopener" class="text-blue-700 hover:text-blue-900 transition-colors">{{ $adminInstagramHandle }}</a>
                      </div>
                   </div>
                </div>

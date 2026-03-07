@@ -29,7 +29,7 @@ class GalleryController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'string', 'max:150'],
-            'caption' => ['nullable', 'string'],
+            'caption' => ['required', 'string'],
             'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
             'is_published' => ['nullable'],
         ], [
@@ -42,7 +42,7 @@ class GalleryController extends Controller
 
         GalleryItem::create([
             'title' => $data['title'],
-            'caption' => $data['caption'] ?? null,
+            'caption' => $data['caption'],
             'image_path' => $path,
             'is_published' => $request->has('is_published') ? $request->boolean('is_published') : true,
         ]);
@@ -59,10 +59,11 @@ class GalleryController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'string', 'max:150'],
-            'caption' => ['nullable', 'string'],
-            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'caption' => ['required', 'string'],
+            'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
             'is_published' => ['nullable'],
         ], [
+            'photo.required' => 'Foto wajib diupload.',
             'photo.mimes' => 'Foto harus jpg/jpeg/png/webp.',
             'photo.max' => 'Ukuran foto maksimal 20MB.',
         ]);
@@ -75,7 +76,7 @@ class GalleryController extends Controller
         }
 
         $gallery->title = $data['title'];
-        $gallery->caption = $data['caption'] ?? null;
+        $gallery->caption = $data['caption'];
         $gallery->is_published = $request->boolean('is_published');
         $gallery->save();
 

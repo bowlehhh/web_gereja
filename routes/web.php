@@ -10,6 +10,8 @@ use App\Http\Controllers\GalleryPublicController;
 use App\Http\Controllers\HambaTuhanPublicController;
 use App\Http\Controllers\MajelisPublicController;
 use App\Http\Controllers\MediaPublicController;
+use App\Http\Controllers\CabangPublicController;
+use App\Http\Controllers\RenunganPublicController;
 use App\Http\Controllers\SitemapController;
 
 use App\Http\Controllers\Admin\WartaController;
@@ -18,6 +20,8 @@ use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\HambaTuhanController;
 use App\Http\Controllers\Admin\MajelisController;
 use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\CabangController;
+use App\Http\Controllers\Admin\RenunganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +41,8 @@ Route::get('/gereja/hamba-tuhan/{hambaTuhan}', [HambaTuhanPublicController::clas
 Route::get('/gereja/majelis', [MajelisPublicController::class, 'index'])->name('gereja.majelis');
 Route::get('/gereja/majelis/{period}', [MajelisPublicController::class, 'show'])->name('gereja.majelis.show');
 Route::get('/gereja/komisi', fn () => view('pages.gereja-komisi'))->name('gereja.komisi');
+Route::get('/cabang', [CabangPublicController::class, 'index'])->name('cabang');
+Route::get('/cabang/{cabang}', [CabangPublicController::class, 'show'])->name('cabang.show');
 
 /* Event (PUBLIC) */
 Route::get('/event', [EventPublicController::class, 'index'])->name('event');
@@ -44,7 +50,9 @@ Route::get('/event/{item}', [EventPublicController::class, 'show'])->name('event
 
 /* Dropdown EVENT */
 Route::get('/artikel', fn () => view('pages.artikel'))->name('artikel');
-Route::get('/renungan', fn () => view('pages.renungan'))->name('renungan');
+Route::get('/api/renungan/random', [RenunganPublicController::class, 'random'])->name('renungan.random');
+Route::get('/renungan', [RenunganPublicController::class, 'index'])->name('renungan');
+Route::get('/renungan/{renunganItem}', [RenunganPublicController::class, 'show'])->name('renungan.show');
 
 Route::get('/media', [MediaPublicController::class, 'index'])->name('media');
 Route::get('/gallery', [GalleryPublicController::class, 'index'])->name('gallery');
@@ -118,5 +126,21 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/media/{media}/edit', [MediaController::class, 'edit'])->name('admin.media.edit');
     Route::put('/media/{media}', [MediaController::class, 'update'])->name('admin.media.update');
     Route::delete('/media/{media}', [MediaController::class, 'destroy'])->name('admin.media.destroy');
+
+    // CABANG ADMIN (CRUD)
+    Route::get('/cabang', [CabangController::class, 'index'])->name('admin.cabang.index');
+    Route::get('/cabang/create', [CabangController::class, 'create'])->name('admin.cabang.create');
+    Route::post('/cabang', [CabangController::class, 'store'])->name('admin.cabang.store');
+    Route::get('/cabang/{cabang}/edit', [CabangController::class, 'edit'])->name('admin.cabang.edit');
+    Route::put('/cabang/{cabang}', [CabangController::class, 'update'])->name('admin.cabang.update');
+    Route::delete('/cabang/{cabang}', [CabangController::class, 'destroy'])->name('admin.cabang.destroy');
+
+    // RENUNGAN ADMIN (CRUD)
+    Route::get('/renungan', [RenunganController::class, 'index'])->name('admin.renungan.index');
+    Route::get('/renungan/create', [RenunganController::class, 'create'])->name('admin.renungan.create');
+    Route::post('/renungan', [RenunganController::class, 'store'])->name('admin.renungan.store');
+    Route::get('/renungan/{renunganItem}/edit', [RenunganController::class, 'edit'])->name('admin.renungan.edit');
+    Route::put('/renungan/{renunganItem}', [RenunganController::class, 'update'])->name('admin.renungan.update');
+    Route::delete('/renungan/{renunganItem}', [RenunganController::class, 'destroy'])->name('admin.renungan.destroy');
 
 });

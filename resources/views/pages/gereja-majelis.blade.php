@@ -157,14 +157,14 @@
 @endpush
 
 @section('content')
-<section class="bg-blue-900 text-white py-20 border-b border-slate-100">
+<section class="bg-blue-900 text-white py-14 sm:py-20 border-b border-slate-100">
     <div class="gkka-container text-center">
-        <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Majelis GKKA Samarinda</h1>
-        <p class="text-lg text-blue-200 font-medium">Pelayanan dengan kasih, bertumbuh dalam iman.</p>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tight">Majelis GKKA Samarinda</h1>
+        <p class="text-base sm:text-lg text-blue-200 font-medium">Pelayanan dengan kasih, bertumbuh dalam iman.</p>
     </div>
 </section>
 
-<section class="py-20 timeline-container overflow-hidden majelis-pattern-bg">
+<section class="py-12 sm:py-20 timeline-container overflow-hidden majelis-pattern-bg">
     @if($items->count())
         <div id="line-progress">
             <div id="line-active"></div>

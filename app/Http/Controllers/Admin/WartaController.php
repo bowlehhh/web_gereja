@@ -29,19 +29,18 @@ class WartaController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'string', 'max:200'],
-            'date' => ['nullable', 'date'],
-            'edition' => ['nullable', 'string', 'max:50'],
+            'date' => ['required', 'date'],
+            'edition' => ['required', 'string', 'max:50'],
 
-            // thumbnail optional
-            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'thumbnail' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
 
-            // pdf wajib
             'pdf' => ['required', 'file', 'mimes:pdf', 'max:20480'],
 
             'is_published' => ['nullable'],
         ], [
             'title.required' => 'Judul wajib diisi.',
             'date.date' => 'Format tanggal tidak valid.',
+            'thumbnail.required' => 'Thumbnail wajib diupload.',
             'thumbnail.mimes' => 'Thumbnail harus JPG/JPEG/PNG/WEBP.',
             'thumbnail.max' => 'Ukuran thumbnail maksimal 20MB.',
             'pdf.required' => 'PDF Warta wajib diupload.',
@@ -58,8 +57,8 @@ class WartaController extends Controller
 
         Warta::create([
             'title' => $data['title'],
-            'date' => $data['date'] ?? null,
-            'edition' => $data['edition'] ?? null,
+            'date' => $data['date'],
+            'edition' => $data['edition'],
             'thumbnail_path' => $thumbPath,
             'pdf_path' => $pdfPath,
             'is_published' => $request->has('is_published') ? $request->boolean('is_published') : true,
@@ -77,16 +76,18 @@ class WartaController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'string', 'max:200'],
-            'date' => ['nullable', 'date'],
-            'edition' => ['nullable', 'string', 'max:50'],
-            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
-            'pdf' => ['nullable', 'file', 'mimes:pdf', 'max:20480'],
+            'date' => ['required', 'date'],
+            'edition' => ['required', 'string', 'max:50'],
+            'thumbnail' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'pdf' => ['required', 'file', 'mimes:pdf', 'max:20480'],
             'is_published' => ['nullable'],
         ], [
             'title.required' => 'Judul wajib diisi.',
             'date.date' => 'Format tanggal tidak valid.',
+            'thumbnail.required' => 'Thumbnail wajib diupload.',
             'thumbnail.mimes' => 'Thumbnail harus JPG/JPEG/PNG/WEBP.',
             'thumbnail.max' => 'Ukuran thumbnail maksimal 20MB.',
+            'pdf.required' => 'PDF Warta wajib diupload.',
             'pdf.mimes' => 'File warta harus PDF.',
             'pdf.max' => 'Ukuran PDF maksimal 20MB.',
         ]);
@@ -106,8 +107,8 @@ class WartaController extends Controller
         }
 
         $warta->title = $data['title'];
-        $warta->date = $data['date'] ?? null;
-        $warta->edition = $data['edition'] ?? null;
+        $warta->date = $data['date'];
+        $warta->edition = $data['edition'];
         $warta->is_published = $request->boolean('is_published');
         $warta->save();
 

@@ -30,8 +30,8 @@ class MediaController extends Controller
         $data = $request->validate(
             [
                 'title' => ['required', 'string', 'max:200'],
-                'speaker' => ['nullable', 'string', 'max:150'],
-                'service_at' => ['nullable', 'date'],
+                'speaker' => ['required', 'string', 'max:150'],
+                'service_at' => ['required', 'date'],
                 'youtube_url' => [
                     'required',
                     'string',
@@ -42,10 +42,11 @@ class MediaController extends Controller
                         }
                     },
                 ],
-                'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
+                'thumbnail' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
                 'is_published' => ['nullable'],
             ],
             [
+                'thumbnail.required' => 'Thumbnail wajib diupload.',
                 'thumbnail.max' => 'Ukuran thumbnail maksimal 10MB.',
             ],
             [
@@ -66,8 +67,8 @@ class MediaController extends Controller
 
         MediaItem::create([
             'title' => $data['title'],
-            'speaker' => $data['speaker'] ?? null,
-            'service_at' => $data['service_at'] ?? null,
+            'speaker' => $data['speaker'],
+            'service_at' => $data['service_at'],
             'youtube_url' => $data['youtube_url'],
             'youtube_id' => $youtubeId,
             'thumbnail_path' => $thumbnailPath,
@@ -87,8 +88,8 @@ class MediaController extends Controller
         $data = $request->validate(
             [
                 'title' => ['required', 'string', 'max:200'],
-                'speaker' => ['nullable', 'string', 'max:150'],
-                'service_at' => ['nullable', 'date'],
+                'speaker' => ['required', 'string', 'max:150'],
+                'service_at' => ['required', 'date'],
                 'youtube_url' => [
                     'required',
                     'string',
@@ -99,17 +100,18 @@ class MediaController extends Controller
                         }
                     },
                 ],
-                'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
+                'thumbnail' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
                 'is_published' => ['nullable'],
             ],
             [
+                'thumbnail.required' => 'Thumbnail wajib diupload.',
                 'thumbnail.max' => 'Ukuran thumbnail maksimal 10MB.',
             ]
         );
 
         $media->title = $data['title'];
-        $media->speaker = $data['speaker'] ?? null;
-        $media->service_at = $data['service_at'] ?? null;
+        $media->speaker = $data['speaker'];
+        $media->service_at = $data['service_at'];
         $media->youtube_url = $data['youtube_url'];
         $media->youtube_id = MediaItem::extractYoutubeId($data['youtube_url']);
         $media->is_published = $request->boolean('is_published');

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\EventItem;
+use App\Models\Cabang;
 use App\Models\MajelisPeriod;
+use App\Models\RenunganItem;
 use Illuminate\Support\Facades\Schema;
 
 class HomeController extends Controller
@@ -13,6 +15,8 @@ class HomeController extends Controller
         $featuredEvent = null;
         $eventList = collect();
         $majelisPeriods = collect();
+        $cabangList = collect();
+        $renunganList = collect();
         $dbReady = true;
 
         try {
@@ -37,18 +41,41 @@ class HomeController extends Controller
                     ->limit(6)
                     ->get();
             }
+
+            if (Schema::hasTable('cabangs')) {
+                $cabangList = Cabang::query()
+                    ->where('is_published', true)
+                    ->orderBy('sort_order')
+                    ->orderByDesc('id')
+                    ->limit(6)
+                    ->get();
+            }
+
+            if (Schema::hasTable('renungan_items')) {
+                $renunganList = RenunganItem::query()
+                    ->where('is_published', true)
+                    ->orderBy('sort_order')
+                    ->orderByDesc('published_at')
+                    ->orderByDesc('id')
+                    ->limit(8)
+                    ->get();
+            }
         } catch (\Throwable $e) {
             // DB belum siap / koneksi gagal: jangan bikin halaman public jadi 500.
             $dbReady = false;
             $featuredEvent = null;
             $eventList = collect();
             $majelisPeriods = collect();
+            $cabangList = collect();
+            $renunganList = collect();
         }
 
         return view('pages.home', [
             'featuredEvent' => $featuredEvent,
             'eventList' => $eventList,
             'majelisPeriods' => $majelisPeriods,
+            'cabangList' => $cabangList,
+            'renunganList' => $renunganList,
             'db_ready' => $dbReady,
         ]);
     }

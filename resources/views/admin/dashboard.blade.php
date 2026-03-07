@@ -11,6 +11,8 @@
 	  use App\Models\Warta;
 	  use App\Models\HambaTuhan;
 	  use App\Models\MajelisPeriod;
+    use App\Models\RenunganItem;
+    use App\Models\Cabang;
 
   $safeCount = function (string $table, callable $query) {
     try {
@@ -35,7 +37,9 @@
 	  $countMajelis = $safeCount('majelis_periods', fn () => MajelisPeriod::query()->count());
 	  $countWarta = $safeCount('wartas', fn () => Warta::query()->count());
 	  $countEvent = $safeCount('event_items', fn () => EventItem::query()->count());
+    $countRenungan = $safeCount('renungan_items', fn () => RenunganItem::query()->count());
 	  $countGallery = $safeCount('gallery_items', fn () => GalleryItem::query()->count());
+    $countCabang = $safeCount('cabangs', fn () => Cabang::query()->count());
 
   $latestWarta = $safeGet('wartas', fn () => Warta::latest()->limit(5)->get());
   $upcomingEvents = $safeGet('event_items', fn () => EventItem::where('start_date', '>=', now())->orderBy('start_date', 'asc')->limit(4)->get());
@@ -50,7 +54,7 @@
 
 <div class="space-y-8">
   <!-- Stats Grid -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-6">
     <!-- Hamba Tuhan Card -->
     <div class="relative overflow-hidden bg-white p-6 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-lg transition-all duration-300">
       <div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity rotate-12">
@@ -126,6 +130,30 @@
         </div>
       </div>
     </div>
+
+    <!-- Renungan Card -->
+    <div class="relative overflow-hidden bg-white p-6 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-lg transition-all duration-300">
+      <div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity rotate-12">
+        <svg class="w-32 h-32 text-amber-600" fill="currentColor" viewBox="0 0 20 20"><path d="M5 4a2 2 0 00-2 2v9a2 2 0 002 2h6l6-6V6a2 2 0 00-2-2H5zm6 1h4a1 1 0 011 1v4h-5V5z"></path></svg>
+      </div>
+      <div class="relative z-10 flex flex-col h-full justify-between">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-2.5 bg-amber-50 text-amber-600 rounded-xl">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M5 4a2 2 0 00-2 2v9a2 2 0 002 2h6l6-6V6a2 2 0 00-2-2H5zm6 1h4a1 1 0 011 1v4h-5V5z"></path></svg>
+          </div>
+          <span class="font-bold text-slate-500 text-sm uppercase tracking-wider">Renungan</span>
+        </div>
+        <div>
+          <h3 class="text-4xl font-black text-slate-800 tracking-tight">{{ $countRenungan }}</h3>
+          <p class="text-slate-400 text-xs font-bold mt-1">Konten Tersimpan</p>
+        </div>
+        <div class="mt-4">
+          <a href="{{ route('admin.renungan.index') }}" class="inline-flex items-center gap-2 text-xs font-bold text-amber-700 hover:text-amber-900 hover:underline">
+            Kelola Renungan →
+          </a>
+        </div>
+      </div>
+    </div>
     <!-- Majelis Card -->
     <div class="relative overflow-hidden bg-white p-6 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-lg transition-all duration-300">
       <div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity rotate-12">
@@ -145,6 +173,30 @@
         <div class="mt-4">
           <a href="{{ route('admin.majelis.index') }}" class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline">
             Kelola Majelis →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cabang Card -->
+    <div class="relative overflow-hidden bg-white p-6 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-lg transition-all duration-300">
+      <div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity rotate-12">
+        <svg class="w-32 h-32 text-cyan-700" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v3H3V4zm0 5h14v7a1 1 0 01-1 1h-3v-3a1 1 0 00-1-1H8a1 1 0 00-1 1v3H4a1 1 0 01-1-1V9z"></path></svg>
+      </div>
+      <div class="relative z-10 flex flex-col h-full justify-between">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-2.5 bg-cyan-50 text-cyan-700 rounded-xl">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v3H3V4zm0 5h14v7a1 1 0 01-1 1h-3v-3a1 1 0 00-1-1H8a1 1 0 00-1 1v3H4a1 1 0 01-1-1V9z"></path></svg>
+          </div>
+          <span class="font-bold text-slate-500 text-sm uppercase tracking-wider">Cabang</span>
+        </div>
+        <div>
+          <h3 class="text-4xl font-black text-slate-800 tracking-tight">{{ $countCabang }}</h3>
+          <p class="text-slate-400 text-xs font-bold mt-1">Cabang Terdaftar</p>
+        </div>
+        <div class="mt-4">
+          <a href="{{ route('admin.cabang.index') }}" class="inline-flex items-center gap-2 text-xs font-bold text-cyan-700 hover:text-cyan-900 hover:underline">
+            Kelola Cabang →
           </a>
         </div>
       </div>
@@ -218,6 +270,10 @@
               <svg class="w-6 h-6 text-emerald-600 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
               <span class="text-xs font-bold text-emerald-900">Buat Event</span>
             </a>
+            <a href="{{ route('admin.renungan.create') }}" class="flex flex-col items-center justify-center gap-2 p-4 bg-amber-50 hover:bg-amber-100 rounded-2xl transition border border-amber-100 group">
+              <svg class="w-6 h-6 text-amber-700 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m-4-4h8M5 5h14v14H5z"></path></svg>
+              <span class="text-xs font-bold text-amber-900">Buat Renungan</span>
+            </a>
             <a href="{{ route('admin.gallery.create') }}" class="flex flex-col items-center justify-center gap-2 p-4 bg-pink-50 hover:bg-pink-100 rounded-2xl transition border border-pink-100 group">
               <svg class="w-6 h-6 text-pink-600 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
               <span class="text-xs font-bold text-pink-900">Tambah Foto</span>
@@ -225,6 +281,10 @@
             <a href="{{ route('admin.hamba.create') }}" class="flex flex-col items-center justify-center gap-2 p-4 bg-amber-50 hover:bg-amber-100 rounded-2xl transition border border-amber-100 group">
               <svg class="w-6 h-6 text-amber-600 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
               <span class="text-xs font-bold text-amber-900">Data Hamba</span>
+            </a>
+            <a href="{{ route('admin.cabang.create') }}" class="flex flex-col items-center justify-center gap-2 p-4 bg-cyan-50 hover:bg-cyan-100 rounded-2xl transition border border-cyan-100 group">
+              <svg class="w-6 h-6 text-cyan-700 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3h8M5 7h14M5 21h14M7 7v14m10-14v14M9 11h6M9 15h6"></path></svg>
+              <span class="text-xs font-bold text-cyan-900">Tambah Cabang</span>
             </a>
           </div>
         </div>

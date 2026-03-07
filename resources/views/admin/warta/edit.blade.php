@@ -41,29 +41,30 @@
 
     <div>
       <label class="font-extrabold text-sm text-blue-900">Tanggal</label>
-      <input type="date" name="date" value="{{ old('date', optional($warta->date)->format('Y-m-d')) }}"
+      <input type="date" name="date" value="{{ old('date', optional($warta->date)->format('Y-m-d')) }}" required
              class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
     </div>
 
     <div>
       <label class="font-extrabold text-sm text-blue-900">Edisi</label>
-      <input name="edition" value="{{ old('edition', $warta->edition) }}"
+      <input name="edition" value="{{ old('edition', $warta->edition) }}" required
              class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
     </div>
 
     <div>
-      <label class="font-extrabold text-sm text-blue-900">Ganti Thumbnail (opsional)</label>
+      <label class="font-extrabold text-sm text-blue-900">Ganti Thumbnail (jpg/png/webp, max 20MB)</label>
       @if($warta->thumbnail_path)
         <div class="mt-2">
           <img src="{{ asset('storage/'.$warta->thumbnail_path) }}" alt="thumb" class="max-w-[220px] rounded-xl border border-blue-200">
         </div>
       @endif
-      <input type="file" name="thumbnail" accept="image/*"
+      <input type="file" name="thumbnail" accept="image/*" required
              class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
+      <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 20MB.</div>
     </div>
 
     <div>
-      <label class="font-extrabold text-sm text-blue-900">Ganti PDF (opsional)</label>
+      <label class="font-extrabold text-sm text-blue-900">Ganti PDF (pdf, max 20MB)</label>
       @if($warta->pdf_path)
         <div class="mt-2">
           <a href="{{ asset('storage/'.$warta->pdf_path) }}" target="_blank" class="font-extrabold text-blue-900 underline hover:text-blue-700">
@@ -71,7 +72,7 @@
           </a>
         </div>
       @endif
-      <input type="file" name="pdf" accept="application/pdf"
+      <input type="file" name="pdf" accept="application/pdf" required
              class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
     </div>
 

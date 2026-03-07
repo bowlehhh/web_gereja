@@ -37,6 +37,12 @@
             'icon' => 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z'
         ],
         [
+            'label' => 'Cabang',
+            'route' => 'admin.cabang.index',
+            'is' => request()->routeIs('admin.cabang.*'),
+            'icon' => 'M8 3h8M5 7h14M5 21h14M7 7v14m10-14v14M9 11h6M9 15h6'
+        ],
+        [
             'label' => 'Warta Jemaat', 
             'route' => 'admin.warta.index', 
             'is' => request()->routeIs('admin.warta.*'),
@@ -47,6 +53,12 @@
             'route' => 'admin.event.index', 
             'is' => request()->routeIs('admin.event.*'),
             'icon' => 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'
+        ],
+        [
+            'label' => 'Renungan',
+            'route' => 'admin.renungan.index',
+            'is' => request()->routeIs('admin.renungan.*'),
+            'icon' => 'M12 6v12m-4-4h8M5 5h14v14H5z'
         ],
         [
             'label' => 'Gallery', 
@@ -107,6 +119,13 @@
                       <div class="text-xs text-slate-400 truncate">{{ auth()->user()->email ?? 'admin@gkka.ov' }}</div>
                   </div>
               </div>
+              <a href="{{ route('home') }}"
+                 class="mb-2 w-full h-10 flex items-center justify-center gap-2 bg-blue-900 hover:bg-blue-800 text-white rounded-xl text-xs font-bold transition-all border border-blue-200 shadow-sm">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                  </svg>
+                  <span>Kembali ke Beranda</span>
+              </a>
               <button type="button" id="logoutBtn" 
                       class="w-full h-10 flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all group border border-red-200 shadow-sm">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
@@ -121,7 +140,7 @@
     <div class="flex-1 flex flex-col min-w-0 transition-all duration-300 h-screen overflow-hidden" id="mainContent">
 
       <!-- Navbar -->
-      <header class="px-8 py-5 flex justify-between items-center gap-4 bg-transparent sticky top-0 z-30">
+      <header class="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex justify-between items-center gap-4 bg-transparent sticky top-0 z-30">
         <div class="flex items-center gap-6 min-w-0">
           <!-- Mobile Burger -->
           <button id="adminBurger"
@@ -138,16 +157,20 @@
           </button>
 
           <div class="min-w-0">
-            <h1 class="text-2xl font-black tracking-tight text-slate-800 truncate">
+            <h1 class="text-xl sm:text-2xl font-black tracking-tight text-slate-800 truncate">
               @yield('admin_heading', 'Dashboard')
             </h1>
-            <p class="text-slate-500 text-xs font-bold uppercase tracking-wider opacity-60 truncate">
+            <p class="text-slate-500 text-[11px] sm:text-xs font-bold uppercase tracking-wider opacity-60 truncate">
               @yield('admin_subheading', 'System Management Control')
             </p>
           </div>
         </div>
 
         <div class="flex items-center gap-4 shrink-0">
+          <a href="{{ route('home') }}"
+             class="inline-flex sm:hidden items-center justify-center h-10 px-3 rounded-xl bg-white text-blue-900 hover:bg-blue-50 border border-slate-200 transition shadow-sm text-xs font-black">
+             Beranda
+          </a>
           <a href="{{ route('home') }}"
              class="hidden sm:inline-flex items-center justify-center size-11 rounded-2xl bg-white text-slate-400 hover:text-blue-900 hover:bg-blue-50 border border-slate-200 transition shadow-sm"
              title="Home">
@@ -157,7 +180,7 @@
       </header>
 
       <!-- Content -->
-      <main class="px-8 pb-8 flex-1 overflow-y-auto scrollbar-hide">
+      <main class="px-4 sm:px-6 lg:px-8 pb-6 sm:pb-8 flex-1 overflow-y-auto scrollbar-hide">
         @yield('content')
       </main>
     </div>

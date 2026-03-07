@@ -40,14 +40,14 @@
     </div>
 
     <div>
-      <label class="font-extrabold text-sm text-blue-900">Deskripsi (opsional)</label>
-      <textarea name="description" rows="4"
+      <label class="font-extrabold text-sm text-blue-900">Deskripsi</label>
+      <textarea name="description" rows="4" required
                 class="mt-2 w-full p-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">{{ old('description', $item->description) }}</textarea>
     </div>
 
     <div>
-      <label class="font-extrabold text-sm text-blue-900">Penjelasan Kegiatan (detail) (opsional)</label>
-      <textarea name="content" rows="8"
+      <label class="font-extrabold text-sm text-blue-900">Penjelasan Kegiatan (detail)</label>
+      <textarea name="content" rows="8" required
                 class="mt-2 w-full p-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition"
                 placeholder="Tulis penjelasan lengkap kegiatan...">{{ old('content', $item->content) }}</textarea>
       <div class="mt-2 text-blue-900/60 text-sm font-semibold">Tips: pisahkan paragraf dengan enter.</div>
@@ -58,49 +58,53 @@
         <label class="font-extrabold text-sm text-blue-900">Tanggal Mulai</label>
         <input type="date" name="start_date"
                value="{{ old('start_date', $item->start_date ? \Carbon\Carbon::parse($item->start_date)->format('Y-m-d') : '') }}"
+               required
                class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
       </div>
       <div>
         <label class="font-extrabold text-sm text-blue-900">Tanggal Selesai</label>
         <input type="date" name="end_date"
                value="{{ old('end_date', $item->end_date ? \Carbon\Carbon::parse($item->end_date)->format('Y-m-d') : '') }}"
+               required
                class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         <div class="mt-2 text-blue-900/60 text-sm font-semibold">
-          Kosongkan jika 1 hari. Jika diisi, harus sama/lebih besar dari Tanggal Mulai.
+          Harus sama/lebih besar dari Tanggal Mulai.
         </div>
       </div>
     </div>
 
     <div>
-      <label class="font-extrabold text-sm text-blue-900">Lokasi (opsional)</label>
-      <input name="location" value="{{ old('location', $item->location) }}"
+      <label class="font-extrabold text-sm text-blue-900">Lokasi</label>
+      <input name="location" value="{{ old('location', $item->location) }}" required
              class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
     </div>
 
     <div>
-      <label class="font-extrabold text-sm text-blue-900">Thumbnail (opsional)</label>
+      <label class="font-extrabold text-sm text-blue-900">Thumbnail (jpg/png/webp, max 20MB)</label>
       @if($item->thumbnail_path)
         <div class="mt-2">
           <img src="{{ asset('storage/'.$item->thumbnail_path) }}" class="max-w-[220px] rounded-xl border border-blue-200">
         </div>
       @endif
-      <input type="file" name="thumbnail" accept=".jpg,.jpeg,.png,.webp"
+      <input type="file" name="thumbnail" accept=".jpg,.jpeg,.png,.webp" required
              class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
+      <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 20MB.</div>
     </div>
 
     <div>
-      <label class="font-extrabold text-sm text-blue-900">Foto Kegiatan (detail) (opsional)</label>
+      <label class="font-extrabold text-sm text-blue-900">Foto Kegiatan (detail) (jpg/png/webp, max 20MB)</label>
       @if($item->photo_path)
         <div class="mt-2">
           <img src="{{ asset('storage/'.$item->photo_path) }}" class="max-w-[260px] rounded-xl border border-blue-200">
         </div>
       @endif
-      <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp"
+      <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp" required
              class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
+      <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 20MB.</div>
     </div>
 
 	    <div>
-	      <label class="font-extrabold text-sm text-blue-900">Video Upload (mp4/webm/ogg, max 30MB) (opsional)</label>
+	      <label class="font-extrabold text-sm text-blue-900">Video Upload (mp4/webm/ogg, max 30MB)</label>
 	      @if($item->video_path)
 	        <div class="mt-3">
 	          <video controls class="w-full max-w-[560px] rounded-2xl border border-blue-200 bg-black">
@@ -108,8 +112,9 @@
           </video>
         </div>
       @endif
-	      <input type="file" name="video" accept="video/mp4,video/webm,video/ogg"
+	      <input type="file" name="video" accept="video/mp4,video/webm,video/ogg" required
 	             class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
+        <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran video maksimal 30MB.</div>
 	    </div>
 
 	    <label class="inline-flex items-center gap-3 font-extrabold text-sm text-blue-900 cursor-pointer">

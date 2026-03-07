@@ -26,7 +26,10 @@
   $photoUrl = $hasPhoto ? Storage::url($item->photo_path) : null;
 @endphp
 
-<section class="gkka-blue-page px-4 sm:px-6">
+<section
+  class="gkka-blue-page px-4 sm:px-6"
+  style="background-image: url('{{ asset('images/forest-bg.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+>
   <div class="w-full max-w-[1400px] mx-auto">
     <div class="gkka-blue-stage px-5 sm:px-8 md:px-14 py-10 sm:py-12 md:py-16">
       <div class="gkka-blue-corner tl"></div>
@@ -100,7 +103,7 @@
                 Hubungi Kami
               </a>
             </div>
-          </div>
+          </div><!--  -->
         </div>
 
         {{-- Single Photo (match Majelis vibe) --}}
@@ -108,27 +111,31 @@
           <div class="relative">
             <div class="absolute -inset-8 bg-yellow-400/10 blur-3xl rounded-full"></div>
             <div class="mx-auto lg:mx-0 max-w-[520px]">
-              <div class="rounded-[2.5rem] overflow-hidden border border-white/20 shadow-[0_26px_56px_rgba(0,0,0,0.35)] bg-white/5 backdrop-blur">
-                <div class="aspect-[4/5] sm:aspect-[16/12] lg:aspect-[4/5] overflow-hidden">
-                  @if($photoUrl)
-                    <img
-                      src="{{ $photoUrl }}"
-                      alt="{{ $item->name }}"
-                      class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
-                      loading="eager"
-                    >
-                  @else
-                    <div class="w-full h-full grid place-items-center bg-white/10 text-white/70 font-black text-6xl">
-                      GK
-                    </div>
-                  @endif
+              <div class="gkka-brown-frame shadow-[0_26px_56px_rgba(0,0,0,0.35)]">
+                <div class="gkka-brown-frame-inner">
+                  <div class="aspect-[4/5] sm:aspect-[16/12] lg:aspect-[4/5] overflow-hidden">
+                    @if($photoUrl)
+                      <img
+                        src="{{ $photoUrl }}"
+                        alt="{{ $item->name }}"
+                        class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
+                        loading="eager"
+                      >
+                    @else
+                      <div class="w-full h-full grid place-items-center bg-white/10 text-white/70 font-black text-6xl">
+                        GK
+                      </div>
+                    @endif
+                  </div>
                 </div>
               </div>
 
               @if($kontak !== '')
-                <div class="mt-5 rounded-3xl border border-white/15 bg-white/10 backdrop-blur p-5">
-                  <div class="text-[11px] font-black tracking-widest uppercase text-blue-100/80">Kontak</div>
-                  <div class="mt-1 text-sm sm:text-base font-semibold text-white break-words">{{ $kontak }}</div>
+                <div class="mt-5 gkka-brown-frame" style="--gkka-frame-radius: 1.5rem; --gkka-frame-pad: 2px;">
+                  <div class="gkka-brown-frame-inner p-5">
+                    <div class="text-[11px] font-black tracking-widest uppercase text-blue-100/80">Kontak</div>
+                    <div class="mt-1 text-sm sm:text-base font-semibold text-white break-words">{{ $kontak }}</div>
+                  </div>
                 </div>
               @endif
             </div>

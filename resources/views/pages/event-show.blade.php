@@ -84,14 +84,14 @@
 @endpush
 
 @section('content')
-<section class="bg-blue-900 text-white py-20">
+<section class="bg-blue-900 text-white py-14 sm:py-20">
   <div class="gkka-container text-center">
-    <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Event GKKA Samarinda</h1>
-    <p class="text-lg text-blue-200 font-medium">{{ $item->title }}</p>
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tight">Event GKKA Samarinda</h1>
+    <p class="text-base sm:text-lg text-blue-200 font-medium">{{ $item->title }}</p>
   </div>
 </section>
 
-<section class="py-16 bg-gray-50">
+<section class="py-10 sm:py-16 bg-gray-50">
   <div class="gkka-container">
     <div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12">
       
@@ -131,10 +131,10 @@
           </div>
         @endif
 
-        <div class="p-8 md:p-10">
-          <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-6 leading-tight">{{ $item->title }}</h2>
+        <div class="p-6 sm:p-8 md:p-10">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 mb-6 leading-tight">{{ $item->title }}</h2>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-blue-50 rounded-2xl mb-8 border border-blue-100">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 p-4 sm:p-6 bg-blue-50 rounded-2xl mb-8 border border-blue-100">
             <div>
                <div class="text-xs font-bold text-blue-500 uppercase tracking-widest mb-1">Tanggal</div>
                <div class="font-bold text-slate-800 text-lg">

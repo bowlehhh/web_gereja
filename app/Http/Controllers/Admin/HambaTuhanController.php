@@ -40,15 +40,16 @@ class HambaTuhanController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:160'],
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
-            'roles_summary' => ['nullable', 'string', 'max:255'],
-            'contact' => ['nullable', 'string', 'max:120'],
-            'profile' => ['nullable', 'string'],
-            'service_fields' => ['nullable', 'string'],
-            'sort_order' => ['nullable', 'integer', 'min:0', 'max:1000000'],
+            'photo' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'roles_summary' => ['required', 'string', 'max:255'],
+            'contact' => ['required', 'string', 'max:120'],
+            'profile' => ['required', 'string'],
+            'service_fields' => ['required', 'string'],
+            'sort_order' => ['required', 'integer', 'min:0', 'max:1000000'],
             'is_active' => ['nullable'],
         ], [
             'name.required' => 'Nama wajib diisi.',
+            'photo.required' => 'Foto wajib diupload.',
             'photo.mimes' => 'Foto harus JPG/JPEG/PNG/WEBP.',
             'photo.max' => 'Ukuran foto maksimal 20MB.',
         ]);
@@ -62,11 +63,11 @@ class HambaTuhanController extends Controller
             'name' => $data['name'],
             'slug' => HambaTuhan::uniqueSlug($data['name']),
             'photo_path' => $photoPath,
-            'roles_summary' => $data['roles_summary'] ?? null,
-            'contact' => $data['contact'] ?? null,
-            'profile' => $data['profile'] ?? null,
-            'service_fields' => $data['service_fields'] ?? null,
-            'sort_order' => $data['sort_order'] ?? 0,
+            'roles_summary' => $data['roles_summary'],
+            'contact' => $data['contact'],
+            'profile' => $data['profile'],
+            'service_fields' => $data['service_fields'],
+            'sort_order' => $data['sort_order'],
             'is_active' => $request->boolean('is_active'),
         ]);
 
@@ -86,15 +87,16 @@ class HambaTuhanController extends Controller
         abort_unless(Schema::hasTable('hamba_tuhans'), 404);
         $data = $request->validate([
             'name' => ['required', 'string', 'max:160'],
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
-            'roles_summary' => ['nullable', 'string', 'max:255'],
-            'contact' => ['nullable', 'string', 'max:120'],
-            'profile' => ['nullable', 'string'],
-            'service_fields' => ['nullable', 'string'],
-            'sort_order' => ['nullable', 'integer', 'min:0', 'max:1000000'],
+            'photo' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'roles_summary' => ['required', 'string', 'max:255'],
+            'contact' => ['required', 'string', 'max:120'],
+            'profile' => ['required', 'string'],
+            'service_fields' => ['required', 'string'],
+            'sort_order' => ['required', 'integer', 'min:0', 'max:1000000'],
             'is_active' => ['nullable'],
         ], [
             'name.required' => 'Nama wajib diisi.',
+            'photo.required' => 'Foto wajib diupload.',
             'photo.mimes' => 'Foto harus JPG/JPEG/PNG/WEBP.',
             'photo.max' => 'Ukuran foto maksimal 20MB.',
         ]);
@@ -108,11 +110,11 @@ class HambaTuhanController extends Controller
 
         $hambaTuhan->name = $data['name'];
         $hambaTuhan->slug = HambaTuhan::uniqueSlug($data['name'], $hambaTuhan->id);
-        $hambaTuhan->roles_summary = $data['roles_summary'] ?? null;
-        $hambaTuhan->contact = $data['contact'] ?? null;
-        $hambaTuhan->profile = $data['profile'] ?? null;
-        $hambaTuhan->service_fields = $data['service_fields'] ?? null;
-        $hambaTuhan->sort_order = $data['sort_order'] ?? 0;
+        $hambaTuhan->roles_summary = $data['roles_summary'];
+        $hambaTuhan->contact = $data['contact'];
+        $hambaTuhan->profile = $data['profile'];
+        $hambaTuhan->service_fields = $data['service_fields'];
+        $hambaTuhan->sort_order = $data['sort_order'];
         $hambaTuhan->is_active = $request->boolean('is_active');
         $hambaTuhan->save();
 

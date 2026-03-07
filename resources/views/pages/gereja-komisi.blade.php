@@ -72,7 +72,7 @@
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 text-blue-100 font-black tracking-widest uppercase text-xs">
           GKKA Samarinda
         </div>
-        <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+        <h1 class="mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
           Komisi<br class="hidden md:block">
           <span class="text-blue-200">& Pelayanan</span>
         </h1>

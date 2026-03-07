@@ -1,8 +1,9 @@
 @extends('layout.app')
 
-@section('title', 'GKKA Samarinda | GKKAI Samarinda Resmi')
-@section('meta_description', 'Website resmi GKKA Samarinda (GKKAI Samarinda): info ibadah, event, warta jemaat, media, galeri, dan pelayanan.')
+@section('title', 'GKKA-I INDONESIA | Jemaat Samarinda')
+@section('meta_description', 'Website resmi GKKA-I INDONESIA Jemaat Samarinda: info ibadah, event, warta jemaat, media, galeri, dan pelayanan.')
 @section('meta_image', asset('img/fotogrj.jpeg'))
+@section('body_class', 'home-page')
 
 @section('content')
 @php
@@ -20,6 +21,7 @@
     ['src' => asset('img/remajaa.jpeg')],
     ['src' => asset('img/sekolah minggu.jpeg')],
   ];
+  $renunganBackdrop = asset('img/' . rawurlencode('tuhan yesus.jpeg'));
 @endphp
 
 {{-- INTRO OVERLAY (like GKKA Balikpapan style) --}}
@@ -31,7 +33,7 @@
     <div class="gkka-intro__logo-wrap mx-auto">
       <img class="gkka-intro__logo" src="{{ asset('assets/logo.png') }}" alt="Logo GKKA">
     </div>
-    <div class="mt-6 text-sm font-black tracking-[0.35em] text-white/80 uppercase">GKKA Indonesia</div>
+    <div class="mt-6 text-sm font-black tracking-[0.35em] text-white/80 uppercase">GKKA-I INDONESIA</div>
     <div class="mt-2 text-3xl sm:text-4xl md:text-5xl font-black tracking-tight gkka-hero-title">
       Jemaat Samarinda
     </div>
@@ -61,7 +63,7 @@
         Selamat Datang
       </div>
       <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-tight drop-shadow-lg animate-fade-in-up delay-100">
-        GKKA Indonesia<br><span class="text-blue-200">Jemaat Samarinda</span>
+        GKKA-I INDONESIA<br><span class="text-blue-200">Jemaat Samarinda</span>
       </h1>
       <p class="max-w-2xl text-base sm:text-lg md:text-xl text-blue-100 font-medium mb-10 leading-relaxed drop-shadow-md animate-fade-in-up delay-200">
         Informasi pelayanan, jadwal, komisi, event, dan dokumentasi kegiatan jemaat.
@@ -268,10 +270,10 @@
   <div class="gkka-container grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
       
       {{-- Image --}}
-      <div class="relative group">
+      <a href="{{ route('gallery') }}" class="relative group" aria-label="Buka halaman Gallery">
         <div class="absolute inset-0 bg-blue-600 rounded-3xl rotate-3 opacity-20 group-hover:rotate-6 transition-transform duration-500"></div>
         <img src="{{ asset('img/doa.jpeg') }}" alt="GKKA Samarinda" class="relative w-full h-64 sm:h-80 lg:h-[420px] object-cover rounded-3xl shadow-2xl transform transition-transform duration-500 group-hover:-translate-y-2" onerror="this.onerror=null;this.src='{{ $heroImage }}';">
-      </div>
+      </a>
 
       {{-- Video / Text --}}
       <div>
@@ -333,7 +335,7 @@
             <div class="space-y-2">
               <h3 class="font-bold text-yellow-400 text-lg">Komisi Sekolah Minggu Narwastu</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
-                Tiap Hari Minggu<br>
+                Setiap Hari Minggu<br>
                 09.00 WITA<br>
                 di gereja
               </p>
@@ -341,7 +343,7 @@
             <div class="space-y-2">
               <h3 class="font-bold text-yellow-400 text-lg">Komisi Remaja Betania</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
-                Tiap Hari Minggu<br>
+                Setiap Hari Minggu<br>
                 09.00 WITA • di gereja<br>
                 Minggu ke-1: gabung Kebaktian Umum<br>
                 Minggu ke-2 s/d terakhir: ibadah remaja
@@ -350,7 +352,7 @@
             <div class="space-y-2">
               <h3 class="font-bold text-yellow-400 text-lg">Komisi Pemuda Eirene</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
-                Tiap Hari Sabtu<br>
+                Setiap Hari Sabtu<br>
                 18.00 WITA<br>
                 di gereja
               </p>
@@ -379,28 +381,28 @@
             <div class="space-y-2">
               <h3 class="font-bold text-white text-lg">Ibadah Umum</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
-                Tiap Hari Minggu<br>
+                Setiap Hari Minggu<br>
                 <span class="font-semibold text-yellow-400">09.00 WITA</span>
               </p>
             </div>
             <div class="space-y-2">
               <h3 class="font-bold text-white text-lg">Sekolah Minggu “Narwastu”</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
-                Tiap Hari Minggu<br>
+                Setiap Hari Minggu<br>
                 <span class="font-semibold text-yellow-400">09.00 WITA</span>
               </p>
             </div>
             <div class="space-y-2">
               <h3 class="font-bold text-white text-lg">Ibadah Rumah Tangga</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
-                Tiap Hari Kamis<br>
+                Setiap Hari Kamis<br>
                 <span class="font-semibold text-yellow-400">19.00 WITA</span>
               </p>
             </div>
             <div class="space-y-2">
               <h3 class="font-bold text-white text-lg">Persekutuan Doa</h3>
               <p class="text-blue-100 text-sm leading-relaxed">
-                Tiap Hari Sabtu<br>
+                Setiap Hari Sabtu<br>
                 <span class="font-semibold text-yellow-400">17.00 WITA</span>
               </p>
             </div>
@@ -535,8 +537,64 @@
   </div>
 </section>
 
+{{-- CABANG SECTION --}}
+<section id="cabang-home" class="gkka-section bg-white">
+  <div class="gkka-container">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900 text-white text-[11px] sm:text-xs font-black tracking-widest uppercase">
+          Cabang GKKA
+        </div>
+        <h2 class="mt-4 text-3xl md:text-4xl font-black text-blue-900 tracking-tight">Jaringan Cabang Pelayanan</h2>
+        <p class="mt-3 text-slate-600 font-semibold max-w-3xl">
+          Klik kartu untuk masuk ke detail about cabang.
+        </p>
+      </div>
+      <a href="{{ route('cabang') }}" class="inline-flex items-center gap-2 font-black text-blue-700 hover:text-blue-900 transition-colors">
+        Lihat Semua Cabang <span class="text-xl">→</span>
+      </a>
+    </div>
+
+    @if(isset($cabangList) && $cabangList->isNotEmpty())
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        @foreach($cabangList as $cabang)
+          @php
+            $image = $cabang->image_path ? asset('storage/'.$cabang->image_path) : asset('assets/logo.png');
+          @endphp
+          <a href="{{ route('cabang.show', $cabang) }}"
+             class="group block rounded-3xl overflow-hidden border border-blue-100 bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div class="relative h-56 bg-slate-100 overflow-hidden">
+              <img src="{{ $image }}" alt="{{ $cabang->name }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-blue-950/80 via-blue-900/20 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 w-full p-4 text-white">
+                <div class="text-[11px] font-black tracking-widest uppercase text-blue-200">Cabang</div>
+                <h3 class="mt-1 text-xl font-black leading-tight line-clamp-2">{{ $cabang->name }}</h3>
+                <p class="mt-1 text-xs font-bold text-blue-100 line-clamp-1">{{ $cabang->city ?: 'Lokasi belum diisi' }}</p>
+              </div>
+            </div>
+            <div class="p-5">
+              <p class="text-sm text-slate-600 font-medium leading-relaxed line-clamp-3">
+                {{ $cabang->about }}
+              </p>
+              <div class="mt-4 inline-flex items-center gap-2 text-sm font-black text-blue-700 group-hover:text-blue-900 transition-colors">
+                Lihat detail
+                <span aria-hidden="true">→</span>
+              </div>
+            </div>
+          </a>
+        @endforeach
+      </div>
+    @else
+      <div class="rounded-3xl border border-blue-100 bg-white p-10 text-center shadow-sm">
+        <h3 class="text-xl sm:text-2xl font-black text-blue-900">Data cabang belum tersedia</h3>
+        <p class="mt-2 text-slate-600 font-semibold">Tambahkan data cabang dari dashboard admin agar tampil di beranda.</p>
+      </div>
+    @endif
+  </div>
+</section>
+
 {{-- KOMISI SECTION --}}
-<section class="gkka-section bg-slate-50">
+<section class="gkka-section gkka-home-komisi">
   <div class="gkka-container">
     <h2 class="text-center text-3xl md:text-4xl font-black text-blue-900 mb-12">Komisi GKKA Samarinda</h2>
 
@@ -666,6 +724,56 @@
           </div>
        </aside>
     </div>
+  </div>
+</section>
+
+{{-- RENUNGAN SECTION --}}
+<section id="home-renungan" class="gkka-section relative overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="{{ $renunganBackdrop }}" alt="" aria-hidden="true" loading="lazy" class="h-full w-full object-cover object-[58%_28%] sm:object-center">
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-950/55 via-blue-900/45 to-blue-950/55 sm:from-blue-950/80 sm:via-blue-900/70 sm:to-blue-950/80"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(1200px_480px_at_50%_0%,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0)_65%)]"></div>
+  </div>
+  <div class="gkka-container relative z-10">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-12">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-black text-white">Renungan Harian</h2>
+        <p class="mt-2 text-blue-100 font-semibold">Langsung pilih dan baca renungan dari ibu gembala.</p>
+      </div>
+      <a href="{{ route('renungan') }}" class="inline-flex items-center gap-2 font-black text-amber-200 hover:text-white transition-colors">
+        Masuk Halaman Renungan →
+      </a>
+    </div>
+
+    @if(isset($renunganList) && $renunganList->isNotEmpty())
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        @foreach($renunganList as $renungan)
+          @php
+            $thumb = $renungan->image_path ? asset('storage/'.$renungan->image_path) : asset('assets/logo.png');
+          @endphp
+          <a href="{{ route('renungan.show', $renungan) }}"
+             class="group block w-full rounded-3xl overflow-hidden border border-white/55 bg-white/80 sm:bg-white/95 backdrop-blur-[2px] shadow-xl shadow-blue-950/20 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+            <div class="relative h-44 overflow-hidden">
+              <img src="{{ $thumb }}" alt="{{ $renungan->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+              <div class="absolute inset-0 bg-gradient-to-t from-blue-950/80 via-blue-900/10 to-transparent"></div>
+              <div class="absolute left-4 right-4 bottom-4">
+                <div class="text-[10px] font-black tracking-widest uppercase text-amber-200">{{ $renungan->scripture_reference }}</div>
+                <h3 class="mt-1 text-white text-lg font-black leading-tight line-clamp-2">{{ $renungan->title }}</h3>
+              </div>
+            </div>
+            <div class="p-5 min-h-[8rem]">
+              <p class="text-sm text-slate-600 font-medium line-clamp-2">{{ $renungan->excerpt }}</p>
+              <div class="mt-3 text-xs font-bold text-slate-500">{{ optional($renungan->published_at)->translatedFormat('d F Y') }}</div>
+            </div>
+          </a>
+        @endforeach
+      </div>
+    @else
+      <div class="rounded-3xl border border-white/45 bg-white/80 sm:bg-white/90 backdrop-blur-[2px] p-10 text-center shadow-xl shadow-blue-950/15">
+        <h3 class="text-xl sm:text-2xl font-black text-blue-900">Renungan belum tersedia</h3>
+        <p class="mt-2 text-slate-600 font-semibold">Konten renungan akan tampil otomatis setelah ditambahkan dari dashboard admin.</p>
+      </div>
+    @endif
   </div>
 </section>
 

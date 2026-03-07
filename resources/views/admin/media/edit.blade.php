@@ -8,7 +8,7 @@
   <div class="px-6 py-5 border-b border-blue-100 flex items-center justify-between gap-4 flex-wrap bg-blue-50/50">
     <div>
       <div class="text-xl font-black tracking-tight text-blue-900">Edit Media</div>
-      <div class="text-blue-900/70 font-semibold text-sm mt-1">Update judul, tanggal, link YouTube, dan thumbnail (maks 10MB).</div>
+      <div class="text-blue-900/70 font-semibold text-sm mt-1">Update semua data media beserta thumbnail (maks 10MB).</div>
     </div>
     <a class="h-10 px-4 rounded-xl border border-blue-900 bg-white hover:bg-blue-50 text-blue-900 font-extrabold text-sm inline-flex items-center transition"
        href="{{ route('admin.media.index') }}">← Kembali</a>
@@ -76,14 +76,15 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
-            <label class="font-extrabold text-sm text-blue-900">Pembicara (opsional)</label>
-            <input type="text" name="speaker" value="{{ old('speaker', $media->speaker) }}"
+            <label class="font-extrabold text-sm text-blue-900">Pembicara</label>
+            <input type="text" name="speaker" value="{{ old('speaker', $media->speaker) }}" required
                    class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
           </div>
           <div>
-            <label class="font-extrabold text-sm text-blue-900">Tanggal & Jam (opsional)</label>
+            <label class="font-extrabold text-sm text-blue-900">Tanggal & Jam</label>
             <input type="datetime-local" name="service_at"
                    value="{{ old('service_at', $media->service_at ? $media->service_at->format('Y-m-d\\TH:i') : '') }}"
+                   required
                    class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
           </div>
         </div>
@@ -95,9 +96,10 @@
         </div>
 
         <div>
-          <label class="font-extrabold text-sm text-blue-900">Ganti Thumbnail (opsional, maks 10MB)</label>
-          <input type="file" name="thumbnail" accept="image/*"
+          <label class="font-extrabold text-sm text-blue-900">Ganti Thumbnail (maks 10MB)</label>
+          <input type="file" name="thumbnail" accept="image/*" required
                  class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
+          <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 10MB.</div>
         </div>
 
         <label class="inline-flex items-center gap-3 font-extrabold text-sm text-blue-900 cursor-pointer">
@@ -115,4 +117,3 @@
   </div>
 </div>
 @endsection
-

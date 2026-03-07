@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\VisitorDailyStat;
 use Illuminate\Foundation\Console\ServeCommand;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->configureSeoHttpsUrls();
         $this->disableLoopbackViteHotFileForNonLoopbackClients();
         $this->configurePhpIniScanDirForArtisanServe();
+        $this->shareFooterVisitorStats();
     }
 
     private function configureSeoHttpsUrls(): void
@@ -132,5 +137,40 @@ class AppServiceProvider extends ServiceProvider
             ...ServeCommand::$passthroughVariables,
             'PHP_INI_SCAN_DIR',
         ]));
+    }
+
+    private function shareFooterVisitorStats(): void
+    {
+        View::composer('partials.footer', function ($view): void {
+            $stats = [
+                'daily' => 0,
+                'monthly' => 0,
+                'yearly' => 0,
+            ];
+
+            if (! Schema::hasTable('visitor_daily_stats')) {
+                $view->with('visitorStats', $stats);
+                return;
+            }
+
+            $today = Carbon::today();
+            $todayDate = $today->toDateString();
+            $monthStart = $today->copy()->startOfMonth()->toDateString();
+            $yearStart = $today->copy()->startOfYear()->toDateString();
+
+            $stats['daily'] = (int) (VisitorDailyStat::query()
+                ->whereDate('visit_date', $todayDate)
+                ->value('visitor_count') ?? 0);
+
+            $stats['monthly'] = (int) VisitorDailyStat::query()
+                ->whereBetween('visit_date', [$monthStart, $todayDate])
+                ->sum('visitor_count');
+
+            $stats['yearly'] = (int) VisitorDailyStat::query()
+                ->whereBetween('visit_date', [$yearStart, $todayDate])
+                ->sum('visitor_count');
+
+            $view->with('visitorStats', $stats);
+        });
     }
 }

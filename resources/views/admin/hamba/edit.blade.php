@@ -35,10 +35,11 @@
           <img src="{{ asset('storage/'.$item->photo_path) }}" alt="{{ $item->name }}" class="w-full h-full object-cover block">
         @endif
       </div>
-      <div class="min-w-[240px]">
+      <div class="w-full sm:min-w-[240px]">
         <label class="font-extrabold text-sm text-blue-900">Ganti Foto</label>
-        <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp"
+        <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp" required
                class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
+        <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 20MB.</div>
         @error('photo') <div class="mt-2 text-blue-900 font-bold text-sm bg-blue-50 p-2 rounded-lg border border-blue-100 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>{{ $message }}</div> @enderror
       </div>
     </div>
@@ -52,14 +53,14 @@
 
     <div>
       <label class="font-extrabold text-sm text-blue-900">Ringkasan (untuk kartu)</label>
-      <input name="roles_summary" value="{{ old('roles_summary', $item->roles_summary) }}" maxlength="255"
+      <input name="roles_summary" value="{{ old('roles_summary', $item->roles_summary) }}" maxlength="255" required
              class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
       @error('roles_summary') <div class="mt-2 text-blue-900 font-bold text-sm bg-blue-50 p-2 rounded-lg border border-blue-100 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>{{ $message }}</div> @enderror
     </div>
 
     <div>
       <label class="font-extrabold text-sm text-blue-900">Kontak</label>
-      <input name="contact" value="{{ old('contact', $item->contact) }}" maxlength="120"
+      <input name="contact" value="{{ old('contact', $item->contact) }}" maxlength="120" required
              class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
       @error('contact') <div class="mt-2 text-blue-900 font-bold text-sm bg-blue-50 p-2 rounded-lg border border-blue-100 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>{{ $message }}</div> @enderror
     </div>
@@ -67,7 +68,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div>
         <label class="font-extrabold text-sm text-blue-900">Urutan tampil</label>
-        <input type="number" name="sort_order" value="{{ old('sort_order', $item->sort_order) }}" min="0" max="1000000"
+        <input type="number" name="sort_order" value="{{ old('sort_order', $item->sort_order) }}" min="0" max="1000000" required
                class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         @error('sort_order') <div class="mt-2 text-blue-900 font-bold text-sm bg-blue-50 p-2 rounded-lg border border-blue-100 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>{{ $message }}</div> @enderror
       </div>
@@ -82,14 +83,14 @@
 
     <div>
       <label class="font-extrabold text-sm text-blue-900">Profile (halaman detail)</label>
-      <textarea name="profile" rows="7"
+      <textarea name="profile" rows="7" required
                 class="mt-2 w-full p-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">{{ old('profile', $item->profile) }}</textarea>
       @error('profile') <div class="mt-2 text-blue-900 font-bold text-sm bg-blue-50 p-2 rounded-lg border border-blue-100 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>{{ $message }}</div> @enderror
     </div>
 
     <div>
       <label class="font-extrabold text-sm text-blue-900">Bidang Pelayanan (halaman detail)</label>
-      <textarea name="service_fields" rows="5"
+      <textarea name="service_fields" rows="5" required
                 class="mt-2 w-full p-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">{{ old('service_fields', $item->service_fields) }}</textarea>
       @error('service_fields') <div class="mt-2 text-blue-900 font-bold text-sm bg-blue-50 p-2 rounded-lg border border-blue-100 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>{{ $message }}</div> @enderror
     </div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\EventItem;
 use App\Models\HambaTuhan;
 use App\Models\MajelisPeriod;
+use App\Models\Cabang;
+use App\Models\RenunganItem;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Schema;
 
@@ -25,6 +27,7 @@ class SitemapController extends Controller
         $addUrl(route('gereja.hamba'), $now, 'weekly', '0.7');
         $addUrl(route('gereja.majelis'), $now, 'monthly', '0.7');
         $addUrl(route('gereja.komisi'), $now, 'monthly', '0.6');
+        $addUrl(route('cabang'), $now, 'weekly', '0.7');
         $addUrl(route('event'), $now, 'weekly', '0.8');
         $addUrl(route('artikel'), $now, 'monthly', '0.4');
         $addUrl(route('renungan'), $now, 'monthly', '0.5');
@@ -83,6 +86,46 @@ class SitemapController extends Controller
                         $addUrl(
                             route('gereja.majelis.show', ['period' => $period->period]),
                             optional($period->updated_at)->toAtomString(),
+                            'monthly',
+                            '0.6'
+                        );
+                    });
+            }
+        } catch (\Throwable $e) {
+            // Ignore DB issues for public sitemap.
+        }
+
+        try {
+            if (Schema::hasTable('cabangs')) {
+                Cabang::query()
+                    ->where('is_published', true)
+                    ->orderBy('sort_order')
+                    ->orderByDesc('updated_at')
+                    ->get(['id', 'updated_at'])
+                    ->each(function (Cabang $cabang) use ($addUrl) {
+                        $addUrl(
+                            route('cabang.show', $cabang),
+                            optional($cabang->updated_at)->toAtomString(),
+                            'monthly',
+                            '0.6'
+                        );
+                    });
+            }
+        } catch (\Throwable $e) {
+            // Ignore DB issues for public sitemap.
+        }
+
+        try {
+            if (Schema::hasTable('renungan_items')) {
+                RenunganItem::query()
+                    ->where('is_published', true)
+                    ->orderByDesc('published_at')
+                    ->orderByDesc('updated_at')
+                    ->get(['slug', 'updated_at'])
+                    ->each(function (RenunganItem $renungan) use ($addUrl) {
+                        $addUrl(
+                            route('renungan.show', $renungan),
+                            optional($renungan->updated_at)->toAtomString(),
                             'monthly',
                             '0.6'
                         );

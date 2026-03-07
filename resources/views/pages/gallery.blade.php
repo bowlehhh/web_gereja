@@ -3,17 +3,18 @@
 @section('title','Galeri GKKA Samarinda | Foto Kegiatan GKKAI')
 @section('meta_description', 'Galeri foto kegiatan dan momen jemaat GKKA Samarinda (GKKAI Samarinda).')
 @section('meta_image', asset('img/fotogrj.jpeg'))
+@section('body_class', 'gallery-page')
 
 @section('content')
 @php
   $arr = $items instanceof \Illuminate\Pagination\AbstractPaginator ? $items->getCollection()->values() : collect($items)->values();
-  $featured = $arr->first();
-  $circles = $arr->slice(1, 6)->values();
-  $rest = $arr->slice(7)->values();
+  $titleCounts = $arr->groupBy(function ($item) {
+    return mb_strtolower(trim((string) $item->title));
+  })->map->count();
 @endphp
 
 <section class="gkka-gallery-hero">
-  <div class="relative z-10 gkka-container pt-28 pb-10 sm:pt-32 sm:pb-12">
+  <div class="relative z-10 gkka-container gkka-gallery-container pt-28 pb-10 sm:pt-32 sm:pb-12">
     <h1 class="gkka-hero-title text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">
       Galeri Foto Jemaat
     </h1>
@@ -24,95 +25,51 @@
 </section>
 
 <section class="gkka-gallery-body">
-  <div class="gkka-container py-12 sm:py-14">
+  <div class="gkka-container gkka-gallery-container py-12 sm:py-14">
     <div class="relative z-10 px-2 sm:px-0">
       {{-- blue transparent blobs (like reference depth) --}}
       <div class="absolute -top-24 -left-24 size-[520px] rounded-full bg-blue-400/10 blur-3xl pointer-events-none"></div>
       <div class="absolute -bottom-28 -right-24 size-[560px] rounded-full bg-blue-700/10 blur-3xl pointer-events-none"></div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-10 lg:gap-12 items-start">
-        {{-- Featured (left) --}}
-        <div class="max-w-[420px] mx-auto lg:mx-0">
-          @if($featured)
+      @if($arr->count() === 0)
+        <div class="rounded-2xl border border-slate-200 bg-white/70 backdrop-blur px-6 py-5 text-slate-600 font-semibold shadow-sm">
+          Belum ada foto gallery yang dipublish.
+        </div>
+      @else
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+          @foreach($arr as $it)
+            @php
+              $titleKey = mb_strtolower(trim((string) $it->title));
+              $photoCount = (int) ($titleCounts[$titleKey] ?? 1);
+            @endphp
             <button
               type="button"
-              class="js-gallery-item w-full text-left focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-yellow-300/60"
-              data-src="{{ asset('storage/'.$featured->image_path) }}"
-              data-title="{{ $featured->title }}"
-              data-caption="{{ $featured->caption ?? '' }}"
-              aria-label="Buka foto: {{ $featured->title }}"
+              class="js-gallery-item group w-full text-left rounded-2xl overflow-hidden border border-slate-300 bg-white/95 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-yellow-300/60"
+              data-src="{{ asset('storage/'.$it->image_path) }}"
+              data-title="{{ $it->title }}"
+              data-caption="{{ $it->caption ?? '' }}"
+              aria-label="Buka foto: {{ $it->title }}"
             >
-              <div class="rounded-[1.75rem] overflow-hidden border-4 gkka-gold-ring bg-white">
-                <div class="aspect-[16/9]">
-                  <img
-                    src="{{ asset('storage/'.$featured->image_path) }}"
-                    alt="{{ $featured->title }}"
-                    class="w-full h-full object-cover"
-                    loading="eager"
-                  >
-                </div>
+              <div class="relative aspect-[16/10] overflow-hidden border-b border-slate-200 bg-slate-100">
+                <img
+                  src="{{ asset('storage/'.$it->image_path) }}"
+                  alt="{{ $it->title }}"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                >
+                <div class="pointer-events-none absolute inset-0 ring-2 ring-inset ring-blue-100/90 group-hover:ring-blue-200 transition-colors duration-300"></div>
+              </div>
+              <div class="px-3 py-2.5 sm:px-4 sm:py-3">
+                <h3 class="text-[15px] sm:text-lg font-black text-slate-800 leading-tight line-clamp-2">
+                  {{ $it->title }}
+                </h3>
+                <div class="mt-1 text-xs sm:text-sm font-semibold text-slate-500">{{ number_format($photoCount, 0, ',', '.') }} Foto</div>
               </div>
             </button>
-          @else
-            <div class="rounded-[1.75rem] overflow-hidden border-4 gkka-gold-ring bg-white">
-              <div class="aspect-[16/9] grid place-items-center text-slate-400 font-black">
-                Belum ada foto
-              </div>
-            </div>
-          @endif
+          @endforeach
         </div>
-
-        {{-- Circles (right) --}}
-        <div class="w-full">
-          @if($arr->count() === 0)
-            <div class="rounded-2xl border border-slate-200 bg-white/70 backdrop-blur px-6 py-5 text-slate-600 font-semibold shadow-sm">
-              Belum ada foto gallery yang dipublish.
-            </div>
-          @elseif($circles->count())
-            <div class="grid grid-cols-3 gap-6 sm:gap-7 place-items-center">
-              @foreach($circles as $it)
-                <button
-                  type="button"
-                  class="js-gallery-item group relative size-28 sm:size-32 md:size-36 lg:size-40 rounded-full overflow-hidden border-4 gkka-gold-ring bg-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-yellow-300/60"
-                  data-src="{{ asset('storage/'.$it->image_path) }}"
-                  data-title="{{ $it->title }}"
-                  data-caption="{{ $it->caption ?? '' }}"
-                  aria-label="Buka foto: {{ $it->title }}"
-                >
-                  <img
-                    src="{{ asset('storage/'.$it->image_path) }}"
-                    alt="{{ $it->title }}"
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy"
-                  >
-                  <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/15 transition-colors"></div>
-                </button>
-              @endforeach
-            </div>
-          @else
-            <div class="rounded-2xl border border-slate-200 bg-white/70 backdrop-blur px-6 py-5 text-slate-600 font-semibold shadow-sm">
-              Belum ada foto lainnya untuk ditampilkan.
-            </div>
-          @endif
-        </div>
-      </div>
+      @endif
     </div>
-
-    {{-- Hidden items so modal navigation can include all photos --}}
-    @if($rest->count())
-      <div class="sr-only">
-        @foreach($rest as $it)
-          <button
-            type="button"
-            class="js-gallery-item"
-            data-src="{{ asset('storage/'.$it->image_path) }}"
-            data-title="{{ $it->title }}"
-            data-caption="{{ $it->caption ?? '' }}"
-            aria-label="Buka foto: {{ $it->title }}"
-          ></button>
-        @endforeach
-      </div>
-    @endif
 
     <div class="mt-10">
       @if(method_exists($items, 'links'))

@@ -32,24 +32,27 @@ class EventController extends Controller
         $data = $request->validate(
             [
                 'title' => ['required','string','max:150'],
-                'description' => ['nullable','string'],
-                'content' => ['nullable','string'],
-                'start_date' => ['nullable','date'],
-                'end_date' => ['nullable','date','after_or_equal:start_date'],
-                'location' => ['nullable','string','max:150'],
-                'thumbnail' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:20480'],
-                'photo' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:20480'],
-                'video' => ['nullable','file','mimes:mp4,webm,ogg','max:30720'],
+                'description' => ['required','string'],
+                'content' => ['required','string'],
+                'start_date' => ['required','date'],
+                'end_date' => ['required','date','after_or_equal:start_date'],
+                'location' => ['required','string','max:150'],
+                'thumbnail' => ['required','image','mimes:jpg,jpeg,png,webp','max:20480'],
+                'photo' => ['required','image','mimes:jpg,jpeg,png,webp','max:20480'],
+                'video' => ['required','file','mimes:mp4,webm,ogg','max:30720'],
                 'is_published' => ['nullable'],
             ],
             [
                 'end_date.after_or_equal' => 'Tanggal Selesai harus sama atau setelah Tanggal Mulai.',
+                'thumbnail.required' => 'Thumbnail wajib diupload.',
                 'thumbnail.image' => 'Thumbnail harus berupa file gambar.',
                 'thumbnail.mimes' => 'Thumbnail harus berformat jpg, jpeg, png, atau webp.',
                 'thumbnail.max' => 'Ukuran thumbnail maksimal 20MB.',
+                'photo.required' => 'Foto wajib diupload.',
                 'photo.image' => 'Foto harus berupa file gambar.',
                 'photo.mimes' => 'Foto harus berformat jpg, jpeg, png, atau webp.',
                 'photo.max' => 'Ukuran foto maksimal 20MB.',
+                'video.required' => 'Video wajib diupload.',
                 'video.mimes' => 'Video harus berformat mp4, webm, atau ogg.',
                 'video.max' => 'Ukuran video maksimal 30MB.',
             ],
@@ -83,11 +86,11 @@ class EventController extends Controller
 
         EventItem::create([
             'title' => $data['title'],
-            'description' => $data['description'] ?? null,
-            'content' => $data['content'] ?? null,
-            'start_date' => $data['start_date'] ?? null,
-            'end_date' => $data['end_date'] ?? null,
-            'location' => $data['location'] ?? null,
+            'description' => $data['description'],
+            'content' => $data['content'],
+            'start_date' => $data['start_date'],
+            'end_date' => $data['end_date'],
+            'location' => $data['location'],
             'thumbnail_path' => $thumbnailPath,
             'photo_path' => $photoPath,
             'video_path' => $videoPath,
@@ -107,24 +110,27 @@ class EventController extends Controller
         $data = $request->validate(
             [
                 'title' => ['required','string','max:150'],
-                'description' => ['nullable','string'],
-                'content' => ['nullable','string'],
-                'start_date' => ['nullable','date'],
-                'end_date' => ['nullable','date','after_or_equal:start_date'],
-                'location' => ['nullable','string','max:150'],
-                'thumbnail' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:20480'],
-                'photo' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:20480'],
-                'video' => ['nullable','file','mimes:mp4,webm,ogg','max:30720'],
+                'description' => ['required','string'],
+                'content' => ['required','string'],
+                'start_date' => ['required','date'],
+                'end_date' => ['required','date','after_or_equal:start_date'],
+                'location' => ['required','string','max:150'],
+                'thumbnail' => ['required','image','mimes:jpg,jpeg,png,webp','max:20480'],
+                'photo' => ['required','image','mimes:jpg,jpeg,png,webp','max:20480'],
+                'video' => ['required','file','mimes:mp4,webm,ogg','max:30720'],
                 'is_published' => ['nullable'],
             ],
             [
                 'end_date.after_or_equal' => 'Tanggal Selesai harus sama atau setelah Tanggal Mulai.',
+                'thumbnail.required' => 'Thumbnail wajib diupload.',
                 'thumbnail.image' => 'Thumbnail harus berupa file gambar.',
                 'thumbnail.mimes' => 'Thumbnail harus berformat jpg, jpeg, png, atau webp.',
                 'thumbnail.max' => 'Ukuran thumbnail maksimal 20MB.',
+                'photo.required' => 'Foto wajib diupload.',
                 'photo.image' => 'Foto harus berupa file gambar.',
                 'photo.mimes' => 'Foto harus berformat jpg, jpeg, png, atau webp.',
                 'photo.max' => 'Ukuran foto maksimal 20MB.',
+                'video.required' => 'Video wajib diupload.',
                 'video.mimes' => 'Video harus berformat mp4, webm, atau ogg.',
                 'video.max' => 'Ukuran video maksimal 30MB.',
             ],
@@ -142,11 +148,11 @@ class EventController extends Controller
         );
 
         $item->title = $data['title'];
-        $item->description = $data['description'] ?? null;
-        $item->content = $data['content'] ?? null;
-        $item->start_date = $data['start_date'] ?? null;
-        $item->end_date = $data['end_date'] ?? null;
-        $item->location = $data['location'] ?? null;
+        $item->description = $data['description'];
+        $item->content = $data['content'];
+        $item->start_date = $data['start_date'];
+        $item->end_date = $data['end_date'];
+        $item->location = $data['location'];
         $item->is_published = $request->boolean('is_published');
 
         if ($request->hasFile('thumbnail')) {

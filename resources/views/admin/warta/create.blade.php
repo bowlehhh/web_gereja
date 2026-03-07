@@ -41,25 +41,26 @@
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Tanggal</label>
-          <input type="date" name="date" value="{{ old('date') }}"
+          <input type="date" name="date" value="{{ old('date') }}" required
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         </div>
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Edisi</label>
-          <input name="edition" value="{{ old('edition') }}" placeholder="Misal: 05"
+          <input name="edition" value="{{ old('edition') }}" placeholder="Misal: 05" required
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         </div>
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Thumbnail (jpg/png/webp, max 20MB)</label>
-          <input type="file" name="thumbnail" accept="image/*"
+          <input type="file" name="thumbnail" accept="image/*" required
                  class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
+          <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 20MB.</div>
         </div>
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">PDF Warta (pdf, max 20MB)</label>
-          <input type="file" name="pdf" accept="application/pdf"
+          <input type="file" name="pdf" accept="application/pdf" required
                  class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
         </div>
 

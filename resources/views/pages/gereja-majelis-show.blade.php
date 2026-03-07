@@ -274,7 +274,7 @@
             {{ strtoupper($role) }}
           </div>
 
-          <h1 class="mt-3 text-4xl md:text-6xl font-serif font-semibold text-white leading-tight">
+          <h1 class="mt-3 text-3xl sm:text-4xl md:text-6xl font-serif font-semibold text-white leading-tight">
             {{ $item->name ?: 'Majelis' }}
           </h1>
 

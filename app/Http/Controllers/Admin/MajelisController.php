@@ -43,17 +43,21 @@ class MajelisController extends Controller
 
         $data = $request->validate([
             'period' => ['required', 'string', 'max:120', 'unique:majelis_periods,period'],
-            'about' => ['nullable', 'string'],
-            'service' => ['nullable', 'string'],
-            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
-            'gallery' => ['nullable', 'array', 'max:20'],
-            'gallery.*' => ['file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'about' => ['required', 'string'],
+            'service' => ['required', 'string'],
+            'thumbnail' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'gallery' => ['required', 'array', 'min:1', 'max:20'],
+            'gallery.*' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
         ], [
             'period.required' => 'Periode wajib diisi.',
             'period.unique' => 'Periode ini sudah ada.',
+            'thumbnail.required' => 'Thumbnail wajib diupload.',
             'thumbnail.mimes' => 'Thumbnail harus JPG/JPEG/PNG/WEBP.',
             'thumbnail.max' => 'Ukuran thumbnail maksimal 20MB.',
+            'gallery.required' => 'Gallery wajib diupload.',
+            'gallery.min' => 'Minimal 1 foto gallery.',
             'gallery.max' => 'Maksimal 20 foto gallery.',
+            'gallery.*.required' => 'Semua file gallery wajib berupa gambar.',
             'gallery.*.mimes' => 'Foto gallery harus JPG/JPEG/PNG/WEBP.',
             'gallery.*.max' => 'Ukuran foto gallery maksimal 20MB.',
         ]);
@@ -76,8 +80,8 @@ class MajelisController extends Controller
             'period' => $data['period'],
             'thumbnail_path' => $thumbPath,
             'gallery_paths' => $galleryPaths ?: null,
-            'about' => $data['about'] ?? null,
-            'service' => $data['service'] ?? null,
+            'about' => $data['about'],
+            'service' => $data['service'],
         ]);
 
         return redirect()
@@ -91,18 +95,22 @@ class MajelisController extends Controller
 
         $data = $request->validate([
             'period' => ['required', 'string', 'max:120', 'unique:majelis_periods,period,'.$majelisPeriod->id],
-            'about' => ['nullable', 'string'],
-            'service' => ['nullable', 'string'],
-            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
-            'gallery' => ['nullable', 'array', 'max:20'],
-            'gallery.*' => ['file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'about' => ['required', 'string'],
+            'service' => ['required', 'string'],
+            'thumbnail' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'gallery' => ['required', 'array', 'min:1', 'max:20'],
+            'gallery.*' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
             'clear_gallery' => ['nullable'],
         ], [
             'period.required' => 'Periode wajib diisi.',
             'period.unique' => 'Periode ini sudah ada.',
+            'thumbnail.required' => 'Thumbnail wajib diupload.',
             'thumbnail.mimes' => 'Thumbnail harus JPG/JPEG/PNG/WEBP.',
             'thumbnail.max' => 'Ukuran thumbnail maksimal 20MB.',
+            'gallery.required' => 'Gallery wajib diupload.',
+            'gallery.min' => 'Minimal 1 foto gallery.',
             'gallery.max' => 'Maksimal 20 foto gallery.',
+            'gallery.*.required' => 'Semua file gallery wajib berupa gambar.',
             'gallery.*.mimes' => 'Foto gallery harus JPG/JPEG/PNG/WEBP.',
             'gallery.*.max' => 'Ukuran foto gallery maksimal 20MB.',
         ]);
@@ -140,8 +148,8 @@ class MajelisController extends Controller
         }
 
         $majelisPeriod->period = $data['period'];
-        $majelisPeriod->about = $data['about'] ?? null;
-        $majelisPeriod->service = $data['service'] ?? null;
+        $majelisPeriod->about = $data['about'];
+        $majelisPeriod->service = $data['service'];
         $majelisPeriod->save();
 
         return redirect()
