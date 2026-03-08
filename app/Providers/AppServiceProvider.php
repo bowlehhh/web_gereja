@@ -155,20 +155,31 @@ class AppServiceProvider extends ServiceProvider
 
             $today = Carbon::today();
             $todayDate = $today->toDateString();
-            $monthStart = $today->copy()->startOfMonth()->toDateString();
-            $yearStart = $today->copy()->startOfYear()->toDateString();
+            $monthStart = $today->copy()->startOfMonth();
+            $yearStart = $today->copy()->startOfYear();
+            $yesterday = $today->copy()->subDay();
 
             $stats['daily'] = (int) (VisitorDailyStat::query()
                 ->whereDate('visit_date', $todayDate)
                 ->value('visitor_count') ?? 0);
 
-            $stats['monthly'] = (int) VisitorDailyStat::query()
-                ->whereBetween('visit_date', [$monthStart, $todayDate])
-                ->sum('visitor_count');
+            if ($yesterday->lt($monthStart)) {
+                $stats['monthly'] = 0;
+            } else {
+                $stats['monthly'] = (int) VisitorDailyStat::query()
+                    ->whereBetween('visit_date', [$monthStart->toDateString(), $yesterday->toDateString()])
+                    ->sum('visitor_count');
+            }
 
-            $stats['yearly'] = (int) VisitorDailyStat::query()
-                ->whereBetween('visit_date', [$yearStart, $todayDate])
-                ->sum('visitor_count');
+            $lastMonthEnd = $monthStart->copy()->subDay();
+
+            if ($lastMonthEnd->lt($yearStart)) {
+                $stats['yearly'] = 0;
+            } else {
+                $stats['yearly'] = (int) VisitorDailyStat::query()
+                    ->whereBetween('visit_date', [$yearStart->toDateString(), $lastMonthEnd->toDateString()])
+                    ->sum('visitor_count');
+            }
 
             $view->with('visitorStats', $stats);
         });
