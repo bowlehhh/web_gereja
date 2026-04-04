@@ -1,7 +1,7 @@
 @extends('layout.app')
 
-@section('title','Renungan GKKA-I INDONESIA | Jemaat Samarinda')
-@section('meta_description', 'Renungan harian GKKA-I INDONESIA Jemaat Samarinda: bacaan rohani untuk menguatkan iman setiap hari.')
+@section('title','Renungan GKKA INDONESIA | Jemaat Samarinda')
+@section('meta_description', 'Renungan harian GKKA INDONESIA Jemaat Samarinda: bacaan rohani untuk menguatkan iman setiap hari.')
 @section('meta_image', asset('img/tuhan%20yesus.jpeg'))
 
 @push('styles')

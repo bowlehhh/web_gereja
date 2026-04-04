@@ -1,19 +1,19 @@
-<footer class="bg-blue-900 text-white pt-6 sm:pt-7 md:pt-10 pb-3 sm:pb-4 md:pb-6">
+<footer class="bg-blue-900 text-white pt-5 sm:pt-7 md:pt-10 pb-3 sm:pb-4 md:pb-6">
   <div class="gkka-container">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-6 md:gap-8 lg:grid-cols-4 lg:gap-10">
       
       {{-- Brand & Contact --}}
-      <div class="sm:col-span-2 lg:col-span-1 space-y-2 md:space-y-4">
-        <div class="flex items-center gap-3 md:gap-4">
-          <div class="bg-white p-2 rounded-xl shadow-lg">
-             <img class="w-8 h-8 md:w-10 md:h-10 object-contain" src="{{ asset('assets/logo.png') }}" alt="Logo GKKA">
+      <div class="space-y-2 md:space-y-4 sm:col-span-2 lg:col-span-1">
+        <div class="flex items-center gap-2.5 sm:gap-3 md:gap-4">
+          <div class="bg-white p-1.5 sm:p-2 rounded-xl shadow-lg">
+             <img class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 object-contain" src="{{ asset('assets/logo.png') }}" alt="Logo GKKA">
           </div>
           <div>
-            <div class="font-black text-sm md:text-base leading-tight tracking-wide">GKKA-I INDONESIA</div>
-            <div class="text-blue-300 font-bold text-xs md:text-sm tracking-widest uppercase">Jemaat Samarinda</div>
+            <div class="font-black text-[13px] sm:text-sm md:text-base leading-tight tracking-wide">GKKA INDONESIA</div>
+            <div class="text-blue-300 font-bold text-[11px] sm:text-xs md:text-sm tracking-widest uppercase">Jemaat Samarinda</div>
           </div>
         </div>
-        <div class="text-blue-100 text-xs sm:text-sm leading-relaxed font-medium">
+        <div class="text-blue-100 text-[11px] sm:text-sm leading-relaxed font-medium">
           @php
             $adminEmail = 'gkkaisamarinda@yahoo.com';
             $adminPhoneDisplay = '+62 823-5052-6337';
@@ -38,19 +38,19 @@
       </div>
 
       {{-- Gereja Links --}}
-      <div>
+      <div class="hidden sm:block">
         <h3 class="font-black text-sm md:text-base mb-1.5 md:mb-3 tracking-wide border-b-2 border-blue-700 pb-1 md:pb-2 inline-block">Gereja</h3>
         <ul class="space-y-1.5 md:space-y-2">
           <li><a href="{{ route('gereja.sejarah') }}" class="text-blue-200 hover:text-white hover:pl-1 transition-all duration-300 font-medium text-sm">Sejarah</a></li>
           <li><a href="{{ route('gereja.hamba') }}" class="text-blue-200 hover:text-white hover:pl-1 transition-all duration-300 font-medium text-sm">Hamba Tuhan</a></li>
           <li><a href="{{ route('gereja.majelis') }}" class="text-blue-200 hover:text-white hover:pl-1 transition-all duration-300 font-medium text-sm">Majelis</a></li>
-          <li><a href="{{ route('gereja.komisi') }}" class="text-blue-200 hover:text-white hover:pl-1 transition-all duration-300 font-medium text-sm">Komisi</a></li>
+          <li><a href="{{ route('gereja.komisi') }}" class="text-blue-200 hover:text-white hover:pl-1 transition-all duration-300 font-medium text-sm">Bidang Pelayanan</a></li>
           <li><a href="{{ route('cabang') }}" class="text-blue-200 hover:text-white hover:pl-1 transition-all duration-300 font-medium text-sm">Cabang</a></li>
         </ul>
       </div>
 
       {{-- Event Links --}}
-      <div>
+      <div class="hidden sm:block">
         <h3 class="font-black text-sm md:text-base mb-1.5 md:mb-3 tracking-wide border-b-2 border-blue-700 pb-1 md:pb-2 inline-block">Event</h3>
         <ul class="space-y-1.5 md:space-y-2">
           <li><a href="{{ route('event') }}" class="text-blue-200 hover:text-white hover:pl-1 transition-all duration-300 font-medium text-sm">Event Terbaru</a></li>
@@ -58,7 +58,7 @@
       </div>
 
       {{-- Lainnya Links --}}
-      <div>
+      <div class="hidden sm:block">
         <h3 class="font-black text-sm md:text-base mb-1.5 md:mb-3 tracking-wide border-b-2 border-blue-700 pb-1 md:pb-2 inline-block">Lainnya</h3>
         <ul class="space-y-1.5 md:space-y-2">
           <li><a href="{{ route('media') }}" class="text-blue-200 hover:text-white hover:pl-1 transition-all duration-300 font-medium text-sm">Media</a></li>
@@ -68,7 +68,6 @@
           <li><a href="{{ route('kontak') }}" class="text-blue-200 hover:text-white hover:pl-1 transition-all duration-300 font-medium text-sm">Kontak</a></li>
         </ul>
       </div>
-
     </div>
 
     @php
@@ -78,7 +77,7 @@
       $yearlyVisitors = number_format((int) ($visitorStats['yearly'] ?? 0), 0, ',', '.');
     @endphp
 
-    <div class="mt-4 sm:mt-6 md:mt-7 rounded-xl border border-blue-800/80 bg-blue-950/35 p-2.5 sm:p-3">
+    <div class="mt-3 sm:mt-6 md:mt-7 rounded-xl border border-blue-800/80 bg-blue-950/35 p-2.5 sm:p-3">
       <div class="text-blue-100 text-[10px] sm:text-xs font-black tracking-[0.18em] uppercase">Statistik Pengunjung</div>
       <div class="mt-2 grid grid-cols-3 gap-2">
         <div class="rounded-lg border border-blue-700/70 bg-blue-900/55 px-2 py-1.5 sm:px-3 sm:py-2 text-center">
@@ -96,8 +95,8 @@
       </div>
     </div>
 
-    <div class="mt-4 sm:mt-5 md:mt-10 pt-3 md:pt-6 border-t border-blue-800 text-center text-blue-400 text-[11px] sm:text-xs md:text-sm font-bold tracking-wide">
-      &copy; {{ date('Y') }} GKKA-I INDONESIA. All rights reserved.
+    <div class="mt-3 sm:mt-5 md:mt-10 pt-3 md:pt-6 border-t border-blue-800 text-center text-blue-400 text-[10px] sm:text-xs md:text-sm font-bold tracking-wide">
+      &copy; {{ date('Y') }} GKKA INDONESIA. All rights reserved.
     </div>
   </div>
 </footer>

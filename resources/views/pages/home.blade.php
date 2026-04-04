@@ -1,7 +1,7 @@
 @extends('layout.app')
 
-@section('title', 'GKKA-I INDONESIA | Jemaat Samarinda')
-@section('meta_description', 'Website resmi GKKA-I INDONESIA Jemaat Samarinda: info ibadah, event, warta jemaat, media, galeri, dan pelayanan.')
+@section('title', 'GKKA INDONESIA | Jemaat Samarinda')
+@section('meta_description', 'Website resmi GKKA INDONESIA Jemaat Samarinda: info ibadah, event, warta jemaat, media, galeri, dan pelayanan.')
 @section('meta_image', asset('img/fotogrj.jpeg'))
 @section('body_class', 'home-page')
 
@@ -22,6 +22,87 @@
     ['src' => asset('img/sekolah minggu.jpeg')],
   ];
   $renunganBackdrop = asset('img/' . rawurlencode('tuhan yesus.jpeg'));
+  $commissionSchedules = [
+    [
+      'title' => 'Komisi Wanita Rut',
+      'title_class' => 'text-yellow-300',
+      'items' => [
+        ['text' => 'Ibadah sebulan sekali'],
+        ['text' => 'Minggu ke-2'],
+        ['text' => 'Setelah Kebaktian Umum di gereja'],
+      ],
+    ],
+    [
+      'title' => 'Komisi Sekolah Minggu Narwastu',
+      'title_class' => 'text-yellow-300',
+      'items' => [
+        ['text' => 'Setiap Hari Minggu'],
+        ['text' => '09.00 WITA'],
+        ['text' => 'Di gereja'],
+      ],
+    ],
+    [
+      'title' => 'Komisi Remaja Betania',
+      'title_class' => 'text-yellow-300',
+      'items' => [
+        ['text' => 'Setiap Hari Minggu'],
+        ['text' => '09.00 WITA di gereja'],
+        ['text' => 'Minggu ke-1 gabung Kebaktian Umum'],
+        ['text' => 'Minggu ke-2 s/d terakhir ibadah remaja'],
+      ],
+    ],
+    [
+      'title' => 'Komisi Pemuda Eirene',
+      'title_class' => 'text-yellow-300',
+      'items' => [
+        ['text' => 'Setiap Hari Sabtu'],
+        ['text' => '18.00 WITA'],
+        ['text' => 'Di gereja'],
+      ],
+    ],
+    [
+      'title' => 'Komisi Pria Hizkia',
+      'title_class' => 'text-yellow-300',
+      'items' => [
+        ['text' => 'Ibadah sebulan sekali'],
+        ['text' => 'Hari & jam menyusul'],
+      ],
+    ],
+  ];
+  $worshipSchedules = [
+    [
+      'title' => 'Ibadah Umum',
+      'title_class' => 'text-white',
+      'items' => [
+        ['text' => 'Setiap Hari Minggu'],
+        ['text' => '09.00 WITA', 'highlight' => true],
+      ],
+    ],
+    [
+      'title' => 'Sekolah Minggu Narwastu',
+      'title_class' => 'text-white',
+      'items' => [
+        ['text' => 'Setiap Hari Minggu'],
+        ['text' => '09.00 WITA', 'highlight' => true],
+      ],
+    ],
+    [
+      'title' => 'Ibadah Rumah Tangga',
+      'title_class' => 'text-white',
+      'items' => [
+        ['text' => 'Setiap Hari Kamis'],
+        ['text' => '19.00 WITA', 'highlight' => true],
+      ],
+    ],
+    [
+      'title' => 'Persekutuan Doa',
+      'title_class' => 'text-white',
+      'items' => [
+        ['text' => 'Setiap Hari Sabtu'],
+        ['text' => '17.00 WITA', 'highlight' => true],
+      ],
+    ],
+  ];
 @endphp
 
 {{-- INTRO OVERLAY (like GKKA Balikpapan style) --}}
@@ -33,19 +114,19 @@
     <div class="gkka-intro__logo-wrap mx-auto">
       <img class="gkka-intro__logo" src="{{ asset('assets/logo.png') }}" alt="Logo GKKA">
     </div>
-    <div class="mt-6 text-sm font-black tracking-[0.35em] text-white/80 uppercase">GKKA-I INDONESIA</div>
-    <div class="mt-2 text-3xl sm:text-4xl md:text-5xl font-black tracking-tight gkka-hero-title">
+    <div class="mt-4 text-[0.72rem] sm:mt-6 sm:text-sm font-black tracking-[0.28em] sm:tracking-[0.35em] text-white/80 uppercase">GKKA INDONESIA</div>
+    <div class="mt-2 text-[1.7rem] sm:text-4xl md:text-5xl font-black tracking-tight gkka-hero-title">
       Jemaat Samarinda
     </div>
     <button id="gkkaIntroSkip"
-            class="mt-10 h-11 px-7 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-black shadow-sm transition inline-flex items-center justify-center">
+            class="mt-7 h-10 px-6 text-sm sm:mt-10 sm:h-11 sm:px-7 sm:text-base rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-black shadow-sm transition inline-flex items-center justify-center">
       Masuk
     </button>
   </div>
 </div>
 
 {{-- HERO SECTION --}}
-<section class="relative h-[100svh] min-h-[520px] w-full overflow-hidden">
+<section class="relative h-[100svh] min-h-[520px] max-sm:h-[84svh] max-sm:min-h-[430px] w-full overflow-hidden">
   {{-- Background (slideshow) --}}
   <div class="absolute inset-0">
     <div id="gkkaHeroBgA" class="absolute inset-0 bg-blue-950 bg-no-repeat bg-cover bg-center scale-100 sm:scale-105 transition-opacity duration-1000 opacity-100"
@@ -53,26 +134,26 @@
     <div id="gkkaHeroBgB" class="absolute inset-0 bg-blue-950 bg-no-repeat bg-cover bg-center scale-100 sm:scale-105 transition-opacity duration-1000 opacity-0"
          style="background-image:url('{{ $homeSlides[1]['src'] ?? $homeSlides[0]['src'] }}')"></div>
 
-    <div class="absolute inset-0 bg-blue-900/55 mix-blend-multiply"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/95 via-blue-900/30 to-transparent"></div>
+    <div class="absolute inset-0 bg-blue-900/45 sm:bg-blue-900/55 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/92 via-blue-900/24 to-transparent sm:from-blue-900/95 sm:via-blue-900/30"></div>
   </div>
 
   {{-- Content --}}
-  <div class="relative h-full gkka-container flex flex-col justify-center items-center text-center text-white z-10 pt-24 sm:pt-0 pb-10 sm:pb-0">
-      <div class="font-black text-blue-200 tracking-widest uppercase mb-4 text-sm md:text-base animate-fade-in-up">
+  <div class="relative h-full gkka-container flex flex-col justify-center items-center text-center text-white z-10 pt-24 sm:pt-0 pb-10 sm:pb-0 max-sm:pt-[5.2rem] max-sm:pb-8">
+      <div class="font-black text-blue-200 tracking-widest uppercase mb-4 text-sm md:text-base animate-fade-in-up max-sm:mb-[0.65rem] max-sm:text-[0.72rem] max-sm:tracking-[0.22em]">
         Selamat Datang
       </div>
-      <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-tight drop-shadow-lg animate-fade-in-up delay-100">
-        GKKA-I INDONESIA<br><span class="text-blue-200">Jemaat Samarinda</span>
+      <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-tight drop-shadow-lg animate-fade-in-up delay-100 max-sm:mb-[0.9rem] max-sm:text-[clamp(1.7rem,7.4vw,1.95rem)] max-sm:leading-[1.06]">
+        GKKA INDONESIA<br><span class="text-blue-200">Jemaat Samarinda</span>
       </h1>
-      <p class="max-w-2xl text-base sm:text-lg md:text-xl text-blue-100 font-medium mb-10 leading-relaxed drop-shadow-md animate-fade-in-up delay-200">
+      <p class="max-w-2xl text-base sm:text-lg md:text-xl text-blue-100 font-medium mb-10 leading-relaxed drop-shadow-md animate-fade-in-up delay-200 max-sm:max-w-[19.5rem] max-sm:mb-6 max-sm:text-[0.92rem] max-sm:leading-[1.55]">
         Informasi pelayanan, jadwal, komisi, event, dan dokumentasi kegiatan jemaat.
       </p>
-      <div class="flex flex-wrap gap-4 justify-center animate-fade-in-up delay-300">
-        <a href="{{ route('kontak') }}" class="px-8 py-3.5 rounded-full bg-yellow-500 text-blue-900 font-black shadow-xl hover:bg-yellow-400 hover:scale-105 transition-all duration-300">
+      <div class="flex flex-wrap gap-4 justify-center animate-fade-in-up delay-300 max-sm:gap-3">
+        <a href="{{ route('kontak') }}" class="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-yellow-500 text-blue-900 font-black shadow-xl hover:bg-yellow-400 hover:scale-105 transition-all duration-300 max-sm:px-[1.15rem] max-sm:py-[0.72rem] max-sm:text-[0.875rem]">
           Hubungi Kami
         </a>
-        <a href="{{ route('gereja.sejarah') }}" class="px-8 py-3.5 rounded-full bg-white text-blue-900 font-black shadow-xl hover:bg-gray-100 hover:scale-105 transition-all duration-300">
+        <a href="{{ route('gereja.sejarah') }}" class="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-white text-blue-900 font-black shadow-xl hover:bg-gray-100 hover:scale-105 transition-all duration-300 max-sm:px-4 max-sm:py-[0.72rem] max-sm:text-[0.875rem]">
           Sejarah Gereja
         </a>
       </div>
@@ -272,12 +353,12 @@
       {{-- Image --}}
       <a href="{{ route('gallery') }}" class="relative group" aria-label="Buka halaman Gallery">
         <div class="absolute inset-0 bg-blue-600 rounded-3xl rotate-3 opacity-20 group-hover:rotate-6 transition-transform duration-500"></div>
-        <img src="{{ asset('img/doa.jpeg') }}" alt="GKKA Samarinda" class="relative w-full h-64 sm:h-80 lg:h-[420px] object-cover rounded-3xl shadow-2xl transform transition-transform duration-500 group-hover:-translate-y-2" onerror="this.onerror=null;this.src='{{ $heroImage }}';">
+        <img src="{{ asset('img/doa.jpeg') }}" alt="GKKA Samarinda" class="relative w-full h-52 sm:h-80 lg:h-[420px] object-cover rounded-3xl shadow-2xl transform transition-transform duration-500 group-hover:-translate-y-2" onerror="this.onerror=null;this.src='{{ $heroImage }}';">
       </a>
 
       {{-- Video / Text --}}
       <div>
-        <div class="w-full h-56 sm:h-72 md:h-[400px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-black/5">
+        <div class="w-full h-48 sm:h-72 md:h-[400px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-black/5">
           <iframe
             src="https://www.youtube.com/embed/mYXhv8ZUJa4?start=29&rel=0"
             title="YouTube video"
@@ -298,21 +379,21 @@
     <img
       src="{{ asset('img/majelis potong kue.jpeg') }}"
       alt="GKKA Samarinda"
-      class="w-full h-full object-cover object-center opacity-70"
+      class="w-full h-full object-cover object-center opacity-45 sm:opacity-70"
       onerror="this.onerror=null;this.src='{{ asset('img/fotogrj.jpeg') }}';"
     >
-    <div class="absolute inset-0 bg-blue-950/65 mix-blend-multiply"></div>
-    <div class="absolute inset-0 bg-gradient-to-b from-blue-950/80 via-blue-900/55 to-blue-900/80"></div>
+    <div class="absolute inset-0 bg-blue-950/72 sm:bg-blue-950/65 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-blue-950/88 via-blue-900/62 to-blue-900/84 sm:from-blue-950/80 sm:via-blue-900/55 sm:to-blue-900/80"></div>
   </div>
 
   {{-- Background Decoration --}}
-  <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none">
-     <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
-     <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-600 rounded-full blur-3xl"></div>
+  <div class="absolute top-0 left-0 w-full h-full opacity-10 sm:opacity-15 pointer-events-none">
+     <div class="absolute -top-20 -left-20 w-64 h-64 sm:-top-24 sm:-left-24 sm:w-96 sm:h-96 bg-blue-400 rounded-full blur-3xl"></div>
+     <div class="absolute bottom-0 right-0 w-72 h-72 sm:w-[500px] sm:h-[500px] bg-blue-600 rounded-full blur-3xl"></div>
   </div>
 
   <div class="gkka-container relative z-10">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="hidden sm:grid grid-cols-1 lg:grid-cols-2 gap-8">
       
       {{-- JADWAL KOMISI --}}
       <div class="group relative rounded-3xl overflow-hidden bg-white/10 border border-white/20 shadow-2xl backdrop-blur-xl hover:border-white/40 transition-colors duration-300">
@@ -323,47 +404,18 @@
             <span class="w-2 h-8 bg-yellow-500 rounded-full"></span>
             Jadwal Komisi
           </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div class="space-y-2">
-              <h3 class="font-bold text-yellow-400 text-lg">Komisi Wanita Rut</h3>
-              <p class="text-blue-100 text-sm leading-relaxed">
-                Ibadah sebulan sekali<br>
-                Minggu ke-2<br>
-                Setelah Kebaktian Umum di gereja
-              </p>
-            </div>
-            <div class="space-y-2">
-              <h3 class="font-bold text-yellow-400 text-lg">Komisi Sekolah Minggu Narwastu</h3>
-              <p class="text-blue-100 text-sm leading-relaxed">
-                Setiap Hari Minggu<br>
-                09.00 WITA<br>
-                di gereja
-              </p>
-            </div>
-            <div class="space-y-2">
-              <h3 class="font-bold text-yellow-400 text-lg">Komisi Remaja Betania</h3>
-              <p class="text-blue-100 text-sm leading-relaxed">
-                Setiap Hari Minggu<br>
-                09.00 WITA • di gereja<br>
-                Minggu ke-1: gabung Kebaktian Umum<br>
-                Minggu ke-2 s/d terakhir: ibadah remaja
-              </p>
-            </div>
-            <div class="space-y-2">
-              <h3 class="font-bold text-yellow-400 text-lg">Komisi Pemuda Eirene</h3>
-              <p class="text-blue-100 text-sm leading-relaxed">
-                Setiap Hari Sabtu<br>
-                18.00 WITA<br>
-                di gereja
-              </p>
-            </div>
-            <div class="space-y-2 sm:col-span-2">
-              <h3 class="font-bold text-yellow-400 text-lg">Komisi Pria Hizkia</h3>
-              <p class="text-blue-100 text-sm leading-relaxed">
-                Ibadah sebulan sekali<br>
-                (hari &amp; jam menyusul)
-              </p>
-            </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            @foreach($commissionSchedules as $schedule)
+              <div class="space-y-2 {{ $loop->last ? 'sm:col-span-2' : '' }}">
+                <h3 class="font-bold text-yellow-400 text-lg">{{ $schedule['title'] }}</h3>
+                <p class="text-blue-100 text-sm leading-relaxed">
+                  @foreach($schedule['items'] as $item)
+                    @if(! $loop->first)<br>@endif
+                    {{ $item['text'] }}
+                  @endforeach
+                </p>
+              </div>
+            @endforeach
           </div>
         </div>
       </div>
@@ -378,34 +430,70 @@
             Jadwal Ibadah
           </h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div class="space-y-2">
-              <h3 class="font-bold text-white text-lg">Ibadah Umum</h3>
-              <p class="text-blue-100 text-sm leading-relaxed">
-                Setiap Hari Minggu<br>
-                <span class="font-semibold text-yellow-400">09.00 WITA</span>
-              </p>
-            </div>
-            <div class="space-y-2">
-              <h3 class="font-bold text-white text-lg">Sekolah Minggu “Narwastu”</h3>
-              <p class="text-blue-100 text-sm leading-relaxed">
-                Setiap Hari Minggu<br>
-                <span class="font-semibold text-yellow-400">09.00 WITA</span>
-              </p>
-            </div>
-            <div class="space-y-2">
-              <h3 class="font-bold text-white text-lg">Ibadah Rumah Tangga</h3>
-              <p class="text-blue-100 text-sm leading-relaxed">
-                Setiap Hari Kamis<br>
-                <span class="font-semibold text-yellow-400">19.00 WITA</span>
-              </p>
-            </div>
-            <div class="space-y-2">
-              <h3 class="font-bold text-white text-lg">Persekutuan Doa</h3>
-              <p class="text-blue-100 text-sm leading-relaxed">
-                Setiap Hari Sabtu<br>
-                <span class="font-semibold text-yellow-400">17.00 WITA</span>
-              </p>
-            </div>
+            @foreach($worshipSchedules as $schedule)
+              <div class="space-y-2">
+                <h3 class="font-bold text-white text-lg">{{ $schedule['title'] }}</h3>
+                <p class="text-blue-100 text-sm leading-relaxed">
+                  @foreach($schedule['items'] as $item)
+                    @if(! $loop->first)<br>@endif
+                    <span class="{{ !empty($item['highlight']) ? 'font-semibold text-yellow-400' : '' }}">{{ $item['text'] }}</span>
+                  @endforeach
+                </p>
+              </div>
+            @endforeach
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sm:hidden grid grid-cols-1 gap-5">
+      
+      {{-- JADWAL KOMISI --}}
+      <div class="gkka-home-schedule-panel group transition-colors duration-300 hover:border-white/35">
+        <div class="gkka-home-schedule-panel__body">
+          <h2 class="gkka-home-schedule-panel__heading">
+            <span class="gkka-home-schedule-panel__accent"></span>
+            Jadwal Komisi
+          </h2>
+          <div class="gkka-home-schedule-grid">
+            @foreach($commissionSchedules as $schedule)
+              <article class="gkka-home-schedule-card">
+                <h3 class="gkka-home-schedule-card__title {{ $schedule['title_class'] }}">{{ $schedule['title'] }}</h3>
+                <ul class="gkka-home-schedule-card__list">
+                  @foreach($schedule['items'] as $item)
+                    <li class="gkka-home-schedule-card__item">
+                      <span class="gkka-home-schedule-card__bullet"></span>
+                      <span>{{ $item['text'] }}</span>
+                    </li>
+                  @endforeach
+                </ul>
+              </article>
+            @endforeach
+          </div>
+        </div>
+      </div>
+
+      {{-- JADWAL IBADAH --}}
+      <div class="gkka-home-schedule-panel group transition-colors duration-300 hover:border-white/35">
+        <div class="gkka-home-schedule-panel__body">
+          <h2 class="gkka-home-schedule-panel__heading">
+            <span class="gkka-home-schedule-panel__accent"></span>
+            Jadwal Ibadah
+          </h2>
+          <div class="gkka-home-schedule-grid">
+            @foreach($worshipSchedules as $schedule)
+              <article class="gkka-home-schedule-card">
+                <h3 class="gkka-home-schedule-card__title {{ $schedule['title_class'] }}">{{ $schedule['title'] }}</h3>
+                <ul class="gkka-home-schedule-card__list">
+                  @foreach($schedule['items'] as $item)
+                    <li class="gkka-home-schedule-card__item">
+                      <span class="gkka-home-schedule-card__bullet"></span>
+                      <span class="{{ !empty($item['highlight']) ? 'font-black text-yellow-300' : '' }}">{{ $item['text'] }}</span>
+                    </li>
+                  @endforeach
+                </ul>
+              </article>
+            @endforeach
           </div>
         </div>
       </div>
@@ -417,7 +505,7 @@
 {{-- SEJARAH SIMPLE --}}
 <section class="gkka-section bg-white">
   <div class="gkka-container">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-sm:gap-y-[1.6rem]">
       <div class="relative" data-sejarah-slider tabindex="0">
          <div class="absolute -inset-4 bg-blue-100 rounded-3xl -rotate-2"></div>
          <div class="relative w-full h-64 sm:h-80 lg:h-[420px] overflow-hidden rounded-3xl shadow-xl">
@@ -456,7 +544,7 @@
            </svg>
          </button>
       </div>
-      <div>
+      <div class="max-sm:pt-[0.35rem]">
         <h2 class="text-3xl md:text-4xl font-black text-blue-900 mb-6">Sejarah Gereja</h2>
         <p class="text-slate-600 text-lg leading-relaxed mb-8">
            Ringkasan sejarah berdirinya GKKA Indonesia Jemaat Samarinda. Silakan lengkapi isi sesuai data gereja.

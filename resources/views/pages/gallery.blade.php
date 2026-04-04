@@ -11,16 +11,26 @@
   $titleCounts = $arr->groupBy(function ($item) {
     return mb_strtolower(trim((string) $item->title));
   })->map->count();
+  $hero = asset('img/fotogrj.jpeg');
 @endphp
 
-<section class="gkka-gallery-hero">
-  <div class="relative z-10 gkka-container gkka-gallery-container pt-28 pb-10 sm:pt-32 sm:pb-12">
-    <h1 class="gkka-hero-title text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">
-      Galeri Foto Jemaat
-    </h1>
-    <p class="mt-3 text-sm sm:text-base text-white/80 font-semibold">
-      Jelajahi momen indah GKKA Samarinda
-    </p>
+<section class="relative overflow-hidden text-white">
+  <div class="absolute inset-0">
+    <img src="{{ $hero }}" alt="Galeri GKKA Samarinda" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='{{ asset('assets/logo.png') }}';">
+    <div class="absolute inset-0 bg-blue-950/65 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-blue-950/80 via-blue-950/35 to-transparent"></div>
+  </div>
+
+  <div class="gkka-container relative pt-28 pb-14 sm:pt-32 sm:pb-16">
+    <div class="max-w-2xl text-center mx-auto">
+      <h1 class="gkka-hero-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05]" style="font-family: 'Montserrat', 'Poppins', 'Nunito Sans', 'Segoe UI', sans-serif;">
+        Galeri Foto
+        <span class="block text-blue-200">GKKA Samarinda</span>
+      </h1>
+      <p class="mt-5 text-sm sm:text-base md:text-lg text-blue-100 font-semibold leading-relaxed">
+        Jelajahi momen indah GKKA Samarinda.
+      </p>
+    </div>
   </div>
 </section>
 

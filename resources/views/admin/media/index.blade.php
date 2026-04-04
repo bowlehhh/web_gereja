@@ -7,7 +7,7 @@
 <div class="flex items-end justify-between gap-4 flex-wrap mb-6">
   <div>
     <h1 class="text-2xl font-black tracking-tight text-blue-900">Kelola Media</h1>
-    <p class="text-blue-900 font-semibold mt-1">Masukkan link YouTube setelah ibadah live streaming selesai.</p>
+    <p class="text-blue-900 font-semibold mt-1">Link YouTube bisa diisi sekarang atau menyusul setelah tayangan siap.</p>
   </div>
   <div class="flex gap-2 flex-wrap">
     <a class="h-10 px-4 rounded-xl border border-blue-900 bg-white hover:bg-blue-50 text-blue-900 font-extrabold text-sm inline-flex items-center transition"
@@ -53,8 +53,12 @@
               Status: <span class="font-bold">{{ $it->is_published ? 'PUBLISHED' : 'DRAFT' }}</span>
             </div>
             <div class="pt-2">
-              <a href="{{ $it->youtube_url }}" target="_blank" rel="noopener"
-                 class="text-blue-900 font-black hover:underline break-all">Buka YouTube</a>
+              @if($it->youtube_url)
+                <a href="{{ $it->youtube_url }}" target="_blank" rel="noopener"
+                   class="text-blue-900 font-black hover:underline break-all">Buka YouTube</a>
+              @else
+                <span class="text-slate-500 font-bold">Link YouTube belum diisi</span>
+              @endif
             </div>
           </div>
 

@@ -75,14 +75,20 @@
                     </div>
 
                     @php
-                        $turnstileKey = config('services.turnstile.site_key');
-                        $showTurnstile = !empty($turnstileKey) && (!app()->environment('local') || (bool) config('services.turnstile.enforce_local', false));
+                        $showTurnstile = \App\Support\Turnstile::shouldRender(request());
+                        $turnstileKey = \App\Support\Turnstile::siteKey();
                     @endphp
                     @if($showTurnstile)
                         <div class="pt-2">
                             <div class="cf-turnstile" data-sitekey="{{ $turnstileKey }}"></div>
                             <p class="mt-2 text-xs text-slate-400 font-semibold">
                                 Verifikasi untuk mencegah spam.
+                            </p>
+                        </div>
+                    @else
+                        <div class="pt-2">
+                            <p class="text-xs text-slate-400 font-semibold">
+                                Mode local/development aktif. Verifikasi Cloudflare dilewati agar login lokal tetap lancar.
                             </p>
                         </div>
                     @endif

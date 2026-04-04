@@ -125,16 +125,27 @@
     @else
       <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach($items as $it)
-          <a href="{{ $it->youtube_url }}" target="_blank" rel="noopener"
-             class="group rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
+          @php
+            $hasYoutubeLink = !empty($it->youtube_url);
+          @endphp
+          @if($hasYoutubeLink)
+            <a href="{{ $it->youtube_url }}" target="_blank" rel="noopener"
+               class="group rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl">
+          @else
+            <article class="group rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm opacity-95 transition-all">
+          @endif
             <div class="aspect-[16/9] bg-slate-100 relative overflow-hidden">
               @if($it->thumbnail_url)
                 <img src="{{ $it->thumbnail_url }}" alt="{{ $it->title }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
               @endif
               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
               <div class="absolute inset-0 grid place-items-center">
-                <div class="size-14 rounded-2xl bg-white/90 backdrop-blur text-blue-900 grid place-items-center shadow-lg group-hover:scale-105 transition">
-                  <svg class="w-7 h-7 translate-x-[1px]" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                <div class="size-14 rounded-2xl {{ $hasYoutubeLink ? 'bg-white/90 text-blue-900 group-hover:scale-105' : 'bg-slate-800/85 text-white' }} backdrop-blur grid place-items-center shadow-lg transition">
+                  @if($hasYoutubeLink)
+                    <svg class="w-7 h-7 translate-x-[1px]" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  @else
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h10M3 17h14"></path></svg>
+                  @endif
                 </div>
               </div>
             </div>
@@ -151,8 +162,15 @@
                   &nbsp;
                 @endif
               </div>
+              <div class="mt-3 text-sm font-black {{ $hasYoutubeLink ? 'text-blue-700' : 'text-slate-500' }}">
+                {{ $hasYoutubeLink ? 'Tonton di YouTube' : 'Video belum tersedia' }}
+              </div>
             </div>
-          </a>
+          @if($hasYoutubeLink)
+            </a>
+          @else
+            </article>
+          @endif
         @endforeach
       </div>
 

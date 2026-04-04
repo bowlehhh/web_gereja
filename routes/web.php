@@ -11,6 +11,7 @@ use App\Http\Controllers\HambaTuhanPublicController;
 use App\Http\Controllers\MajelisPublicController;
 use App\Http\Controllers\MediaPublicController;
 use App\Http\Controllers\CabangPublicController;
+use App\Http\Controllers\BidangPelayananPublicController;
 use App\Http\Controllers\RenunganPublicController;
 use App\Http\Controllers\SitemapController;
 
@@ -21,6 +22,7 @@ use App\Http\Controllers\Admin\HambaTuhanController;
 use App\Http\Controllers\Admin\MajelisController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\CabangController;
+use App\Http\Controllers\Admin\BidangPelayananController;
 use App\Http\Controllers\Admin\RenunganController;
 
 /*
@@ -40,7 +42,8 @@ Route::get('/gereja/hamba-tuhan', [HambaTuhanPublicController::class, 'index'])-
 Route::get('/gereja/hamba-tuhan/{hambaTuhan}', [HambaTuhanPublicController::class, 'show'])->name('gereja.hamba.show');
 Route::get('/gereja/majelis', [MajelisPublicController::class, 'index'])->name('gereja.majelis');
 Route::get('/gereja/majelis/{period}', [MajelisPublicController::class, 'show'])->name('gereja.majelis.show');
-Route::get('/gereja/komisi', fn () => view('pages.gereja-komisi'))->name('gereja.komisi');
+Route::get('/gereja/komisi', [BidangPelayananPublicController::class, 'index'])->name('gereja.komisi');
+Route::get('/gereja/komisi/{slug}', [BidangPelayananPublicController::class, 'show'])->name('gereja.komisi.show');
 Route::get('/cabang', [CabangPublicController::class, 'index'])->name('cabang');
 Route::get('/cabang/{cabang}', [CabangPublicController::class, 'show'])->name('cabang.show');
 
@@ -134,6 +137,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/cabang/{cabang}/edit', [CabangController::class, 'edit'])->name('admin.cabang.edit');
     Route::put('/cabang/{cabang}', [CabangController::class, 'update'])->name('admin.cabang.update');
     Route::delete('/cabang/{cabang}', [CabangController::class, 'destroy'])->name('admin.cabang.destroy');
+
+    // BIDANG PELAYANAN ADMIN (CRUD)
+    Route::get('/bidang-pelayanan', [BidangPelayananController::class, 'index'])->name('admin.bidang.index');
+    Route::get('/bidang-pelayanan/create', [BidangPelayananController::class, 'create'])->name('admin.bidang.create');
+    Route::post('/bidang-pelayanan', [BidangPelayananController::class, 'store'])->name('admin.bidang.store');
+    Route::get('/bidang-pelayanan/{bidangPelayanan}/edit', [BidangPelayananController::class, 'edit'])->name('admin.bidang.edit');
+    Route::put('/bidang-pelayanan/{bidangPelayanan}', [BidangPelayananController::class, 'update'])->name('admin.bidang.update');
+    Route::delete('/bidang-pelayanan/{bidangPelayanan}', [BidangPelayananController::class, 'destroy'])->name('admin.bidang.destroy');
 
     // RENUNGAN ADMIN (CRUD)
     Route::get('/renungan', [RenunganController::class, 'index'])->name('admin.renungan.index');

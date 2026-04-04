@@ -24,8 +24,12 @@ class MediaItem extends Model
         'is_published' => 'boolean',
     ];
 
-    public static function extractYoutubeId(string $value): ?string
+    public static function extractYoutubeId(?string $value): ?string
     {
+        if ($value === null) {
+            return null;
+        }
+
         $value = trim($value);
         if ($value === '') return null;
 

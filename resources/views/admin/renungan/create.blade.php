@@ -1,6 +1,6 @@
 @extends('layout.admin')
 
-@section('title', 'Tambah Renungan - GKKA-I INDONESIA')
+@section('title', 'Tambah Renungan - GKKA INDONESIA')
 @section('admin_heading','Tambah Renungan')
 @section('admin_subheading','Semua input wajib diisi')
 

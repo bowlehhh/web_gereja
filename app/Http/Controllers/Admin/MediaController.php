@@ -33,10 +33,14 @@ class MediaController extends Controller
                 'speaker' => ['required', 'string', 'max:150'],
                 'service_at' => ['required', 'date'],
                 'youtube_url' => [
-                    'required',
+                    'nullable',
                     'string',
                     'max:255',
                     function (string $attribute, mixed $value, \Closure $fail) {
+                        if ($value === null || $value === '') {
+                            return;
+                        }
+
                         if (!is_string($value) || !MediaItem::extractYoutubeId($value)) {
                             $fail('Link YouTube tidak valid.');
                         }
@@ -63,13 +67,15 @@ class MediaController extends Controller
             $thumbnailPath = ImageUpload::storeAsWebp($request->file('thumbnail'), 'media/thumbnails');
         }
 
-        $youtubeId = MediaItem::extractYoutubeId($data['youtube_url']);
+        $youtubeUrl = trim((string) ($data['youtube_url'] ?? ''));
+        $youtubeUrl = $youtubeUrl !== '' ? $youtubeUrl : null;
+        $youtubeId = MediaItem::extractYoutubeId($youtubeUrl);
 
         MediaItem::create([
             'title' => $data['title'],
             'speaker' => $data['speaker'],
             'service_at' => $data['service_at'],
-            'youtube_url' => $data['youtube_url'],
+            'youtube_url' => $youtubeUrl,
             'youtube_id' => $youtubeId,
             'thumbnail_path' => $thumbnailPath,
             'is_published' => $request->has('is_published') ? $request->boolean('is_published') : true,
@@ -91,20 +97,23 @@ class MediaController extends Controller
                 'speaker' => ['required', 'string', 'max:150'],
                 'service_at' => ['required', 'date'],
                 'youtube_url' => [
-                    'required',
+                    'nullable',
                     'string',
                     'max:255',
                     function (string $attribute, mixed $value, \Closure $fail) {
+                        if ($value === null || $value === '') {
+                            return;
+                        }
+
                         if (!is_string($value) || !MediaItem::extractYoutubeId($value)) {
                             $fail('Link YouTube tidak valid.');
                         }
                     },
                 ],
-                'thumbnail' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
+                'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
                 'is_published' => ['nullable'],
             ],
             [
-                'thumbnail.required' => 'Thumbnail wajib diupload.',
                 'thumbnail.max' => 'Ukuran thumbnail maksimal 10MB.',
             ]
         );
@@ -112,8 +121,10 @@ class MediaController extends Controller
         $media->title = $data['title'];
         $media->speaker = $data['speaker'];
         $media->service_at = $data['service_at'];
-        $media->youtube_url = $data['youtube_url'];
-        $media->youtube_id = MediaItem::extractYoutubeId($data['youtube_url']);
+        $youtubeUrl = trim((string) ($data['youtube_url'] ?? ''));
+        $youtubeUrl = $youtubeUrl !== '' ? $youtubeUrl : null;
+        $media->youtube_url = $youtubeUrl;
+        $media->youtube_id = MediaItem::extractYoutubeId($youtubeUrl);
         $media->is_published = $request->boolean('is_published');
 
         if ($request->hasFile('thumbnail')) {

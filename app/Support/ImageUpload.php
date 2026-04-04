@@ -12,7 +12,9 @@ class ImageUpload
         UploadedFile $file,
         string $directory,
         string $disk = 'public',
-        int $quality = 82
+        int $quality = 82,
+        ?int $maxWidth = null,
+        ?int $maxHeight = null
     ): string {
         $directory = trim($directory, '/');
 
@@ -28,6 +30,7 @@ class ImageUpload
         imagepalettetotruecolor($image);
         imagealphablending($image, true);
         imagesavealpha($image, true);
+        $image = self::resizeImageResource($image, $maxWidth, $maxHeight);
 
         $filename = Str::uuid()->toString().'.webp';
         $path = $directory !== '' ? $directory.'/'.$filename : $filename;
@@ -86,5 +89,70 @@ class ImageUpload
             'webp' => function_exists('imagecreatefromwebp') ? @imagecreatefromwebp($path) : false,
             default => false,
         };
+    }
+
+    private static function resizeImageResource(mixed $image, ?int $maxWidth, ?int $maxHeight): mixed
+    {
+        if (!is_resource($image) && !($image instanceof \GdImage)) {
+            return $image;
+        }
+
+        $width = imagesx($image);
+        $height = imagesy($image);
+
+        if ($width < 1 || $height < 1) {
+            return $image;
+        }
+
+        $targetWidth = $width;
+        $targetHeight = $height;
+
+        if ($maxWidth !== null && $width > $maxWidth) {
+            $ratio = $maxWidth / $width;
+            $targetWidth = $maxWidth;
+            $targetHeight = (int) max(1, round($height * $ratio));
+        }
+
+        if ($maxHeight !== null && $targetHeight > $maxHeight) {
+            $ratio = $maxHeight / $targetHeight;
+            $targetHeight = $maxHeight;
+            $targetWidth = (int) max(1, round($targetWidth * $ratio));
+        }
+
+        if ($targetWidth === $width && $targetHeight === $height) {
+            return $image;
+        }
+
+        $resized = imagecreatetruecolor($targetWidth, $targetHeight);
+        if ($resized === false) {
+            return $image;
+        }
+
+        imagealphablending($resized, false);
+        imagesavealpha($resized, true);
+        $transparent = imagecolorallocatealpha($resized, 0, 0, 0, 127);
+        imagefilledrectangle($resized, 0, 0, $targetWidth, $targetHeight, $transparent);
+
+        $copied = imagecopyresampled(
+            $resized,
+            $image,
+            0,
+            0,
+            0,
+            0,
+            $targetWidth,
+            $targetHeight,
+            $width,
+            $height
+        );
+
+        if (!$copied) {
+            imagedestroy($resized);
+            return $image;
+        }
+
+        imagedestroy($image);
+
+        return $resized;
     }
 }

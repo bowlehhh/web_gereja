@@ -1,6 +1,6 @@
 @extends('layout.admin')
 
-@section('title', 'Kelola Renungan - GKKA-I INDONESIA')
+@section('title', 'Kelola Renungan - GKKA INDONESIA')
 @section('admin_heading','Kelola Renungan')
 @section('admin_subheading','Tambah, edit, dan publish renungan jemaat')
 

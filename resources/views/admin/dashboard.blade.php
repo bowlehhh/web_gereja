@@ -232,7 +232,7 @@
                                 <div class="text-xs text-slate-400">{{ $w->edition }}</div>
                             </td>
                             <td class="py-3 px-4 text-sm text-slate-600 font-medium">
-                                {{ $w->date ? $w->date->format('d M Y') : '-' }}
+                                {{ $w->date ? $w->date->format('d/m/Y') : '-' }}
                             </td>
                             <td class="py-3 px-4 text-right">
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-bold {{ $w->is_published ? 'bg-emerald-50 text-emerald-600' : 'bg-slate-100 text-slate-500' }}">
@@ -299,9 +299,8 @@
             <div class="space-y-4">
                 @forelse($upcomingEvents as $e)
                 <div class="flex gap-4 group">
-                    <div class="flex-shrink-0 w-14 h-14 bg-slate-50 rounded-xl border border-slate-100 flex flex-col items-center justify-center text-center">
-                        <span class="text-[10px] font-bold text-red-500 uppercase">{{ $e->start_date ? $e->start_date->format('M') : 'N/A' }}</span>
-                        <span class="text-lg font-black text-slate-800 leading-none">{{ $e->start_date ? $e->start_date->format('d') : '-' }}</span>
+                    <div class="flex-shrink-0 min-w-[106px] h-14 px-3 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center text-center">
+                        <span class="text-[11px] font-black text-slate-700 tracking-wide">{{ $e->start_date ? $e->start_date->format('d/m/Y') : '-' }}</span>
                     </div>
                     <div class="flex-1 min-w-0 py-0.5">
                         <h4 class="text-sm font-bold text-slate-800 truncate group-hover:text-blue-900 transition-colors">{{ $e->title }}</h4>

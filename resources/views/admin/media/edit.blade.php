@@ -8,7 +8,7 @@
   <div class="px-6 py-5 border-b border-blue-100 flex items-center justify-between gap-4 flex-wrap bg-blue-50/50">
     <div>
       <div class="text-xl font-black tracking-tight text-blue-900">Edit Media</div>
-      <div class="text-blue-900/70 font-semibold text-sm mt-1">Update semua data media beserta thumbnail (maks 10MB).</div>
+      <div class="text-blue-900/70 font-semibold text-sm mt-1">Update data media. Link YouTube boleh kosong jika tayangan belum siap.</div>
     </div>
     <a class="h-10 px-4 rounded-xl border border-blue-900 bg-white hover:bg-blue-50 text-blue-900 font-extrabold text-sm inline-flex items-center transition"
        href="{{ route('admin.media.index') }}">← Kembali</a>
@@ -53,12 +53,16 @@
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
           @else
-            <div class="w-full h-full grid place-items-center text-slate-400 font-bold">Tidak ada preview</div>
+            <div class="w-full h-full grid place-items-center text-slate-400 font-bold">Link video belum tersedia</div>
           @endif
         </div>
         <div class="p-4">
-          <a href="{{ $media->youtube_url }}" target="_blank" rel="noopener"
-             class="text-blue-900 font-black hover:underline break-all">Buka YouTube</a>
+          @if($media->youtube_url)
+            <a href="{{ $media->youtube_url }}" target="_blank" rel="noopener"
+               class="text-blue-900 font-black hover:underline break-all">Buka YouTube</a>
+          @else
+            <div class="text-sm font-bold text-slate-500">Belum ada link YouTube.</div>
+          @endif
         </div>
       </div>
     </div>
@@ -90,16 +94,17 @@
         </div>
 
         <div>
-          <label class="font-extrabold text-sm text-blue-900">Link YouTube</label>
-          <input type="text" name="youtube_url" value="{{ old('youtube_url', $media->youtube_url) }}" required
+          <label class="font-extrabold text-sm text-blue-900">Link YouTube Opsional</label>
+          <input type="text" name="youtube_url" value="{{ old('youtube_url', $media->youtube_url) }}"
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
+          <div class="mt-2 text-blue-900/60 text-sm font-semibold">Kosongkan jika tayangan belum diupload atau belum mau ditampilkan.</div>
         </div>
 
         <div>
-          <label class="font-extrabold text-sm text-blue-900">Ganti Thumbnail (maks 10MB)</label>
-          <input type="file" name="thumbnail" accept="image/*" required
+          <label class="font-extrabold text-sm text-blue-900">Ganti Thumbnail Opsional (maks 10MB)</label>
+          <input type="file" name="thumbnail" accept="image/*"
                  class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
-          <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 10MB.</div>
+          <div class="mt-2 text-blue-900/60 text-sm font-semibold">Biarkan kosong jika thumbnail lama masih dipakai. Batas ukuran foto maksimal 10MB.</div>
         </div>
 
         <label class="inline-flex items-center gap-3 font-extrabold text-sm text-blue-900 cursor-pointer">

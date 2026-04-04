@@ -34,11 +34,11 @@ class CabangController extends Controller
             'name' => ['required', 'string', 'max:160'],
             'city' => ['required', 'string', 'max:140'],
             'address' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:190'],
+            'email' => ['nullable', 'email', 'max:190'],
             'phone' => ['required', 'string', 'max:60'],
             'pastor' => ['required', 'string', 'max:160'],
-            'map_latitude' => ['required', 'numeric', 'between:-90,90'],
-            'map_longitude' => ['required', 'numeric', 'between:-180,180'],
+            'map_latitude' => ['nullable', 'numeric', 'between:-90,90'],
+            'map_longitude' => ['nullable', 'numeric', 'between:-180,180'],
             'about' => ['required', 'string'],
             'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
             'sort_order' => ['required', 'integer', 'min:0', 'max:100000'],
@@ -86,11 +86,11 @@ class CabangController extends Controller
             'name' => ['required', 'string', 'max:160'],
             'city' => ['required', 'string', 'max:140'],
             'address' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:190'],
+            'email' => ['nullable', 'email', 'max:190'],
             'phone' => ['required', 'string', 'max:60'],
             'pastor' => ['required', 'string', 'max:160'],
-            'map_latitude' => ['required', 'numeric', 'between:-90,90'],
-            'map_longitude' => ['required', 'numeric', 'between:-180,180'],
+            'map_latitude' => ['nullable', 'numeric', 'between:-90,90'],
+            'map_longitude' => ['nullable', 'numeric', 'between:-180,180'],
             'about' => ['required', 'string'],
             'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
             'sort_order' => ['required', 'integer', 'min:0', 'max:100000'],
@@ -114,7 +114,7 @@ class CabangController extends Controller
         $cabang->city = $data['city'];
         foreach ($this->cabangOptionalColumns() as $column => $exists) {
             if ($exists) {
-                $cabang->{$column} = $data[$column];
+                $cabang->{$column} = $data[$column] ?? null;
             }
         }
         $cabang->about = $data['about'];

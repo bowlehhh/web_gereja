@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@yield('title','GKKA-I INDONESIA')</title>
+  <title>@yield('title','GKKA INDONESIA')</title>
 
   @php
-    $metaSiteName = config('app.name', 'GKKA-I INDONESIA');
+    $metaSiteName = config('app.name', 'GKKA INDONESIA');
     $seo = config('seo', []);
     $homeUrl = rtrim(url('/'), '/');
     $logoPath = trim((string) ($seo['logo_path'] ?? 'assets/logo.png'));
@@ -16,7 +16,7 @@
     if ($metaTitle === '') {
       $metaTitle = trim($__env->yieldContent('title', $metaSiteName));
     }
-    $metaDescription = trim($__env->yieldContent('meta_description', 'Situs resmi GKKA-I INDONESIA Jemaat Samarinda. Informasi ibadah, event, warta jemaat, media, galeri, dan pelayanan.'));
+    $metaDescription = trim($__env->yieldContent('meta_description', 'Situs resmi GKKA INDONESIA Jemaat Samarinda. Informasi ibadah, event, warta jemaat, media, galeri, dan pelayanan.'));
     $metaImage = $logoUrl;
     $metaUrl = trim($__env->yieldContent('canonical', url()->current()));
     $metaType = trim($__env->yieldContent('meta_type', 'website'));
@@ -169,11 +169,11 @@
   @stack('meta')
   
 </head>
-<body class="min-h-screen min-h-[100svh] flex flex-col overflow-x-hidden @yield('body_class')">
+<body class="site-public min-h-screen min-h-[100svh] flex flex-col overflow-x-hidden @yield('body_class')">
 
 @include('components.navbar')
 
-<main class="flex-1">
+<main class="site-public-main flex-1">
   @yield('content')
 </main>
 

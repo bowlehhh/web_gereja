@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', $item->title.' | Renungan GKKA-I INDONESIA')
+@section('title', $item->title.' | Renungan GKKA INDONESIA')
 @section('meta_description', \Illuminate\Support\Str::limit(strip_tags($item->excerpt), 160))
 @section('meta_image', asset('img/tuhan%20yesus.jpeg'))
 

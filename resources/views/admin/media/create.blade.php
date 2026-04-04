@@ -8,7 +8,7 @@
   <div class="px-6 py-5 border-b border-blue-100 flex items-center justify-between gap-4 flex-wrap bg-blue-50/50">
     <div>
       <div class="text-xl font-black tracking-tight text-blue-900">Tambah Media YouTube</div>
-      <div class="text-blue-900/70 font-semibold text-sm mt-1">Semua input wajib diisi, termasuk thumbnail custom.</div>
+      <div class="text-blue-900/70 font-semibold text-sm mt-1">Link YouTube sekarang opsional, jadi data media bisa disimpan lebih dulu lalu dilengkapi nanti.</div>
     </div> 
     <a class="h-10 px-4 rounded-xl border border-blue-900 bg-white hover:bg-blue-50 text-blue-900 font-extrabold text-sm inline-flex items-center transition"
        href="{{ route('admin.media.index') }}">← Kembali</a>
@@ -46,9 +46,10 @@
         </div>
 
         <div>
-          <label class="font-extrabold text-sm text-blue-900">Link YouTube</label>
-          <input type="text" name="youtube_url" value="{{ old('youtube_url') }}" required placeholder="https://www.youtube.com/watch?v=..."
+          <label class="font-extrabold text-sm text-blue-900">Link YouTube Opsional</label>
+          <input type="text" name="youtube_url" value="{{ old('youtube_url') }}" placeholder="https://www.youtube.com/watch?v=..."
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
+          <div class="mt-2 text-blue-900/60 text-sm font-semibold">Boleh dikosongkan jika video belum tersedia.</div>
         </div>
 
         <div>

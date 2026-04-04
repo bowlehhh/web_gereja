@@ -1,6 +1,6 @@
 @extends('layout.admin')
 
-@section('title', 'Edit Renungan - GKKA-I INDONESIA')
+@section('title', 'Edit Renungan - GKKA INDONESIA')
 @section('admin_heading','Edit Renungan')
 @section('admin_subheading','Perbarui konten renungan')
 

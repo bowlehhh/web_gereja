@@ -437,27 +437,29 @@
 
   @media (max-width: 767px) {
     .cabang-hero-art {
-      min-height: clamp(320px, 46vh, 460px);
+      min-height: clamp(280px, 38vh, 390px);
       background-position: center 28%;
     }
 
     .cabang-hero-content {
-      padding-bottom: clamp(1.2rem, 4vw, 2rem);
+      padding-bottom: clamp(0.85rem, 3vw, 1.4rem);
     }
 
     .cabang-hero-welcome-line {
-      gap: 0.15em;
-      font-size: clamp(1.45rem, 1.65vw + 0.96rem, 2.45rem);
+      gap: 0.12em;
+      font-size: clamp(1.24rem, 1.18vw + 0.92rem, 1.92rem);
     }
 
     .cabang-hero-welcome-sub {
-      font-size: 1.02rem;
-      gap: 0.22em;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      gap: 0.16em;
     }
 
     .cabang-hero-actions {
-      margin-top: 1rem;
-      gap: 0.7rem;
+      margin-top: 0.8rem;
+      gap: 0.55rem;
       width: 100%;
       padding: 0;
       border: 0;
@@ -467,6 +469,8 @@
 
     .cabang-hero-btn {
       width: 100%;
+      font-size: 0.9rem;
+      padding: 0.7rem 0.95rem !important;
     }
   }
 

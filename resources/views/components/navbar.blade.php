@@ -1,19 +1,18 @@
 <header class="fixed w-full top-0 z-50 bg-white shadow-md max-sm:bg-white/95 max-sm:backdrop-blur">
-  <div class="gkka-container py-2.5 sm:py-3 flex justify-between items-center">
+  <div class="gkka-container py-2 sm:py-3 flex justify-between items-center">
     
     {{-- BRAND --}}
-    <a class="flex items-center gap-2.5 sm:gap-3 group shrink-0" href="{{ route('home') }}">
+    <a class="flex items-center gap-2 sm:gap-3 group shrink-0" href="{{ route('home') }}">
       <img
         src="{{ asset('assets/logo.png') }}"
-        class="object-contain group-hover:scale-105 transition-transform duration-300"
+        class="w-9 h-9 sm:w-10 sm:h-10 object-contain group-hover:scale-105 transition-transform duration-300"
         width="40"
         height="40"
-        style="width:40px;height:40px;min-width:40px;min-height:40px;"
         alt="Logo GKKA"
       >
       <div>
-        <div class="font-black text-base sm:text-lg leading-tight text-blue-900 group-hover:text-blue-700 transition-colors">GKKA-I INDONESIA</div>
-        <div class="text-[11px] sm:text-xs text-gray-500 font-bold tracking-wide">Jemaat Samarinda</div>
+        <div class="font-black text-[15px] sm:text-lg leading-tight text-blue-900 group-hover:text-blue-700 transition-colors">GKKA INDONESIA</div>
+        <div class="text-[10px] sm:text-xs text-gray-500 font-bold tracking-wide">Jemaat Samarinda</div>
       </div>
     </a>
 
@@ -30,7 +29,7 @@
             <a href="{{ route('gereja.sejarah') }}" class="block px-4 py-2 text-sm hover:bg-blue-50 text-gray-700 hover:text-blue-900 font-semibold transition-colors">SEJARAH</a>
             <a href="{{ route('gereja.hamba') }}" class="block px-4 py-2 text-sm hover:bg-blue-50 text-gray-700 hover:text-blue-900 font-semibold transition-colors">HAMBA TUHAN</a>
             <a href="{{ route('gereja.majelis') }}" class="block px-4 py-2 text-sm hover:bg-blue-50 text-gray-700 hover:text-blue-900 font-semibold transition-colors">MAJELIS</a>
-            <a href="{{ route('gereja.komisi') }}" class="block px-4 py-2 text-sm hover:bg-blue-50 text-gray-700 hover:text-blue-900 font-semibold transition-colors">KOMISI</a>
+            <a href="{{ route('gereja.komisi') }}" class="block px-4 py-2 text-sm hover:bg-blue-50 text-gray-700 hover:text-blue-900 font-semibold transition-colors">BIDANG</a>
             <a href="{{ route('cabang') }}" class="block px-4 py-2 text-sm hover:bg-blue-50 text-gray-700 hover:text-blue-900 font-semibold transition-colors">CABANG</a>
           </div>
         </div>
@@ -57,8 +56,8 @@
     </nav>
 
     {{-- MOBILE TOGGLE --}}
-    <button id="mobile-menu-btn" class="lg:hidden p-2 text-blue-900 rounded-lg hover:bg-blue-50 transition-colors focus:outline-none">
-      <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <button id="mobile-menu-btn" class="lg:hidden p-1.5 text-blue-900 rounded-lg hover:bg-blue-50 transition-colors focus:outline-none">
+      <svg class="w-5 h-5 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16m-7 6h7"></path>
       </svg>
     </button>
@@ -70,27 +69,27 @@
 <div id="mobile-overlay" class="fixed inset-0 bg-black/60 z-[60] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div>
 
 {{-- MOBILE SIDEBAR --}}
-<div id="mobile-sidebar" class="fixed top-0 right-0 w-[88%] max-w-[336px] h-full bg-white z-[70] shadow-2xl flex flex-col hidden rounded-l-3xl overflow-hidden">
+<div id="mobile-sidebar" class="fixed top-0 right-0 w-[84%] max-w-[320px] h-full bg-white z-[70] shadow-2xl flex flex-col hidden rounded-l-[1.4rem] overflow-hidden">
     
     {{-- HEADER --}}
-    <div class="px-6 pt-8 pb-4 bg-white flex justify-between items-start">
+    <div class="px-5 pt-6 pb-3 bg-white flex justify-between items-start">
         <div>
-            <div class="text-xs font-bold text-blue-600 uppercase tracking-widest mb-1">MENU</div>
-            <div class="font-black text-2xl text-slate-900 tracking-tight leading-none">GKKA-I INDONESIA</div>
+            <div class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-1">MENU</div>
+            <div class="font-black text-[1.28rem] text-slate-900 tracking-tight leading-none">GKKA INDONESIA</div>
         </div>
-        <button id="close-sidebar-btn" class="text-gray-400 hover:text-red-500 transition-colors bg-gray-50 p-2 rounded-full">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button id="close-sidebar-btn" class="text-gray-400 hover:text-red-500 transition-colors bg-gray-50 p-1.5 rounded-full">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
     </div>
     
     {{-- SCROLLABLE CONTENT --}}
-    <div class="flex-1 overflow-y-auto px-6 pb-48 space-y-8" id="mobile-nav-links">
+    <div class="flex-1 overflow-y-auto px-5 pb-40 space-y-6" id="mobile-nav-links">
         
         {{-- SECTION: MAIN --}}
         <div>
-            <a href="{{ route('home') }}" class="mobile-link w-full py-4 px-5 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center gap-3 shadow-md group {{ request()->routeIs('home') ? 'bg-blue-900 text-white shadow-blue-500/30' : 'bg-white text-slate-700 hover:bg-gray-50 border border-gray-100' }}">
+            <a href="{{ route('home') }}" class="mobile-link w-full py-3.5 px-4 rounded-xl font-bold text-base transition-all duration-300 flex items-center gap-3 shadow-md group {{ request()->routeIs('home') ? 'bg-blue-900 text-white shadow-blue-500/30' : 'bg-white text-slate-700 hover:bg-gray-50 border border-gray-100' }}">
                  <span class="size-9 rounded-xl grid place-items-center {{ request()->routeIs('home') ? 'bg-white/15 text-white' : 'bg-blue-50 text-blue-700 group-hover:bg-blue-100' }}">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-10.5z"></path>
@@ -104,7 +103,7 @@
         <div>
             <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 px-1">Tentang Gereja</div>
             <div class="space-y-1">
-                 <a href="{{ route('gereja.sejarah') }}" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-base transition-all duration-200 {{ request()->routeIs('gereja.sejarah') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">
+                 <a href="{{ route('gereja.sejarah') }}" class="mobile-link flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold text-[15px] transition-all duration-200 {{ request()->routeIs('gereja.sejarah') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">
                     <span class="size-9 rounded-lg grid place-items-center {{ request()->routeIs('gereja.sejarah') ? 'bg-white/15 text-white' : 'bg-blue-50 text-blue-700 group-hover:bg-blue-100' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6h10M8 10h10M8 14h10M4 6h.01M4 10h.01M4 14h.01M4 18h16"></path>
@@ -112,7 +111,7 @@
                     </span>
                     Sejarah
                  </a>
-                 <a href="{{ route('gereja.hamba') }}" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-base transition-all duration-200 {{ request()->routeIs('gereja.hamba*') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">
+                 <a href="{{ route('gereja.hamba') }}" class="mobile-link flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold text-[15px] transition-all duration-200 {{ request()->routeIs('gereja.hamba*') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">
                     <span class="size-9 rounded-lg grid place-items-center {{ request()->routeIs('gereja.hamba*') ? 'bg-white/15 text-white' : 'bg-blue-50 text-blue-700 group-hover:bg-blue-100' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"></path>
@@ -121,7 +120,7 @@
                     </span>
                     Hamba Tuhan
                  </a>
-                 <a href="{{ route('gereja.majelis') }}" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-base transition-all duration-200 {{ request()->routeIs('gereja.majelis*') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">
+                 <a href="{{ route('gereja.majelis') }}" class="mobile-link flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold text-[15px] transition-all duration-200 {{ request()->routeIs('gereja.majelis*') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">
                     <span class="size-9 rounded-lg grid place-items-center {{ request()->routeIs('gereja.majelis*') ? 'bg-white/15 text-white' : 'bg-blue-50 text-blue-700 group-hover:bg-blue-100' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20h10M5 10l7-5 7 5v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9z"></path>
@@ -129,15 +128,15 @@
                     </span>
                     Majelis
                  </a>
-                 <a href="{{ route('gereja.komisi') }}" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-base transition-all duration-200 {{ request()->routeIs('gereja.komisi') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">
-                    <span class="size-9 rounded-lg grid place-items-center {{ request()->routeIs('gereja.komisi') ? 'bg-white/15 text-white' : 'bg-blue-50 text-blue-700 group-hover:bg-blue-100' }}">
+                 <a href="{{ route('gereja.komisi') }}" class="mobile-link flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold text-[15px] transition-all duration-200 {{ request()->routeIs('gereja.komisi*') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">
+                    <span class="size-9 rounded-lg grid place-items-center {{ request()->routeIs('gereja.komisi*') ? 'bg-white/15 text-white' : 'bg-blue-50 text-blue-700 group-hover:bg-blue-100' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 6h6M12 3v18M6 9h12M6 15h12"></path>
                         </svg>
                     </span>
-                    Komisi
+                    Bidang Pelayanan
                  </a>
-                 <a href="{{ route('cabang') }}" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-base transition-all duration-200 {{ request()->routeIs('cabang*') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">
+                 <a href="{{ route('cabang') }}" class="mobile-link flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold text-[15px] transition-all duration-200 {{ request()->routeIs('cabang*') ? 'bg-blue-900 text-white' : 'text-slate-700 hover:bg-gray-50 hover:text-blue-700' }}">
                     <span class="size-9 rounded-lg grid place-items-center {{ request()->routeIs('cabang*') ? 'bg-white/15 text-white' : 'bg-blue-50 text-blue-700 group-hover:bg-blue-100' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3h8M5 7h14M5 21h14M7 7v14m10-14v14M9 11h6M9 15h6"></path>
@@ -152,7 +151,7 @@
         <div>
             <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 px-1">Aktivitas & Media</div>
              <div class="grid grid-cols-2 gap-3">
-                <a href="{{ route('event') }}" class="mobile-link flex flex-col items-center justify-center gap-2 h-24 rounded-2xl transition-all duration-300 group border hover:border-blue-200 {{ request()->routeIs('event*') ? 'bg-blue-900 text-white border-transparent' : 'bg-gray-100 text-slate-800 hover:bg-gray-200 border-transparent' }}">
+                <a href="{{ route('event') }}" class="mobile-link flex flex-col items-center justify-center gap-1.5 h-20 rounded-xl transition-all duration-300 group border hover:border-blue-200 {{ request()->routeIs('event*') ? 'bg-blue-900 text-white border-transparent' : 'bg-gray-100 text-slate-800 hover:bg-gray-200 border-transparent' }}">
                     <span class="size-10 rounded-xl grid place-items-center {{ request()->routeIs('event*') ? 'bg-white/15 text-white' : 'bg-white text-blue-700' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3M4 11h16M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"></path>
@@ -160,7 +159,7 @@
                     </span>
                     <span class="font-bold text-sm">Event</span>
                 </a>
-                <a href="{{ route('renungan') }}" class="mobile-link flex flex-col items-center justify-center gap-2 h-24 rounded-2xl transition-all duration-300 group border hover:border-blue-200 {{ request()->routeIs('renungan*') ? 'bg-blue-900 text-white border-transparent' : 'bg-gray-100 text-slate-800 hover:bg-gray-200 border-transparent' }}">
+                <a href="{{ route('renungan') }}" class="mobile-link flex flex-col items-center justify-center gap-1.5 h-20 rounded-xl transition-all duration-300 group border hover:border-blue-200 {{ request()->routeIs('renungan*') ? 'bg-blue-900 text-white border-transparent' : 'bg-gray-100 text-slate-800 hover:bg-gray-200 border-transparent' }}">
                     <span class="size-10 rounded-xl grid place-items-center {{ request()->routeIs('renungan*') ? 'bg-white/15 text-white' : 'bg-white text-blue-700' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h14v14H5V5zm7 3v8m-4-4h8"></path>
@@ -168,7 +167,7 @@
                     </span>
                     <span class="font-bold text-sm">Renungan</span>
                 </a>
-                <a href="{{ route('media') }}" class="mobile-link flex flex-col items-center justify-center gap-2 h-24 rounded-2xl transition-all duration-300 group border hover:border-blue-200 {{ request()->routeIs('media') ? 'bg-blue-900 text-white border-transparent' : 'bg-gray-100 text-slate-800 hover:bg-gray-200 border-transparent' }}">
+                <a href="{{ route('media') }}" class="mobile-link flex flex-col items-center justify-center gap-1.5 h-20 rounded-xl transition-all duration-300 group border hover:border-blue-200 {{ request()->routeIs('media') ? 'bg-blue-900 text-white border-transparent' : 'bg-gray-100 text-slate-800 hover:bg-gray-200 border-transparent' }}">
                     <span class="size-10 rounded-xl grid place-items-center {{ request()->routeIs('media') ? 'bg-white/15 text-white' : 'bg-white text-blue-700' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.5-2.6a1 1 0 0 1 1.5.86v7.48a1 1 0 0 1-1.5.86L15 14M4 6h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"></path>
@@ -176,7 +175,7 @@
                     </span>
                     <span class="font-bold text-sm">Media</span>
                 </a>
-                <a href="{{ route('gallery') }}" class="mobile-link flex flex-col items-center justify-center gap-2 h-24 rounded-2xl transition-all duration-300 group border hover:border-blue-200 {{ request()->routeIs('gallery') ? 'bg-blue-900 text-white border-transparent' : 'bg-gray-100 text-slate-800 hover:bg-gray-200 border-transparent' }}">
+                <a href="{{ route('gallery') }}" class="mobile-link flex flex-col items-center justify-center gap-1.5 h-20 rounded-xl transition-all duration-300 group border hover:border-blue-200 {{ request()->routeIs('gallery') ? 'bg-blue-900 text-white border-transparent' : 'bg-gray-100 text-slate-800 hover:bg-gray-200 border-transparent' }}">
                     <span class="size-10 rounded-xl grid place-items-center {{ request()->routeIs('gallery') ? 'bg-white/15 text-white' : 'bg-white text-blue-700' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 0 1 2-2h9l5 5v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z"></path>
@@ -185,7 +184,7 @@
                     </span>
                     <span class="font-bold text-sm">Gallery</span>
                 </a>
-                <a href="{{ route('warta') }}" class="mobile-link flex flex-col items-center justify-center gap-2 h-24 rounded-2xl transition-all duration-300 group border hover:border-blue-200 {{ request()->routeIs('warta') ? 'bg-blue-900 text-white border-transparent' : 'bg-gray-100 text-slate-800 hover:bg-gray-200 border-transparent' }}">
+                <a href="{{ route('warta') }}" class="mobile-link flex flex-col items-center justify-center gap-1.5 h-20 rounded-xl transition-all duration-300 group border hover:border-blue-200 {{ request()->routeIs('warta') ? 'bg-blue-900 text-white border-transparent' : 'bg-gray-100 text-slate-800 hover:bg-gray-200 border-transparent' }}">
                     <span class="size-10 rounded-xl grid place-items-center {{ request()->routeIs('warta') ? 'bg-white/15 text-white' : 'bg-white text-blue-700' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7m-2 0a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m0 0h10"></path>
@@ -200,7 +199,7 @@
         {{-- SECTION: CONTACT --}}
         <div>
             <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 px-1">Hubungi Kami</div>
-            <a href="{{ route('kontak') }}" class="mobile-link w-full py-4 px-5 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center justify-between group {{ request()->routeIs('kontak') ? 'bg-blue-900 text-white shadow-lg shadow-blue-900/30' : 'bg-slate-900 text-white hover:bg-slate-800 hover:shadow-lg' }}">
+            <a href="{{ route('kontak') }}" class="mobile-link w-full py-3.5 px-4 rounded-xl font-bold text-base transition-all duration-300 flex items-center justify-between group {{ request()->routeIs('kontak') ? 'bg-blue-900 text-white shadow-lg shadow-blue-900/30' : 'bg-slate-900 text-white hover:bg-slate-800 hover:shadow-lg' }}">
                 <span class="flex items-center gap-3">
                     <span class="size-9 rounded-xl grid place-items-center {{ request()->routeIs('kontak') ? 'bg-white/15 text-white' : 'bg-white/10 text-white' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -214,7 +213,7 @@
                 </span>
             </a>
             <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-3 mb-3 px-1">Login Area</div>
-            <a href="{{ route('login') }}" class="mobile-link w-full py-4 px-5 rounded-2xl bg-blue-900 text-white font-bold text-lg hover:bg-blue-800 hover:shadow-lg transition-all duration-300 flex items-center justify-between group">
+            <a href="{{ route('login') }}" class="mobile-link w-full py-3.5 px-4 rounded-xl bg-blue-900 text-white font-bold text-base hover:bg-blue-800 hover:shadow-lg transition-all duration-300 flex items-center justify-between group">
                 <span class="flex items-center gap-3">
                     <span class="size-9 rounded-xl grid place-items-center bg-white/10 text-white group-hover:bg-white/20">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -234,7 +233,7 @@
     </div>
 
     {{-- FOOTER --}}
-    <div class="absolute bottom-0 w-full p-6 bg-white border-t border-gray-100 z-20">
+    <div class="absolute bottom-0 w-full p-5 bg-white border-t border-gray-100 z-20">
         @auth
             <div class="flex gap-2">
                 <a href="{{ route('admin.dashboard') }}" class="flex-1 text-center py-3 bg-blue-50 text-blue-700 rounded-lg font-bold text-xs uppercase tracking-wider hover:bg-blue-100 transition-colors">

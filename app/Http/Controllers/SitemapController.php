@@ -6,6 +6,7 @@ use App\Models\EventItem;
 use App\Models\HambaTuhan;
 use App\Models\MajelisPeriod;
 use App\Models\Cabang;
+use App\Models\BidangPelayanan;
 use App\Models\RenunganItem;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Schema;
@@ -86,6 +87,26 @@ class SitemapController extends Controller
                         $addUrl(
                             route('gereja.majelis.show', ['period' => $period->period]),
                             optional($period->updated_at)->toAtomString(),
+                            'monthly',
+                            '0.6'
+                        );
+                    });
+            }
+        } catch (\Throwable $e) {
+            // Ignore DB issues for public sitemap.
+        }
+
+        try {
+            if (Schema::hasTable('bidang_pelayanans')) {
+                BidangPelayanan::query()
+                    ->where('is_active', true)
+                    ->orderBy('sort_order')
+                    ->orderByDesc('updated_at')
+                    ->get(['slug', 'updated_at'])
+                    ->each(function (BidangPelayanan $item) use ($addUrl) {
+                        $addUrl(
+                            route('gereja.komisi.show', ['slug' => $item->slug]),
+                            optional($item->updated_at)->toAtomString(),
                             'monthly',
                             '0.6'
                         );

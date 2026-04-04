@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\VisitorDailyStat;
+use App\Support\LoopbackHost;
 use Illuminate\Foundation\Console\ServeCommand;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
@@ -36,12 +37,11 @@ class AppServiceProvider extends ServiceProvider
     private function configureSeoHttpsUrls(): void
     {
         $forceHttps = filter_var((string) config('app.force_https', false), FILTER_VALIDATE_BOOL);
+        $appUrl = rtrim((string) config('app.url', ''), '/');
 
-        if (! $forceHttps) {
+        if (! $forceHttps || LoopbackHost::urlUsesLoopbackHost($appUrl)) {
             return;
         }
-
-        $appUrl = rtrim((string) config('app.url', ''), '/');
 
         if ($appUrl !== '') {
             $httpsRoot = preg_replace('/^http:/i', 'https:', $appUrl);
@@ -148,37 +148,45 @@ class AppServiceProvider extends ServiceProvider
                 'yearly' => 0,
             ];
 
-            if (! Schema::hasTable('visitor_daily_stats')) {
-                $view->with('visitorStats', $stats);
-                return;
-            }
+            try {
+                if (! Schema::hasTable('visitor_daily_stats')) {
+                    $view->with('visitorStats', $stats);
+                    return;
+                }
 
-            $today = Carbon::today();
-            $todayDate = $today->toDateString();
-            $monthStart = $today->copy()->startOfMonth();
-            $yearStart = $today->copy()->startOfYear();
-            $yesterday = $today->copy()->subDay();
+                $today = Carbon::today();
+                $todayDate = $today->toDateString();
+                $monthStart = $today->copy()->startOfMonth();
+                $yearStart = $today->copy()->startOfYear();
+                $yesterday = $today->copy()->subDay();
 
-            $stats['daily'] = (int) (VisitorDailyStat::query()
-                ->whereDate('visit_date', $todayDate)
-                ->value('visitor_count') ?? 0);
+                $stats['daily'] = (int) (VisitorDailyStat::query()
+                    ->whereDate('visit_date', $todayDate)
+                    ->value('visitor_count') ?? 0);
 
-            if ($yesterday->lt($monthStart)) {
-                $stats['monthly'] = 0;
-            } else {
-                $stats['monthly'] = (int) VisitorDailyStat::query()
-                    ->whereBetween('visit_date', [$monthStart->toDateString(), $yesterday->toDateString()])
-                    ->sum('visitor_count');
-            }
+                if ($yesterday->lt($monthStart)) {
+                    $stats['monthly'] = 0;
+                } else {
+                    $stats['monthly'] = (int) VisitorDailyStat::query()
+                        ->whereBetween('visit_date', [$monthStart->toDateString(), $yesterday->toDateString()])
+                        ->sum('visitor_count');
+                }
 
-            $lastMonthEnd = $monthStart->copy()->subDay();
+                $lastMonthEnd = $monthStart->copy()->subDay();
 
-            if ($lastMonthEnd->lt($yearStart)) {
-                $stats['yearly'] = 0;
-            } else {
-                $stats['yearly'] = (int) VisitorDailyStat::query()
-                    ->whereBetween('visit_date', [$yearStart->toDateString(), $lastMonthEnd->toDateString()])
-                    ->sum('visitor_count');
+                if ($lastMonthEnd->lt($yearStart)) {
+                    $stats['yearly'] = 0;
+                } else {
+                    $stats['yearly'] = (int) VisitorDailyStat::query()
+                        ->whereBetween('visit_date', [$yearStart->toDateString(), $lastMonthEnd->toDateString()])
+                        ->sum('visitor_count');
+                }
+            } catch (\Throwable $e) {
+                $stats = [
+                    'daily' => 0,
+                    'monthly' => 0,
+                    'yearly' => 0,
+                ];
             }
 
             $view->with('visitorStats', $stats);

@@ -1,7 +1,7 @@
 @extends('layout.app')
 
-@section('title', 'Tentang GKKA Samarinda | Profil GKKAI Samarinda')
-@section('meta_description', 'Profil GKKA Samarinda (GKKAI Samarinda): sejarah gereja, hamba Tuhan, majelis, komisi, dan pelayanan jemaat.')
+@section('title', 'Tentang GKKA Samarinda | Profil GKKA Samarinda')
+@section('meta_description', 'Profil GKKA Samarinda: sejarah gereja, hamba Tuhan, majelis, bidang pelayanan, dan pelayanan jemaat.')
 @section('meta_image', asset('img/fotogrj.jpeg'))
 
 @section('content')
@@ -44,8 +44,8 @@
         <div class="w-16 h-16 sm:w-20 sm:h-20 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">
           <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
         </div>
-        <h3 class="text-xl font-black text-slate-800 mb-2 group-hover:text-blue-700 transition-colors">Komisi</h3>
-        <p class="text-slate-500 text-sm leading-relaxed">Wadah pelayanan kategorial untuk setiap jemaat.</p>
+        <h3 class="text-xl font-black text-slate-800 mb-2 group-hover:text-blue-700 transition-colors">Bidang Pelayanan</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Dashboard pelayanan kategorial dengan tampilan ringkas dan mobile-first.</p>
       </a>
 
     </div>

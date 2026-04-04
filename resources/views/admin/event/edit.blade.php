@@ -80,46 +80,46 @@
     </div>
 
     <div>
-      <label class="font-extrabold text-sm text-blue-900">Thumbnail (jpg/png/webp, max 20MB)</label>
+      <label class="font-extrabold text-sm text-blue-900">Thumbnail Opsional (jpg/png/webp, max 20MB)</label>
       @if($item->thumbnail_path)
         <div class="mt-2">
           <img src="{{ asset('storage/'.$item->thumbnail_path) }}" class="max-w-[220px] rounded-xl border border-blue-200">
         </div>
       @endif
-      <input type="file" name="thumbnail" accept=".jpg,.jpeg,.png,.webp" required
+      <input type="file" name="thumbnail" accept=".jpg,.jpeg,.png,.webp"
              class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
-      <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 20MB.</div>
+      <div class="mt-2 text-blue-900/60 text-sm font-semibold">Biarkan kosong jika thumbnail lama masih dipakai. Batas ukuran foto maksimal 20MB.</div>
     </div>
 
     <div>
-      <label class="font-extrabold text-sm text-blue-900">Foto Kegiatan (detail) (jpg/png/webp, max 20MB)</label>
+      <label class="font-extrabold text-sm text-blue-900">Foto Kegiatan Opsional (detail) (jpg/png/webp, max 20MB)</label>
       @if($item->photo_path)
         <div class="mt-2">
           <img src="{{ asset('storage/'.$item->photo_path) }}" class="max-w-[260px] rounded-xl border border-blue-200">
         </div>
       @endif
-      <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp" required
+      <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp"
              class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
-      <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 20MB.</div>
+      <div class="mt-2 text-blue-900/60 text-sm font-semibold">Biarkan kosong jika foto lama masih dipakai. Batas ukuran foto maksimal 20MB.</div>
     </div>
 
-	    <div>
-	      <label class="font-extrabold text-sm text-blue-900">Video Upload (mp4/webm/ogg, max 30MB)</label>
-	      @if($item->video_path)
-	        <div class="mt-3">
-	          <video controls class="w-full max-w-[560px] rounded-2xl border border-blue-200 bg-black">
+    <div>
+      <label class="font-extrabold text-sm text-blue-900">Video Upload Opsional (mp4/webm/ogg, max 30MB)</label>
+      @if($item->video_path)
+        <div class="mt-3">
+          <video controls class="w-full max-w-[560px] rounded-2xl border border-blue-200 bg-black">
             <source src="{{ asset('storage/'.$item->video_path) }}">
           </video>
         </div>
       @endif
-	      <input type="file" name="video" accept="video/mp4,video/webm,video/ogg" required
+      <input type="file" name="video" accept="video/mp4,video/webm,video/ogg"
 	             class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
-        <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran video maksimal 30MB.</div>
-	    </div>
+        <div class="mt-2 text-blue-900/60 text-sm font-semibold">Biarkan kosong jika tidak ingin mengganti atau belum punya video. Batas ukuran video maksimal 30MB.</div>
+    </div>
 
-	    <label class="inline-flex items-center gap-3 font-extrabold text-sm text-blue-900 cursor-pointer">
-	      <input type="checkbox" name="is_published" value="1" {{ old('is_published', $item->is_published) ? 'checked' : '' }}
-	             class="size-5 rounded border-blue-300 text-blue-900 focus:ring-blue-900">
+    <label class="inline-flex items-center gap-3 font-extrabold text-sm text-blue-900 cursor-pointer">
+      <input type="checkbox" name="is_published" value="1" {{ old('is_published', $item->is_published) ? 'checked' : '' }}
+             class="size-5 rounded border-blue-300 text-blue-900 focus:ring-blue-900">
       Publish
     </label>
 

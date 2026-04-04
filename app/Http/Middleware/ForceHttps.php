@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\LoopbackHost;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ class ForceHttps
     {
         $forceHttps = filter_var((string) config('app.force_https', false), FILTER_VALIDATE_BOOL);
 
-        if ($forceHttps && ! $request->isSecure()) {
+        if ($forceHttps && ! LoopbackHost::contains($request->getHost()) && ! $request->isSecure()) {
             $httpsUrl = 'https://'.$request->getHttpHost().$request->getRequestUri();
 
             return redirect()->to($httpsUrl, 301);

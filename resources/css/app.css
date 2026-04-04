@@ -677,38 +677,254 @@ html.lenis {
     --gkka-header-offset: 4.4rem;
   }
 
+  .site-public .gkka-container,
   .gkka-container {
-    padding-left: 0.875rem;
-    padding-right: 0.875rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .site-public .gkka-container {
+    max-width: 26.25rem;
   }
 
   .home-page .gkka-container {
-    max-width: 22.5rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+    max-width: 26.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  .home-page .gkka-section {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+  .site-public .site-public-main {
+    overflow-x: hidden;
   }
 
-  .home-page .gkka-section h2 {
-    font-size: clamp(1.55rem, 6.2vw, 1.95rem);
-    line-height: 1.2;
+  .site-public main > section:first-of-type [class~="pt-24"] {
+    padding-top: 5.4rem !important;
   }
 
-  .home-page .gkka-section h3 {
-    line-height: 1.28;
+  .site-public main > section:first-of-type [class~="pt-20"] {
+    padding-top: 5rem !important;
   }
 
-  .home-page .gkka-section p {
+  .site-public main > section:first-of-type [class~="pt-28"] {
+    padding-top: 5.85rem !important;
+  }
+
+  .site-public main > section:first-of-type [class~="pt-32"] {
+    padding-top: 6.1rem !important;
+  }
+
+  .site-public main > section:first-of-type [class~="pb-16"] {
+    padding-bottom: 2.25rem !important;
+  }
+
+  .site-public main > section:first-of-type [class~="pb-14"] {
+    padding-bottom: 2rem !important;
+  }
+
+  .site-public main > section:first-of-type [class~="pb-12"] {
+    padding-bottom: 1.75rem !important;
+  }
+
+  .site-public main > section:first-of-type [class~="pb-10"] {
+    padding-bottom: 1.5rem !important;
+  }
+
+  .site-public main > section:first-of-type [class~="pb-20"] {
+    padding-bottom: 1.9rem !important;
+  }
+
+  .site-public main > section:first-of-type [class~="pb-24"] {
+    padding-bottom: 2.15rem !important;
+  }
+
+  .site-public main > section:first-of-type [class~="pb-28"] {
+    padding-bottom: 2.25rem !important;
+  }
+
+  .site-public main > section:first-of-type [class~="py-16"] {
+    padding-top: 5.35rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .site-public main > section:first-of-type [class~="min-h-screen"] {
+    min-height: auto !important;
+  }
+
+  .site-public main > section:first-of-type [class*="min-h-[100svh]"] {
+    min-height: 84svh !important;
+  }
+
+  .site-public main > section:first-of-type .gkka-hero-title,
+  .site-public main > section:first-of-type [class~="text-4xl"].gkka-hero-title,
+  .site-public main > section:first-of-type [class~="text-3xl"].gkka-hero-title {
+    font-size: clamp(1.9rem, 7vw, 2.2rem) !important;
+    line-height: 1.08 !important;
+  }
+
+  .site-public main > section:first-of-type p {
     font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .site-public main > section:first-of-type .inline-flex[class*="rounded-full"] {
+    font-size: 0.64rem;
+    letter-spacing: 0.14em;
+    padding: 0.55rem 0.9rem;
+  }
+
+  .site-public .gkka-section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .site-public .gkka-section-tight {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .site-public .gkka-card {
+    border-radius: 1.1rem;
+  }
+
+  .site-public .gkka-card-pad {
+    padding: 0.95rem;
+  }
+
+  .site-public .gkka-pill {
+    height: 2rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.07em;
+  }
+
+  .site-public .gkka-prose {
+    font-size: 0.9rem;
     line-height: 1.6;
   }
 
+  .site-public .gkka-prose h2 {
+    margin-top: 1.75rem;
+    font-size: 1.35rem;
+    line-height: 1.2;
+  }
+
+  .site-public .gkka-prose h3 {
+    margin-top: 1.35rem;
+    font-size: 1.08rem;
+    line-height: 1.25;
+  }
+
+  .site-public .gkka-prose p,
+  .site-public .gkka-prose ul,
+  .site-public .gkka-prose ol {
+    margin-top: 0.9rem;
+  }
+
+  .site-public .gkka-accordion {
+    border-radius: 1.1rem;
+  }
+
+  .site-public .gkka-accordion__summary {
+    padding: 0.95rem 1rem;
+    gap: 0.75rem;
+  }
+
+  .site-public .gkka-accordion__title {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  .site-public .gkka-accordion__meta {
+    margin-top: 0.2rem;
+    font-size: 0.68rem;
+  }
+
+  .site-public .gkka-accordion__chev {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.9rem;
+  }
+
+  .site-public .gkka-accordion__body {
+    padding: 0 1rem 1rem;
+  }
+
+  .site-public .gkka-blue-page {
+    padding-top: 78px;
+    padding-bottom: 20px;
+  }
+
+  .site-public .gkka-blue-stage {
+    border-radius: 18px;
+  }
+
+  .site-public .gkka-blue-corner {
+    width: 58px;
+    height: 58px;
+  }
+
+  .site-public .gkka-brown-frame {
+    --gkka-frame-radius: 1.1rem;
+  }
+
+  .site-public .gkka-warta-hero {
+    min-height: clamp(280px, 40vh, 330px);
+  }
+
+  .site-public .gkka-warta-body {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .site-public .gkka-gallery-hero .gkka-container {
+    padding-top: 5.85rem;
+    padding-bottom: 1.6rem;
+  }
+
+  .site-public .gkka-gallery-body .gkka-container {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .site-public .gkka-gallery-panel {
+    border-radius: 1.35rem;
+  }
+
+  .site-public .gkka-cabang-card::before {
+    border-radius: 1.05rem;
+  }
+
+  .site-public #mobile-sidebar .mobile-link {
+    line-height: 1.2;
+  }
+
+  .site-public footer .gkka-container {
+    max-width: 26.25rem;
+  }
+
+  .home-page .gkka-section {
+    padding-top: 2.25rem;
+    padding-bottom: 2.25rem;
+  }
+
+  .home-page .gkka-section h2:not(.gkka-home-schedule-panel__heading) {
+    font-size: clamp(1.35rem, 5.8vw, 1.7rem);
+    line-height: 1.18;
+  }
+
+  .home-page .gkka-section h3:not(.gkka-home-schedule-card__title) {
+    font-size: 1.04rem;
+    line-height: 1.26;
+  }
+
+  .home-page .gkka-section p {
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
   .home-page .gkka-section .grid {
-    row-gap: 1.5rem;
+    row-gap: 1rem;
   }
 
   .home-page .gkka-section .rounded-3xl {
@@ -716,13 +932,13 @@ html.lenis {
   }
 
   .gkka-section {
-    padding-top: 2.75rem;
-    padding-bottom: 2.75rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
   }
 
   .gkka-section-tight {
-    padding-top: 2.25rem;
-    padding-bottom: 2.25rem;
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
   }
 
   .gkka-pill {
@@ -776,6 +992,99 @@ html.lenis {
   .gkka-intro__ring {
     width: 184px;
     height: 184px;
+  }
+
+  .gkka-home-schedule-panel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.35rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 24px 60px rgba(2, 6, 23, 0.22);
+    backdrop-filter: blur(14px);
+  }
+
+  .gkka-home-schedule-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(6,24,70,0.62) 42%, rgba(10,37,84,0.74) 100%);
+    opacity: 0.96;
+    pointer-events: none;
+  }
+
+  .gkka-home-schedule-panel > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .gkka-home-schedule-panel__body {
+    padding: 1rem;
+  }
+
+  .gkka-home-schedule-panel__heading {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 0.9rem;
+    font-size: 1.32rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .gkka-home-schedule-panel__accent {
+    width: 0.42rem;
+    height: 1.45rem;
+    border-radius: 9999px;
+    background: #facc15;
+    flex: none;
+  }
+
+  .gkka-home-schedule-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .gkka-home-schedule-card {
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(4, 20, 56, 0.34);
+    padding: 0.95rem;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 14px 30px rgba(1, 8, 20, 0.14);
+  }
+
+  .gkka-home-schedule-card__title {
+    font-size: 0.98rem;
+    font-weight: 900;
+    line-height: 1.28;
+    letter-spacing: -0.01em;
+  }
+
+  .gkka-home-schedule-card__list {
+    margin-top: 0.55rem;
+    display: grid;
+    gap: 0.3rem;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: rgba(219, 234, 254, 0.96);
+  }
+
+  .gkka-home-schedule-card__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+  }
+
+  .gkka-home-schedule-card__bullet {
+    width: 0.38rem;
+    height: 0.38rem;
+    border-radius: 9999px;
+    background: rgba(250, 204, 21, 0.92);
+    margin-top: 0.46rem;
+    flex: none;
   }
 
   .gkka-gallery-panel {
