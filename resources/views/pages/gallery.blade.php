@@ -34,7 +34,7 @@
   </div>
 </section>
 
-<section class="gkka-gallery-body">
+<section class="gkka-gallery-body {{ $arr->count() === 0 ? 'gkka-gallery-body--empty' : '' }}">
   <div class="gkka-container gkka-gallery-container py-12 sm:py-14">
     <div class="relative z-10 px-2 sm:px-0">
       {{-- blue transparent blobs (like reference depth) --}}

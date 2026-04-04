@@ -8,8 +8,6 @@
 @php
   $hero = asset('img/tuhan%20yesus.jpeg');
   $published = $item->published_at;
-  $contentWords = str_word_count(strip_tags((string) $item->content));
-  $readingMinutes = max(1, (int) ceil($contentWords / 220));
 
   $dayLabel = $published ? \Illuminate\Support\Str::upper($published->translatedFormat('l')) : 'HARI INI';
   $dateLabel = $published ? \Illuminate\Support\Str::upper($published->translatedFormat('j F')) : '-';
@@ -21,7 +19,6 @@
   $shareText = trim($item->title.' - '.$item->excerpt);
   $waUrl = 'https://wa.me/?text='.rawurlencode($shareText.' '.$shareUrl);
   $fbUrl = 'https://www.facebook.com/sharer/sharer.php?u='.rawurlencode($shareUrl);
-  $mailUrl = 'mailto:?subject='.rawurlencode($item->title).'&body='.rawurlencode($shareText."\n\n".$shareUrl);
 
   $paragraphs = collect(preg_split('/\R+/', trim((string) $item->content) ?: '') ?: [])
     ->map(fn ($line) => trim((string) $line))
@@ -485,7 +482,7 @@
           <div class="ren-head-main">
             <h1>{{ $item->title }}</h1>
             <div class="ren-head-meta">
-              Oleh: <strong>{{ $item->author }}</strong> | Waktu Baca: {{ $readingMinutes }} Menit | Kategori: {{ $categoryLabel }}
+              Oleh: <strong>{{ $item->author }}</strong> | Kategori: {{ $categoryLabel }}
             </div>
           </div>
         </header>
@@ -516,9 +513,6 @@
             </a>
             <a href="{{ $fbUrl }}" class="ren-share-btn facebook" target="_blank" rel="noopener" aria-label="Share ke Facebook">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.326v21.348c0 .732.593 1.326 1.325 1.326h11.495v-9.294h-3.128v-3.622h3.128V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24h-1.918c-1.504 0-1.796.716-1.796 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.324-.594 1.324-1.326V1.326C24 .593 23.405 0 22.675 0z"/></svg>
-            </a>
-            <a href="{{ $mailUrl }}" class="ren-share-btn mail" aria-label="Share via Email">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm10 8 9-6H3l9 6zm0 2-10-6v10h20V8l-10 6z"/></svg>
             </a>
           </div>
 

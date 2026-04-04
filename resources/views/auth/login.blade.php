@@ -38,6 +38,16 @@
 
         <div class="w-full md:w-7/12 p-8 md:p-16 flex flex-col justify-center">
             <div class="max-w-md mx-auto w-full">
+                <div class="mb-6">
+                    <a href="{{ route('home') }}"
+                       class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-50 hover:text-blue-900">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                        <span>Kembali ke Home</span>
+                    </a>
+                </div>
+
                 <div class="mb-10">
                     <h2 class="text-3xl font-extrabold text-slate-800 mb-2">Selamat Datang</h2>
                     <p class="text-slate-500 font-medium">Silakan masuk untuk melanjutkan ke dashboard.</p>

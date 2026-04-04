@@ -84,7 +84,7 @@
     <div id="adminOverlay" class="hidden fixed inset-0 bg-slate-900/20 z-40 md:hidden backdrop-blur-sm"></div>
 
     <aside id="adminSidebar"
-           class="w-72 bg-white text-slate-600 hidden md:flex md:static fixed inset-y-0 left-0 z-50 flex-col sidebar-transition border-r border-slate-100 shadow-2xl md:shadow-none md:h-screen">
+           class="w-72 bg-white text-slate-600 hidden flex md:flex md:static fixed inset-y-0 left-0 z-50 flex-col sidebar-transition border-r border-slate-100 shadow-2xl md:shadow-none h-[100dvh] md:h-screen overflow-hidden">
       
       <!-- Brand -->
       <div class="h-24 flex items-center px-8 border-b border-slate-100">
@@ -100,7 +100,7 @@
       </div>
 
       <!-- Nav -->
-      <nav class="flex-1 py-8 px-4 space-y-2 overflow-y-auto scrollbar-hide">
+      <nav class="flex-1 min-h-0 py-8 px-4 space-y-2 overflow-y-auto overscroll-contain pb-24 md:pb-8 sidebar-scroll-touch sidebar-scrollbar">
         @foreach($adminLinks as $l)
           <a href="{{ route($l['route']) }}"
              class="group flex items-center gap-4 px-5 py-3.5 rounded-2xl font-bold transition-all relative overflow-hidden
@@ -114,7 +114,7 @@
       </nav>
       
       <!-- Footer / Logout -->
-      <div class="p-4 border-t border-slate-100 sidebar-text">
+      <div class="p-4 border-t border-slate-100 sidebar-text shrink-0">
           <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">
               <div class="flex items-center gap-3 mb-4">
                   <div class="w-10 h-10 min-w-10 min-h-10 rounded-full bg-gradient-to-br from-blue-900 to-blue-950 grid place-items-center text-white font-bold text-sm shadow-md shrink-0">

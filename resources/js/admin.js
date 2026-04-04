@@ -168,7 +168,15 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.add('fixed', 'z-50');
         // Force full height on mobile if needed, or keep the floating look but position it correctly
 
-        gsap.fromTo(sidebar, { x: '-100%' }, { x: '0%', duration: 0.4, ease: 'power3.out' });
+        gsap.fromTo(sidebar, { x: '-100%' }, {
+            x: '0%',
+            duration: 0.4,
+            ease: 'power3.out',
+            onComplete: () => {
+                // Clear transform after open so mobile scrolling stays smooth.
+                gsap.set(sidebar, { clearProps: "x" });
+            }
+        });
         isSidebarOpenMobile = true;
     }
 
