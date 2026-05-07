@@ -35,19 +35,19 @@
   <div class="grid gap-6">
     <div>
       <label class="font-extrabold text-sm text-blue-900">Judul</label>
-      <input name="title" value="{{ old('title', $warta->title) }}" required
+      <input name="title" value="{{ old('title', $warta->title) }}"
              class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
     </div>
 
     <div>
       <label class="font-extrabold text-sm text-blue-900">Tanggal</label>
-      <input type="date" name="date" value="{{ old('date', optional($warta->date)->format('Y-m-d')) }}" required
+      <input type="date" name="date" value="{{ old('date', optional($warta->date)->format('Y-m-d')) }}"
              class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
     </div>
 
     <div>
       <label class="font-extrabold text-sm text-blue-900">Edisi</label>
-      <input name="edition" value="{{ old('edition', $warta->edition) }}" required
+      <input name="edition" value="{{ old('edition', $warta->edition) }}"
              class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
     </div>
 
@@ -58,7 +58,7 @@
           <img src="{{ asset('storage/'.$warta->thumbnail_path) }}" alt="thumb" class="max-w-[220px] rounded-xl border border-blue-200">
         </div>
       @endif
-      <input type="file" name="thumbnail" accept="image/*" required
+      <input type="file" name="thumbnail" accept="image/*"
              class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
       <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 20MB.</div>
     </div>
@@ -72,7 +72,7 @@
           </a>
         </div>
       @endif
-      <input type="file" name="pdf" accept="application/pdf" required
+      <input type="file" name="pdf" accept="application/pdf"
              class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
     </div>
 

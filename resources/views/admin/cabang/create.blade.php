@@ -28,13 +28,13 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="font-extrabold text-sm text-blue-900">Nama Cabang</label>
-          <input type="text" name="name" value="{{ old('name') }}" required
+          <input type="text" name="name" value="{{ old('name') }}"
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         </div>
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Kota / Lokasi</label>
-          <input type="text" name="city" value="{{ old('city') }}" required
+          <input type="text" name="city" value="{{ old('city') }}"
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         </div>
       </div>
@@ -42,7 +42,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="font-extrabold text-sm text-blue-900">Alamat</label>
-          <input type="text" name="address" value="{{ old('address') }}" required
+          <input type="text" name="address" value="{{ old('address') }}"
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         </div>
 
@@ -56,13 +56,13 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="font-extrabold text-sm text-blue-900">Telp</label>
-          <input type="text" name="phone" value="{{ old('phone') }}" required
+          <input type="text" name="phone" value="{{ old('phone') }}"
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         </div>
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Penanggung Jawab / Pendeta</label>
-          <input type="text" name="pastor" value="{{ old('pastor') }}" required
+          <input type="text" name="pastor" value="{{ old('pastor') }}"
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         </div>
       </div>
@@ -86,21 +86,21 @@
 
       <div>
         <label class="font-extrabold text-sm text-blue-900">About Cabang</label>
-        <textarea name="about" rows="7" required
+        <textarea name="about" rows="7"
                   class="mt-2 w-full p-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">{{ old('about') }}</textarea>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="font-extrabold text-sm text-blue-900">Foto Cabang</label>
-          <input type="file" name="photo" accept="image/*" required
+          <input type="file" name="photo" accept="image/*"
                  class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
           <p class="mt-2 text-xs font-semibold text-slate-500">Maksimal ukuran foto 20MB. Saran rasio: 4:3 atau 16:9.</p>
         </div>
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Urutan Tampil</label>
-          <input type="number" min="0" name="sort_order" value="{{ old('sort_order', 0) }}" required
+          <input type="number" min="0" name="sort_order" value="{{ old('sort_order', 0) }}"
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
           <p class="mt-2 text-xs font-semibold text-slate-500">Nilai kecil tampil lebih awal.</p>
         </div>

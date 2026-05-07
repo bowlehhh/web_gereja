@@ -33,19 +33,19 @@
       <div class="grid gap-6">
         <div>
           <label class="font-extrabold text-sm text-blue-900">Judul Renungan</label>
-          <input name="title" value="{{ old('title') }}" required maxlength="180"
+          <input name="title" value="{{ old('title') }}" maxlength="180"
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label class="font-extrabold text-sm text-blue-900">Ayat Referensi</label>
-            <input name="scripture_reference" value="{{ old('scripture_reference') }}" required maxlength="180" placeholder="Contoh: Mazmur 23:1-6"
+            <input name="scripture_reference" value="{{ old('scripture_reference') }}" maxlength="180" placeholder="Contoh: Mazmur 23:1-6"
                    class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
           </div>
           <div>
             <label class="font-extrabold text-sm text-blue-900">Penulis/Pembawa</label>
-            <input name="author" value="{{ old('author', 'Ibu Gembala') }}" required maxlength="120"
+            <input name="author" value="{{ old('author', 'Ibu Gembala') }}" maxlength="120"
                    class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
           </div>
         </div>
@@ -53,7 +53,7 @@
         <div>
           <label class="font-extrabold text-sm text-blue-900">Ayat Firman (Isi Ayat)</label>
           <div class="mt-1 text-blue-900/65 text-xs font-semibold">Isi teks ayat firman yang akan ditampilkan di bagian atas.</div>
-          <textarea name="excerpt" rows="5" required
+          <textarea name="excerpt" rows="5"
                     class="mt-2 w-full p-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition"
                     placeholder="Contoh: Di tengah pergumulan hidup yang berat, kita diingatkan bahwa Tuhan tetap memanggil kita...">{{ old('excerpt') }}</textarea>
         </div>
@@ -61,14 +61,14 @@
         <div>
           <label class="font-extrabold text-sm text-blue-900">Tafsiran Renungan</label>
           <div class="mt-1 text-blue-900/65 text-xs font-semibold">Tulis penjelasan/tafsiran di bawah ayat firman.</div>
-          <textarea name="content" rows="10" required
+          <textarea name="content" rows="10"
                     class="mt-2 w-full p-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition"
                     placeholder="Tulis tafsiran lengkap renungan...">{{ old('content') }}</textarea>
         </div>
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Gambar Renungan (jpg/png/webp, max 20MB)</label>
-          <input type="file" name="image" accept=".jpg,.jpeg,.png,.webp" required
+          <input type="file" name="image" accept=".jpg,.jpeg,.png,.webp"
                  class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
           <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 20MB.</div>
         </div>
@@ -76,12 +76,12 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label class="font-extrabold text-sm text-blue-900">Tanggal Tayang</label>
-            <input type="date" name="published_at" value="{{ old('published_at', now()->format('Y-m-d')) }}" required
+            <input type="date" name="published_at" value="{{ old('published_at', now()->format('Y-m-d')) }}"
                    class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
           </div>
           <div>
             <label class="font-extrabold text-sm text-blue-900">Urutan Tampil</label>
-            <input type="number" name="sort_order" value="{{ old('sort_order', 0) }}" min="0" max="1000000" required
+            <input type="number" name="sort_order" value="{{ old('sort_order', 0) }}" min="0" max="1000000"
                    class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
           </div>
         </div>

@@ -38,8 +38,8 @@
     return $contact;
   };
 
-  $initials = function (string $name): string {
-    $clean = preg_replace('/[^\\p{L}\\p{N} ]+/u', '', $name) ?? '';
+  $initials = function (?string $name): string {
+    $clean = preg_replace('/[^\\p{L}\\p{N} ]+/u', '', (string) $name) ?? '';
     $parts = array_values(array_filter(preg_split('/\\s+/u', trim($clean)) ?: []));
     $take = array_slice($parts, 0, 2);
     $out = '';

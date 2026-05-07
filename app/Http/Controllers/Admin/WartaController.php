@@ -28,13 +28,13 @@ class WartaController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => ['required', 'string', 'max:200'],
-            'date' => ['required', 'date'],
-            'edition' => ['required', 'string', 'max:50'],
+            'title' => ['nullable', 'string', 'max:200'],
+            'date' => ['nullable', 'date'],
+            'edition' => ['nullable', 'string', 'max:50'],
 
-            'thumbnail' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
 
-            'pdf' => ['required', 'file', 'mimes:pdf', 'max:20480'],
+            'pdf' => ['nullable', 'file', 'mimes:pdf', 'max:20480'],
 
             'is_published' => ['nullable'],
         ], [
@@ -53,12 +53,15 @@ class WartaController extends Controller
             $thumbPath = ImageUpload::storeAsWebp($request->file('thumbnail'), 'warta/thumbs');
         }
 
-        $pdfPath = $request->file('pdf')->store('warta/pdfs', 'public');
+        $pdfPath = null;
+        if ($request->hasFile('pdf')) {
+            $pdfPath = $request->file('pdf')->store('warta/pdfs', 'public');
+        }
 
         Warta::create([
-            'title' => $data['title'],
-            'date' => $data['date'],
-            'edition' => $data['edition'],
+            'title' => $data['title'] ?? null,
+            'date' => $data['date'] ?? null,
+            'edition' => $data['edition'] ?? null,
             'thumbnail_path' => $thumbPath,
             'pdf_path' => $pdfPath,
             'is_published' => $request->has('is_published') ? $request->boolean('is_published') : true,
@@ -75,11 +78,11 @@ class WartaController extends Controller
     public function update(Request $request, Warta $warta)
     {
         $data = $request->validate([
-            'title' => ['required', 'string', 'max:200'],
-            'date' => ['required', 'date'],
-            'edition' => ['required', 'string', 'max:50'],
-            'thumbnail' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
-            'pdf' => ['required', 'file', 'mimes:pdf', 'max:20480'],
+            'title' => ['nullable', 'string', 'max:200'],
+            'date' => ['nullable', 'date'],
+            'edition' => ['nullable', 'string', 'max:50'],
+            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'pdf' => ['nullable', 'file', 'mimes:pdf', 'max:20480'],
             'is_published' => ['nullable'],
         ], [
             'title.required' => 'Judul wajib diisi.',
@@ -106,9 +109,9 @@ class WartaController extends Controller
             $warta->pdf_path = $request->file('pdf')->store('warta/pdfs', 'public');
         }
 
-        $warta->title = $data['title'];
-        $warta->date = $data['date'];
-        $warta->edition = $data['edition'];
+        $warta->title = $data['title'] ?? null;
+        $warta->date = $data['date'] ?? null;
+        $warta->edition = $data['edition'] ?? null;
         $warta->is_published = $request->boolean('is_published');
         $warta->save();
 

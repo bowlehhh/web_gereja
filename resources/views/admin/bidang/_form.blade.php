@@ -27,7 +27,6 @@
         type="text"
         name="name"
         value="{{ old('name', $item?->name) }}"
-        required
         class="mt-2 h-11 w-full rounded-xl border border-blue-200 px-4 text-blue-900 transition focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-900"
         placeholder="Contoh: Bidang Pemuda Eirene"
       >
@@ -53,7 +52,6 @@
         max="2100"
         name="service_year"
         value="{{ old('service_year', $item?->service_year ?? now()->year) }}"
-        required
         class="mt-2 h-11 w-full rounded-xl border border-blue-200 px-4 text-blue-900 transition focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-900"
         placeholder="{{ now()->year }}"
       >
@@ -66,7 +64,6 @@
     <textarea
       name="description"
       rows="7"
-      required
       class="mt-2 w-full rounded-xl border border-blue-200 p-4 text-blue-900 transition focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-900"
       placeholder="Tulis deskripsi lengkap bidang pelayanan yang akan tampil di halaman detail."
     >{{ old('description', $item?->description) }}</textarea>
@@ -80,7 +77,6 @@
         type="file"
         name="member_photo"
         accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
-        {{ $item ? '' : 'required' }}
         class="mt-2 w-full rounded-xl border border-blue-200 bg-white p-2 text-blue-900 transition file:mr-4 file:rounded-lg file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-bold file:text-blue-900 hover:file:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-900"
       >
       <p class="mt-2 text-xs font-semibold text-slate-500">Format: JPG, JPEG, PNG, WEBP. Maksimal 12 MB. Sistem sekarang hanya memakai 1 foto utama untuk setiap bidang.</p>
@@ -93,7 +89,6 @@
         min="0"
         name="sort_order"
         value="{{ old('sort_order', $item?->sort_order ?? 0) }}"
-        required
         class="mt-2 h-11 w-full rounded-xl border border-blue-200 px-4 text-blue-900 transition focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-900"
       >
       <label class="mt-4 inline-flex cursor-pointer items-center gap-3 text-sm font-black text-blue-900">

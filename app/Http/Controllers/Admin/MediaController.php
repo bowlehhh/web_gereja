@@ -29,9 +29,9 @@ class MediaController extends Controller
     {
         $data = $request->validate(
             [
-                'title' => ['required', 'string', 'max:200'],
-                'speaker' => ['required', 'string', 'max:150'],
-                'service_at' => ['required', 'date'],
+                'title' => ['nullable', 'string', 'max:200'],
+                'speaker' => ['nullable', 'string', 'max:150'],
+                'service_at' => ['nullable', 'date'],
                 'youtube_url' => [
                     'nullable',
                     'string',
@@ -46,7 +46,7 @@ class MediaController extends Controller
                         }
                     },
                 ],
-                'thumbnail' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
+                'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
                 'is_published' => ['nullable'],
             ],
             [
@@ -72,9 +72,9 @@ class MediaController extends Controller
         $youtubeId = MediaItem::extractYoutubeId($youtubeUrl);
 
         MediaItem::create([
-            'title' => $data['title'],
-            'speaker' => $data['speaker'],
-            'service_at' => $data['service_at'],
+            'title' => $data['title'] ?? null,
+            'speaker' => $data['speaker'] ?? null,
+            'service_at' => $data['service_at'] ?? null,
             'youtube_url' => $youtubeUrl,
             'youtube_id' => $youtubeId,
             'thumbnail_path' => $thumbnailPath,
@@ -93,9 +93,9 @@ class MediaController extends Controller
     {
         $data = $request->validate(
             [
-                'title' => ['required', 'string', 'max:200'],
-                'speaker' => ['required', 'string', 'max:150'],
-                'service_at' => ['required', 'date'],
+                'title' => ['nullable', 'string', 'max:200'],
+                'speaker' => ['nullable', 'string', 'max:150'],
+                'service_at' => ['nullable', 'date'],
                 'youtube_url' => [
                     'nullable',
                     'string',
@@ -118,9 +118,9 @@ class MediaController extends Controller
             ]
         );
 
-        $media->title = $data['title'];
-        $media->speaker = $data['speaker'];
-        $media->service_at = $data['service_at'];
+        $media->title = $data['title'] ?? null;
+        $media->speaker = $data['speaker'] ?? null;
+        $media->service_at = $data['service_at'] ?? null;
         $youtubeUrl = trim((string) ($data['youtube_url'] ?? ''));
         $youtubeUrl = $youtubeUrl !== '' ? $youtubeUrl : null;
         $media->youtube_url = $youtubeUrl;

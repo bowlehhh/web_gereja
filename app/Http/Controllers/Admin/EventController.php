@@ -31,12 +31,12 @@ class EventController extends Controller
     {
         $data = $request->validate(
             [
-                'title' => ['required','string','max:150'],
-                'description' => ['required','string'],
-                'content' => ['required','string'],
-                'start_date' => ['required','date'],
-                'end_date' => ['required','date','after_or_equal:start_date'],
-                'location' => ['required','string','max:150'],
+                'title' => ['nullable','string','max:150'],
+                'description' => ['nullable','string'],
+                'content' => ['nullable','string'],
+                'start_date' => ['nullable','date'],
+                'end_date' => ['nullable','date'],
+                'location' => ['nullable','string','max:150'],
                 'thumbnail' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:20480'],
                 'photo' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:20480'],
                 'video' => ['nullable','file','mimes:mp4,webm,ogg','max:30720'],
@@ -82,12 +82,12 @@ class EventController extends Controller
         }
 
         EventItem::create([
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'content' => $data['content'],
-            'start_date' => $data['start_date'],
-            'end_date' => $data['end_date'],
-            'location' => $data['location'],
+            'title' => $data['title'] ?? null,
+            'description' => $data['description'] ?? null,
+            'content' => $data['content'] ?? null,
+            'start_date' => $data['start_date'] ?? null,
+            'end_date' => $data['end_date'] ?? null,
+            'location' => $data['location'] ?? null,
             'thumbnail_path' => $thumbnailPath,
             'photo_path' => $photoPath,
             'video_path' => $videoPath,
@@ -106,12 +106,12 @@ class EventController extends Controller
     {
         $data = $request->validate(
             [
-                'title' => ['required','string','max:150'],
-                'description' => ['required','string'],
-                'content' => ['required','string'],
-                'start_date' => ['required','date'],
-                'end_date' => ['required','date','after_or_equal:start_date'],
-                'location' => ['required','string','max:150'],
+                'title' => ['nullable','string','max:150'],
+                'description' => ['nullable','string'],
+                'content' => ['nullable','string'],
+                'start_date' => ['nullable','date'],
+                'end_date' => ['nullable','date'],
+                'location' => ['nullable','string','max:150'],
                 'thumbnail' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:20480'],
                 'photo' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:20480'],
                 'video' => ['nullable','file','mimes:mp4,webm,ogg','max:30720'],
@@ -141,12 +141,12 @@ class EventController extends Controller
             ]
         );
 
-        $item->title = $data['title'];
-        $item->description = $data['description'];
-        $item->content = $data['content'];
-        $item->start_date = $data['start_date'];
-        $item->end_date = $data['end_date'];
-        $item->location = $data['location'];
+        $item->title = $data['title'] ?? null;
+        $item->description = $data['description'] ?? null;
+        $item->content = $data['content'] ?? null;
+        $item->start_date = $data['start_date'] ?? null;
+        $item->end_date = $data['end_date'] ?? null;
+        $item->location = $data['location'] ?? null;
         $item->is_published = $request->boolean('is_published');
 
         if ($request->hasFile('thumbnail')) {

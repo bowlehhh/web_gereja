@@ -28,9 +28,9 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => ['required', 'string', 'max:150'],
-            'caption' => ['required', 'string'],
-            'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'title' => ['nullable', 'string', 'max:150'],
+            'caption' => ['nullable', 'string'],
+            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
             'is_published' => ['nullable'],
         ], [
             'photo.required' => 'Foto wajib diupload.',
@@ -38,11 +38,14 @@ class GalleryController extends Controller
             'photo.max' => 'Ukuran foto maksimal 20MB.',
         ]);
 
-        $path = ImageUpload::storeAsWebp($request->file('photo'), 'gallery');
+        $path = null;
+        if ($request->hasFile('photo')) {
+            $path = ImageUpload::storeAsWebp($request->file('photo'), 'gallery');
+        }
 
         GalleryItem::create([
-            'title' => $data['title'],
-            'caption' => $data['caption'],
+            'title' => $data['title'] ?? null,
+            'caption' => $data['caption'] ?? null,
             'image_path' => $path,
             'is_published' => $request->has('is_published') ? $request->boolean('is_published') : true,
         ]);
@@ -58,9 +61,9 @@ class GalleryController extends Controller
     public function update(Request $request, GalleryItem $gallery)
     {
         $data = $request->validate([
-            'title' => ['required', 'string', 'max:150'],
-            'caption' => ['required', 'string'],
-            'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'title' => ['nullable', 'string', 'max:150'],
+            'caption' => ['nullable', 'string'],
+            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
             'is_published' => ['nullable'],
         ], [
             'photo.required' => 'Foto wajib diupload.',
@@ -75,8 +78,8 @@ class GalleryController extends Controller
             $gallery->image_path = ImageUpload::storeAsWebp($request->file('photo'), 'gallery');
         }
 
-        $gallery->title = $data['title'];
-        $gallery->caption = $data['caption'];
+        $gallery->title = $data['title'] ?? null;
+        $gallery->caption = $data['caption'] ?? null;
         $gallery->is_published = $request->boolean('is_published');
         $gallery->save();
 

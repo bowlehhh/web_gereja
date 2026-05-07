@@ -74,21 +74,20 @@
       <div class="grid gap-6">
         <div>
           <label class="font-extrabold text-sm text-blue-900">Judul</label>
-          <input type="text" name="title" value="{{ old('title', $media->title) }}" required
+          <input type="text" name="title" value="{{ old('title', $media->title) }}"
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label class="font-extrabold text-sm text-blue-900">Pembicara</label>
-            <input type="text" name="speaker" value="{{ old('speaker', $media->speaker) }}" required
+            <input type="text" name="speaker" value="{{ old('speaker', $media->speaker) }}"
                    class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
           </div>
           <div>
             <label class="font-extrabold text-sm text-blue-900">Tanggal & Jam</label>
             <input type="datetime-local" name="service_at"
                    value="{{ old('service_at', $media->service_at ? $media->service_at->format('Y-m-d\\TH:i') : '') }}"
-                   required
                    class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
           </div>
         </div>

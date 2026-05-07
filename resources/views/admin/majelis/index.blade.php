@@ -88,7 +88,6 @@
             value="{{ old('period', $edit->period ?? '') }}"
             placeholder="Contoh: 2026"
             class="mt-2 w-full h-12 px-4 rounded-2xl border border-slate-200 bg-white text-slate-800 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-600/20"
-            required
           >
         </div>
 
@@ -99,7 +98,6 @@
               type="file"
               name="thumbnail"
               accept="image/*"
-              required
               class="block w-full text-sm font-semibold text-slate-700 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:bg-blue-900 file:text-white hover:file:opacity-90"
             >
             <div class="mt-2 text-xs text-slate-500 font-semibold">Untuk gambar kartu periode di halaman publik `/gereja/majelis`. Maksimal ukuran foto 20MB.</div>
@@ -121,7 +119,6 @@
           name="about"
           rows="4"
           placeholder="Cerita / deskripsi majelis periode ini..."
-          required
           class="mt-2 w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white text-slate-800 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-600/20"
         >{{ old('about', $edit->about ?? '') }}</textarea>
         <div class="mt-2 text-xs text-slate-500 font-semibold">Tampil di kartu periode (ringkas) dan detail About Majelis.</div>
@@ -133,7 +130,6 @@
           name="service"
           rows="3"
           placeholder="Contoh: Pelayanan ibadah, persekutuan, diakonia (boleh multi-line)"
-          required
           class="mt-2 w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white text-slate-800 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-600/20"
         >{{ old('service', $edit->service ?? '') }}</textarea>
         <div class="mt-2 text-xs text-slate-500 font-semibold">Tampil di bagian “Bidang Pelayanan” pada halaman detail.</div>
@@ -159,7 +155,6 @@
             name="gallery[]"
             accept="image/*"
             multiple
-            required
             class="block w-full text-sm font-semibold text-slate-700 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:bg-blue-900 file:text-white hover:file:opacity-90"
           >
           <div class="mt-2 text-xs text-slate-500 font-semibold">Foto-foto ini tampil di halaman About Majelis (maksimal 20 foto, masing-masing maksimal 20MB).</div>

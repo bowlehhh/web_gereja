@@ -42,12 +42,12 @@ class MajelisController extends Controller
         abort_unless(Schema::hasTable('majelis_periods'), 404);
 
         $data = $request->validate([
-            'period' => ['required', 'string', 'max:120', 'unique:majelis_periods,period'],
-            'about' => ['required', 'string'],
-            'service' => ['required', 'string'],
-            'thumbnail' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
-            'gallery' => ['required', 'array', 'min:1', 'max:20'],
-            'gallery.*' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'period' => ['nullable', 'string', 'max:120', 'unique:majelis_periods,period'],
+            'about' => ['nullable', 'string'],
+            'service' => ['nullable', 'string'],
+            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'gallery' => ['nullable', 'array', 'max:20'],
+            'gallery.*' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
         ], [
             'period.required' => 'Periode wajib diisi.',
             'period.unique' => 'Periode ini sudah ada.',
@@ -62,7 +62,8 @@ class MajelisController extends Controller
             'gallery.*.max' => 'Ukuran foto gallery maksimal 20MB.',
         ]);
 
-        $slug = Str::slug($data['period']);
+        $period = trim((string) ($data['period'] ?? ''));
+        $slug = Str::slug($period !== '' ? $period : 'majelis');
 
         $thumbPath = null;
         if ($request->hasFile('thumbnail')) {
@@ -77,11 +78,11 @@ class MajelisController extends Controller
         }
 
         MajelisPeriod::create([
-            'period' => $data['period'],
+            'period' => $period !== '' ? $period : 'Periode '.now()->format('YmdHis'),
             'thumbnail_path' => $thumbPath,
             'gallery_paths' => $galleryPaths ?: null,
-            'about' => $data['about'],
-            'service' => $data['service'],
+            'about' => $data['about'] ?? null,
+            'service' => $data['service'] ?? null,
         ]);
 
         return redirect()
@@ -94,12 +95,12 @@ class MajelisController extends Controller
         abort_unless(Schema::hasTable('majelis_periods'), 404);
 
         $data = $request->validate([
-            'period' => ['required', 'string', 'max:120', 'unique:majelis_periods,period,'.$majelisPeriod->id],
-            'about' => ['required', 'string'],
-            'service' => ['required', 'string'],
-            'thumbnail' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
-            'gallery' => ['required', 'array', 'min:1', 'max:20'],
-            'gallery.*' => ['required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'period' => ['nullable', 'string', 'max:120', 'unique:majelis_periods,period,'.$majelisPeriod->id],
+            'about' => ['nullable', 'string'],
+            'service' => ['nullable', 'string'],
+            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'gallery' => ['nullable', 'array', 'max:20'],
+            'gallery.*' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
             'clear_gallery' => ['nullable'],
         ], [
             'period.required' => 'Periode wajib diisi.',
@@ -115,7 +116,8 @@ class MajelisController extends Controller
             'gallery.*.max' => 'Ukuran foto gallery maksimal 20MB.',
         ]);
 
-        $slug = Str::slug($data['period']);
+        $period = trim((string) ($data['period'] ?? ''));
+        $slug = Str::slug($period !== '' ? $period : $majelisPeriod->period);
 
         if ($request->hasFile('thumbnail')) {
             if ($majelisPeriod->thumbnail_path && Storage::disk('public')->exists($majelisPeriod->thumbnail_path)) {
@@ -147,9 +149,9 @@ class MajelisController extends Controller
             $majelisPeriod->gallery_paths = $galleryPaths ?: null;
         }
 
-        $majelisPeriod->period = $data['period'];
-        $majelisPeriod->about = $data['about'];
-        $majelisPeriod->service = $data['service'];
+        $majelisPeriod->period = $period !== '' ? $period : $majelisPeriod->period;
+        $majelisPeriod->about = $data['about'] ?? null;
+        $majelisPeriod->service = $data['service'] ?? null;
         $majelisPeriod->save();
 
         return redirect()

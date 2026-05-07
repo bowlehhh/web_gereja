@@ -51,12 +51,12 @@ class BidangPelayananController extends Controller
             }
 
             $item = BidangPelayanan::create([
-                'name' => $data['name'],
-                'slug' => BidangPelayanan::uniqueSlug(trim((string) (($data['slug'] ?? '') !== '' ? $data['slug'] : $data['name']))),
-                'description' => $data['description'],
-                'service_year' => (int) $data['service_year'],
+                'name' => $data['name'] ?? null,
+                'slug' => BidangPelayanan::uniqueSlug(trim((string) (($data['slug'] ?? '') !== '' ? $data['slug'] : ($data['name'] ?? '')))),
+                'description' => $data['description'] ?? null,
+                'service_year' => isset($data['service_year']) ? (int) $data['service_year'] : null,
                 'member_photo_paths' => $storedPhoto !== null ? [$storedPhoto] : [],
-                'sort_order' => (int) $data['sort_order'],
+                'sort_order' => (int) ($data['sort_order'] ?? 0),
                 'is_active' => $request->boolean('is_active'),
             ]);
         } catch (\Throwable $e) {
@@ -98,12 +98,12 @@ class BidangPelayananController extends Controller
             }
 
             $bidangPelayanan->fill([
-                'name' => $data['name'],
-                'slug' => BidangPelayanan::uniqueSlug(trim((string) (($data['slug'] ?? '') !== '' ? $data['slug'] : $data['name'])), $bidangPelayanan->id),
-                'description' => $data['description'],
-                'service_year' => (int) $data['service_year'],
+                'name' => $data['name'] ?? null,
+                'slug' => BidangPelayanan::uniqueSlug(trim((string) (($data['slug'] ?? '') !== '' ? $data['slug'] : ($data['name'] ?? ''))), $bidangPelayanan->id),
+                'description' => $data['description'] ?? null,
+                'service_year' => isset($data['service_year']) ? (int) $data['service_year'] : null,
                 'member_photo_paths' => $nextPhotos,
-                'sort_order' => (int) $data['sort_order'],
+                'sort_order' => (int) ($data['sort_order'] ?? 0),
                 'is_active' => $request->boolean('is_active'),
             ]);
             $bidangPelayanan->save();
@@ -130,13 +130,13 @@ class BidangPelayananController extends Controller
     private function rules(bool $updating = false): array
     {
         return [
-            'name' => ['required', 'string', 'max:160'],
+            'name' => ['nullable', 'string', 'max:160'],
             'slug' => ['nullable', 'string', 'max:180', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],
-            'description' => ['required', 'string'],
-            'service_year' => ['required', 'integer', 'min:2000', 'max:2100'],
-            'member_photo' => [$updating ? 'nullable' : 'required', 'file', 'mimes:jpg,jpeg,png,webp', 'max:'.self::MAX_FILE_SIZE_KB],
+            'description' => ['nullable', 'string'],
+            'service_year' => ['nullable', 'integer', 'min:2000', 'max:2100'],
+            'member_photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:'.self::MAX_FILE_SIZE_KB],
             'remove_member_photo' => ['nullable'],
-            'sort_order' => ['required', 'integer', 'min:0', 'max:1000000'],
+            'sort_order' => ['nullable', 'integer', 'min:0', 'max:1000000'],
             'is_active' => ['nullable'],
         ];
     }

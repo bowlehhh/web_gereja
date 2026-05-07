@@ -27,19 +27,19 @@
       <div class="grid gap-6">
         <div>
           <label class="font-extrabold text-sm text-blue-900">Judul</label>
-          <input type="text" name="title" value="{{ old('title') }}" required
+          <input type="text" name="title" value="{{ old('title') }}"
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         </div>
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Caption</label>
-          <textarea name="caption" rows="3" required
+          <textarea name="caption" rows="3"
                     class="mt-2 w-full p-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">{{ old('caption') }}</textarea>
         </div>
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Foto</label>
-          <input type="file" name="photo" accept="image/*" required
+          <input type="file" name="photo" accept="image/*"
                  class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
           <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 20MB.</div>
         </div>

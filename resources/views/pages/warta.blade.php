@@ -38,15 +38,17 @@
               $thumb = $w->thumbnail_path ? asset('storage/'.$w->thumbnail_path) : null;
               $dateLabel = optional($w->date)->translatedFormat('d F Y');
               $edition = $w->edition ?? '-';
+              $pdfUrl = $w->pdf_path ? asset('storage/'.$w->pdf_path) : '#';
+              $title = trim((string) $w->title) !== '' ? $w->title : 'Warta Jemaat';
             @endphp
 
-            <a href="{{ asset('storage/'.$w->pdf_path) }}" target="_blank" rel="noopener"
+            <a href="{{ $pdfUrl }}" target="{{ $w->pdf_path ? '_blank' : '_self' }}" rel="noopener"
                class="group block w-full max-w-[360px] rounded-[2.25rem] bg-[#f8fbff] text-slate-900 shadow-[0_26px_56px_rgba(0,0,0,0.35)] border border-white/70 overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_34px_70px_rgba(0,0,0,0.42)] active:-translate-y-2 active:shadow-[0_44px_90px_rgba(0,0,0,0.55)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-yellow-300/60">
               <div class="p-5 sm:p-6">
                 <div class="relative rounded-[1.75rem] overflow-hidden bg-slate-100 border border-slate-200 shadow-sm">
                   <div class="aspect-[16/11]">
                     @if($thumb)
-                      <img src="{{ $thumb }}" alt="{{ $w->title }}" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700">
+                      <img src="{{ $thumb }}" alt="{{ $title }}" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700">
                     @else
                       <div class="w-full h-full grid place-items-center text-slate-400 font-black">
                         PDF
@@ -78,7 +80,7 @@
 
                 <div class="mt-5">
                   <div class="font-black text-lg sm:text-xl leading-tight tracking-tight text-slate-900 line-clamp-2 group-hover:text-blue-800 transition-colors">
-                    {{ $w->title }}
+                    {{ $title }}
                   </div>
                   <div class="mt-2 text-xs font-bold uppercase tracking-widest text-slate-500">
                     Edisi {{ $edition }}

@@ -31,17 +31,17 @@ class CabangController extends Controller
         $this->normalizeMapCoordinateInputs($request);
 
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:160'],
-            'city' => ['required', 'string', 'max:140'],
-            'address' => ['required', 'string', 'max:255'],
+            'name' => ['nullable', 'string', 'max:160'],
+            'city' => ['nullable', 'string', 'max:140'],
+            'address' => ['nullable', 'string', 'max:255'],
             'email' => ['nullable', 'email', 'max:190'],
-            'phone' => ['required', 'string', 'max:60'],
-            'pastor' => ['required', 'string', 'max:160'],
+            'phone' => ['nullable', 'string', 'max:60'],
+            'pastor' => ['nullable', 'string', 'max:160'],
             'map_latitude' => ['nullable', 'numeric', 'between:-90,90'],
             'map_longitude' => ['nullable', 'numeric', 'between:-180,180'],
-            'about' => ['required', 'string'],
-            'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
-            'sort_order' => ['required', 'integer', 'min:0', 'max:100000'],
+            'about' => ['nullable', 'string'],
+            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'sort_order' => ['nullable', 'integer', 'min:0', 'max:100000'],
             'is_published' => ['nullable'],
         ], [
             'photo.required' => 'Foto cabang wajib diupload.',
@@ -51,14 +51,17 @@ class CabangController extends Controller
             'map_longitude.between' => 'Longitude harus di rentang -180 sampai 180.',
         ]);
 
-        $path = ImageUpload::storeAsWebp($request->file('photo'), 'cabang');
+        $path = null;
+        if ($request->hasFile('photo')) {
+            $path = ImageUpload::storeAsWebp($request->file('photo'), 'cabang');
+        }
 
         $payload = [
-            'name' => $data['name'],
-            'city' => $data['city'],
-            'about' => $data['about'],
+            'name' => $data['name'] ?? null,
+            'city' => $data['city'] ?? null,
+            'about' => $data['about'] ?? null,
             'image_path' => $path,
-            'sort_order' => (int) $data['sort_order'],
+            'sort_order' => (int) ($data['sort_order'] ?? 0),
             'is_published' => $request->boolean('is_published'),
         ];
 
@@ -83,17 +86,17 @@ class CabangController extends Controller
         $this->normalizeMapCoordinateInputs($request);
 
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:160'],
-            'city' => ['required', 'string', 'max:140'],
-            'address' => ['required', 'string', 'max:255'],
+            'name' => ['nullable', 'string', 'max:160'],
+            'city' => ['nullable', 'string', 'max:140'],
+            'address' => ['nullable', 'string', 'max:255'],
             'email' => ['nullable', 'email', 'max:190'],
-            'phone' => ['required', 'string', 'max:60'],
-            'pastor' => ['required', 'string', 'max:160'],
+            'phone' => ['nullable', 'string', 'max:60'],
+            'pastor' => ['nullable', 'string', 'max:160'],
             'map_latitude' => ['nullable', 'numeric', 'between:-90,90'],
             'map_longitude' => ['nullable', 'numeric', 'between:-180,180'],
-            'about' => ['required', 'string'],
-            'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
-            'sort_order' => ['required', 'integer', 'min:0', 'max:100000'],
+            'about' => ['nullable', 'string'],
+            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
+            'sort_order' => ['nullable', 'integer', 'min:0', 'max:100000'],
             'is_published' => ['nullable'],
         ], [
             'photo.required' => 'Foto cabang wajib diupload.',
@@ -110,15 +113,15 @@ class CabangController extends Controller
             $cabang->image_path = ImageUpload::storeAsWebp($request->file('photo'), 'cabang');
         }
 
-        $cabang->name = $data['name'];
-        $cabang->city = $data['city'];
+        $cabang->name = $data['name'] ?? null;
+        $cabang->city = $data['city'] ?? null;
         foreach ($this->cabangOptionalColumns() as $column => $exists) {
             if ($exists) {
                 $cabang->{$column} = $data[$column] ?? null;
             }
         }
-        $cabang->about = $data['about'];
-        $cabang->sort_order = (int) $data['sort_order'];
+        $cabang->about = $data['about'] ?? null;
+        $cabang->sort_order = (int) ($data['sort_order'] ?? 0);
         $cabang->is_published = $request->boolean('is_published');
         $cabang->save();
 

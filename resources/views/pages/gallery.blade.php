@@ -51,19 +51,21 @@
             @php
               $titleKey = mb_strtolower(trim((string) $it->title));
               $photoCount = (int) ($titleCounts[$titleKey] ?? 1);
+              $imageUrl = $it->image_path ? asset('storage/'.$it->image_path) : asset('assets/logo.png');
+              $title = trim((string) $it->title) !== '' ? $it->title : 'Foto Gallery';
             @endphp
             <button
               type="button"
               class="js-gallery-item group w-full text-left rounded-2xl overflow-hidden border border-slate-300 bg-white/95 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-yellow-300/60"
-              data-src="{{ asset('storage/'.$it->image_path) }}"
-              data-title="{{ $it->title }}"
+              data-src="{{ $imageUrl }}"
+              data-title="{{ $title }}"
               data-caption="{{ $it->caption ?? '' }}"
-              aria-label="Buka foto: {{ $it->title }}"
+              aria-label="Buka foto: {{ $title }}"
             >
               <div class="relative aspect-[16/10] overflow-hidden border-b border-slate-200 bg-slate-100">
                 <img
-                  src="{{ asset('storage/'.$it->image_path) }}"
-                  alt="{{ $it->title }}"
+                  src="{{ $imageUrl }}"
+                  alt="{{ $title }}"
                   class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 >
@@ -71,7 +73,7 @@
               </div>
               <div class="px-3 py-2.5 sm:px-4 sm:py-3">
                 <h3 class="text-[15px] sm:text-lg font-black text-slate-800 leading-tight line-clamp-2">
-                  {{ $it->title }}
+                  {{ $title }}
                 </h3>
                 <div class="mt-1 text-xs sm:text-sm font-semibold text-slate-500">{{ number_format($photoCount, 0, ',', '.') }} Foto</div>
               </div>

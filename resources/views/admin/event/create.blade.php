@@ -35,19 +35,19 @@
       <div class="grid gap-6">
         <div>
           <label class="font-extrabold text-sm text-blue-900">Judul</label>
-          <input name="title" value="{{ old('title') }}" required
+          <input name="title" value="{{ old('title') }}"
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         </div>
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Deskripsi</label>
-          <textarea name="description" rows="4" required
+          <textarea name="description" rows="4"
                     class="mt-2 w-full p-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">{{ old('description') }}</textarea>
         </div>
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Penjelasan Kegiatan (detail)</label>
-          <textarea name="content" rows="8" required
+          <textarea name="content" rows="8"
                     class="mt-2 w-full p-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition"
                     placeholder="Tulis penjelasan lengkap kegiatan...">{{ old('content') }}</textarea>
           <div class="mt-2 text-blue-900/60 text-sm font-semibold">Tips: pisahkan paragraf dengan enter.</div>
@@ -56,12 +56,12 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label class="font-extrabold text-sm text-blue-900">Tanggal Mulai</label>
-            <input type="date" name="start_date" value="{{ old('start_date') }}" required
+            <input type="date" name="start_date" value="{{ old('start_date') }}"
                    class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
           </div>
           <div>
             <label class="font-extrabold text-sm text-blue-900">Tanggal Selesai</label>
-            <input type="date" name="end_date" value="{{ old('end_date') }}" required
+            <input type="date" name="end_date" value="{{ old('end_date') }}"
                    class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
             <div class="mt-2 text-blue-900/60 text-sm font-semibold">
               Harus sama/lebih besar dari Tanggal Mulai.
@@ -71,20 +71,20 @@
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Lokasi</label>
-          <input name="location" value="{{ old('location') }}" required
+          <input name="location" value="{{ old('location') }}"
                  class="mt-2 w-full h-11 px-4 rounded-xl border border-blue-200 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition">
         </div>
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Thumbnail (jpg/png/webp, max 20MB)</label>
-          <input type="file" name="thumbnail" accept=".jpg,.jpeg,.png,.webp" required
+          <input type="file" name="thumbnail" accept=".jpg,.jpeg,.png,.webp"
                  class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
           <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 20MB.</div>
         </div>
 
         <div>
           <label class="font-extrabold text-sm text-blue-900">Foto Kegiatan (detail) (jpg/png/webp, max 20MB)</label>
-          <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp" required
+          <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp"
                  class="mt-2 w-full rounded-xl border border-blue-200 bg-white text-blue-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
           <div class="mt-2 text-blue-900/60 text-sm font-semibold">Batas ukuran foto maksimal 20MB.</div>
         </div>
